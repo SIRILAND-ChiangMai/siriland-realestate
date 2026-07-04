@@ -20,7 +20,7 @@ const properties = [
     price: "2.39 MB",
     size: "32.09 sq.m.",
     bedrooms: "1 Bedroom",
-    images: [
+   images: [
   "images/jc-hill-909-1.jpg",
   "images/jc-hill-909-2.jpg",
   "images/jc-hill-909-3.jpg",
