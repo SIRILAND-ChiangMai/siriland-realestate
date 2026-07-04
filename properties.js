@@ -7,6 +7,7 @@ const properties = [
     price: "2.59 MB",
     size: "36 sq.m.",
     bedrooms: "1 Bedroom",
+    image: "images/wiangping-1110-1.jpg",
     description: "Near MAYA only 200 m, 11th floor, renovated, foreign quota, Airbnb allowed.",
     map: "https://maps.app.goo.gl/cHi4XGUstCAHv3uCA",
     label: "CONDO"
