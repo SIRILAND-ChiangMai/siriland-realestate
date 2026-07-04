@@ -118,7 +118,17 @@
   <footer>
     <p>© 2026 SIRILAND Real Estate Thailand</p>
   </footer>
+<div id="galleryModal" class="gallery-modal hidden">
+  <button class="gallery-close" onclick="closeGallery()">×</button>
 
+  <button class="gallery-arrow left" onclick="prevImage()">❮</button>
+
+  <img id="galleryImage" src="" alt="Property">
+
+  <button class="gallery-arrow right" onclick="nextImage()">❯</button>
+
+  <div id="galleryCounter" class="gallery-counter"></div>
+</div>
    <script src="properties.js"></script>
   <script src="script.js"></script>
 </body>
