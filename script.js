@@ -1,15 +1,31 @@
-let currentLang = "en";
+let galleryImages = [];
+let galleryIndex = 0;
 
-function propertyImageHTML(p) {
+function getImages(p) {
+  if (Array.isArray(p.images) && p.images.length > 0) {
+    return p.images;
+  }
   if (p.image) {
+    return [p.image];
+  }
+  return [];
+}
+
+function propertyImageHTML(p, index) {
+  const imgs = getImages(p);
+
+  if (imgs.length > 0) {
     return `
-      <img 
-        class="property-photo" 
-        src="${p.image}" 
-        alt="${p.title}" 
-        loading="lazy"
-        onerror="this.parentElement.innerHTML='<div class=&quot;card-img&quot;>${p.label || p.type}</div>'"
-      >
+      <div class="photo-wrap" onclick="openGallery(${index}, 0)">
+        <img 
+          class="property-photo" 
+          src="${imgs[0]}" 
+          alt="${p.title}" 
+          loading="lazy"
+          onerror="this.parentElement.innerHTML='<div class=&quot;card-img&quot;>${p.label || p.type}</div>'"
+        >
+        <span class="photo-count">📸 ${imgs.length}</span>
+      </div>
     `;
   }
 
@@ -22,15 +38,15 @@ function renderProperties() {
   const deal = document.getElementById("dealFilter").value;
   const search = document.getElementById("searchInput").value.toLowerCase();
 
-  const filtered = properties.filter(p => {
-    return (city === "all" || p.city === city) &&
-           (type === "all" || p.type === type) &&
-           (deal === "all" || p.deal === deal) &&
-           (
-             p.title.toLowerCase().includes(search) ||
-             p.description.toLowerCase().includes(search)
-           );
-  });
+  const filtered = properties.filter(p =>
+    (city === "all" || p.city === city) &&
+    (type === "all" || p.type === type) &&
+    (deal === "all" || p.deal === deal) &&
+    (
+      p.title.toLowerCase().includes(search) ||
+      p.description.toLowerCase().includes(search)
+    )
+  );
 
   const grid = document.getElementById("propertyGrid");
 
@@ -39,30 +55,67 @@ function renderProperties() {
     return;
   }
 
-  grid.innerHTML = filtered.map(p => `
-    <article class="card">
-      <div class="photo-wrap">
-        ${propertyImageHTML(p)}
-      </div>
+  grid.innerHTML = filtered.map(p => {
+    const realIndex = properties.indexOf(p);
 
-      <div class="card-content">
-        <div class="meta">${p.city} • ${p.type} • ${p.deal}</div>
-        <h3>${p.title}</h3>
-        <div class="price">${p.price}</div>
-        <p>${p.description}</p>
+    return `
+      <article class="card">
+        ${propertyImageHTML(p, realIndex)}
 
-        <div class="chips">
-          <span>${p.size}</span>
-          <span>${p.bedrooms}</span>
+        <div class="card-content">
+          <div class="meta">${p.city} • ${p.type} • ${p.deal}</div>
+          <h3>${p.title}</h3>
+          <div class="price">${p.price}</div>
+          <p>${p.description}</p>
+
+          <div class="chips">
+            <span>${p.size}</span>
+            <span>${p.bedrooms}</span>
+          </div>
+
+          <div class="card-actions">
+            <a class="mini-btn goldmini" href="${p.map}" target="_blank">Google Maps</a>
+            <a class="mini-btn" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a>
+          </div>
         </div>
+      </article>
+    `;
+  }).join("");
+}
 
-        <div class="card-actions">
-          <a class="mini-btn goldmini" href="${p.map}" target="_blank">Google Maps</a>
-          <a class="mini-btn" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a>
-        </div>
-      </div>
-    </article>
-  `).join("");
+function openGallery(propertyIndex, startIndex) {
+  galleryImages = getImages(properties[propertyIndex]);
+
+  if (!galleryImages.length) return;
+
+  galleryIndex = startIndex || 0;
+  updateGallery();
+
+  document.getElementById("galleryModal").classList.remove("hidden");
+}
+
+function closeGallery() {
+  document.getElementById("galleryModal").classList.add("hidden");
+}
+
+function updateGallery() {
+  document.getElementById("galleryImage").src = galleryImages[galleryIndex];
+  document.getElementById("galleryCounter").textContent =
+    `${galleryIndex + 1} / ${galleryImages.length}`;
+}
+
+function nextImage() {
+  if (!galleryImages.length) return;
+
+  galleryIndex = (galleryIndex + 1) % galleryImages.length;
+  updateGallery();
+}
+
+function prevImage() {
+  if (!galleryImages.length) return;
+
+  galleryIndex = (galleryIndex - 1 + galleryImages.length) % galleryImages.length;
+  updateGallery();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -72,4 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   renderProperties();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeGallery();
+  if (e.key === "ArrowRight") nextImage();
+  if (e.key === "ArrowLeft") prevImage();
 });
