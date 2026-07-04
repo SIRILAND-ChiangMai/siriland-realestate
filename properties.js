@@ -21,26 +21,36 @@ const properties = [
     size: "32.09 sq.m.",
     bedrooms: "1 Bedroom",
    images: [
-  "images/jc-hill-909-1.jpg",
-  "images/jc-hill-909-2.jpg",
-  "images/jc-hill-909-3.jpg",
-  "images/jc-hill-909-4.jpg",
-  "images/jc-hill-909-5.jpg",
-  "images/jc-hill-909-6.jpg",
-  "images/jc-hill-909-7.jpg",
-  "images/jc-hill-909-8.jpg",
-  "images/jc-hill-909-9.jpg",
-  "images/jc-hill-909-10.jpg",
-  "images/jc-hill-909-11.jpg",
-  "images/jc-hill-909-12.jpg",
-  "images/jc-hill-909-13.jpg",
-  "images/jc-hill-909-14.jpg",
-  "images/jc-hill-909-15.jpg",
-  "images/jc-hill-909-16.jpg",
-  "images/jc-hill-909-17.jpg",
-  "images/jc-hill-909-18.jpg",
-  "images/jc-hill-909-19.jpg",
-  "images/jc-hill-909-20.jpg"
+  jc-hill-909-1.jpg.jpg
+jc-hill-909-2.jpg.jpg
+jc-hill-909-3.jpg.jpg
+jc-hill-909-4.jpg.jpg
+jc-hill-909-5.jpg.jpg
+jc-hill-909-6.jpg.jpg
+jc-hill-909-7.jpg.jpg
+jc-hill-909-8.jpg.jpg
+jc-hill-909-9.jpg.jpg
+jc-hill-909-10.jpg.jpg
+jc-hill-909-11.jpg.jpg
+jc-hill-909-12.jpg.jpg
+jc-hill-909-13.jpg.jpg
+jc-hill-909-14.jpg.jpg
+jc-hill-909-15.jpg.jpg
+jc-hill-909-16.jpg.jpg
+jc-hill-909-17.jpg.jpg
+jc-hill-909-18.jpg.jpg
+jc-hill-909-19.jpg.jpg
+jc-hill-909-20.jpg.jpg
+jc-hill-909-21.jpg.jpg
+jc-hill-909-22.jpg.jpg
+jc-hill-909-23.jpg.jpg
+jc-hill-909-24.jpg.jpg
+jc-hill-909-25.jpg.jpg
+jc-hill-909-26.jpg.jpg
+jc-hill-909-27.jpg.jpg
+jc-hill-909-28.jpg.jpg
+jc-hill-909-29.jpg.jpg
+jc-hill-909-30.jpg.jpg
 ],
     description: "Jed Yod area, renovated condo, convenient location near Nimman and MAYA.",
     map: "#",
