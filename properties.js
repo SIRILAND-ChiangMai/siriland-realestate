@@ -21,7 +21,7 @@ const properties = [
     size: "32.09 sq.m.",
     bedrooms: "1 Bedroom",
    images: [
-jc-hill-909-1.jpg.jpg
+image: "images/jc-hill-909 (1).jpg",
 jc-hill-909-2.jpg.jpg
 jc-hill-909-3.jpg.jpg
 jc-hill-909-4.jpg.jpg
