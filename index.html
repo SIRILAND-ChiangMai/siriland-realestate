@@ -1,149 +1,125 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SIRILAND Real Estate Thailand</title>
-  <meta name="description" content="SIRILAND Thailand real estate: houses, condos, land, owner financing, Chiang Mai, Phichit, Phitsanulok, Bangkok." />
+  <meta name="description" content="SIRILAND Real Estate Thailand: houses, condos, land and commercial properties for sale and rent." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="hero">
-    <nav class="nav">
-      <div class="brand">
-        <div class="logo">S</div>
-        <div>
-          <h1>SIRILAND</h1>
-          <p>Real Estate Thailand</p>
-        </div>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div>
+        <strong>SIRILAND</strong>
+        <span>Real Estate Thailand</span>
       </div>
-      <div class="nav-links">
-        <a href="#properties">Properties</a>
-        <a href="#owner-finance">Owner Finance</a>
-        <a href="#contact">Contact</a>
-      </div>
+    </div>
+
+    <nav>
+      <a href="#properties" data-i18n="navProperties">Properties</a>
+      <a href="#finance" data-i18n="navFinance">Owner Finance</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
     </nav>
 
-    <section class="hero-content">
-      <p class="badge">Thailand Property • บ้าน • Condo • Land</p>
-      <h2>Buy, Rent & Invest in Thailand Property</h2>
-      <p class="subtitle">
-        Houses, condos, commercial buildings and land in Chiang Mai, Phichit, Phitsanulok, Bangkok and more.
-      </p>
-      <div class="hero-buttons">
-        <a class="btn primary" href="tel:+66920056640">Call Kwan</a>
-        <a class="btn secondary" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a>
-      </div>
-    </section>
+    <div class="lang">
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('th')">TH</button>
+      <button onclick="setLang('zh')">中文</button>
+      <button onclick="setLang('tr')">TR</button>
+    </div>
   </header>
 
-  <main>
-    <section class="language-box">
-      <div>
-        <h3>🇹🇭 ภาษาไทย</h3>
-        <p>ซื้อ ขาย เช่า อสังหาริมทรัพย์ บ้าน คอนโด ที่ดิน และอาคารพาณิชย์ พร้อมบริการดูแลครบวงจร</p>
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <p class="gold" data-i18n="heroBadge">Thailand Property Collection</p>
+      <h1 data-i18n="heroTitle">Luxury Real Estate, Investment & Owner Financing</h1>
+      <p data-i18n="heroText">Buy, sell and rent houses, condos, land and commercial properties across Thailand.</p>
+      <div class="hero-actions">
+        <a class="btn gold-btn" href="#properties" data-i18n="viewListings">View Listings</a>
+        <a class="btn line-btn" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a>
       </div>
-      <div>
-        <h3>🇬🇧 English</h3>
-        <p>Thailand real estate for sale and rent: houses, condos, land and commercial properties.</p>
-      </div>
-      <div>
-        <h3>🇨🇳 中文</h3>
-        <p>泰国房地产买卖与出租服务：别墅、公寓、土地、商业楼。</p>
-      </div>
-      <div>
-        <h3>🇹🇷 Türkçe</h3>
-        <p>Tayland’da satılık ve kiralık ev, condo, arsa ve ticari mülk ilanları.</p>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="properties" class="section">
-      <div class="section-title">
-        <p class="badge">Featured Listings</p>
-        <h2>Recommended Properties</h2>
-      </div>
+  <section class="stats">
+    <div><strong>4</strong><span data-i18n="statLang">Languages</span></div>
+    <div><strong>5+</strong><span data-i18n="statCities">Service Areas</span></div>
+    <div><strong>0%</strong><span data-i18n="statFinance">Selected Finance Plans</span></div>
+    <div><strong>24/7</strong><span data-i18n="statContact">Online Contact</span></div>
+  </section>
 
-      <div class="grid">
-        <article class="card">
-          <div class="photo condo">CONDO</div>
-          <div class="card-body">
-            <p class="tag">Chiang Mai • Condo</p>
-            <h3>Wiang Ping Mansion – Room 1110</h3>
-            <p>Near MAYA, Rin Kham intersection. 1 Bedroom, 36 sq.m., 11th floor, renovated.</p>
-            <ul>
-              <li>Price: 2.59 MB</li>
-              <li>Foreign quota</li>
-              <li>Airbnb allowed</li>
-            </ul>
-            <a class="map" href="https://maps.app.goo.gl/cHi4XGUstCAHv3uCA" target="_blank">Google Maps</a>
-          </div>
-        </article>
+  <section id="properties" class="section">
+    <div class="section-head">
+      <p class="gold" data-i18n="featured">Featured Listings</p>
+      <h2 data-i18n="propertiesTitle">Properties for Sale & Rent</h2>
+    </div>
 
-        <article class="card">
-          <div class="photo condo2">CONDO</div>
-          <div class="card-body">
-            <p class="tag">Chiang Mai • Condo</p>
-            <h3>JC Hill Place – Room 909</h3>
-            <p>Jed Yod area, renovated 1 bedroom condo, 32.09 sq.m., convenient city location.</p>
-            <ul>
-              <li>Price: 2.39 MB</li>
-              <li>Foreign quota</li>
-              <li>Ready after renovation</li>
-            </ul>
-            <a class="map" href="#" target="_blank">Add Google Maps Link</a>
-          </div>
-        </article>
+    <div class="filters">
+      <select id="cityFilter">
+        <option value="all">All Cities</option>
+        <option value="Chiang Mai">Chiang Mai</option>
+        <option value="Phichit">Phichit</option>
+        <option value="Phitsanulok">Phitsanulok</option>
+        <option value="Bangkok">Bangkok</option>
+      </select>
 
-        <article class="card">
-          <div class="photo house">HOUSE</div>
-          <div class="card-body">
-            <p class="tag">Phichit • House</p>
-            <h3>Thanawanrudee Village</h3>
-            <p>Detached house, 4 bedrooms, 2 bathrooms, land options available.</p>
-            <ul>
-              <li>Starting price: 1.95 MB</li>
-              <li>Booking: 5,000 THB</li>
-              <li>Free document support</li>
-            </ul>
-            <a class="map" href="#contact">Ask Location</a>
-          </div>
-        </article>
-      </div>
-    </section>
+      <select id="typeFilter">
+        <option value="all">All Types</option>
+        <option value="Condo">Condo</option>
+        <option value="House">House</option>
+        <option value="Land">Land</option>
+        <option value="Commercial">Commercial</option>
+      </select>
 
-    <section id="owner-finance" class="section dark">
-      <div>
-        <p class="badge">Owner Financing</p>
-        <h2>ซื้อบ้านง่ายขึ้น ผ่อนตรงกับเจ้าของ</h2>
-        <p>
-          Selected properties support owner financing, flexible down payment and special monthly installment plans.
-        </p>
-      </div>
-      <div class="finance-box">
-        <h3>Common Terms</h3>
-        <p>Down payment from 10%</p>
-        <p>0% interest plans available on selected assets</p>
-        <p>Contact us for each property’s exact terms.</p>
-      </div>
-    </section>
+      <select id="dealFilter">
+        <option value="all">Sale & Rent</option>
+        <option value="Sale">Sale</option>
+        <option value="Rent">Rent</option>
+      </select>
 
-    <section id="contact" class="section contact">
-      <div>
-        <p class="badge">Contact</p>
-        <h2>Talk to Kwan</h2>
-        <p>For sale, rent, investment or agent cooperation.</p>
-      </div>
-      <div class="contact-card">
-        <a href="tel:+66920056640">☎️ 092-005-6640</a>
-        <a href="tel:+66906507558">☎️ 090-650-7558</a>
-        <a href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">💬 LINE: @realcreamthailand</a>
-        <p>Thailand: Chiang Mai • Phichit • Phitsanulok • Bangkok</p>
-      </div>
-    </section>
-  </main>
+      <input id="searchInput" placeholder="Search property..." />
+    </div>
+
+    <div id="propertyGrid" class="property-grid"></div>
+  </section>
+
+  <section id="finance" class="finance">
+    <div>
+      <p class="gold" data-i18n="financeBadge">Owner Financing</p>
+      <h2 data-i18n="financeTitle">Easier Way to Own Property</h2>
+      <p data-i18n="financeText">Selected assets support direct installment plans with the owner. Terms depend on each property.</p>
+    </div>
+    <div class="finance-card">
+      <h3 data-i18n="financeBoxTitle">Common Conditions</h3>
+      <p>Down payment from 10%</p>
+      <p>0% interest available on selected listings</p>
+      <p>Flexible monthly installment plan</p>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div>
+      <p class="gold" data-i18n="contactBadge">Contact</p>
+      <h2 data-i18n="contactTitle">Talk to Kwan</h2>
+      <p data-i18n="contactText">For buying, selling, renting, investing or property consultation.</p>
+    </div>
+
+    <div class="contact-box">
+      <a href="tel:+66920056640">☎️ 092-005-6640</a>
+      <a href="tel:+66906507558">☎️ 090-650-7558</a>
+      <a href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">💬 LINE: @realcreamthailand</a>
+      <p>Chiang Mai • Phichit • Phitsanulok • Bangkok</p>
+    </div>
+  </section>
 
   <footer>
-    <p>© 2026 SIRILAND Real Estate Thailand. All rights reserved.</p>
+    <p>© 2026 SIRILAND Real Estate Thailand</p>
   </footer>
+
+  <script src="properties.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

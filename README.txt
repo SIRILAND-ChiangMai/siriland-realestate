@@ -1,39 +1,50 @@
-# SIRILAND GitHub Pages Website
+SIRILAND PRO WEBSITE
 
-## How to upload to GitHub Pages
+Upload these files to the same GitHub repository:
 
-1. Go to https://github.com
-2. Create a new repository, for example:
-   `siriland-realestate`
-3. Upload these files:
-   - `index.html`
-   - `style.css`
-4. Go to:
-   Settings → Pages
-5. Under "Build and deployment":
-   - Source: Deploy from a branch
-   - Branch: main
-   - Folder: /root
-6. Click Save.
-7. Your free website will be live at:
-   `https://YOUR-USERNAME.github.io/siriland-realestate/`
+- index.html
+- style.css
+- script.js
+- properties.js
 
-## How to edit listings
+HOW TO UPDATE YOUR EXISTING SITE
 
-Open `index.html` and edit the property cards inside:
+1. Open your repository:
+   SIRILAND-ChiangMai / siriland-realestate
 
-`<section id="properties">`
+2. Delete or replace old files:
+   - index.html
+   - style.css
 
-Replace:
-- price
-- property name
-- Google Maps link
-- details
-- contact number
+3. Upload all new files from this folder:
+   - index.html
+   - style.css
+   - script.js
+   - properties.js
+   - README.txt
 
-## Contact in this template
+4. Commit changes.
 
-Kwan
-092-005-6640
-090-650-7558
-LINE: @realcreamthailand
+5. Wait 1-3 minutes.
+
+Your site will update automatically:
+https://siriland-chiangmai.github.io/siriland-realestate/
+
+HOW TO ADD A NEW PROPERTY
+
+Open properties.js and copy one block:
+
+{
+  title: "Property Name",
+  city: "Chiang Mai",
+  type: "Condo",
+  deal: "Sale",
+  price: "2.59 MB",
+  size: "36 sq.m.",
+  bedrooms: "1 Bedroom",
+  description: "Short description here.",
+  map: "Google Maps link here",
+  label: "CONDO"
+}
+
+Then change the details.
