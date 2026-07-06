@@ -637,7 +637,7 @@ const properties = [
     ],
     "images": [
       "images/the-next-1-1.jpg",
-     "images/the-next-1-26.jpg",
+      "images/the-next-1-26.jpg",
       "images/the-next-1-27.jpg",
       "images/the-next-1-28.jpg",
       "images/the-next-1-29.jpg",
@@ -915,6 +915,39 @@ const properties = [
       "images/wiang-ping-mansion-condo-1110-22.jpg",
       "images/wiang-ping-mansion-condo-1110-23.jpg",
       "images/wiang-ping-mansion-condo-1110-24.jpg"
+    ]
+  },
+  {
+    "id": "PIL02",
+    "title": "2 Bedroom House",
+    "city": "Phitsanulok",
+    "type": "House",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2.8 ล้าน",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "1 Bathrooms",
+    "area": "",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "description": "ทรัพย์ใหม่ 🏡 รอขวัญ รีวิว พร้อมโปรโมท \n🏡 ขายบ้านพร้อมอยู่\n📍ปลักแรด อ.บางระกำ จ.พิษณุโลก\n🌿 บ้านบรรยากาศร่มรื่น พื้นที่ 2 งาน\n🚧 ล้อมรั้วเรียบร้อย ติดถนน เข้า-ออกสะดวก\n🛏️ 2 ห้องนอน\n🚿 1 ห้องน้ำ\n🎁 แถมเฟอร์นิเจอร์ + เครื่องใช้ไฟฟ้าครบ พร้อมอยู่\n🛏️ เตียงนอน\n🧺 ตู้เสื้อผ้า\n🪑 โต๊ะ + เก้าอี้ทานข้าว\n🛋️ โซฟา\n❄️ แอร์\n🧼 เครื่องซักผ้า\n🍽️ ไมโครเวฟ\n💰 ราคาขายเพียง 2.8 ล้านบาท เท่านั้น‼️\n✨ ซื้อแล้วเข้าอยู่ได้เลย คุ้มมาก ไม่ต้องแต่งเพิ่ม\nสนใจทักแชท / นัดชมบ้านได้เลยค่ะ 📲\n🏹 สนใจอสังหาริมทรัพย์ บ้าน คอนโด ตึก ที่ดิน โกดังสินค้า \n#ฝากขาย #ฝากปล่อยเช่า 🏦 #ประเมินราคาก่อนทำงาน\n☀️ติดต่อขวัญได้นะคะ \n📞 โทร 092-0056640\n☎️ 090-650-7558\n💬 LINE ID 🆔 @realcreamthailand\\n\\nFacebook: https://www.facebook.com/share/p/19V234jMRv/",
+    "highlights": [],
+    "images": [
+      "images/2-bedroom-house-1.jpg",
+      "images/2-bedroom-house-2.jpg",
+      "images/2-bedroom-house-3.jpg",
+      "images/2-bedroom-house-4.jpg",
+      "images/2-bedroom-house-5.jpg",
+      "images/2-bedroom-house-6.jpg",
+      "images/2-bedroom-house-7.jpg",
+      "images/2-bedroom-house-8.jpg",
+      "images/2-bedroom-house-9.jpg",
+      "images/2-bedroom-house-10.jpg",
+      "images/2-bedroom-house-11.jpg",
+      "images/2-bedroom-house-12.jpg",
+      "images/2-bedroom-house-13.jpg",
+      "images/2-bedroom-house-14.jpg"
     ]
   }
 ];
