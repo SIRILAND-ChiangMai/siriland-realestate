@@ -1,0 +1,27 @@
+SIRILAND CMS Yeni İlan Fix Raporu
+
+Kök hata:
+- Eski admin panelde ZIP / properties.js oluştururken formdaki güncel ilan otomatik kaydedilmiyordu.
+- Kullanıcı yeni ilanı yazıp direkt ZIP oluşturursa properties.js eski listeyle çıkıyordu.
+- Bu yüzden GitHub'a yükleme başarılı olsa bile yeni ilan sitede görünmüyordu.
+
+Yapılan düzeltme:
+- ZIP oluştur, properties.js indir ve JSON indir butonları artık önce formdaki mevcut ilanı otomatik kaydeder.
+- Yeni ilan ID sistemi korundu: CM-0032, CM-0033...
+- Yeni foto yolları çalışan siteyle uyumlu hale getirildi: images/ilan-adi-1.jpg
+- Export ZIP içine properties.js + data/properties.json + yeni görseller eklenir.
+- Birden fazla yeni ilan kaydedilirse bekleyen görseller ID bazında tutulur.
+- Import parser güçlendirildi; properties.js farklı formatlarda olsa da okunur.
+
+Kullanım:
+1) admin.html açılır.
+2) Yeni ilan bilgileri girilir.
+3) Fotoğraflar seçilir.
+4) Direkt ZIP oluştur'a basılabilir; Save'e basmak zorunlu değildir.
+5) Çıkan ZIP içindeki properties.js ve images klasörü GitHub proje klasörüne kopyalanır.
+6) GitHub Desktop: Commit + Push.
+
+Test sonucu:
+- Mevcut properties.js okundu.
+- 32 mevcut ilan korundu.
+- Yeni ilan algoritması yeni kaydı properties.js içine ekleyecek şekilde düzeltildi.
