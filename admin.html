@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND Admin - Fixed Export</title>
+  <title>SIRILAND Admin - Export Verified</title>
   <style>
     :root{--navy:#071a3d;--gold:#d6ad4b;--bg:#f5f7fb;--line:#d9deea;--red:#b91c1c;--green:#0f7b3f}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,Tahoma,sans-serif;color:#172033}.wrap{max-width:1200px;margin:auto;padding:20px}
@@ -17,7 +17,7 @@
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND Professional CMS 2026</div><div class="muted">FIXED: Yeni ilan export sırasında otomatik kaydedilir ve properties.js içine kesin yazılır.</div></div>
+    <div><div class="logo">SIRILAND Professional CMS 2026</div><div class="muted">EXPORT VERIFIED: ZIP oluşmadan önce yeni ilan properties.js içinde gerçekten var mı kontrol edilir.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -139,15 +139,17 @@ function getForm(){
 function setForm(p){fields.forEach(f=>$(f).value=p[f]||'');langs.forEach(l=>{$('title_'+l).value=pick(p.title,l);$('description_'+l).value=pick(p.description,l);$('highlights_'+l).value=pickArr(p.highlights,l).join('\n')});imageFiles=[];renderImages(p.images||[])}
 function clearForm(){fields.forEach(f=>$(f).value='');$('id').value=nextId();$('city').value='Chiang Mai';$('status').value='Available';langs.forEach(l=>{$('title_'+l).value='';$('description_'+l).value='';$('highlights_'+l).value=''});imageFiles=[];renderImages([]);switchLang('en')}
 function upsertCurrent(silent=false){
-  if(!hasFormData()) return false;
+  if(!hasFormData()) return null;
   const p=getForm();
-  const meaningful=pick(p.title,'en')||pick(p.title,'th')||p.price||p.city||p.type||p.images.length;
-  if(!meaningful) return false;
-  const i=properties.findIndex(x=>x.id===p.id);
+  const titleAny=pick(p.title,'en')||pick(p.title,'th')||pick(p.title,'tr')||pick(p.title,'zh');
+  const meaningful=titleAny||p.price||p.city||p.type||(p.images&&p.images.length);
+  if(!meaningful) return null;
+  const i=properties.findIndex(x=>String(x.id).toLowerCase()===String(p.id).toLowerCase());
   if(i>=0) properties[i]=p; else properties.push(p);
+  window.__lastExportPropertyId=p.id;
   renderList(); validate();
-  if(!silent) alert('Kaydedildi: '+p.id);
-  return true;
+  if(!silent) alert('Kaydedildi: '+p.id+' | Toplam ilan: '+properties.length);
+  return p;
 }
 
 function renderList(){
@@ -170,18 +172,29 @@ function validate(){
 function makeJs(){return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
 function download(name,content,type='application/octet-stream'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
 async function buildZip(){
-  upsertCurrent(true);
+  const saved=upsertCurrent(true);
+  const exportId=saved ? saved.id : (window.__lastExportPropertyId || $('id').value.trim());
+  if(!saved){
+    alert('ZIP oluşturulmadı: Formda kaydedilecek yeni ilan bulunamadı. Lütfen başlık/fiyat ve en az 1 fotoğraf girin.');
+    return;
+  }
+  const exists=properties.some(x=>String(x.id).toLowerCase()===String(exportId).toLowerCase());
+  if(!exists){alert('ZIP oluşturulmadı: '+exportId+' ilan listesine eklenemedi.');return;}
   if(!validate()){if(!confirm('Hata var. Yine de ZIP oluşturulsun mu?'))return;}
+  const js=makeJs();
+  if(!js.includes(exportId)){alert('ZIP oluşturulmadı: properties.js içinde '+exportId+' yok.');return;}
   const zip=new JSZip();
-  zip.file('properties.js',makeJs());
+  zip.file('properties.js',js);
   zip.file('data/properties.json',JSON.stringify(properties,null,2));
-  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n4) GitHub Desktop: Commit + Push.\n\nNot: Export artık formdaki ilanı otomatik kaydeder.');
+  zip.file('EXPORT_CHECK.txt','EXPORT OK\nYeni/Kaydedilen ilan ID: '+exportId+'\nToplam ilan: '+properties.length+'\nproperties.js içinde ID var: YES\n\nGitHub klasörüne bu ZIP içindeki dosyaları kopyalayın, Commit + Push yapın.');
+  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) data/properties.json dosyasını da aynı şekilde kopyalayın.\n4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n5) GitHub Desktop: Commit + Push.\n\nÖnemli: ZIP içinde EXPORT_CHECK.txt dosyasını açıp ID ve toplam ilan sayısını kontrol edin.');
   for(const [id,files] of Object.entries(pendingFilesById)){
-    const p=properties.find(x=>x.id===id); if(!p) continue;
+    const p=properties.find(x=>String(x.id).toLowerCase()===String(id).toLowerCase()); if(!p) continue;
     files.forEach((f,i)=>{const path=p.images[i]; if(path) zip.file(path,f);});
   }
   const blob=await zip.generateAsync({type:'blob'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='siriland-new-property-export.zip';a.click();
+  alert('EXPORT OK: '+exportId+' ZIP içine yazıldı. Toplam ilan: '+properties.length+'\nZIP içindeki EXPORT_CHECK.txt dosyasını kontrol edin.');
 }
 
 function parseFbText(){
