@@ -4,3 +4,7 @@
 .lang-switch button{background:transparent;color:#fff;border:1px solid #d8b25c;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer}
 .lang-switch button.active,.lang-switch button:hover{background:#d8b25c;color:#07111f}
 @media(max-width:800px){.lang-switch{width:100%;justify-content:flex-start}.lang-switch button{padding:9px 12px}}
+
+/* SIRILAND urgent CMS 2026 patch: sold/rented ribbon + stronger gallery */
+.photo .sold-ribbon{position:absolute;left:-22%;top:42%;width:144%;transform:rotate(-28deg);background:rgba(185,28,28,.92);color:white;text-align:center;font-weight:1000;font-size:clamp(28px,4vw,48px);letter-spacing:.08em;padding:12px 8px;border-top:3px solid rgba(255,255,255,.75);border-bottom:3px solid rgba(255,255,255,.75);text-shadow:0 3px 8px rgba(0,0,0,.45);box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:4;pointer-events:none}.photo:has(.sold-ribbon) img{filter:saturate(.72) brightness(.78)}.modal-gallery{touch-action:pan-y}.modal-arrow:hover{background:#d8b25c;color:#07111f}.thumbs{scrollbar-width:thin}.thumbs img:hover{opacity:1;transform:translateY(-2px)}
+@media(max-width:700px){.photo .sold-ribbon{font-size:30px;padding:9px}.modal-arrow{width:40px;height:40px;font-size:30px}.thumbs img{width:68px;height:52px}}

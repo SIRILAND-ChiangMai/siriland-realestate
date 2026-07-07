@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND Admin - Export Verified</title>
+  <title>SIRILAND Admin - City ID + Language UI</title>
   <style>
     :root{--navy:#071a3d;--gold:#d6ad4b;--bg:#f5f7fb;--line:#d9deea;--red:#b91c1c;--green:#0f7b3f}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,Tahoma,sans-serif;color:#172033}.wrap{max-width:1200px;margin:auto;padding:20px}
@@ -17,7 +17,7 @@
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND Professional CMS 2026</div><div class="muted">EXPORT VERIFIED: ZIP oluşmadan önce yeni ilan properties.js içinde gerçekten var mı kontrol edilir.</div></div>
+    <div><div class="logo">SIRILAND Professional CMS 2026</div><div class="muted">City seçimine göre doğru ID üretir. Üst dil sekmesine göre admin alan başlıkları değişir.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -29,34 +29,40 @@
   <div class="grid">
     <div>
       <div class="panel">
-        <h2>1) İlan Bilgileri</h2>
+        <h2 id="h_info">1) İlan Bilgileri</h2>
         <div class="grid3">
-          <div><label>ID</label><input id="id" placeholder="CM-0032"></div>
-          <div><label>City</label><input id="city" placeholder="Chiang Mai"></div>
-          <div><label>Type</label><input id="type" placeholder="Condo / House / Land"></div>
-          <div><label>Deal</label><input id="deal" placeholder="Sale / Rent"></div>
-          <div><label>Status</label><input id="status" placeholder="Available"></div>
-          <div><label>Price</label><input id="price" placeholder="2.59 MB"></div>
-          <div><label>Bedrooms</label><input id="bedrooms"></div>
-          <div><label>Bathrooms</label><input id="bathrooms"></div>
-          <div><label>Area</label><input id="area"></div>
-          <div><label>Room</label><input id="room"></div>
-          <div><label>Floor</label><input id="floor"></div>
-          <div><label>Map URL</label><input id="map"></div>
+          <div><label data-ui="id">ID</label><input id="id" placeholder="CM-0032"></div>
+          <div><label data-ui="city">City</label><select id="city">
+            <option value="Chiang Mai">Chiang Mai</option>
+            <option value="Bangkok">Bangkok</option>
+            <option value="Phitsanulok">Phitsanulok</option>
+            <option value="Phichit">Phichit</option>
+            <option value="Nakhon Sawan">Nakhon Sawan</option>
+          </select></div>
+          <div><label data-ui="type">Type</label><input id="type" placeholder="Condo / House / Land"></div>
+          <div><label data-ui="deal">Deal</label><input id="deal" placeholder="Sale / Rent"></div>
+          <div><label data-ui="status">Status</label><input id="status" placeholder="Available"></div>
+          <div><label data-ui="price">Price</label><input id="price" placeholder="2.59 MB"></div>
+          <div><label data-ui="bedrooms">Bedrooms</label><input id="bedrooms"></div>
+          <div><label data-ui="bathrooms">Bathrooms</label><input id="bathrooms"></div>
+          <div><label data-ui="area">Area</label><input id="area"></div>
+          <div><label data-ui="room">Room</label><input id="room"></div>
+          <div><label data-ui="floor">Floor</label><input id="floor"></div>
+          <div><label data-ui="map">Map URL</label><input id="map"></div>
         </div>
       </div>
       <div class="panel">
-        <h2>2) 4 Dil İçerik</h2>
+        <h2 id="h_lang">2) 4 Dil İçerik</h2>
         <div class="tabs" id="langTabs"></div>
         <div id="langForms"></div>
       </div>
       <div class="panel">
-        <h2>3) Facebook Metni</h2>
+        <h2 id="h_fb">3) Facebook Metni</h2>
         <textarea id="fbText" placeholder="Facebook ilan metnini buraya yapıştır..."></textarea>
         <button class="btn dark" id="parseBtn">Alanları otomatik doldur</button>
       </div>
       <div class="panel">
-        <h2>4) Görseller</h2>
+        <h2 id="h_images">4) Görseller</h2>
         <p class="muted">Yeni ilanın fotoğraflarını seç. Kapak fotoğrafı ilk sıradadır. Oklarla sıralayabilirsin.</p>
         <input type="file" id="imageFiles" accept="image/*" multiple>
         <div id="imagePreview" class="list"></div>
@@ -78,6 +84,7 @@
 let properties=[];
 let currentLang='en';
 let imageFiles=[];
+let existingImageList=[];
 let pendingFilesById={};
 const langs=['en','th','tr','zh'];
 const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map'];
@@ -88,7 +95,23 @@ function slugify(s){return String(s||'property').toLowerCase().normalize('NFKD')
 function pick(v,l='en'){return v&&typeof v==='object'&&!Array.isArray(v)?(v[l]||v.en||v.th||v.tr||v.zh||''):(v||'')}
 function pickArr(v,l='en'){return v&&typeof v==='object'&&!Array.isArray(v)?(v[l]||v.en||v.th||v.tr||v.zh||[]):(Array.isArray(v)?v:[])}
 function hasFormData(){return fields.some(f=>$(f).value.trim()) || langs.some(l=>$('title_'+l).value.trim()||$('description_'+l).value.trim()||$('highlights_'+l).value.trim()) || imageFiles.length}
-function nextId(){let max=0;properties.forEach(p=>{let m=String(p.id||'').match(/CM-(\d+)/i);if(m)max=Math.max(max,+m[1])});return 'CM-'+String(max+1).padStart(4,'0')}
+const CITY_CODES={
+  'Chiang Mai':'CM',
+  'Bangkok':'BKK',
+  'Phitsanulok':'PLK',
+  'Phichit':'PCT',
+  'Nakhon Sawan':'NKS'
+};
+const UI={
+  en:{info:'1) Property Information',lang:'2) 4 Language Content',fb:'3) Facebook Text',images:'4) Images',id:'ID',city:'City',type:'Type',deal:'Deal',status:'Status',price:'Price',bedrooms:'Bedrooms',bathrooms:'Bathrooms',area:'Area',room:'Room',floor:'Floor',map:'Map URL'},
+  th:{info:'1) ข้อมูลประกาศ',lang:'2) เนื้อหา 4 ภาษา',fb:'3) ข้อความ Facebook',images:'4) รูปภาพ',id:'รหัสประกาศ',city:'จังหวัด/เมือง',type:'ประเภท',deal:'ขาย/เช่า',status:'สถานะ',price:'ราคา',bedrooms:'ห้องนอน',bathrooms:'ห้องน้ำ',area:'พื้นที่',room:'เลขห้อง',floor:'ชั้น',map:'ลิงก์แผนที่'},
+  tr:{info:'1) İlan Bilgileri',lang:'2) 4 Dil İçerik',fb:'3) Facebook Metni',images:'4) Görseller',id:'ID',city:'Şehir',type:'Tür',deal:'Satış / Kiralama',status:'Durum',price:'Fiyat',bedrooms:'Yatak Odası',bathrooms:'Banyo',area:'Alan',room:'Oda',floor:'Kat',map:'Harita URL'},
+  zh:{info:'1) 房源信息',lang:'2) 4种语言内容',fb:'3) Facebook 文本',images:'4) 图片',id:'编号',city:'城市',type:'类型',deal:'出售/出租',status:'状态',price:'价格',bedrooms:'卧室',bathrooms:'浴室',area:'面积',room:'房号',floor:'楼层',map:'地图链接'}
+};
+function cityCode(city){return CITY_CODES[city]||String(city||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,3)||'PRP'}
+function nextId(city){const code=cityCode(city||$('city')?.value||'Chiang Mai');let max=0;properties.forEach(p=>{let m=String(p.id||'').match(new RegExp('^'+code+'-(\\d+)$','i'));if(m)max=Math.max(max,+m[1])});return code+'-'+String(max+1).padStart(4,'0')}
+function syncIdToCity(force=false){const city=$('city').value;const code=cityCode(city);const id=$('id').value.trim();const known=Object.values(CITY_CODES).join('|');if(force||!id||new RegExp('^('+known+')-\\d+$','i').test(id)) $('id').value=nextId(city)}
+function updateUiLang(l=currentLang){const t=UI[l]||UI.en;$('h_info').textContent=t.info;$('h_lang').textContent=t.lang;$('h_fb').textContent=t.fb;$('h_images').textContent=t.images;document.querySelectorAll('[data-ui]').forEach(el=>{el.textContent=t[el.dataset.ui]||el.textContent})}
 function imageBaseFor(p){return slugify(p.title?.en||p.title?.th||p.title?.tr||p.title?.zh||p.id)}
 
 function extractProperties(text){
@@ -115,11 +138,15 @@ function initLangForms(){
   $('langTabs').innerHTML=langs.map(l=>`<button class="tab ${l==='en'?'active':''}" data-lang="${l}">${l.toUpperCase()}</button>`).join('');
   $('langForms').innerHTML=langs.map(l=>`<div class="langform" id="form_${l}" style="display:${l==='en'?'block':'none'}"><div class="grid2"><div><label>Başlık ${l.toUpperCase()}</label><input id="title_${l}"></div><div><label>Öne çıkanlar ${l.toUpperCase()} (her satır ayrı)</label><textarea id="highlights_${l}"></textarea></div></div><label>Açıklama ${l.toUpperCase()}</label><textarea id="description_${l}"></textarea></div>`).join('');
 }
-function switchLang(l){currentLang=l;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));langs.forEach(x=>$('form_'+x).style.display=x===l?'block':'none')}
+function switchLang(l){currentLang=l;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));langs.forEach(x=>$('form_'+x).style.display=x===l?'block':'none');updateUiLang(l)}
 
 function getForm(){
   const p={}; fields.forEach(f=>p[f]=$(f).value.trim());
-  if(!p.id) p.id=nextId();
+  if(!p.id) p.id=nextId(p.city);
+  const expected=cityCode(p.city);
+  if(p.id && !String(p.id).toUpperCase().startsWith(expected+'-')){
+    if(confirm('ID şehir kodu ile uyumsuz. '+p.id+' yerine '+nextId(p.city)+' yapılsın mı?')){p.id=nextId(p.city);$('id').value=p.id}
+  }
   p.title={}; p.description={}; p.highlights={};
   langs.forEach(l=>{p.title[l]=$('title_'+l).value.trim();p.description[l]=$('description_'+l).value.trim();p.highlights[l]=$('highlights_'+l).value.split('\n').map(x=>x.trim()).filter(Boolean)});
   const existing=properties.find(x=>x.id===p.id);
@@ -128,7 +155,7 @@ function getForm(){
     p.images=imageFiles.map((f,i)=>`images/${base}-${i+1}.${(f.name.split('.').pop()||'jpg').toLowerCase()}`);
     pendingFilesById[p.id]=imageFiles.slice();
   } else {
-    p.images=(existing&&existing.images)||[];
+    p.images=existingImageList.length ? existingImageList.slice() : ((existing&&existing.images)||[]);
   }
   p.createdAt=(existing&&existing.createdAt)||new Date().toISOString().slice(0,10);
   p.updatedAt=new Date().toISOString().slice(0,10);
@@ -136,31 +163,37 @@ function getForm(){
   p.contact={name:'Kwan',phone1:'092-005-6640',phone2:'090-650-7558',line:'@realcreamthailand'};
   return p;
 }
-function setForm(p){fields.forEach(f=>$(f).value=p[f]||'');langs.forEach(l=>{$('title_'+l).value=pick(p.title,l);$('description_'+l).value=pick(p.description,l);$('highlights_'+l).value=pickArr(p.highlights,l).join('\n')});imageFiles=[];renderImages(p.images||[])}
-function clearForm(){fields.forEach(f=>$(f).value='');$('id').value=nextId();$('city').value='Chiang Mai';$('status').value='Available';langs.forEach(l=>{$('title_'+l).value='';$('description_'+l).value='';$('highlights_'+l).value=''});imageFiles=[];renderImages([]);switchLang('en')}
+function setForm(p){fields.forEach(f=>$(f).value=p[f]||'');langs.forEach(l=>{$('title_'+l).value=pick(p.title,l);$('description_'+l).value=pick(p.description,l);$('highlights_'+l).value=pickArr(p.highlights,l).join('\n')});imageFiles=[];existingImageList=(p.images||[]).slice();renderImages()}
+function clearForm(){fields.forEach(f=>$(f).value='');$('city').value='Chiang Mai';$('id').value=nextId('Chiang Mai');$('status').value='Available';langs.forEach(l=>{$('title_'+l).value='';$('description_'+l).value='';$('highlights_'+l).value=''});imageFiles=[];existingImageList=[];renderImages();switchLang('en')}
 function upsertCurrent(silent=false){
-  if(!hasFormData()) return null;
+  if(!hasFormData()) return false;
   const p=getForm();
-  const titleAny=pick(p.title,'en')||pick(p.title,'th')||pick(p.title,'tr')||pick(p.title,'zh');
-  const meaningful=titleAny||p.price||p.city||p.type||(p.images&&p.images.length);
-  if(!meaningful) return null;
-  const i=properties.findIndex(x=>String(x.id).toLowerCase()===String(p.id).toLowerCase());
+  const meaningful=pick(p.title,'en')||pick(p.title,'th')||p.price||p.city||p.type||p.images.length;
+  if(!meaningful) return false;
+  const i=properties.findIndex(x=>x.id===p.id);
   if(i>=0) properties[i]=p; else properties.push(p);
-  window.__lastExportPropertyId=p.id;
   renderList(); validate();
-  if(!silent) alert('Kaydedildi: '+p.id+' | Toplam ilan: '+properties.length);
-  return p;
+  if(!silent) alert('Kaydedildi: '+p.id);
+  return true;
 }
 
 function renderList(){
   $('list').innerHTML=properties.map(p=>`<div class="item"><div><b>${escapeHtml(p.id)}</b> — ${escapeHtml(pick(p.title,'en')||pick(p.title,'th'))}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.price||'')} • ${(p.images||[]).length} foto</span></div><div><button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button><button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button></div></div>`).join('');
 }
-function renderImages(existing=[]){
-  $('imagePreview').innerHTML=(imageFiles.length?imageFiles.map((f,i)=>`<div class="item"><span>${i+1}. ${escapeHtml(f.name)}</span><span><button class="btn dark" onclick="moveImg(${i},-1)">↑</button><button class="btn dark" onclick="moveImg(${i},1)">↓</button></span></div>`):existing.map((x,i)=>`<div class="item"><span class="photoName">${i+1}. ${escapeHtml(x)}</span></div>`)).join('');
+function renderImages(){
+  if(imageFiles.length){
+    $('imagePreview').innerHTML=imageFiles.map((f,i)=>`<div class="item"><span>${i+1}. ${i===0?'<b>Kapak</b> • ':''}${escapeHtml(f.name)}</span><span><button class="btn" onclick="coverImg(${i})">Kapak Yap</button><button class="btn dark" onclick="moveImg(${i},-1)">↑</button><button class="btn dark" onclick="moveImg(${i},1)">↓</button></span></div>`).join('');
+  } else {
+    $('imagePreview').innerHTML=existingImageList.map((x,i)=>`<div class="item"><span class="photoName">${i+1}. ${i===0?'<b>Kapak</b> • ':''}${escapeHtml(x)}</span><span><button class="btn" onclick="coverExisting(${i})">Kapak Yap</button><button class="btn dark" onclick="moveExisting(${i},-1)">↑</button><button class="btn dark" onclick="moveExisting(${i},1)">↓</button><button class="btn red" onclick="removeExisting(${i})">Sil</button></span></div>`).join('');
+  }
 }
 window.editProp=id=>{const p=properties.find(x=>x.id===id);if(p)setForm(p)};
 window.deleteProp=id=>{if(confirm(id+' silinsin mi?')){properties=properties.filter(p=>p.id!==id);delete pendingFilesById[id];renderList();clearForm();validate()}};
 window.moveImg=(i,d)=>{const j=i+d;if(j<0||j>=imageFiles.length)return;[imageFiles[i],imageFiles[j]]=[imageFiles[j],imageFiles[i]];renderImages()};
+window.coverImg=i=>{if(i<=0||i>=imageFiles.length)return;const f=imageFiles.splice(i,1)[0];imageFiles.unshift(f);renderImages()};
+window.moveExisting=(i,d)=>{const j=i+d;if(j<0||j>=existingImageList.length)return;[existingImageList[i],existingImageList[j]]=[existingImageList[j],existingImageList[i]];renderImages()};
+window.coverExisting=i=>{if(i<=0||i>=existingImageList.length)return;const f=existingImageList.splice(i,1)[0];existingImageList.unshift(f);renderImages()};
+window.removeExisting=i=>{if(confirm('Bu görsel listeden silinsin mi?')){existingImageList.splice(i,1);renderImages()}};
 
 function validate(){
   const r=[];const ids=new Set();
@@ -172,29 +205,18 @@ function validate(){
 function makeJs(){return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
 function download(name,content,type='application/octet-stream'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
 async function buildZip(){
-  const saved=upsertCurrent(true);
-  const exportId=saved ? saved.id : (window.__lastExportPropertyId || $('id').value.trim());
-  if(!saved){
-    alert('ZIP oluşturulmadı: Formda kaydedilecek yeni ilan bulunamadı. Lütfen başlık/fiyat ve en az 1 fotoğraf girin.');
-    return;
-  }
-  const exists=properties.some(x=>String(x.id).toLowerCase()===String(exportId).toLowerCase());
-  if(!exists){alert('ZIP oluşturulmadı: '+exportId+' ilan listesine eklenemedi.');return;}
+  upsertCurrent(true);
   if(!validate()){if(!confirm('Hata var. Yine de ZIP oluşturulsun mu?'))return;}
-  const js=makeJs();
-  if(!js.includes(exportId)){alert('ZIP oluşturulmadı: properties.js içinde '+exportId+' yok.');return;}
   const zip=new JSZip();
-  zip.file('properties.js',js);
+  zip.file('properties.js',makeJs());
   zip.file('data/properties.json',JSON.stringify(properties,null,2));
-  zip.file('EXPORT_CHECK.txt','EXPORT OK\nYeni/Kaydedilen ilan ID: '+exportId+'\nToplam ilan: '+properties.length+'\nproperties.js içinde ID var: YES\n\nGitHub klasörüne bu ZIP içindeki dosyaları kopyalayın, Commit + Push yapın.');
-  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) data/properties.json dosyasını da aynı şekilde kopyalayın.\n4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n5) GitHub Desktop: Commit + Push.\n\nÖnemli: ZIP içinde EXPORT_CHECK.txt dosyasını açıp ID ve toplam ilan sayısını kontrol edin.');
+  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n4) GitHub Desktop: Commit + Push.\n\nNot: Export artık formdaki ilanı otomatik kaydeder.');
   for(const [id,files] of Object.entries(pendingFilesById)){
-    const p=properties.find(x=>String(x.id).toLowerCase()===String(id).toLowerCase()); if(!p) continue;
+    const p=properties.find(x=>x.id===id); if(!p) continue;
     files.forEach((f,i)=>{const path=p.images[i]; if(path) zip.file(path,f);});
   }
   const blob=await zip.generateAsync({type:'blob'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='siriland-new-property-export.zip';a.click();
-  alert('EXPORT OK: '+exportId+' ZIP içine yazıldı. Toplam ilan: '+properties.length+'\nZIP içindeki EXPORT_CHECK.txt dosyasını kontrol edin.');
 }
 
 function parseFbText(){
@@ -218,11 +240,13 @@ $('downloadJson').onclick=()=>{upsertCurrent(true);download('properties.json',JS
 $('downloadJs').onclick=()=>{upsertCurrent(true);download('properties.js',makeJs(),'text/javascript')};
 $('downloadZip').onclick=buildZip;
 $('parseBtn').onclick=parseFbText;
-$('imageFiles').onchange=e=>{imageFiles=Array.from(e.target.files||[]);renderImages()};
+$('city').onchange=()=>syncIdToCity(true);
+$('imageFiles').onchange=e=>{imageFiles=Array.from(e.target.files||[]);existingImageList=[];renderImages()};
 $('importBtn').onclick=()=>$('importFile').click();
 $('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result);renderList();clearForm();validate();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
 
 initLangForms();
+updateUiLang('en');
 fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate()});
 </script>
 </body>
