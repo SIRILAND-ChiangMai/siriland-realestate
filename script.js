@@ -47,30 +47,6 @@
     if(s.includes('reserved')) return 'RESERVED';
     return '';
   };
-  function cleanText(v){ return String(pick(v) || '').replace(/[#*_]+/g,'').replace(/\s+/g,' ').trim(); }
-  function autoShort(p){
-    const parts=[];
-    const add=(v,icon='')=>{ const x=cleanText(v); if(x && !parts.includes(x)) parts.push((icon?icon+' ':'')+x); };
-    add(p.bedrooms,'🏡');
-    add(p.bathrooms,'🛁');
-    add(p.area,'📐');
-    add(p.floor,'🏢');
-    add(p.room,'🚪');
-    add(p.parking,'🚗');
-    if(p.furniture || /furnish/i.test(String(p.description||''))) parts.push(translateText('Fully furnished'));
-    if(p.price) parts.push('💰 '+p.price);
-    const h=pickList(p.highlights).slice(0,3).map(x=>String(x).trim()).filter(Boolean);
-    h.forEach(x=>{ if(!parts.includes(x)) parts.push(x); });
-    if(parts.length) return parts.slice(0,6).join(' • ');
-    const d=cleanText(p.description);
-    return d.length>170 ? d.slice(0,167).trim()+'...' : d;
-  }
-  function cardDescription(p){
-    const sd = p.shortDescription || p.summary || p.cardDescription;
-    if(sd) return cleanText(sd);
-    return autoShort(p);
-  }
-
 
   function applyI18n(){
     document.documentElement.lang = lang;
@@ -90,7 +66,7 @@
   }
 
   function card(p){
-    const title=pick(p.title), desc=cardDescription(p), highlights=pickList(p.highlights).slice(0,4), ov=overlayText(p.status);
+    const title=pick(p.title), desc=pick(p.description), highlights=pickList(p.highlights).slice(0,4), ov=overlayText(p.status);
     return `<article class="card">
       <div class="photo" data-id="${p.id}"><img src="${safeImg(p.images)}" alt="${title}" loading="lazy" onerror="this.src='images/logo.png'"><span class="badge">${trMap('deal',p.deal)}</span><span class="status">${trMap('status',p.status)}</span><span class="count">${(p.images||[]).length} ${t('photos')}</span>${ov?`<span class="sold-ribbon">${ov}</span>`:''}</div>
       <div class="content"><div class="meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div><h3>${title}</h3><div class="price">${p.price||''}</div><p class="desc">${desc}</p>
