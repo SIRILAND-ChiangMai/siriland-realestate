@@ -2924,9 +2924,14 @@ window.SIRILAND_PROPERTIES = [
     },
     "description": {
       "en": "",
-      "th": "✨ **House for Rent – Karnkanok 12 Phase 1, Chiang Mai** 🏡\n\nLooking for a beautiful home near international schools? This house is an excellent choice for families!\n\n📍 **Prime Location:** Karnkanok 12 Phase 1, Chiang Mai\n\n🎓 Conveniently located near several international schools, especially **Americana Chinese International School (ACIS)** and **Unity Concord International School (UCIS)**, making daily school commutes quick and easy.\n\n### ✨ Property Features\n\n🛏️ 4 Bedrooms\n🚿 4 Bathrooms\n🚗 Parking for 2 Cars\n🛋️ Fully furnished with complete electrical appliances – Ready to move in\n📐 Land size: Over 60 sq.wah\n🏠 Spacious, bright, and comfortable living space\n\n### 📍 Location Highlights\n\n🚶 Walking distance to 7-Eleven\n🚗 Easy access to Chiang Mai city center\n🍽️ Close to restaurants, cafés, supermarkets, and other everyday conveniences\n👨‍👩‍👧‍👦 Perfect for families seeking comfort, convenience, and a secure neighborhood\n\n💰 **Rental Price: Only THB 35,000 per month**",
-      "tr": "✨ **House for Rent – Karnkanok 12 Phase 1, Chiang Mai** 🏡\n\nLooking for a beautiful home near international schools? This house is an excellent choice for families!\n\n📍 **Prime Location:** Karnkanok 12 Phase 1, Chiang Mai\n\n🎓 Conveniently located near several international schools, especially **Americana Chinese International School (ACIS)** and **Unity Concord International School (UCIS)**, making daily school commutes quick and easy.\n\n### ✨ Property Features\n\n🛏️ 4 Bedrooms\n🚿 4 Bathrooms\n🚗 Parking for 2 Cars\n🛋️ Fully furnished with complete electrical appliances – Ready to move in\n📐 Land size: Over 60 sq.wah\n🏠 Spacious, bright, and comfortable living space\n\n### 📍 Location Highlights\n\n🚶 Walking distance to 7-Eleven\n🚗 Easy access to Chiang Mai city center\n🍽️ Close to restaurants, cafés, supermarkets, and other everyday conveniences\n👨‍👩‍👧‍👦 Perfect for families seeking comfort, convenience, and a secure neighborhood\n\n💰 **Rental Price: Only THB 35,000 per month**",
-      "zh": "✨ **House for Rent – Karnkanok 12 Phase 1, Chiang Mai** 🏡\n\nLooking for a beautiful home near international schools? This house is an excellent choice for families!\n\n📍 **Prime Location:** Karnkanok 12 Phase 1, Chiang Mai\n\n🎓 Conveniently located near several international schools, especially **Americana Chinese International School (ACIS)** and **Unity Concord International School (UCIS)**, making daily school commutes quick and easy.\n\n### ✨ Property Features\n\n🛏️ 4 Bedrooms\n🚿 4 Bathrooms\n🚗 Parking for 2 Cars\n🛋️ Fully furnished with complete electrical appliances – Ready to move in\n📐 Land size: Over 60 sq.wah\n🏠 Spacious, bright, and comfortable living space\n\n### 📍 Location Highlights\n\n🚶 Walking distance to 7-Eleven\n🚗 Easy access to Chiang Mai city center\n🍽️ Close to restaurants, cafés, supermarkets, and other everyday conveniences\n👨‍👩‍👧‍👦 Perfect for families seeking comfort, convenience, and a secure neighborhood\n\n💰 **Rental Price: Only THB 35,000 per month**"
+     Karnkanok 12 Phase 1
+4 Bedrooms
+4 Bathrooms
+60+ sq.w.
+Fully Furnished
+2 Parking
+Near ACIS & UCIS
+THB 35,000 / Month
     },
     "highlights": {
       "en": [
