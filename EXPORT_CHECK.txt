@@ -1,0 +1,6 @@
+EXPORT OK
+Yeni/Kaydedilen ilan ID: BK-0032
+Toplam ilan: 35
+properties.js içinde ID var: YES
+
+GitHub klasörüne bu ZIP içindeki dosyaları kopyalayın, Commit + Push yapın.
