@@ -1,5 +1,5 @@
 EXPORT OK
-Yeni/Kaydedilen ilan ID: BK-0032
+Yeni/Kaydedilen ilan ID: CM-0032
 Toplam ilan: 36
 properties.js içinde ID var: YES
 
