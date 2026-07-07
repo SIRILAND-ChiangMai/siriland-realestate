@@ -2662,6 +2662,195 @@ window.SIRILAND_PROPERTIES = [
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
+  },
+  {
+    "id": "BKK-0001",
+    "title": {
+      "en": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "th": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "tr": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "zh": "Bangkok Luxury Condo — Sathorn / Suanplu"
+    },
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "12.99 MB",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathrooms",
+    "area": "94.80 sqm",
+    "room": "",
+    "floor": "7th Floor",
+    "map": "",
+    "description": {
+      "en": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
+      "th": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
+      "tr": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
+      "zh": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026."
+    },
+    "highlights": {
+      "en": [
+        "Sathorn / Suanplu Bangkok",
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "94.80 sqm",
+        "Tenant 45,000 THB/month",
+        "Lease until 31 Oct 2026"
+      ],
+      "th": [
+        "Sathorn / Suanplu Bangkok",
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "94.80 sqm",
+        "Tenant 45,000 THB/month",
+        "Lease until 31 Oct 2026"
+      ],
+      "tr": [
+        "Sathorn / Suanplu Bangkok",
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "94.80 sqm",
+        "Tenant 45,000 THB/month",
+        "Lease until 31 Oct 2026"
+      ],
+      "zh": [
+        "Sathorn / Suanplu Bangkok",
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "94.80 sqm",
+        "Tenant 45,000 THB/month",
+        "Lease until 31 Oct 2026"
+      ]
+    },
+    "images": [
+      "images/bkk-01-3.jpg",
+      "images/bkk-01-10.jpg",
+      "images/bkk-01-2.jpg",
+      "images/bkk-01-5.jpg",
+      "images/bkk-01-6.jpg",
+      "images/bkk-01-7.jpg",
+      "images/bkk-01-8.jpg",
+      "images/bkk-01-9.jpg",
+      "images/bkk-01-1.jpg",
+      "images/bkk-01-4.jpg",
+      "images/bkk-01-11.jpg",
+      "images/bkk-01-12.jpg",
+      "images/bkk-01-13.jpg",
+      "images/bkk-01-14.jpg",
+      "images/bkk-01-15.jpg",
+      "images/bkk-01-16.jpg",
+      "images/bkk-01-17.jpg",
+      "images/bkk-01-18.jpg",
+      "images/bkk-01-19.jpg",
+      "images/bkk-01-20.jpg",
+      "images/bkk-01-21.jpg",
+      "images/bkk-01-22.jpg",
+      "images/bkk-01-23.jpg",
+      "images/bkk-01-24.jpg",
+      "images/bkk-01-25.jpg",
+      "images/bkk-01-26.jpg",
+      "images/bkk-01-27.jpg",
+      "images/bkk-01-28.jpg",
+      "images/bkk-01-29.jpg"
+    ],
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "BKK-0002",
+    "title": {
+      "en": "Living Nest Ramkhamhaeng",
+      "th": "Living Nest Ramkhamhaeng",
+      "tr": "Living Nest Ramkhamhaeng",
+      "zh": "Living Nest Ramkhamhaeng"
+    },
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "3.29 MB",
+    "bedrooms": "1 Bedroom",
+    "bathrooms": "1 Bathroom",
+    "area": "51.61 sqm",
+    "room": "845/61",
+    "floor": "5th Floor",
+    "map": "",
+    "description": {
+      "en": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng.",
+      "th": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng.",
+      "tr": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng.",
+      "zh": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng."
+    },
+    "highlights": {
+      "en": [
+        "Living Nest Ramkhamhaeng",
+        "1 Bedroom",
+        "1 Bathroom",
+        "51.61 sqm",
+        "5th Floor",
+        "Near The Mall Ramkhamhaeng"
+      ],
+      "th": [
+        "Living Nest Ramkhamhaeng",
+        "1 Bedroom",
+        "1 Bathroom",
+        "51.61 sqm",
+        "5th Floor",
+        "Near The Mall Ramkhamhaeng"
+      ],
+      "tr": [
+        "Living Nest Ramkhamhaeng",
+        "1 Bedroom",
+        "1 Bathroom",
+        "51.61 sqm",
+        "5th Floor",
+        "Near The Mall Ramkhamhaeng"
+      ],
+      "zh": [
+        "Living Nest Ramkhamhaeng",
+        "1 Bedroom",
+        "1 Bathroom",
+        "51.61 sqm",
+        "5th Floor",
+        "Near The Mall Ramkhamhaeng"
+      ]
+    },
+    "images": [
+      "images/bkk-lvnst-01-1.jpg",
+      "images/bkk-lvnst-01-2.jpg",
+      "images/bkk-lvnst-01-3.jpg",
+      "images/bkk-lvnst-01-4.jpg",
+      "images/bkk-lvnst-01-5.jpg",
+      "images/bkk-lvnst-01-6.jpg",
+      "images/bkk-lvnst-01-7.jpg",
+      "images/bkk-lvnst-01-8.jpg",
+      "images/bkk-lvnst-01-9.jpg",
+      "images/bkk-lvnst-01-10.jpg",
+      "images/bkk-lvnst-01-11.jpg",
+      "images/bkk-lvnst-01-12.jpg",
+      "images/bkk-lvnst-01-13.jpg",
+      "images/bkk-lvnst-01-14.jpg",
+      "images/bkk-lvnst-01-15.jpg",
+      "images/bkk-lvnst-01-16.jpg",
+      "images/bkk-lvnst-01-17.jpg",
+      "images/bkk-lvnst-01-18.jpg",
+      "images/bkk-lvnst-01-19.jpg",
+      "images/bkk-lvnst-01-20.jpg",
+      "images/bkk-lvnst-01-21.jpg",
+      "images/bkk-lvnst-01-22.jpg",
+      "images/bkk-lvnst-01-23.jpg",
+      "images/bkk-lvnst-01-24.jpg"
+    ],
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
   }
 ];
 const properties = window.SIRILAND_PROPERTIES;

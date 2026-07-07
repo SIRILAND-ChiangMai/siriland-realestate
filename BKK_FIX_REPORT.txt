@@ -1,0 +1,18 @@
+SIRILAND Bangkok Listing Fix Report
+
+Yapılan işlem:
+- Eksik Bangkok ilan kayıtları properties.js ve data/properties.json içine eklendi.
+- BKK-0001: Bangkok Luxury Condo — Sathorn / Suanplu
+- BKK-0002: Living Nest Ramkhamhaeng
+- Toplam ilan sayısı: 34
+- BKK-0001 resim sayısı: 29
+- BKK-0002 resim sayısı: 24
+
+Not:
+Bu paket sadece veri dosyalarını günceller. Site tasarımı, admin panel ve mevcut Chiang Mai ilanlarına dokunulmadı.
+
+Yükleme:
+1) ZIP'i aç.
+2) İçindeki properties.js ve data/properties.json dosyalarını mevcut GitHub proje klasörüne kopyala.
+3) Üzerine yaz.
+4) GitHub Desktop: Commit + Push.
