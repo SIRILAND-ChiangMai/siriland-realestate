@@ -1,0 +1,14 @@
+SIRILAND FINAL FIX
+
+1) Bu ZIP içindeki dosyaları GitHub Desktop proje klasörüne kopyala.
+2) Replace de.
+3) GitHub Desktop Summary: Final language and PIL property fix
+4) Commit to main.
+5) Push origin.
+6) Site: https://siriland-chiangmai.github.io/siriland-realestate-v2/?v=120000
+7) Admin: https://siriland-chiangmai.github.io/siriland-realestate-v2/admin.html?v=120000
+
+Bu paket şunları içerir:
+- PIL-001 ilanı properties.js içine eklendi.
+- pil-001-1.jpg ... pil-001-10.jpg images klasörüne eklendi.
+- 4 dil frontend dosyaları korunur.
