@@ -15,44 +15,39 @@
     </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
     <nav id="mainNav">
-      <a href="#properties" data-i18n="nav<span data-i18n="statProperties">Properties</span>">Properties</a>
-      <a href="#finance" data-i18n="navFinance"><span data-i18n="ownerFinance">Owner Finance</span></a>
-      <a href="#contact" data-i18n="nav<span data-i18n="contact">Contact</span>">Contact</a>
+      <a href="#properties" data-i18n="navProperties">Properties</a>
+      <a href="#finance" data-i18n="navFinance">Owner Finance</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+      <div class="lang-switch" id="langSwitch"><button data-lang="en">EN</button><button data-lang="th">TH</button><button data-lang="tr">TR</button><button data-lang="zh">中文</button></div>
       <a class="nav-line" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a>
-      <div class="lang-switch" aria-label="Language selector">
-        <button type="button" data-lang="en">EN</button>
-        <button type="button" data-lang="th">TH</button>
-        <button type="button" data-lang="tr">TR</button>
-        <button type="button" data-lang="zh">中文</button>
-      </div>
     </nav>
   </header>
 
   <section class="hero" id="home">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <span class="eyebrow"><span data-i18n="heroEyebrow">Luxury Real Estate Thailand</span></span>
-      <h2><span data-i18n="heroTitle">Buy, Rent & Invest in Chiang Mai Property</span></h2>
-      <p><span data-i18n="heroText">Premium condos, houses and investment properties with photo galleries, maps and direct contact.</span></p>
+      <span class="eyebrow" data-i18n="heroEyebrow">Luxury Real Estate Thailand</span>
+      <h2 data-i18n="heroTitle">Buy, Rent & Invest in Chiang Mai Property</h2>
+      <p data-i18n="heroText">Premium condos, houses and investment properties with photo galleries, maps and direct contact.</p>
       <div class="hero-actions">
-        <a href="#properties" class="btn primary"><span data-i18n="viewListings">View Listings</span></a>
-        <a href="https://line.me/R/ti/p/@realcreamthailand" target="_blank" class="btn outline">LINE Official</a>
+        <a href="#properties" class="btn primary" data-i18n="viewListings">View Listings</a>
+        <a href="https://line.me/R/ti/p/@realcreamthailand" target="_blank" class="btn outline" data-i18n="lineOfficial">LINE Official</a>
       </div>
     </div>
   </section>
 
   <section class="trust-bar">
-    <button class="trust-item" type="button" data-action="showAll"><strong id="propertyCount">0+</strong><span data-i18n="statProperties">Properties</span></button>
-    <button class="trust-item" type="button" data-action="chiangMai"><strong>Chiang Mai</strong><span data-i18n="statPrime">Prime Locations</span></button>
-    <button class="trust-item" type="button" data-action="ownerFinance"><strong data-i18n="ownerFinance">Owner Finance</strong><span data-i18n="statDeals">Selected deals</span></button>
-    <button class="trust-item" type="button" data-action="languages"><strong data-i18n="statLanguages">4 Languages</strong><span>TH / EN / TR / 中文</span></button>
+    <a href="#properties" class="trust-item" data-trust-action="properties"><strong id="propertyCount">0+</strong><span data-i18n="statProperties">Properties</span></a>
+    <a href="#properties" class="trust-item" data-trust-city="Chiang Mai"><strong>Chiang Mai</strong><span data-i18n="statLocations">Prime Locations</span></a>
+    <a href="#finance" class="trust-item"><strong>Owner Finance</strong><span data-i18n="statDeals">Selected deals</span></a>
+    <a href="#properties" class="trust-item" data-trust-action="languages"><strong data-i18n="stat4Lang">4 Languages</strong><span data-i18n="statLanguages">TH / EN / TR / 中文</span></a>
   </section>
 
   <main>
     <section class="section" id="properties">
       <div class="section-head">
-        <span class="eyebrow dark"><span data-i18n="featuredListings">Featured Listings</span></span>
-        <h2><span data-i18n="propertiesTitle">Properties for Sale & Rent</span></h2>
+        <span class="eyebrow dark" data-i18n="featured">Featured Listings</span>
+        <h2 data-i18n="propertiesTitle">Properties for Sale & Rent</h2>
       </div>
       <div class="filters">
         <select id="cityFilter"><option value="all" data-i18n="allCities">All Cities</option></select>
@@ -64,16 +59,16 @@
     </section>
 
     <section class="finance" id="finance">
-      <div><span class="eyebrow">Owner Finance</span><h2><span data-i18n="financeTitle">Flexible payment options for selected properties</span></h2><p><span data-i18n="financeText">Ask us about owner finance, foreign quota, Airbnb allowed units and special buyer conditions.</span></p><a href="#contact" class="btn primary"><span data-i18n="askDetails">Ask For Details</span></a></div>
-      <div class="finance-card"><h3><span data-i18n="whySiriland">Why SIRILAND?</span></h3><ul><li><span data-i18n="why1">Curated investment properties</span></li><li><span data-i18n="why2">Clear ID system for every listing</span></li><li><span data-i18n="why3">Map links and photo galleries</span></li><li><span data-i18n="why4">Thai, English, Turkish and Chinese support</span></li></ul></div>
+      <div><span class="eyebrow" data-i18n="financeEyebrow">Owner Finance</span><h2 data-i18n="financeTitle">Flexible payment options for selected properties</h2><p data-i18n="financeText">Ask us about owner finance, foreign quota, Airbnb allowed units and special buyer conditions.</p><a href="#contact" class="btn primary" data-i18n="askDetails">Ask For Details</a></div>
+      <div class="finance-card"><h3 data-i18n="whyTitle">Why SIRILAND?</h3><ul><li data-i18n="why1">Curated investment properties</li><li data-i18n="why2">Clear ID system for every listing</li><li data-i18n="why3">Map links and photo galleries</li><li data-i18n="why4">Thai, English, Turkish and Chinese support</li></ul></div>
     </section>
 
     <section class="section contact" id="contact">
-      <div class="section-head left-head"><span class="eyebrow dark">Contact</span><h2><span data-i18n="contactTitle">Talk to SIRILAND</span></h2></div>
+      <div class="section-head left-head"><span class="eyebrow dark" data-i18n="contactEyebrow">Contact</span><h2 data-i18n="contactTitle">Talk to SIRILAND</h2></div>
       <div class="contact-grid">
-        <a class="contact-card" href="tel:0920056640"><strong>092-005-6640</strong><span>Call / WhatsApp</span></a>
-        <a class="contact-card" href="tel:0906507558"><strong>090-650-7558</strong><span>Call / WhatsApp</span></a>
-        <a class="contact-card" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank"><strong>@realcreamthailand</strong><span>LINE Official</span></a>
+        <a class="contact-card" href="tel:0920056640"><strong>092-005-6640</strong><span data-i18n="callWhatsapp">Call / WhatsApp</span></a>
+        <a class="contact-card" href="tel:0906507558"><strong>090-650-7558</strong><span data-i18n="callWhatsapp">Call / WhatsApp</span></a>
+        <a class="contact-card" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank"><strong>@realcreamthailand</strong><span data-i18n="lineOfficial">LINE Official</span></a>
       </div>
     </section>
   </main>
