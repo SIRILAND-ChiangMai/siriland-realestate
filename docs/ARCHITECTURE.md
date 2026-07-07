@@ -1,14 +1,15 @@
 # SIRILAND Professional 2026 Architecture
 
-Current public site stays GitHub Pages compatible: `index.html`, `style.css`, `script.js`, `properties.js`, `images/`.
+Tek veri kaynağı: `data/properties.json`.
 
-Professional CMS foundation added:
+Üretilen dosya: `properties.js`.
 
-- `admin.html` — browser CMS for adding/editing listings and exporting ZIP.
-- `data/properties.json` — clean data mirror for future tools.
-- `src/core/parser.js` — Facebook post text parser.
-- `src/core/validator.js` — required-field and 4-language validation.
-- `src/core/exporter.js` — `properties.js` / JSON generator.
-- `src/core/imageMatcher.js` — safe image naming.
+Yayın: GitHub Pages statik site.
 
-Rule: `properties.js` is the file used by GitHub Pages. Every export must create a valid `properties.js` and put selected images under `images/`.
+Klasörler:
+- `admin.html`: CMS paneli
+- `data/i18n.js`: 4 dil site metinleri
+- `data/properties.json`: ilan verisi
+- `images/`: ilan ve site görselleri
+- `tools/build.js`: JSON → properties.js
+- `tools/validate.js`: yayın öncesi kontrol

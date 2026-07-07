@@ -1,194 +1,33 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIRILAND Professional CMS</title>
-  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-  <style>
-    *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f6f1e8;color:#071a33}.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}aside{background:#07111f;color:white;padding:24px;border-right:4px solid #d8b25c}.logo{font-size:28px;font-weight:900;letter-spacing:2px}.sub{color:#d8b25c;font-size:13px;margin-top:4px}.nav{margin-top:28px;display:grid;gap:10px}.nav button{background:transparent;color:white;border:1px solid rgba(216,178,92,.25);padding:13px;border-radius:12px;text-align:left;font-weight:800;cursor:pointer}.nav button.active,.nav button:hover{background:#d8b25c;color:#07111f}main{padding:28px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px}.top h1{margin:0;font-size:34px}.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}.card{background:white;border-radius:22px;padding:24px;box-shadow:0 18px 50px rgba(7,17,31,.1)}label{display:block;font-weight:900;margin-top:12px}input,select,textarea{width:100%;padding:13px;border:1px solid #d7c9b7;border-radius:12px;margin-top:6px;font-size:15px}textarea{min-height:110px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}button{border:0;border-radius:12px;padding:13px 17px;font-weight:900;cursor:pointer}.primary{background:#d8b25c;color:#07111f}.dark{background:#07111f;color:white}.ghost{background:#f0e5d2;color:#07111f}.danger{background:#b91c1c;color:white}.preview{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}.preview img{width:100%;height:90px;object-fit:cover;border-radius:10px}pre{background:#07111f;color:#d8b25c;border-radius:14px;padding:16px;white-space:pre-wrap;max-height:560px;overflow:auto}.list{display:grid;gap:10px;max-height:470px;overflow:auto}.item{padding:12px;border:1px solid #eadcc8;border-radius:14px;cursor:pointer}.item:hover{background:#fff6e5}.item strong{display:block}.item span{font-size:13px;color:#677386}.ok{display:none;background:#e9f7ef;border:1px solid #b7e3c8;color:#145a32;padding:12px;border-radius:12px;margin-top:12px}.note{background:#fff3cd;border:1px solid #ffe08a;color:#6b4e00;padding:12px;border-radius:12px;margin-bottom:18px}.hidden{display:none}.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pill{display:inline-block;background:#f0e5d2;border-radius:999px;padding:5px 10px;margin:3px;font-size:12px;font-weight:800}@media(max-width:980px){.app{grid-template-columns:1fr}.grid,.row,.lang-grid{grid-template-columns:1fr}.preview{grid-template-columns:repeat(2,1fr)}}
-  </style>
-</head>
-<body>
-<div class="app">
-  <aside>
-    <div class="logo">SIRILAND</div><div class="sub">Professional CMS</div>
-    <div class="nav"><button class="active" data-tab="dashboard">🏠 Dashboard</button><button data-tab="add">➕ Add Property</button><button data-tab="all">🏢 All Properties</button><button data-tab="export">📦 Export</button></div>
-  </aside>
-  <main>
-    <div class="top"><div><h1 id="pageTitle">Dashboard</h1><div class="sub" style="color:#8a6a24">Yeni ilan kaydet, 4 dil metin, ZIP export</div></div><div class="actions"><button class="ghost" id="newBtn">New Property</button><button class="dark" id="downloadZipTop">Download ZIP</button></div></div>
-    <div class="note">Bu CMS GitHub'a direkt yazmaz. <b>Save Property</b> sonrası <b>Download ZIP</b> indir. ZIP içindeki <b>properties.js</b> ve <b>images</b> klasörünü GitHub proje klasörüne kopyala, sonra GitHub Desktop ile Commit + Push yap.</div>
-
-    <section id="dashboard" class="tab"><div class="grid"><div class="card"><h2>Durum</h2><p><b id="count">0</b> ilan yüklü.</p><p id="loadStatus">properties.js okunuyor...</p><div id="loadOk" class="ok">Hazır.</div></div><div class="card"><h2>Doğru Kullanım</h2><ol><li>Add Property aç</li><li>Facebook yazısını Post Text alanına yapıştır</li><li>Auto Fill bas</li><li>Bilgileri kontrol et</li><li>Fotoğrafları seç</li><li>Save Property</li><li>All Properties içinde yeni ilanı gör</li><li>Download ZIP</li></ol></div></div></section>
-
-    <section id="add" class="tab hidden"><div class="grid"><div class="card"><h2>Add / Edit Property</h2>
-      <label>Facebook Link</label><input id="fbLink" placeholder="https://www.facebook.com/share/p/...">
-      <label>Facebook Post Text</label><textarea id="fbText" placeholder="Facebook ilan açıklamasını buraya yapıştır. Sadece link yetmez."></textarea>
-      <div class="actions"><button class="primary" id="extractBtn" type="button">Auto Fill From Text</button><button class="ghost" id="sameLangBtn" type="button">Copy EN to all languages</button><button class="ghost" id="clearBtn" type="button">Clear Form</button></div>
-      <div class="row"><div><label>ID</label><input id="id" placeholder="CM-0022"></div><div><label>Title</label><input id="title" placeholder="Project Name 2 Bedroom House"></div></div>
-      <div class="row"><div><label>City</label><input id="city" value="Chiang Mai"></div><div><label>Type</label><select id="type"><option>Condo</option><option>House</option><option>Land</option><option>Commercial</option></select></div></div>
-      <div class="row"><div><label>Deal</label><select id="deal"><option>Sale</option><option>Rent</option><option>Sale & Rent</option></select></div><div><label>Status</label><select id="status"><option>Available</option><option>Reserved</option><option>Sold Out</option><option>Rented</option></select></div></div>
-      <div class="row"><div><label>Price</label><input id="price" placeholder="2.80 MB"></div><div><label>Area</label><input id="area" placeholder="97.6 sq.w."></div></div>
-      <div class="row"><div><label>Bedrooms</label><input id="bedrooms" placeholder="2 Bedrooms"></div><div><label>Bathrooms</label><input id="bathrooms" placeholder="1 Bathroom"></div></div>
-      <div class="row"><div><label>Room / Unit</label><input id="room"></div><div><label>Floor</label><input id="floor"></div></div>
-      <label>Google Maps</label><input id="map" placeholder="https://maps.app.goo.gl/...">
-      <label>Short Description EN</label><textarea id="description"></textarea>
-      <div class="lang-grid"><div><label>Thai Description</label><textarea id="description_th"></textarea></div><div><label>Turkish Description</label><textarea id="description_tr"></textarea></div><div><label>Chinese Description</label><textarea id="description_zh"></textarea></div><div><label>Highlights / Badges</label><textarea id="highlights" placeholder="Foreign Quota, Airbnb Allowed, Owner Finance"></textarea></div></div>
-      <label>Photos</label><input type="file" id="images" accept="image/*" multiple><div id="preview" class="preview"></div>
-      <div class="actions"><button class="primary" id="saveBtn" type="button">💾 Save Property</button><button class="danger" id="deleteBtn" type="button">Delete Current ID</button></div><div id="doneOk" class="ok">Kaydedildi. All Properties içinde kontrol et, sonra ZIP indir.</div>
-    </div><div class="card"><h2>Output Preview</h2><p id="saveCheck"></p><pre id="output">Henüz çıktı yok.</pre></div></div></section>
-
-    <section id="all" class="tab hidden"><div class="card"><h2>All Properties</h2><input id="listSearch" placeholder="Search ID / title / city"><div class="list" id="propertyList"></div></div></section>
-    <section id="export" class="tab hidden"><div class="card"><h2>Export</h2><p>Yeni properties.js ve yeni resimleri ZIP olarak indir.</p><div class="actions"><button class="dark" id="downloadProps" type="button">Download properties.js</button><button class="primary" id="downloadZip2" type="button">Download Full ZIP</button><button class="ghost" id="copyProps" type="button">Copy properties.js</button></div><pre id="exportText"></pre></div></section>
-  </main>
-</div>
-
-<script>
-
-let properties = [];
-let selectedImages = [];
-let imageFilesByPath = {};
-let generatedCode = "";
-const $ = id => document.getElementById(id);
-const REQUIRED_LANGS = ["en","th","tr","zh"];
-
-function slugify(text){
-  return String(text||"property").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,90)||"property";
-}
-function safeJsonFromPropertiesJs(txt){
-  const cleaned = String(txt||"").replace(/^\s*(?:const|let|var)\s+properties\s*=\s*/,"").replace(/;\s*$/,"").trim();
-  return Function('"use strict"; return (' + cleaned + ')')();
-}
-function normalizeProperty(p){
-  const title = typeof p.title === "object" ? (p.title.en || p.title.th || p.title.tr || p.title.zh || "") : (p.title || "");
-  const descriptions = Object.assign({en:p.description||"", th:"", tr:"", zh:""}, p.descriptions || {});
-  REQUIRED_LANGS.forEach(l=>{ if(!descriptions[l]) descriptions[l] = descriptions.en || title; });
-  return Object.assign({}, p, {
-    title,
-    titles: Object.assign({en:title, th:title, tr:title, zh:title}, p.titles || {}),
-    descriptions,
-    description: descriptions.en || p.description || "",
-    highlights: Array.isArray(p.highlights) ? p.highlights : [],
-    images: Array.isArray(p.images) ? p.images : []
-  });
-}
-function nextId(){
-  const cityName = (getVal("city") || "Chiang Mai").toLowerCase();
-  const prefix = cityName.includes("bangkok") ? "BKK" : cityName.includes("phichit") ? "PC" : cityName.includes("phitsanulok") ? "PL" : "CM";
-  const nums=properties.map(p=>String(p.id||"").match(/(\d+)$/)).filter(Boolean).map(m=>Number(m[1]));
-  const n=(nums.length?Math.max(...nums):0)+1;
-  return prefix+"-"+String(n).padStart(4,"0");
-}
-function makeCode(){
-  const clean = properties.map(normalizeProperty).sort((a,b)=>String(a.id).localeCompare(String(b.id)));
-  generatedCode = "const properties = " + JSON.stringify(clean,null,2) + ";\n";
-  if($("exportText")) $("exportText").textContent = generatedCode;
-  if($("output")) $("output").textContent = generatedCode;
-  return generatedCode;
-}
-function refreshAll(){
-  properties = properties.map(normalizeProperty).sort((a,b)=>String(a.id).localeCompare(String(b.id)));
-  $("count").textContent=properties.length;
-  makeCode();
-  renderList();
-  localStorage.setItem("siriland_cms_properties", generatedCode);
-}
-function setVal(id,v){$(id).value=v||""} function getVal(id){return ($(id).value||"").trim()}
-function getTitle(p){return typeof p.title === "object" ? (p.title.en||p.title.th||"") : (p.title||"")}
-
-async function autoLoadProperties(){
-  try{
-    const res=await fetch("properties.js?v="+Date.now(),{cache:"no-store"});
-    if(!res.ok) throw new Error("properties.js bulunamadı");
-    properties=safeJsonFromPropertiesJs(await res.text()).map(normalizeProperty);
-    $("loadStatus").textContent="Yüklendi: "+properties.length+" ilan.";
-    $("loadOk").style.display="block";
-  } catch(e){
-    const saved=localStorage.getItem("siriland_cms_properties");
-    if(saved){ properties=safeJsonFromPropertiesJs(saved).map(normalizeProperty); $("loadStatus").textContent="Local kayıt yüklendi: "+properties.length+" ilan."; }
-    else { properties=[]; $("loadStatus").textContent="properties.js okunamadı. GitHub Pages veya local server üzerinden aç."; }
-  }
-  refreshAll();
-}
-
-document.querySelectorAll(".nav button").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.add("hidden"));$(btn.dataset.tab).classList.remove("hidden");$("pageTitle").textContent=btn.textContent.replace(/[🏠➕🏢📦]/g,"").trim()});
-$("newBtn").onclick=()=>{clearForm();setVal("id",nextId());document.querySelector('[data-tab="add"]').click()};
-
-function detectCity(t){if(/bangkok|bkk|sathorn|suanplu|rama|กรุงเทพ|สาทร/i.test(t))return"Bangkok";if(/chiang mai|nimman|maya|เชียงใหม่|เจ็ดยอด/i.test(t))return"Chiang Mai";if(/phichit|พิจิตร/i.test(t))return"Phichit";if(/phitsanulok|พิษณุโลก/i.test(t))return"Phitsanulok";return""}
-function detectType(t){if(/condo|condominium|คอนโด/i.test(t))return"Condo";if(/house|villa|บ้าน|pool villa/i.test(t))return"House";if(/land|ที่ดิน|ไร่|งาน|ตารางวา/i.test(t))return"Land";if(/commercial|shophouse|อาคารพาณิชย์|ตึก/i.test(t))return"Commercial";return""}
-function pick(r,t){const m=String(t||"").match(r);return m?m[1].trim():""}
-function normalizePrice(x){return String(x||"").replace(/ล้าน/g,"MB").replace(/บาท\/เดือน/g,"THB/month").replace(/บาท/g,"THB").replace(/฿/g,"THB ").replace(/\s+/g," ").trim()}
-function extFromFile(file){const m=String(file.name||"").toLowerCase().match(/\.(jpe?g|png|webp|gif)$/);return m?m[1].replace("jpeg","jpg"):"jpg";}
-
-$("extractBtn").onclick=()=>{
-  const t=$("fbText").value||""; const link=getVal("fbLink");
-  const price=pick(/(?:price|ราคา|ขาย|เช่า|฿)\s*[:：]?\s*([0-9,.]+\s*(?:MB|M|ล้าน|บาท|THB|฿)?(?:\s*\/\s*month)?)/i,t)||pick(/([0-9,.]+\s*(?:MB|ล้าน|THB\/month|บาท\/เดือน|บาท))/i,t);
-  const area=pick(/([0-9,.]+\s*(?:sq\.?m\.?|sqm|ตร\.ม\.|ตารางเมตร|sq\.?w\.?|ตร\.ว\.|ไร่|งาน))/i,t);
-  const bed=pick(/([0-9]+\s*(?:bedrooms?|bed room|br|นอน|ห้องนอน))/i,t);
-  const bath=pick(/([0-9]+\s*(?:bathrooms?|bath room|ba|น้ำ|ห้องน้ำ))/i,t);
-  const floor=pick(/([0-9]+(?:st|nd|rd|th)?\s*(?:floor|ชั้น))/i,t);
-  const room=pick(/(?:room|unit|ห้อง)\s*([A-Za-z0-9\-\/]+)/i,t);
-  const map=pick(/(https?:\/\/(?:maps\.app\.goo\.gl|goo\.gl\/maps|www\.google\.com\/maps)[^\s]+)/i,t);
-  const title=t.split(/\n/).map(x=>x.trim()).find(x=>x.length>8&&!/ราคา|price|tel|line|โทร|whatsapp|ติดต่อ/i.test(x))||getVal("title")||"New Property";
-  setVal("title",title); const city=detectCity(t); if(city)setVal("city",city); const typ=detectType(t); if(typ)$("type").value=typ;
-  setVal("price",normalizePrice(price)); setVal("area",area);
-  setVal("bedrooms",bed?bed.replace(/bed room|bedrooms?|br/i,"Bedrooms").replace(/ห้องนอน|นอน/,"Bedrooms"):"");
-  setVal("bathrooms",bath?bath.replace(/bath room|bathrooms?|ba/i,"Bathrooms").replace(/ห้องน้ำ|น้ำ/,"Bathrooms"):"");
-  setVal("floor",floor); setVal("room",room?("Room "+room):""); setVal("map",map);
-  setVal("description",t.trim()+(link?"\n\nFacebook: "+link:""));
-  if(!getVal("id")) setVal("id", nextId());
-};
-$("sameLangBtn").onclick=()=>{setVal("description_th",getVal("description"));setVal("description_tr",getVal("description"));setVal("description_zh",getVal("description"))};
-$("images").addEventListener("change",e=>{selectedImages=Array.from(e.target.files||[]);$("preview").innerHTML="";selectedImages.slice(0,80).forEach(file=>{const img=document.createElement("img");img.src=URL.createObjectURL(file);$("preview").appendChild(img)})});
-function collect(){
-  const id=getVal("id"); const title=getVal("title"); const base=slugify(id||title);
-  const highlights=getVal("highlights").split(/[\n,]+/).map(x=>x.trim()).filter(Boolean);
-  const imgs=selectedImages.map((f,i)=>{const path=`images/${base}-${i+1}.${extFromFile(f)}`;imageFilesByPath[path]=f;return path});
-  const descriptions={en:getVal("description"),th:getVal("description_th")||getVal("description"),tr:getVal("description_tr")||getVal("description"),zh:getVal("description_zh")||getVal("description")};
-  const titles={en:title, th:title, tr:title, zh:title};
-  return normalizeProperty({id,title,titles,city:getVal("city"),type:$("type").value,deal:$("deal").value,status:$("status").value,price:getVal("price"),bedrooms:getVal("bedrooms"),bathrooms:getVal("bathrooms"),area:getVal("area"),room:getVal("room"),floor:getVal("floor"),map:getVal("map"),description:descriptions.en,descriptions,highlights,images:imgs});
-}
-function validateProperty(p, opts={}){
-  const errors=[]; const warnings=[];
-  ["id","title","city","type","deal","status","price"].forEach(k=>{ if(!p[k]) errors.push(k+" boş olamaz"); });
-  if(!p.images || !p.images.length) warnings.push("Resim yok. Eski ilan düzenleniyorsa eski resimler korunur; yeni ilanda en az 1 fotoğraf seç.");
-  REQUIRED_LANGS.forEach(l=>{ if(!p.descriptions || !p.descriptions[l]) warnings.push(l+" açıklama eksik, EN ile doldurulacak"); });
-  const duplicate = properties.some(x=>String(x.id)===String(p.id) && opts.mode!=="update");
-  if(duplicate) errors.push("Bu ID zaten var: "+p.id);
-  return {errors,warnings,ok:errors.length===0};
-}
-function loadToForm(p){setVal("id",p.id);setVal("title",getTitle(p));setVal("city",p.city);$("type").value=p.type||"Condo";$("deal").value=p.deal||"Sale";$("status").value=p.status||"Available";setVal("price",p.price);setVal("bedrooms",p.bedrooms);setVal("bathrooms",p.bathrooms);setVal("area",p.area);setVal("room",p.room);setVal("floor",p.floor);setVal("map",p.map);setVal("description",p.descriptions?.en||p.description);setVal("description_th",p.descriptions?.th||"");setVal("description_tr",p.descriptions?.tr||"");setVal("description_zh",p.descriptions?.zh||"");setVal("highlights",(p.highlights||[]).join(", "));selectedImages=[];$("preview").innerHTML="";document.querySelector('[data-tab="add"]').click()}
-$("saveBtn").onclick=()=>{
-  const p=collect(); const old=properties.find(x=>String(x.id)===String(p.id)); const v=validateProperty(p,{mode:old?"update":"new"});
-  if(v.errors.length){ alert("Hata:\n- "+v.errors.join("\n- ")); return; }
-  if(old&&!p.images.length) p.images=old.images||[];
-  properties=properties.filter(x=>String(x.id)!==String(p.id)); properties.push(p);
-  $("doneOk").style.display="block"; $("saveCheck").innerHTML=`<span class="pill">Saved: ${p.id}</span><span class="pill">Total: ${properties.length}</span>${v.warnings.map(w=>`<span class="pill">⚠ ${w}</span>`).join("")}`;
-  refreshAll(); alert("İlan kaydedildi. All Properties içinde kontrol et. Sonra Download ZIP yap.")
-};
-$("deleteBtn").onclick=()=>{const id=getVal("id");if(!id){alert("Silmek için ID yaz.");return}if(!confirm(id+" silinsin mi?"))return;properties=properties.filter(x=>String(x.id)!==String(id));refreshAll();alert("Silindi: "+id)};
-function clearForm(){document.querySelectorAll("#add input,#add textarea").forEach(x=>{if(x.type!=="file")x.value=""});$("type").value="Condo";$("deal").value="Sale";$("status").value="Available";selectedImages=[];$("preview").innerHTML="";$("doneOk").style.display="none";$("saveCheck").innerHTML=""}$("clearBtn").onclick=clearForm;
-function renderList(){const q=(( $("listSearch")&&$("listSearch").value)||"").toLowerCase();$("propertyList").innerHTML=properties.filter(p=>(`${p.id} ${getTitle(p)} ${p.city}`.toLowerCase().includes(q))).map(p=>`<div class="item" data-id="${p.id}"><strong>${p.id} — ${getTitle(p)}</strong><span>${p.city} • ${p.type} • ${p.deal} • ${p.price} • ${p.images?.length||0} photos</span></div>`).join("")||"<p>No property loaded.</p>";document.querySelectorAll(".item").forEach(it=>it.onclick=()=>loadToForm(properties.find(p=>String(p.id)===String(it.dataset.id))))}$("listSearch").oninput=renderList;
-function buildReport(){
-  const lines=["# SIRILAND CMS Export Report","",`Export date: ${new Date().toISOString()}` ,`Total properties: ${properties.length}`,""];
-  const ids=new Set(); let problems=0;
-  properties.forEach(p=>{ if(ids.has(p.id)){lines.push(`ERROR duplicate ID: ${p.id}`);problems++;} ids.add(p.id); if(!p.images?.length){lines.push(`WARNING no images: ${p.id} ${getTitle(p)}`);} REQUIRED_LANGS.forEach(l=>{if(!p.descriptions?.[l]){lines.push(`WARNING missing ${l}: ${p.id}`);}}); });
-  lines.push("", problems?"Export has blocking errors.":"Export structure OK. Upload properties.js and images folder to GitHub.");
-  return lines.join("\n");
-}
-async function buildZip(){
-  makeCode(); const zip=new JSZip();
-  zip.file("properties.js",generatedCode);
-  zip.file("data/properties.json",JSON.stringify(properties.map(normalizeProperty),null,2));
-  zip.file("image_match_report.md",buildReport());
-  const folder=zip.folder("images");
-  for(const [path,file] of Object.entries(imageFilesByPath)){folder.file(path.replace(/^images\//,""),await file.arrayBuffer())}
-  return await zip.generateAsync({type:"blob"})
-}
-async function downloadZip(){const blob=await buildZip();const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="siriland-cms-export.zip";a.click()}
-$("downloadZipTop").onclick=downloadZip;$("downloadZip2").onclick=downloadZip;$("downloadProps").onclick=()=>{makeCode();const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([generatedCode],{type:"text/javascript"}));a.download="properties.js";a.click()};$("copyProps").onclick=async()=>{makeCode();await navigator.clipboard.writeText(generatedCode);alert("properties.js kopyalandı.")};
-autoLoadProperties();
-
-</script>
-</body>
-</html>
+<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SIRILAND Professional CMS 2026</title><style>
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#07111f;color:#fff}.wrap{max-width:1200px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;border-bottom:1px solid #d8b25c;padding-bottom:18px}.logo{font-size:26px;font-weight:900;color:#d8b25c}.panel{background:#101b2d;border:1px solid rgba(216,178,92,.35);border-radius:18px;padding:18px;margin:18px 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-size:13px;color:#e6c980;font-weight:800;margin-bottom:5px}input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #31435e;background:#07111f;color:#fff}textarea{min-height:90px}.btn{background:#d8b25c;color:#07111f;border:0;border-radius:11px;padding:12px 16px;font-weight:900;cursor:pointer;margin:5px}.btn.dark{background:#263650;color:#fff}.btn.red{background:#9b2b2b;color:#fff}.list{display:grid;gap:10px}.item{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#07111f;border:1px solid #263650;border-radius:12px;padding:12px}.muted{color:#b8c1d1}.ok{color:#63e6be}.bad{color:#ff8787}pre{white-space:pre-wrap;background:#07111f;border-radius:12px;padding:14px;max-height:260px;overflow:auto}.langtabs button.active{background:#fff;color:#07111f}@media(max-width:850px){.grid,.grid2{grid-template-columns:1fr}.top{display:block}}
+</style></head><body><div class="wrap"><div class="top"><div><div class="logo">SIRILAND Professional CMS 2026</div><div class="muted">Tek kaynak: data/properties.json → otomatik properties.js → GitHub Pages</div></div><div><button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden><button class="btn dark" id="downloadJson">JSON indir</button><button class="btn dark" id="downloadJs">properties.js indir</button><button class="btn" id="downloadZip">ZIP oluştur</button></div></div>
+<div class="panel"><h2>1) Facebook metnini yapıştır</h2><textarea id="fbText" placeholder="Facebook ilan metnini buraya yapıştır..."></textarea><button class="btn" id="parseBtn">Alanları otomatik doldur</button><span class="muted">Sonra eksik yerleri kontrol et.</span></div>
+<div class="panel"><h2>2) İlan bilgileri</h2><div class="grid"><div><label>ID</label><input id="id" placeholder="CM-0032"></div><div><label>Şehir</label><input id="city" placeholder="Chiang Mai"></div><div><label>Tip</label><input id="type" placeholder="Condo / House / Land"></div><div><label>İşlem</label><select id="deal"><option>Sale</option><option>Rent</option><option>Sale/Rent</option></select></div><div><label>Durum</label><select id="status"><option>Available</option><option>Sold Out</option><option>Rented Out</option><option>Reserved</option></select></div><div><label>Fiyat</label><input id="price" placeholder="2.59 MB / 35,000 THB/month"></div><div><label>Yatak</label><input id="bedrooms"></div><div><label>Banyo</label><input id="bathrooms"></div><div><label>Alan</label><input id="area"></div><div><label>Oda</label><input id="room"></div><div><label>Kat</label><input id="floor"></div><div><label>Google Map</label><input id="map"></div></div></div>
+<div class="panel"><h2>3) 4 Dil içerik</h2><div class="langtabs"><button class="btn active" data-tab="en">EN</button><button class="btn dark" data-tab="th">TH</button><button class="btn dark" data-tab="tr">TR</button><button class="btn dark" data-tab="zh">中文</button></div><div id="langForms"></div></div>
+<div class="panel"><h2>4) Görseller</h2><p class="muted">Fotoğrafları seç. ZIP oluştururken sistem otomatik olarak <b>images/ILAN-ID/</b> mantığına hazırlar. Kapak fotoğrafı ilk sıradadır.</p><input type="file" id="imageFiles" accept="image/*" multiple><div id="imagePreview" class="list"></div></div>
+<div class="panel"><button class="btn" id="saveBtn">İlanı kaydet / güncelle</button><button class="btn red" id="clearBtn">Formu temizle</button><button class="btn dark" id="validateBtn">Kontrol et</button><h3>Kontrol sonucu</h3><pre id="report"></pre></div>
+<div class="panel"><h2>İlanlar</h2><div id="list" class="list"></div></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script>
+let properties=[];let currentLang='en';let imageFiles=[];const langs=['en','th','tr','zh'];const $=id=>document.getElementById(id);const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map'];
+function initLangForms(){ $('langForms').innerHTML=langs.map(l=>`<div class="langform" id="form_${l}" style="display:${l==='en'?'block':'none'}"><div class="grid2"><div><label>Başlık ${l.toUpperCase()}</label><input id="title_${l}"></div><div><label>Öne çıkanlar ${l.toUpperCase()} (her satır ayrı)</label><textarea id="highlights_${l}"></textarea></div></div><label>Açıklama ${l.toUpperCase()}</label><textarea id="description_${l}"></textarea></div>`).join('');}
+function pick(v,l='en'){return typeof v==='object'&&!Array.isArray(v)?(v[l]||v.en||v.th||v.tr||v.zh||''):(v||'')}
+function pickArr(v,l='en'){return typeof v==='object'&&!Array.isArray(v)?(v[l]||v.en||v.th||v.tr||v.zh||[]):(Array.isArray(v)?v:[])}
+function nextId(){let max=0;properties.forEach(p=>{let m=String(p.id||'').match(/CM-(\d+)/);if(m)max=Math.max(max,+m[1])});return 'CM-'+String(max+1).padStart(4,'0')}
+function getForm(){let p={};fields.forEach(f=>p[f]=$(f).value.trim());p.title={};p.description={};p.highlights={};langs.forEach(l=>{p.title[l]=$('title_'+l).value.trim();p.description[l]=$('description_'+l).value.trim();p.highlights[l]=$('highlights_'+l).value.split('\n').map(x=>x.trim()).filter(Boolean)});p.images=imageFiles.length?imageFiles.map((f,i)=>`images/${p.id.toLowerCase()}/${p.id.toLowerCase()}-${i+1}.${(f.name.split('.').pop()||'jpg').toLowerCase()}`):(properties.find(x=>x.id===p.id)?.images||[]);p.createdAt=properties.find(x=>x.id===p.id)?.createdAt||new Date().toISOString().slice(0,10);p.updatedAt=new Date().toISOString().slice(0,10);p.featured=true;p.contact={name:'Kwan',phone1:'092-005-6640',phone2:'090-650-7558',line:'@realcreamthailand'};return p}
+function setForm(p){fields.forEach(f=>$(f).value=p[f]||'');langs.forEach(l=>{$('title_'+l).value=pick(p.title,l);$('description_'+l).value=pick(p.description,l);$('highlights_'+l).value=pickArr(p.highlights,l).join('\n')});imageFiles=[];renderImages(p.images||[])}
+function clearForm(){$('id').value=nextId();fields.filter(f=>f!=='id').forEach(f=>$(f).value='');langs.forEach(l=>{$('title_'+l).value='';$('description_'+l).value='';$('highlights_'+l).value=''});imageFiles=[];renderImages([])}
+function renderList(){$('list').innerHTML=properties.map(p=>`<div class="item"><div><b>${p.id}</b> — ${pick(p.title,'en')}<br><span class="muted">${p.city||''} • ${p.price||''} • ${(p.images||[]).length} foto</span></div><div><button class="btn dark" onclick="edit('${p.id}')">Düzenle</button><button class="btn red" onclick="delp('${p.id}')">Sil</button></div></div>`).join('')}
+function renderImages(existing=[]){$('imagePreview').innerHTML=(imageFiles.length?imageFiles.map((f,i)=>`<div class="item"><span>${i+1}. ${f.name}</span><button class="btn dark" onclick="moveImg(${i},-1)">↑</button><button class="btn dark" onclick="moveImg(${i},1)">↓</button></div>`):existing.map((x,i)=>`<div class="item"><span>${i+1}. ${x}</span></div>`)).join('')}
+window.edit=id=>{let p=properties.find(x=>x.id===id); if(p)setForm(p)}; window.delp=id=>{if(confirm('Silinsin mi?')){properties=properties.filter(p=>p.id!==id);renderList();clearForm()}}; window.moveImg=(i,d)=>{let j=i+d;if(j<0||j>=imageFiles.length)return;[imageFiles[i],imageFiles[j]]=[imageFiles[j],imageFiles[i]];renderImages()}
+function validate(){let r=[];let ids=new Set();properties.forEach((p,n)=>{if(!p.id)r.push(`Satır ${n+1}: ID yok`);if(ids.has(p.id))r.push(`Duplicate ID: ${p.id}`);ids.add(p.id);if(!pick(p.title))r.push(`${p.id}: Başlık yok`);if(!p.price)r.push(`${p.id}: Fiyat yok`);if(!p.images||!p.images.length)r.push(`${p.id}: Foto yok`);langs.forEach(l=>{if(!pick(p.title,l))r.push(`${p.id}: ${l} başlık eksik`)})});$('report').innerHTML=r.length?'<span class="bad">HATA:</span>\n'+r.join('\n'):'<span class="ok">OK: Sistem hazır. properties.js üretilebilir.</span>';return !r.length}
+function download(name,content,type='application/octet-stream'){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
+function makeJs(){return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
+$('saveBtn').onclick=()=>{let p=getForm();let i=properties.findIndex(x=>x.id===p.id);if(i>=0)properties[i]=p;else properties.push(p);renderList();validate();alert('Kaydedildi')};
+$('clearBtn').onclick=clearForm;$('validateBtn').onclick=validate;$('downloadJson').onclick=()=>download('properties.json',JSON.stringify(properties,null,2),'application/json');$('downloadJs').onclick=()=>download('properties.js',makeJs(),'text/javascript');
+$('downloadZip').onclick=async()=>{validate();let zip=new JSZip();zip.file('properties.js',makeJs());zip.file('data/properties.json',JSON.stringify(properties,null,2));zip.file('README-CMS.txt','Upload properties.js, data/properties.json and images folder to GitHub.');for(const f of imageFiles){let id=$('id').value.toLowerCase();let idx=imageFiles.indexOf(f)+1;let ext=(f.name.split('.').pop()||'jpg').toLowerCase();zip.file(`images/${id}/${id}-${idx}.${ext}`,f)}let blob=await zip.generateAsync({type:'blob'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='siriland-cms-export.zip';a.click()};
+$('imageFiles').onchange=e=>{imageFiles=[...e.target.files];renderImages()};
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{currentLang=b.dataset.tab;document.querySelectorAll('[data-tab]').forEach(x=>{x.classList.toggle('active',x===b);x.classList.toggle('dark',x!==b)});langs.forEach(l=>$('form_'+l).style.display=l===currentLang?'block':'none')});
+$('parseBtn').onclick=()=>{let txt=$('fbText').value; if(!$('id').value)$('id').value=nextId(); let price=txt.match(/(\d[\d,.]*\s*(MB|ล้าน|บาท|THB|฿)[^\n]*)/i); if(price)$('price').value=price[1]; let area=txt.match(/(\d+[\d.]*\s*(sqm|sq\.m|ตร\.ม|ตารางเมตร|sq\.w|ตร\.วา))/i); if(area)$('area').value=area[1]; let bed=txt.match(/(\d+)\s*(bed|bedroom|นอน|ห้องนอน)/i); if(bed)$('bedrooms').value=bed[1]+' Bedrooms'; let bath=txt.match(/(\d+)\s*(bath|bathroom|น้ำ|ห้องน้ำ)/i); if(bath)$('bathrooms').value=bath[1]+' Bathrooms'; $('description_en').value=txt.trim(); $('description_th').value=txt.trim(); $('description_tr').value=txt.trim(); $('description_zh').value=txt.trim(); if(!$('title_en').value)$('title_en').value=txt.trim().split('\n').filter(Boolean)[0]||'';};
+$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=e=>{let f=e.target.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{let s=rd.result,m=s.match(/(?:window\.SIRILAND_PROPERTIES\s*=|const\s+properties\s*=)\s*(\[[\s\S]*\])\s*;?/);properties=JSON.parse(m?m[1]:s);renderList();clearForm();validate()};rd.readAsText(f)};
+initLangForms();fetch('properties.js').then(r=>r.text()).then(s=>{let m=s.match(/(?:window\.SIRILAND_PROPERTIES\s*=|const\s+properties\s*=)\s*(\[[\s\S]*\])\s*;?/);properties=JSON.parse(m[1]);renderList();clearForm();validate()}).catch(()=>{clearForm();renderList()});
+</script></body></html>
