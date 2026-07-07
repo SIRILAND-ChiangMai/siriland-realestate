@@ -1,17 +1,6 @@
-SIRILAND Professional 2026 - GitHub Upload
+1) Bu ZIP dosyasını açın.
+2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.
+3) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.
+4) GitHub Desktop: Commit + Push.
 
-1) Open admin.html from the GitHub Pages site or local server.
-2) Add/Edit property.
-3) Select photos.
-4) Save Property.
-5) Download ZIP.
-6) Open the ZIP.
-7) Copy properties.js into the main GitHub project folder.
-8) Copy everything inside ZIP/images into the project images folder.
-9) Commit + Push.
-10) Open the live site and hard refresh.
-
-Important:
-- Do not rename image files after export.
-- If a property has no photos, add photos before publishing.
-- GitHub Pages uses properties.js, not data/properties.json.
+Not: Export artık formdaki ilanı otomatik kaydeder.
