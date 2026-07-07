@@ -1,4 +1,4 @@
-const properties = [
+[
   {
     "id": "CM-0001",
     "title": "Srithana 2 Huay Kaew Room 813 (8th Floor Corner Unit)",
@@ -962,4 +962,4 @@ const properties = [
       "images/pil-001-10.jpg"
     ]
   }
-];
+]

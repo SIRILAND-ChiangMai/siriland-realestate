@@ -1,14 +1,17 @@
-SIRILAND FINAL FIX
+SIRILAND Professional 2026 - GitHub Upload
 
-1) Bu ZIP içindeki dosyaları GitHub Desktop proje klasörüne kopyala.
-2) Replace de.
-3) GitHub Desktop Summary: Final language and PIL property fix
-4) Commit to main.
-5) Push origin.
-6) Site: https://siriland-chiangmai.github.io/siriland-realestate-v2/?v=120000
-7) Admin: https://siriland-chiangmai.github.io/siriland-realestate-v2/admin.html?v=120000
+1) Open admin.html from the GitHub Pages site or local server.
+2) Add/Edit property.
+3) Select photos.
+4) Save Property.
+5) Download ZIP.
+6) Open the ZIP.
+7) Copy properties.js into the main GitHub project folder.
+8) Copy everything inside ZIP/images into the project images folder.
+9) Commit + Push.
+10) Open the live site and hard refresh.
 
-Bu paket şunları içerir:
-- PIL-001 ilanı properties.js içine eklendi.
-- pil-001-1.jpg ... pil-001-10.jpg images klasörüne eklendi.
-- 4 dil frontend dosyaları korunur.
+Important:
+- Do not rename image files after export.
+- If a property has no photos, add photos before publishing.
+- GitHub Pages uses properties.js, not data/properties.json.

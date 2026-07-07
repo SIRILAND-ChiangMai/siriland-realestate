@@ -44,45 +44,151 @@
 </div>
 
 <script>
+
 let properties = [];
 let selectedImages = [];
 let imageFilesByPath = {};
 let generatedCode = "";
 const $ = id => document.getElementById(id);
+const REQUIRED_LANGS = ["en","th","tr","zh"];
 
-function slugify(text){return String(text||"property").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80)||"property"}
-function readPropertiesText(txt){const cleaned=txt.replace(/^\s*const\s+properties\s*=\s*/,"").replace(/;\s*$/,");").replace(/;\s*$/,");");return Function('"use strict"; return ('+cleaned.replace(/;\s*$/,'')+')')()}
-function nextId(){const nums=properties.map(p=>String(p.id||"").match(/(\d+)$/)).filter(Boolean).map(m=>Number(m[1]));const n=(nums.length?Math.max(...nums):0)+1;return "NEW-"+String(n).padStart(4,"0")}
-function makeCode(){generatedCode="const properties = "+JSON.stringify(properties,null,2)+";";$("exportText").textContent=generatedCode;$("output").textContent=generatedCode;return generatedCode}
-function refreshAll(){properties.sort((a,b)=>String(a.id).localeCompare(String(b.id)));$("count").textContent=properties.length;makeCode();renderList();localStorage.setItem("siriland_cms_properties", generatedCode)}
+function slugify(text){
+  return String(text||"property").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,90)||"property";
+}
+function safeJsonFromPropertiesJs(txt){
+  const cleaned = String(txt||"").replace(/^\s*(?:const|let|var)\s+properties\s*=\s*/,"").replace(/;\s*$/,"").trim();
+  return Function('"use strict"; return (' + cleaned + ')')();
+}
+function normalizeProperty(p){
+  const title = typeof p.title === "object" ? (p.title.en || p.title.th || p.title.tr || p.title.zh || "") : (p.title || "");
+  const descriptions = Object.assign({en:p.description||"", th:"", tr:"", zh:""}, p.descriptions || {});
+  REQUIRED_LANGS.forEach(l=>{ if(!descriptions[l]) descriptions[l] = descriptions.en || title; });
+  return Object.assign({}, p, {
+    title,
+    titles: Object.assign({en:title, th:title, tr:title, zh:title}, p.titles || {}),
+    descriptions,
+    description: descriptions.en || p.description || "",
+    highlights: Array.isArray(p.highlights) ? p.highlights : [],
+    images: Array.isArray(p.images) ? p.images : []
+  });
+}
+function nextId(){
+  const cityName = (getVal("city") || "Chiang Mai").toLowerCase();
+  const prefix = cityName.includes("bangkok") ? "BKK" : cityName.includes("phichit") ? "PC" : cityName.includes("phitsanulok") ? "PL" : "CM";
+  const nums=properties.map(p=>String(p.id||"").match(/(\d+)$/)).filter(Boolean).map(m=>Number(m[1]));
+  const n=(nums.length?Math.max(...nums):0)+1;
+  return prefix+"-"+String(n).padStart(4,"0");
+}
+function makeCode(){
+  const clean = properties.map(normalizeProperty).sort((a,b)=>String(a.id).localeCompare(String(b.id)));
+  generatedCode = "const properties = " + JSON.stringify(clean,null,2) + ";\n";
+  if($("exportText")) $("exportText").textContent = generatedCode;
+  if($("output")) $("output").textContent = generatedCode;
+  return generatedCode;
+}
+function refreshAll(){
+  properties = properties.map(normalizeProperty).sort((a,b)=>String(a.id).localeCompare(String(b.id)));
+  $("count").textContent=properties.length;
+  makeCode();
+  renderList();
+  localStorage.setItem("siriland_cms_properties", generatedCode);
+}
 function setVal(id,v){$(id).value=v||""} function getVal(id){return ($(id).value||"").trim()}
+function getTitle(p){return typeof p.title === "object" ? (p.title.en||p.title.th||"") : (p.title||"")}
 
 async function autoLoadProperties(){
-  try{const res=await fetch("properties.js?v="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("properties.js bulunamadı");properties=readPropertiesText(await res.text());$("loadStatus").textContent="Yüklendi: "+properties.length+" ilan.";$("loadOk").style.display="block";}
-  catch(e){const saved=localStorage.getItem("siriland_cms_properties"); if(saved){properties=readPropertiesText(saved);$("loadStatus").textContent="Local kayıt yüklendi: "+properties.length+" ilan.";} else {properties=[];$("loadStatus").textContent="properties.js okunamadı. Site üzerinden açtığından emin ol.";}}
+  try{
+    const res=await fetch("properties.js?v="+Date.now(),{cache:"no-store"});
+    if(!res.ok) throw new Error("properties.js bulunamadı");
+    properties=safeJsonFromPropertiesJs(await res.text()).map(normalizeProperty);
+    $("loadStatus").textContent="Yüklendi: "+properties.length+" ilan.";
+    $("loadOk").style.display="block";
+  } catch(e){
+    const saved=localStorage.getItem("siriland_cms_properties");
+    if(saved){ properties=safeJsonFromPropertiesJs(saved).map(normalizeProperty); $("loadStatus").textContent="Local kayıt yüklendi: "+properties.length+" ilan."; }
+    else { properties=[]; $("loadStatus").textContent="properties.js okunamadı. GitHub Pages veya local server üzerinden aç."; }
+  }
   refreshAll();
 }
 
 document.querySelectorAll(".nav button").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.add("hidden"));$(btn.dataset.tab).classList.remove("hidden");$("pageTitle").textContent=btn.textContent.replace(/[🏠➕🏢📦]/g,"").trim()});
 $("newBtn").onclick=()=>{clearForm();setVal("id",nextId());document.querySelector('[data-tab="add"]').click()};
 
-function detectCity(t){if(/bangkok|bkk|sathorn|suanplu|rama|กรุงเทพ|สาทร/i.test(t))return"Bangkok";if(/chiang mai|nimman|maya|เชียงใหม่/i.test(t))return"Chiang Mai";if(/phichit|พิจิตร/i.test(t))return"Phichit";if(/phitsanulok|พิษณุโลก/i.test(t))return"Phitsanulok";return""}
-function detectType(t){if(/condo|condominium|คอนโด/i.test(t))return"Condo";if(/house|villa|บ้าน/i.test(t))return"House";if(/land|ที่ดิน/i.test(t))return"Land";if(/commercial|shophouse|อาคารพาณิชย์/i.test(t))return"Commercial";return""}
-function pick(r,t){const m=t.match(r);return m?m[1].trim():""}
-function normalizePrice(x){return x.replace(/ล้าน/g,"MB").replace(/บาท\/เดือน/g,"THB/month").replace(/บาท/g,"THB").replace(/\s+/g," ").trim()}
+function detectCity(t){if(/bangkok|bkk|sathorn|suanplu|rama|กรุงเทพ|สาทร/i.test(t))return"Bangkok";if(/chiang mai|nimman|maya|เชียงใหม่|เจ็ดยอด/i.test(t))return"Chiang Mai";if(/phichit|พิจิตร/i.test(t))return"Phichit";if(/phitsanulok|พิษณุโลก/i.test(t))return"Phitsanulok";return""}
+function detectType(t){if(/condo|condominium|คอนโด/i.test(t))return"Condo";if(/house|villa|บ้าน|pool villa/i.test(t))return"House";if(/land|ที่ดิน|ไร่|งาน|ตารางวา/i.test(t))return"Land";if(/commercial|shophouse|อาคารพาณิชย์|ตึก/i.test(t))return"Commercial";return""}
+function pick(r,t){const m=String(t||"").match(r);return m?m[1].trim():""}
+function normalizePrice(x){return String(x||"").replace(/ล้าน/g,"MB").replace(/บาท\/เดือน/g,"THB/month").replace(/บาท/g,"THB").replace(/฿/g,"THB ").replace(/\s+/g," ").trim()}
+function extFromFile(file){const m=String(file.name||"").toLowerCase().match(/\.(jpe?g|png|webp|gif)$/);return m?m[1].replace("jpeg","jpg"):"jpg";}
 
-$("extractBtn").onclick=()=>{const t=$("fbText").value||"";const link=getVal("fbLink");const price=pick(/(?:price|ราคา|ขาย|เช่า|฿)\s*[:：]?\s*([0-9,.]+\s*(?:MB|M|ล้าน|บาท|THB|฿)?(?:\s*\/\s*month)?)/i,t)||pick(/([0-9,.]+\s*(?:MB|ล้าน|THB\/month|บาท\/เดือน|บาท))/i,t);const area=pick(/([0-9,.]+\s*(?:sq\.?m\.?|sqm|ตร\.ม\.|ตารางเมตร|sq\.w\.?|ตร\.ว\.))/i,t);const bed=pick(/([0-9]+\s*(?:bedrooms?|bed room|br|นอน|ห้องนอน))/i,t);const bath=pick(/([0-9]+\s*(?:bathrooms?|bath room|ba|น้ำ|ห้องน้ำ))/i,t);const floor=pick(/([0-9]+(?:st|nd|rd|th)?\s*(?:floor|ชั้น))/i,t);const room=pick(/(?:room|unit|ห้อง)\s*([A-Za-z0-9\-\/]+)/i,t);const map=pick(/(https?:\/\/(?:maps\.app\.goo\.gl|goo\.gl\/maps|www\.google\.com\/maps)[^\s]+)/i,t);const title=t.split(/\n/).map(x=>x.trim()).find(x=>x.length>8&&!/ราคา|price|tel|line|โทร|whatsapp/i.test(x))||getVal("title")||"New Property";setVal("title",title);const city=detectCity(t);if(city)setVal("city",city);const typ=detectType(t);if(typ)$("type").value=typ;setVal("price",normalizePrice(price));setVal("area",area);setVal("bedrooms",bed?bed.replace(/bed room|bedrooms?|br/i,"Bedrooms").replace(/ห้องนอน|นอน/,"Bedrooms"):"");setVal("bathrooms",bath?bath.replace(/bath room|bathrooms?|ba/i,"Bathrooms").replace(/ห้องน้ำ|น้ำ/,"Bathrooms"):"");setVal("floor",floor);setVal("room",room?("Room "+room):"");setVal("map",map);setVal("description",t.trim()+(link?"\n\nFacebook: "+link:""));};
+$("extractBtn").onclick=()=>{
+  const t=$("fbText").value||""; const link=getVal("fbLink");
+  const price=pick(/(?:price|ราคา|ขาย|เช่า|฿)\s*[:：]?\s*([0-9,.]+\s*(?:MB|M|ล้าน|บาท|THB|฿)?(?:\s*\/\s*month)?)/i,t)||pick(/([0-9,.]+\s*(?:MB|ล้าน|THB\/month|บาท\/เดือน|บาท))/i,t);
+  const area=pick(/([0-9,.]+\s*(?:sq\.?m\.?|sqm|ตร\.ม\.|ตารางเมตร|sq\.?w\.?|ตร\.ว\.|ไร่|งาน))/i,t);
+  const bed=pick(/([0-9]+\s*(?:bedrooms?|bed room|br|นอน|ห้องนอน))/i,t);
+  const bath=pick(/([0-9]+\s*(?:bathrooms?|bath room|ba|น้ำ|ห้องน้ำ))/i,t);
+  const floor=pick(/([0-9]+(?:st|nd|rd|th)?\s*(?:floor|ชั้น))/i,t);
+  const room=pick(/(?:room|unit|ห้อง)\s*([A-Za-z0-9\-\/]+)/i,t);
+  const map=pick(/(https?:\/\/(?:maps\.app\.goo\.gl|goo\.gl\/maps|www\.google\.com\/maps)[^\s]+)/i,t);
+  const title=t.split(/\n/).map(x=>x.trim()).find(x=>x.length>8&&!/ราคา|price|tel|line|โทร|whatsapp|ติดต่อ/i.test(x))||getVal("title")||"New Property";
+  setVal("title",title); const city=detectCity(t); if(city)setVal("city",city); const typ=detectType(t); if(typ)$("type").value=typ;
+  setVal("price",normalizePrice(price)); setVal("area",area);
+  setVal("bedrooms",bed?bed.replace(/bed room|bedrooms?|br/i,"Bedrooms").replace(/ห้องนอน|นอน/,"Bedrooms"):"");
+  setVal("bathrooms",bath?bath.replace(/bath room|bathrooms?|ba/i,"Bathrooms").replace(/ห้องน้ำ|น้ำ/,"Bathrooms"):"");
+  setVal("floor",floor); setVal("room",room?("Room "+room):""); setVal("map",map);
+  setVal("description",t.trim()+(link?"\n\nFacebook: "+link:""));
+  if(!getVal("id")) setVal("id", nextId());
+};
 $("sameLangBtn").onclick=()=>{setVal("description_th",getVal("description"));setVal("description_tr",getVal("description"));setVal("description_zh",getVal("description"))};
-$("images").addEventListener("change",e=>{selectedImages=Array.from(e.target.files||[]);$("preview").innerHTML="";selectedImages.slice(0,60).forEach(file=>{const img=document.createElement("img");img.src=URL.createObjectURL(file);$("preview").appendChild(img)})});
-function collect(){const id=getVal("id");const title=getVal("title");const base=slugify(id||title);const highlights=getVal("highlights").split(/[\n,]+/).map(x=>x.trim()).filter(Boolean);const imgs=selectedImages.map((f,i)=>{const path=`images/${base}-${i+1}.jpg`;imageFilesByPath[path]=f;return path});const descriptions={en:getVal("description"),th:getVal("description_th"),tr:getVal("description_tr"),zh:getVal("description_zh")};return {id,title,titles:{en:title,th:title,tr:title,zh:title},city:getVal("city"),type:$("type").value,deal:$("deal").value,status:$("status").value,price:getVal("price"),bedrooms:getVal("bedrooms"),bathrooms:getVal("bathrooms"),area:getVal("area"),room:getVal("room"),floor:getVal("floor"),map:getVal("map"),description:descriptions.en,descriptions,highlights,images:imgs}}
-function loadToForm(p){setVal("id",p.id);setVal("title",typeof p.title==="object"?(p.title.en||""):p.title);setVal("city",p.city);$("type").value=p.type||"Condo";$("deal").value=p.deal||"Sale";$("status").value=p.status||"Available";setVal("price",p.price);setVal("bedrooms",p.bedrooms);setVal("bathrooms",p.bathrooms);setVal("area",p.area);setVal("room",p.room);setVal("floor",p.floor);setVal("map",p.map);setVal("description",p.descriptions?.en||p.description);setVal("description_th",p.descriptions?.th||"");setVal("description_tr",p.descriptions?.tr||"");setVal("description_zh",p.descriptions?.zh||"");setVal("highlights",(p.highlights||[]).join(", "));selectedImages=[];$("preview").innerHTML="";document.querySelector('[data-tab="add"]').click()}
-$("saveBtn").onclick=()=>{const p=collect();if(!p.id||!p.title){alert("ID ve Title zorunlu.");return}const old=properties.find(x=>String(x.id)===String(p.id));if(old&&!p.images.length)p.images=old.images||[];properties=properties.filter(x=>String(x.id)!==String(p.id));properties.push(p);$("doneOk").style.display="block";$("saveCheck").innerHTML=`<span class="pill">Saved: ${p.id}</span><span class="pill">Total: ${properties.length}</span>`;refreshAll();alert("İlan kaydedildi. All Properties içinde kontrol et. Sonra Download ZIP yap.")};
+$("images").addEventListener("change",e=>{selectedImages=Array.from(e.target.files||[]);$("preview").innerHTML="";selectedImages.slice(0,80).forEach(file=>{const img=document.createElement("img");img.src=URL.createObjectURL(file);$("preview").appendChild(img)})});
+function collect(){
+  const id=getVal("id"); const title=getVal("title"); const base=slugify(id||title);
+  const highlights=getVal("highlights").split(/[\n,]+/).map(x=>x.trim()).filter(Boolean);
+  const imgs=selectedImages.map((f,i)=>{const path=`images/${base}-${i+1}.${extFromFile(f)}`;imageFilesByPath[path]=f;return path});
+  const descriptions={en:getVal("description"),th:getVal("description_th")||getVal("description"),tr:getVal("description_tr")||getVal("description"),zh:getVal("description_zh")||getVal("description")};
+  const titles={en:title, th:title, tr:title, zh:title};
+  return normalizeProperty({id,title,titles,city:getVal("city"),type:$("type").value,deal:$("deal").value,status:$("status").value,price:getVal("price"),bedrooms:getVal("bedrooms"),bathrooms:getVal("bathrooms"),area:getVal("area"),room:getVal("room"),floor:getVal("floor"),map:getVal("map"),description:descriptions.en,descriptions,highlights,images:imgs});
+}
+function validateProperty(p, opts={}){
+  const errors=[]; const warnings=[];
+  ["id","title","city","type","deal","status","price"].forEach(k=>{ if(!p[k]) errors.push(k+" boş olamaz"); });
+  if(!p.images || !p.images.length) warnings.push("Resim yok. Eski ilan düzenleniyorsa eski resimler korunur; yeni ilanda en az 1 fotoğraf seç.");
+  REQUIRED_LANGS.forEach(l=>{ if(!p.descriptions || !p.descriptions[l]) warnings.push(l+" açıklama eksik, EN ile doldurulacak"); });
+  const duplicate = properties.some(x=>String(x.id)===String(p.id) && opts.mode!=="update");
+  if(duplicate) errors.push("Bu ID zaten var: "+p.id);
+  return {errors,warnings,ok:errors.length===0};
+}
+function loadToForm(p){setVal("id",p.id);setVal("title",getTitle(p));setVal("city",p.city);$("type").value=p.type||"Condo";$("deal").value=p.deal||"Sale";$("status").value=p.status||"Available";setVal("price",p.price);setVal("bedrooms",p.bedrooms);setVal("bathrooms",p.bathrooms);setVal("area",p.area);setVal("room",p.room);setVal("floor",p.floor);setVal("map",p.map);setVal("description",p.descriptions?.en||p.description);setVal("description_th",p.descriptions?.th||"");setVal("description_tr",p.descriptions?.tr||"");setVal("description_zh",p.descriptions?.zh||"");setVal("highlights",(p.highlights||[]).join(", "));selectedImages=[];$("preview").innerHTML="";document.querySelector('[data-tab="add"]').click()}
+$("saveBtn").onclick=()=>{
+  const p=collect(); const old=properties.find(x=>String(x.id)===String(p.id)); const v=validateProperty(p,{mode:old?"update":"new"});
+  if(v.errors.length){ alert("Hata:\n- "+v.errors.join("\n- ")); return; }
+  if(old&&!p.images.length) p.images=old.images||[];
+  properties=properties.filter(x=>String(x.id)!==String(p.id)); properties.push(p);
+  $("doneOk").style.display="block"; $("saveCheck").innerHTML=`<span class="pill">Saved: ${p.id}</span><span class="pill">Total: ${properties.length}</span>${v.warnings.map(w=>`<span class="pill">⚠ ${w}</span>`).join("")}`;
+  refreshAll(); alert("İlan kaydedildi. All Properties içinde kontrol et. Sonra Download ZIP yap.")
+};
 $("deleteBtn").onclick=()=>{const id=getVal("id");if(!id){alert("Silmek için ID yaz.");return}if(!confirm(id+" silinsin mi?"))return;properties=properties.filter(x=>String(x.id)!==String(id));refreshAll();alert("Silindi: "+id)};
 function clearForm(){document.querySelectorAll("#add input,#add textarea").forEach(x=>{if(x.type!=="file")x.value=""});$("type").value="Condo";$("deal").value="Sale";$("status").value="Available";selectedImages=[];$("preview").innerHTML="";$("doneOk").style.display="none";$("saveCheck").innerHTML=""}$("clearBtn").onclick=clearForm;
-function renderList(){const q=(($("listSearch")&&$("listSearch").value)||"").toLowerCase();$("propertyList").innerHTML=properties.filter(p=>(`${p.id} ${typeof p.title==="object"?p.title.en:p.title} ${p.city}`.toLowerCase().includes(q))).map(p=>`<div class="item" data-id="${p.id}"><strong>${p.id} — ${typeof p.title==="object"?p.title.en:p.title}</strong><span>${p.city} • ${p.type} • ${p.deal} • ${p.price}</span></div>`).join("")||"<p>No property loaded.</p>";document.querySelectorAll(".item").forEach(it=>it.onclick=()=>loadToForm(properties.find(p=>String(p.id)===String(it.dataset.id))))}$("listSearch").oninput=renderList;
-async function buildZip(){makeCode();const zip=new JSZip();zip.file("properties.js",generatedCode);const folder=zip.folder("images");for(const [path,file] of Object.entries(imageFilesByPath)){folder.file(path.replace(/^images\//,""),await file.arrayBuffer())}return await zip.generateAsync({type:"blob"})}
-async function downloadZip(){const blob=await buildZip();const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="siriland-cms-export.zip";a.click()}$("downloadZipTop").onclick=downloadZip;$("downloadZip2").onclick=downloadZip;$("downloadProps").onclick=()=>{makeCode();const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([generatedCode],{type:"text/javascript"}));a.download="properties.js";a.click()};$("copyProps").onclick=async()=>{makeCode();await navigator.clipboard.writeText(generatedCode);alert("properties.js kopyalandı.")};
+function renderList(){const q=(( $("listSearch")&&$("listSearch").value)||"").toLowerCase();$("propertyList").innerHTML=properties.filter(p=>(`${p.id} ${getTitle(p)} ${p.city}`.toLowerCase().includes(q))).map(p=>`<div class="item" data-id="${p.id}"><strong>${p.id} — ${getTitle(p)}</strong><span>${p.city} • ${p.type} • ${p.deal} • ${p.price} • ${p.images?.length||0} photos</span></div>`).join("")||"<p>No property loaded.</p>";document.querySelectorAll(".item").forEach(it=>it.onclick=()=>loadToForm(properties.find(p=>String(p.id)===String(it.dataset.id))))}$("listSearch").oninput=renderList;
+function buildReport(){
+  const lines=["# SIRILAND CMS Export Report","",`Export date: ${new Date().toISOString()}` ,`Total properties: ${properties.length}`,""];
+  const ids=new Set(); let problems=0;
+  properties.forEach(p=>{ if(ids.has(p.id)){lines.push(`ERROR duplicate ID: ${p.id}`);problems++;} ids.add(p.id); if(!p.images?.length){lines.push(`WARNING no images: ${p.id} ${getTitle(p)}`);} REQUIRED_LANGS.forEach(l=>{if(!p.descriptions?.[l]){lines.push(`WARNING missing ${l}: ${p.id}`);}}); });
+  lines.push("", problems?"Export has blocking errors.":"Export structure OK. Upload properties.js and images folder to GitHub.");
+  return lines.join("\n");
+}
+async function buildZip(){
+  makeCode(); const zip=new JSZip();
+  zip.file("properties.js",generatedCode);
+  zip.file("data/properties.json",JSON.stringify(properties.map(normalizeProperty),null,2));
+  zip.file("image_match_report.md",buildReport());
+  const folder=zip.folder("images");
+  for(const [path,file] of Object.entries(imageFilesByPath)){folder.file(path.replace(/^images\//,""),await file.arrayBuffer())}
+  return await zip.generateAsync({type:"blob"})
+}
+async function downloadZip(){const blob=await buildZip();const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="siriland-cms-export.zip";a.click()}
+$("downloadZipTop").onclick=downloadZip;$("downloadZip2").onclick=downloadZip;$("downloadProps").onclick=()=>{makeCode();const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([generatedCode],{type:"text/javascript"}));a.download="properties.js";a.click()};$("copyProps").onclick=async()=>{makeCode();await navigator.clipboard.writeText(generatedCode);alert("properties.js kopyalandı.")};
 autoLoadProperties();
+
 </script>
 </body>
 </html>
