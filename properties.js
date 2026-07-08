@@ -2200,13 +2200,13 @@ window.SIRILAND_PROPERTIES = [
     "type": "Condo",
     "deal": "Sale",
     "status": "Available",
-    "price": "Ask for price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
+    "price": "9.59 MB",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathrooms",
+    "area": "115 SQ.M.",
+    "room": "Room 401",
+    "floor": "4th Floor",
+    "map": "https://maps.app.goo.gl/Hcpno7c57fefWAnYA",
     "title": {
       "en": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
       "th": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
@@ -2221,9 +2221,15 @@ window.SIRILAND_PROPERTIES = [
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
+        "Spacious Living Area",
+        "🍽️ Dining Area",
+        "✨ Highlights",
+        "✅ Master Bedroom with Bathtub",
+        "✅ Exclusive Corner Unit",
+        "✅ Beautiful Layout with large living space",
+        "✅ Fully Furnished & Ready to Move In",
+        "✅ Foreign Quota Available",
+        "✅ Airbnb Allowed"
       ],
       "th": [
         "Recovered from image folder",
