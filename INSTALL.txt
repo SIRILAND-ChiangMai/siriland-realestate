@@ -1,11 +1,13 @@
-Kopyala:
-- admin.html
-- properties.js
-- properties.json
+SIRILAND Facebook / Instagram Post Text Patch
 
-Ayrıca data/properties.json gerekiyorsa properties.json dosyasını data klasörüne de kopyala.
+1) admin.html dosyasını proje ana klasörüne kopyala, üzerine yaz.
+2) GitHub Desktop Summary:
+   Add Facebook Instagram post text generator
+3) Commit + Push.
 
-Summary: Admin photo preview and required fields
-Commit + Push.
+Admin içinde:
+- Generate Post Text
+- Copy Facebook
+- Copy Instagram
 
-Düzeltildi: Ask for price -> Contact for Price. Fotoğraf önizleme + kapak seçme eklendi.
+Metne ilan website linki ve ana website linki otomatik eklenir.
