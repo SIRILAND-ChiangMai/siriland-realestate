@@ -1584,23 +1584,23 @@
   },
   {
     "id": "CM-0020",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2.39 MB",
+    "bedrooms": "1 bedroom",
+    "bathrooms": "1 Bathrooms",
+    "area": "32.09 m²",
+    "room": "Room 909",
+    "floor": "9th Floor",
+    "map": "https://maps.app.goo.gl/oP2Y8N1k6XxqgA5M7",
     "title": {
       "en": "JC Hill Place Room 909 (9th Floor)",
       "th": "JC Hill Place Room 909 (9th Floor)",
       "tr": "JC Hill Place Room 909 (9th Floor)",
       "zh": "JC Hill Place Room 909 (9th Floor)"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "2.39 MB",
-    "bedrooms": "-",
-    "bathrooms": "-",
-    "area": "32.09 m²",
-    "room": "Room 909",
-    "floor": "9th Floor",
-    "map": "https://maps.app.goo.gl/oP2Y8N1k6XxqgA5M7",
     "description": {
       "en": "JC Hill Place Room 909 (9th Floor). 1 /bedroom | Geniş Balkon. Area 32.09 m². Room 909 9th Floor.",
       "th": "JC Hill Place Room 909 (9th Floor). 1 /bedroom | Geniş Balkon. Area 32.09 m². Room 909 9th Floor.",
@@ -1666,7 +1666,7 @@
       "images/jc-hill-place-909-30.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -1853,34 +1853,33 @@
   },
   {
     "id": "CM-0022",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "Ask for price",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathrooms",
+    "area": "64.22 sq.m.",
+    "room": "Please update",
+    "floor": "Please update4th Floor",
+    "map": "https://maps.google.com/?q=Punna+Residence+5+Chiang+Mai",
     "title": {
       "en": "Punna Residence 5 — 8 Storey Low Rise Condo",
       "th": "Punna Residence 5 — 8 Storey Low Rise Condo",
       "tr": "Punna Residence 5 — 8 Storey Low Rise Condo",
       "zh": "Punna Residence 5 — 8 Storey Low Rise Condo"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Contact for Price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
-      "en": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND.",
+      "en": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
       "th": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND.",
       "tr": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND.",
       "zh": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND."
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
+        "Punna Residence 5",
+        "Building 4, 4th Floor"
       ],
       "th": [
         "Recovered from image folder",
@@ -1933,7 +1932,7 @@
       "images/punna-residence-5-8-storey-low-rise-condo-32.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -1944,23 +1943,23 @@
   },
   {
     "id": "CM-0023",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2.89 MB",
+    "bedrooms": "1 Bedroom",
+    "bathrooms": "1 Bathrooms",
+    "area": "35 Sq.m.",
+    "room": "Please uUnit 236pdate",
+    "floor": "Please upd2nd Floorate",
+    "map": "https://maps.google.com/?q=Hillside+Condo+3+Nimmanhaemin+Soi+8+Chiang+Mai",
     "title": {
       "en": "Hillside 3 Condo Unit 236 — 2nd Floor",
       "th": "Hillside 3 Condo Unit 236 — 2nd Floor",
       "tr": "Hillside 3 Condo Unit 236 — 2nd Floor",
       "zh": "Hillside 3 Condo Unit 236 — 2nd Floor"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Contact for Price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
       "en": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND.",
       "th": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND.",
@@ -2022,7 +2021,7 @@
       "images/hillside-3-condo-unit-236-2nd-floor-30.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -2033,23 +2032,23 @@
   },
   {
     "id": "CM-0024",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2.89 MB",
+    "bedrooms": "Please update",
+    "bathrooms": "Please update",
+    "area": "38.45 SQ.M.",
+    "room": "Room 1021",
+    "floor": "10th Floor",
+    "map": "https://maps.app.goo.gl/unubbYrDY4wQvEqAA",
     "title": {
       "en": "Nakornping Condo",
       "th": "Nakornping Condo",
       "tr": "Nakornping Condo",
       "zh": "Nakornping Condo"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Contact for Price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
       "en": "Nakornping Condo. Details are being updated by SIRILAND.",
       "th": "Nakornping Condo. Details are being updated by SIRILAND.",
@@ -2101,7 +2100,7 @@
       "images/nakornping-condo-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -2112,23 +2111,23 @@
   },
   {
     "id": "CM-0025",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2.79 MB",
+    "bedrooms": "1 Bedroom",
+    "bathrooms": "1 Bathroom",
+    "area": "38 SQ.M.",
+    "room": "Room 5/16",
+    "floor": "3rd Floor",
+    "map": "https://maps.app.goo.gl/r8ViNxQKgQE92Hqk6",
     "title": {
       "en": "Pansuk The Erben Condo Room 5/16",
       "th": "Pansuk The Erben Condo Room 5/16",
       "tr": "Pansuk The Erben Condo Room 5/16",
       "zh": "Pansuk The Erben Condo Room 5/16"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Contact for Price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
       "en": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND.",
       "th": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND.",
@@ -2137,9 +2136,15 @@
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
+        "Fully Furnished Luxury Design",
+        "✨ 24H Security",
+        "✨ Prime Location near MAYA / One Nimman / CMU",
+        "🆓 Free Electrical Appliances",
+        "🧺 Washer + Dryer",
+        "📺 Android TV 55” + 43”",
+        "❄️ 2 Air Conditioners",
+        "🍳 Electric Stove + Hood",
+        "💧 Water Filter"
       ],
       "th": [
         "Recovered from image folder",
@@ -2180,7 +2185,7 @@
       "images/pansuk-the-erben-condo-room-5-16-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -2191,23 +2196,23 @@
   },
   {
     "id": "CM-0026",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "9.59 MB",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathrooms",
+    "area": "115 SQ.M.",
+    "room": "Room 401",
+    "floor": "4th Floor",
+    "map": "https://maps.app.goo.gl/Hcpno7c57fefWAnYA",
     "title": {
       "en": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
       "th": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
       "tr": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
       "zh": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m."
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Contact for Price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
       "en": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND.",
       "th": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND.",
@@ -2216,9 +2221,15 @@
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
+        "Spacious Living Area",
+        "🍽️ Dining Area",
+        "✨ Highlights",
+        "✅ Master Bedroom with Bathtub",
+        "✅ Exclusive Corner Unit",
+        "✅ Beautiful Layout with large living space",
+        "✅ Fully Furnished & Ready to Move In",
+        "✅ Foreign Quota Available",
+        "✅ Airbnb Allowed"
       ],
       "th": [
         "Recovered from image folder",
@@ -2237,15 +2248,15 @@
       ]
     },
     "images": [
-      "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-1.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-2.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-3.jpg",
+      "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-1.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-4.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-5.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-6.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-7.jpg",
-      "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-8.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-9.jpg",
+      "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-8.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-10.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-11.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-12.jpg",
@@ -2259,86 +2270,7 @@
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
-    "id": "CM-0027",
-    "title": {
-      "en": "Srithana 2 Condo — 8th Floor",
-      "th": "Srithana 2 Condo — 8th Floor",
-      "tr": "Srithana 2 Condo — 8th Floor",
-      "zh": "Srithana 2 Condo — 8th Floor"
-    },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Contact for Price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
-    "description": {
-      "en": "Srithana 2 Condo — 8th Floor. Details are being updated by SIRILAND.",
-      "th": "Srithana 2 Condo — 8th Floor. Details are being updated by SIRILAND.",
-      "tr": "Srithana 2 Condo — 8th Floor. Details are being updated by SIRILAND.",
-      "zh": "Srithana 2 Condo — 8th Floor. Details are being updated by SIRILAND."
-    },
-    "highlights": {
-      "en": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "th": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "tr": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "zh": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ]
-    },
-    "images": [
-      "images/srithana-2-condo-8th-floor-1.jpg",
-      "images/srithana-2-condo-8th-floor-2.jpg",
-      "images/srithana-2-condo-8th-floor-3.jpg",
-      "images/srithana-2-condo-8th-floor-4.jpg",
-      "images/srithana-2-condo-8th-floor-5.jpg",
-      "images/srithana-2-condo-8th-floor-6.jpg",
-      "images/srithana-2-condo-8th-floor-7.jpg",
-      "images/srithana-2-condo-8th-floor-8.jpg",
-      "images/srithana-2-condo-8th-floor-9.jpg",
-      "images/srithana-2-condo-8th-floor-10.jpg",
-      "images/srithana-2-condo-8th-floor-11.jpg",
-      "images/srithana-2-condo-8th-floor-12.jpg",
-      "images/srithana-2-condo-8th-floor-13.jpg",
-      "images/srithana-2-condo-8th-floor-14.jpg",
-      "images/srithana-2-condo-8th-floor-15.jpg",
-      "images/srithana-2-condo-8th-floor-16.jpg",
-      "images/srithana-2-condo-8th-floor-17.jpg",
-      "images/srithana-2-condo-8th-floor-18.jpg",
-      "images/srithana-2-condo-8th-floor-19.jpg",
-      "images/srithana-2-condo-8th-floor-20.jpg"
-    ],
-    "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -2359,7 +2291,7 @@
     "type": "Condo",
     "deal": "Sale",
     "status": "Available",
-    "price": "Contact for Price",
+    "price": "Ask for price",
     "bedrooms": "Please update",
     "bathrooms": "Please update",
     "area": "Please update",
@@ -2427,103 +2359,24 @@
     }
   },
   {
-    "id": "CM-0029",
-    "title": {
-      "en": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor",
-      "th": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor",
-      "tr": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor",
-      "zh": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor"
-    },
+    "id": "CM-0030",
     "city": "Chiang Mai",
     "type": "Condo",
     "deal": "Sale",
     "status": "Available",
-    "price": "Contact for Price",
-    "bedrooms": "Please update",
+    "price": "3.69 MB",
+    "bedrooms": "2 Bedrooms",
     "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
-    "description": {
-      "en": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor. Details are being updated by SIRILAND.",
-      "th": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor. Details are being updated by SIRILAND.",
-      "tr": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor. Details are being updated by SIRILAND.",
-      "zh": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor. Details are being updated by SIRILAND."
-    },
-    "highlights": {
-      "en": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "th": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "tr": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "zh": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ]
-    },
-    "images": [
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-1.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-2.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-3.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-4.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-5.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-6.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-7.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-8.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-9.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-10.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-11.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-12.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-13.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-14.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-15.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-16.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-17.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-18.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-19.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-20.jpg"
-    ],
-    "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
-    "id": "CM-0030",
+    "area": "61.48 SQ.M.",
+    "room": "Unit 3609",
+    "floor": "3rd Floor",
+    "map": "https://maps.app.goo.gl/85u98y3mHX4VasbG7",
     "title": {
       "en": "The Next 1.3 Ruamchok",
       "th": "The Next 1.3 Ruamchok",
       "tr": "The Next 1.3 Ruamchok",
       "zh": "The Next 1.3 Ruamchok"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Contact for Price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
       "en": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND.",
       "th": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND.",
@@ -2575,7 +2428,7 @@
       "images/the-next-1-3-ruamchok-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -2596,7 +2449,7 @@
     "type": "Condo",
     "deal": "Sale",
     "status": "Available",
-    "price": "Contact for Price",
+    "price": "Ask for price",
     "bedrooms": "Please update",
     "bathrooms": "Please update",
     "area": "Please update",
@@ -2845,6 +2698,59 @@
       "images/bkk-lvnst-01-23.jpg",
       "images/bkk-lvnst-01-24.jpg"
     ],
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "PCT-0001",
+    "city": "Phichit",
+    "type": "Srimala Villa Shophouse",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "3,200,000 THB / Unit",
+    "bedrooms": "3",
+    "bathrooms": "3",
+    "area": "",
+    "room": "",
+    "floor": "3 Floors",
+    "map": "https://maps.app.goo.gl/J36iCzsPpTPL6N3d9",
+    "title": {
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [
+        "Prime Location, Owner Financing, Free Transfer, Investment Opportunity..."
+      ],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/pct-0001-1.jpg",
+      "images/pct-0001-2.jpg",
+      "images/pct-0001-3.jpg",
+      "images/pct-0001-4.jpg",
+      "images/pct-0001-5.jpg",
+      "images/pct-0001-6.jpg",
+      "images/pct-0001-7.jpg",
+      "images/pct-0001-8.jpg"
+    ],
+    "createdAt": "2026-07-08",
+    "updatedAt": "2026-07-08",
+    "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
