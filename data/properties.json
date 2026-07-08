@@ -2191,12 +2191,6 @@
   },
   {
     "id": "CM-0026",
-    "title": {
-      "en": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
-      "th": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
-      "tr": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
-      "zh": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m."
-    },
     "city": "Chiang Mai",
     "type": "Condo",
     "deal": "Sale",
@@ -2208,6 +2202,12 @@
     "room": "Please update",
     "floor": "Please update",
     "map": "",
+    "title": {
+      "en": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
+      "th": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
+      "tr": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.",
+      "zh": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m."
+    },
     "description": {
       "en": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND.",
       "th": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND.",
@@ -2237,15 +2237,15 @@
       ]
     },
     "images": [
-      "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-1.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-2.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-3.jpg",
+      "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-1.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-4.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-5.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-6.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-7.jpg",
-      "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-8.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-9.jpg",
+      "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-8.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-10.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-11.jpg",
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-12.jpg",
@@ -2259,7 +2259,7 @@
       "images/rawi-waree-residence-nimman-soi-15-room-401-4th-floor-115-sq-m-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
