@@ -1,21 +1,19 @@
-// SIRILAND Visitor Counter + Online Users
-// Add before </body> in index.html:
-// <script src="visitor-counter.js"></script>
-
+// SIRILAND Live Statistics - Firebase Visitor Counter + Online Users
 (function () {
   const firebaseConfig = {
-  "apiKey": "AIzaSyC-arJS1pZkcVEXhYgOOOqg3wPZpF5L_fE",
-  "authDomain": "siriland-realestate.firebaseapp.com",
-  "databaseURL": "https://siriland-realestate-default-rtdb.asia-southeast1.firebasedatabase.app",
-  "projectId": "siriland-realestate",
-  "storageBucket": "siriland-realestate.firebasestorage.app",
-  "messagingSenderId": "967829423088",
-  "appId": "1:967829423088:web:e768d4908994b077f05335",
-  "measurementId": "G-8E32GKRSCE"
-};
+    apiKey: "AIzaSyC-arJS1pZkcVEXhYgOOOqg3wPZpF5L_fE",
+    authDomain: "siriland-realestate.firebaseapp.com",
+    databaseURL: "https://siriland-realestate-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "siriland-realestate",
+    storageBucket: "siriland-realestate.firebasestorage.app",
+    messagingSenderId: "967829423088",
+    appId: "1:967829423088:web:e768d4908994b077f05335",
+    measurementId: "G-8E32GKRSCE"
+  };
 
   function load(src) {
     return new Promise((resolve, reject) => {
+      if ([...document.scripts].some(s => s.src === src)) return resolve();
       const s = document.createElement('script');
       s.src = src;
       s.onload = resolve;
@@ -23,14 +21,9 @@
       document.head.appendChild(s);
     });
   }
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-  function dateKey(d = new Date()) {
-    return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
-  }
-  function monthKey(d = new Date()) {
-    return d.getFullYear() + '-' + pad(d.getMonth()+1);
-  }
+  const pad = n => String(n).padStart(2, '0');
+  const dateKey = (d = new Date()) => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  const monthKey = (d = new Date()) => d.getFullYear() + '-' + pad(d.getMonth() + 1);
   function sessionId() {
     let id = sessionStorage.getItem('siriland_session_id');
     if (!id) {
@@ -39,70 +32,52 @@
     }
     return id;
   }
+  function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+  function setDateTime() {
+    const now = new Date();
+    setText('siriland-live-date', now.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' }));
+    setText('siriland-live-time', now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' }));
+  }
 
   async function start() {
-    if (!window.firebase) {
-      await load('https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js');
-      await load('https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js');
-    }
+    await load('https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js');
+    await load('https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js');
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
     const sid = sessionId();
-    const now = Date.now();
     const today = dateKey();
     const month = monthKey();
-    const path = location.pathname + location.search;
-
+    const page = location.pathname + location.search;
     const onlineRef = db.ref('online/' + sid);
-    onlineRef.set({
-      at: now,
-      page: path,
-      ua: navigator.userAgent.slice(0, 120)
-    });
-    onlineRef.onDisconnect().remove();
 
+    onlineRef.set({ at: Date.now(), page, ua: navigator.userAgent.slice(0, 120) });
+    onlineRef.onDisconnect().remove();
+    setInterval(() => onlineRef.update({ at: Date.now(), page: location.pathname + location.search }), 30000);
+
+    // Count one page load
     db.ref('visits/total').transaction(v => (v || 0) + 1);
     db.ref('visits/daily/' + today).transaction(v => (v || 0) + 1);
     db.ref('visits/monthly/' + month).transaction(v => (v || 0) + 1);
-    db.ref('visits/pages/' + encodeURIComponent(path)).transaction(v => (v || 0) + 1);
-    db.ref('visits/lastVisit').set(now);
-
-    setInterval(() => {
-      onlineRef.update({ at: Date.now(), page: location.pathname + location.search });
-    }, 30000);
-
-    function ensureWidget() {
-      let box = document.getElementById('siriland-live-stats');
-      if (!box) {
-        box = document.createElement('div');
-        box.id = 'siriland-live-stats';
-        box.innerHTML = '<span id="s-online">Online: -</span><span id="s-today">Today: -</span><span id="s-total">Total: -</span>';
-        document.body.appendChild(box);
-      }
-      return box;
-    }
-
-    ensureWidget();
+    db.ref('visits/pages/' + encodeURIComponent(page)).transaction(v => (v || 0) + 1);
+    db.ref('visits/lastVisit').set(Date.now());
 
     db.ref('online').on('value', snap => {
       const val = snap.val() || {};
       const cutoff = Date.now() - 120000;
       const count = Object.values(val).filter(x => x && x.at > cutoff).length;
-      const el = document.getElementById('s-online');
-      if (el) el.textContent = '👥 Online: ' + count;
+      setText('siriland-online-count', count.toLocaleString());
     });
+    db.ref('visits/daily/' + today).on('value', snap => setText('siriland-today-count', (snap.val() || 0).toLocaleString()));
+    db.ref('visits/monthly/' + month).on('value', snap => setText('siriland-month-count', (snap.val() || 0).toLocaleString()));
+    db.ref('visits/total').on('value', snap => setText('siriland-total-count', (snap.val() || 0).toLocaleString()));
 
-    db.ref('visits/daily/' + today).on('value', snap => {
-      const el = document.getElementById('s-today');
-      if (el) el.textContent = '👁 Today: ' + (snap.val() || 0);
-    });
-
-    db.ref('visits/total').on('value', snap => {
-      const el = document.getElementById('s-total');
-      if (el) el.textContent = '🌍 Total: ' + (snap.val() || 0);
-    });
+    setDateTime();
+    setInterval(setDateTime, 30000);
   }
 
-  start().catch(console.error);
+  start().catch(err => console.error('SIRILAND live stats error:', err));
 })();
