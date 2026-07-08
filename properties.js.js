@@ -1,4 +1,4 @@
-[
+window.SIRILAND_PROPERTIES = [
   {
     "id": "CM-0001",
     "title": {
@@ -2812,4 +2812,5 @@
       "line": "@realcreamthailand"
     }
   }
-]
+];
+const properties = window.SIRILAND_PROPERTIES;
