@@ -1853,34 +1853,33 @@ window.SIRILAND_PROPERTIES = [
   },
   {
     "id": "CM-0022",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "Ask for price",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathrooms",
+    "area": "64.22 sq.m.",
+    "room": "Please update",
+    "floor": "Please update4th Floor",
+    "map": "https://maps.google.com/?q=Punna+Residence+5+Chiang+Mai",
     "title": {
       "en": "Punna Residence 5 — 8 Storey Low Rise Condo",
       "th": "Punna Residence 5 — 8 Storey Low Rise Condo",
       "tr": "Punna Residence 5 — 8 Storey Low Rise Condo",
       "zh": "Punna Residence 5 — 8 Storey Low Rise Condo"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Ask for price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
-      "en": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND.",
+      "en": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
       "th": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND.",
       "tr": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND.",
       "zh": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND."
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
+        "Punna Residence 5",
+        "Building 4, 4th Floor"
       ],
       "th": [
         "Recovered from image folder",
@@ -1933,7 +1932,7 @@ window.SIRILAND_PROPERTIES = [
       "images/punna-residence-5-8-storey-low-rise-condo-32.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
