@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SIRILAND Admin - Extra Fields</title>
+  <style>
+    :root{--navy:#071a3d;--gold:#d6ad4b;--bg:#f5f7fb;--line:#d9deea;--red:#b91c1c;--green:#0f7b3f}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,Tahoma,sans-serif;color:#172033}.wrap{max-width:1250px;margin:auto;padding:20px}
+    .top{display:flex;justify-content:space-between;gap:14px;align-items:center;background:var(--navy);color:white;border-radius:18px;padding:18px;margin-bottom:18px}.logo{font-size:24px;font-weight:800;color:var(--gold)}.muted{opacity:.75;font-size:13px}
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 5px 20px rgba(7,26,61,.06);margin-bottom:16px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    label{font-weight:700;font-size:13px;margin:10px 0 5px;display:block}input,textarea,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:white;font-size:14px}textarea{min-height:95px;resize:vertical}.btn{background:var(--gold);border:0;color:#071a3d;font-weight:800;border-radius:999px;padding:10px 14px;cursor:pointer;margin:3px}.btn.dark{background:#172033;color:white}.btn.red{background:var(--red);color:white}.btn.green{background:var(--green);color:white}.btn:disabled{opacity:.5;cursor:not-allowed}
+    .tabs{display:flex;gap:6px;margin:8px 0 12px;flex-wrap:wrap}.tab{border:1px solid var(--line);background:white;border-radius:999px;padding:8px 12px;cursor:pointer}.tab.active{background:var(--navy);color:white}.item{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:#fff}.list{max-height:470px;overflow:auto}.ok{color:var(--green);font-weight:800}.bad{color:var(--red);font-weight:800}.warn{color:#b45309;font-weight:800}.report{white-space:pre-wrap;background:#0b1220;color:#dbeafe;border-radius:12px;padding:12px;min-height:90px;overflow:auto}.hint{background:#fff7df;border:1px solid #f1d184;border-radius:12px;padding:10px;margin:10px 0}.photoName{font-family:monospace;font-size:12px}.sectionTitle{color:var(--navy);border-bottom:2px solid var(--gold);padding-bottom:6px}
+    .imageGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:12px;margin-top:12px;max-height:520px;overflow:auto}
+    .imageCard{position:relative;border:1px solid var(--line);border-radius:14px;background:#fff;padding:8px;box-shadow:0 4px 12px rgba(7,26,61,.05)}
+    .imageCard img{width:100%;height:95px;object-fit:cover;border-radius:10px;background:#eef2f7;display:block}
+    .imageCard.cover{border:2px solid var(--gold);box-shadow:0 0 0 3px rgba(214,173,75,.18)}
+    .coverBadge{position:absolute;top:10px;left:10px;background:var(--gold);color:#071a3d;font-size:11px;font-weight:900;padding:4px 7px;border-radius:999px}
+    .imageActions{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px}.imageActions .btn{font-size:11px;padding:6px 8px;margin:0}.imageNo{font-size:12px;font-weight:800;margin-top:5px;color:#172033}.imageHint{font-size:12px;color:#64748b;margin-top:6px}
+    @media(max-width:900px){.grid,.grid2,.grid3{grid-template-columns:1fr}.top{display:block}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div><div class="logo">SIRILAND Professional CMS 2030</div><div class="muted">Extra fields + image preview + cover photo selection added.</div></div>
+    <div>
+      <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
+      <button class="btn dark" id="downloadJson">JSON indir</button>
+      <button class="btn dark" id="downloadJs">properties.js indir</button>
+      <button class="btn green" id="downloadZip">ZIP oluştur</button>
+    </div>
+  </div>
+  <div class="hint"><b>Yeni:</b> İlanlarda artık satış fiyatı, kira fiyatı, sahibinden taksit, taksit planı, ücretsiz devir, yakın yerler, özellikler, mobilya ve elektrikli eşyalar ayrı ayrı kaydedilir.</div>
+  <div class="grid">
+    <div>
+      <div class="panel">
+        <h2 class="sectionTitle">1) Temel İlan Bilgileri</h2>
+        <div class="grid3">
+          <div><label>ID</label><input id="id" placeholder="PCK-0001"></div>
+          <div><label>City</label><input id="city" placeholder="Phichit"></div>
+          <div><label>Type</label><input id="type" placeholder="Condo / House / Shophouse / Land"></div>
+          <div><label>Deal</label><input id="deal" placeholder="Sale / Rent / Sale-Rent"></div>
+          <div><label>Status</label><input id="status" placeholder="Available"></div>
+          <div><label>Main Price</label><input id="price" placeholder="3.2 MB / Unit"></div>
+          <div><label>Bedrooms</label><input id="bedrooms"></div>
+          <div><label>Bathrooms</label><input id="bathrooms"></div>
+          <div><label>Area</label><input id="area"></div>
+          <div><label>Room / Unit</label><input id="room"></div>
+          <div><label>Floor</label><input id="floor"></div>
+          <div><label>Map URL</label><input id="map"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="sectionTitle">2) Yeni Satış / Kiralama Alanları</h2>
+        <div class="grid3">
+          <div><label>🏷️ Sale Price</label><input id="salePrice" placeholder="3.2 MB / Unit"></div>
+          <div><label>💰 Rent Price</label><input id="rentPrice" placeholder="20,000 THB / Month"></div>
+          <div><label>💳 Owner Finance</label><input id="ownerFinance" placeholder="10% Down / Owner Finance Available"></div>
+          <div><label>📅 Installment</label><input id="installment" placeholder="60 months, year 1: 10,000 THB/month"></div>
+          <div><label>🎁 Free Transfer</label><input id="freeTransfer" placeholder="Free transfer / tax paid by owner"></div>
+          <div><label>⭐ Short Highlight</label><input id="shortHighlight" placeholder="Prime location, negotiable price"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="sectionTitle">3) 4 Dil İçerik</h2>
+        <div class="tabs" id="langTabs"></div>
+        <div id="langForms"></div>
+      </div>
+
+      <div class="panel">
+        <h2 class="sectionTitle">4) Detay Listeleri</h2>
+        <div class="grid2">
+          <div><label>📍 Nearby (her satır ayrı)</label><textarea id="nearby" placeholder="Srimala Villa\nPhichit City Center"></textarea></div>
+          <div><label>📦 Features (her satır ayrı)</label><textarea id="features" placeholder="3 Floors\nCCTV\nBuilt-in Kitchen"></textarea></div>
+          <div><label>🛋 Furniture (her satır ayrı)</label><textarea id="furniture" placeholder="Partial furniture\nBuilt-in counter"></textarea></div>
+          <div><label>⚡ Appliances (her satır ayrı)</label><textarea id="appliances" placeholder="TV\nCCTV\nAir conditioner"></textarea></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="sectionTitle">5) Facebook Metni</h2>
+        <textarea id="fbText" placeholder="Facebook ilan metnini buraya yapıştır..."></textarea>
+        <button class="btn dark" id="parseBtn">Alanları otomatik doldur</button>
+      </div>
+
+      <div class="panel">
+        <h2 class="sectionTitle">6) Görseller</h2>
+        <div class="hint"><b>Kapak fotoğrafı:</b> Seçtiğin kapak fotoğrafı otomatik olarak 1. sıraya alınır. Sitede ilk fotoğraf kapak olarak görünür.</div>
+        <input type="file" id="imageFiles" accept="image/*" multiple>
+        <div class="imageHint">Fotoğraf seçince dosya adı yerine küçük görsel önizleme çıkar. Kapak yapmak istediğine “Kapak yap” de.</div>
+        <div id="imagePreview" class="imageGrid"></div>
+      </div>
+
+      <div class="panel">
+        <button class="btn green" id="saveBtn">İlanı Kaydet</button>
+        <button class="btn dark" id="clearBtn">Yeni İlan</button>
+        <button class="btn" id="validateBtn">Kontrol Et</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel"><h2>İlan Listesi</h2><div id="list" class="list"></div></div>
+      <div class="panel"><h2>Test / Hata Kontrol</h2><div id="report" class="report"></div></div>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+let properties=[];
+let currentLang='en';
+let imageFiles=[];
+let imageObjectUrls=[];
+let coverIndex=0;
+let pendingFilesById={};
+let existingImagesState=[];
+const langs=['en','th','tr','zh'];
+const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map','salePrice','rentPrice','ownerFinance','installment','freeTransfer','shortHighlight'];
+const listFields=['nearby','features','furniture','appliances'];
+const $=id=>document.getElementById(id);
+
+function escapeHtml(s){return String(s||'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]))}
+function slugify(s){return String(s||'property').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'property'}
+function pick(v,l='en'){return v&&typeof v==='object'&&!Array.isArray(v)?(v[l]||v.en||v.th||v.tr||v.zh||''):(v||'')}
+function pickArr(v,l='en'){return v&&typeof v==='object'&&!Array.isArray(v)?(v[l]||v.en||v.th||v.tr||v.zh||[]):(Array.isArray(v)?v:[])}
+function lines(id){return $(id).value.split('\n').map(x=>x.trim()).filter(Boolean)}
+function setLines(id,arr){$(id).value=(arr||[]).join('\n')}
+function hasFormData(){return fields.some(f=>$(f).value.trim()) || listFields.some(f=>$(f).value.trim()) || langs.some(l=>$('title_'+l).value.trim()||$('description_'+l).value.trim()||$('highlights_'+l).value.trim()) || imageFiles.length}
+function nextId(){const pref=String(($('city')?.value||'').toLowerCase()).includes('phichit')?'PCK':'CM';let max=0;properties.forEach(p=>{let m=String(p.id||'').match(new RegExp(pref+'-(\\d+)','i'));if(m)max=Math.max(max,+m[1])});return pref+'-'+String(max+1).padStart(4,'0')}
+function imageBaseFor(p){return slugify(p.title?.en||p.title?.th||p.title?.tr||p.title?.zh||p.id)}
+
+function extractProperties(text){
+  text=String(text||'').trim();
+  if(text.startsWith('[')) return JSON.parse(text);
+  const marks=['window.SIRILAND_PROPERTIES','window.properties','const properties','let properties','var properties'];
+  let eq=-1;
+  for(const m of marks){const i=text.indexOf(m); if(i>=0){eq=text.indexOf('[',i); break;}}
+  if(eq<0) eq=text.indexOf('[');
+  if(eq<0) throw new Error('properties array bulunamadı');
+  let depth=0,inStr=false,esc=false,end=-1;
+  for(let i=eq;i<text.length;i++){
+    const ch=text[i];
+    if(inStr){ if(esc) esc=false; else if(ch==='\\') esc=true; else if(ch==='\"') inStr=false; continue; }
+    if(ch==='\"'){inStr=true;continue}
+    if(ch==='[') depth++;
+    if(ch===']'){depth--; if(depth===0){end=i+1;break}}
+  }
+  if(end<0) throw new Error('properties array kapanışı bulunamadı');
+  return JSON.parse(text.slice(eq,end));
+}
+
+function initLangForms(){
+  $('langTabs').innerHTML=langs.map(l=>`<button class="tab ${l==='en'?'active':''}" data-lang="${l}">${l.toUpperCase()}</button>`).join('');
+  $('langForms').innerHTML=langs.map(l=>`<div class="langform" id="form_${l}" style="display:${l==='en'?'block':'none'}"><div class="grid2"><div><label>Başlık ${l.toUpperCase()}</label><input id="title_${l}"></div><div><label>⭐ Highlights ${l.toUpperCase()} (her satır ayrı)</label><textarea id="highlights_${l}"></textarea></div></div><label>Açıklama ${l.toUpperCase()}</label><textarea id="description_${l}"></textarea></div>`).join('');
+}
+function switchLang(l){currentLang=l;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));langs.forEach(x=>$('form_'+x).style.display=x===l?'block':'none')}
+
+function getForm(){
+  const p={}; fields.forEach(f=>p[f]=$(f).value.trim());
+  listFields.forEach(f=>p[f]=lines(f));
+  if(!p.id) p.id=nextId();
+  p.title={}; p.description={}; p.highlights={};
+  langs.forEach(l=>{p.title[l]=$('title_'+l).value.trim();p.description[l]=$('description_'+l).value.trim();p.highlights[l]=$('highlights_'+l).value.split('\n').map(x=>x.trim()).filter(Boolean)});
+  const existing=properties.find(x=>x.id===p.id);
+  if(imageFiles.length){
+    const base=imageBaseFor(p);
+    p.images=imageFiles.map((f,i)=>`images/${base}-${i+1}.${(f.name.split('.').pop()||'jpg').toLowerCase()}`);
+    pendingFilesById[p.id]=imageFiles.slice();
+  } else {
+    p.images=existingImagesState.length?existingImagesState:((existing&&existing.images)||[]);
+  }
+  p.createdAt=(existing&&existing.createdAt)||new Date().toISOString().slice(0,10);
+  p.updatedAt=new Date().toISOString().slice(0,10);
+  p.featured=existing?.featured!==undefined?existing.featured:true;
+  p.contact={name:'Kwan',phone1:'092-005-6640',phone2:'090-650-7558',line:'@realcreamthailand'};
+  return p;
+}
+function setForm(p){fields.forEach(f=>$(f).value=p[f]||'');listFields.forEach(f=>setLines(f,p[f]||[]));langs.forEach(l=>{$('title_'+l).value=pick(p.title,l);$('description_'+l).value=pick(p.description,l);$('highlights_'+l).value=pickArr(p.highlights,l).join('\n')});imageFiles=[];coverIndex=0;existingImagesState=(p.images||[]).slice();renderImages(existingImagesState)}
+function clearForm(){fields.forEach(f=>$(f).value='');listFields.forEach(f=>$(f).value='');$('id').value=nextId();$('city').value='Phichit';$('status').value='Available';langs.forEach(l=>{$('title_'+l).value='';$('description_'+l).value='';$('highlights_'+l).value=''});imageFiles=[];coverIndex=0;existingImagesState=[];renderImages([]);switchLang('en')}
+function upsertCurrent(silent=false){
+  if(!hasFormData()) return false;
+  const p=getForm();
+  const meaningful=pick(p.title,'en')||pick(p.title,'th')||p.price||p.salePrice||p.rentPrice||p.city||p.type||p.images.length;
+  if(!meaningful) return false;
+  const i=properties.findIndex(x=>x.id===p.id);
+  if(i>=0) properties[i]=p; else properties.push(p);
+  renderList(); validate();
+  if(!silent) alert('Kaydedildi: '+p.id);
+  return true;
+}
+
+function renderList(){
+  $('list').innerHTML=properties.map(p=>`<div class="item"><div><b>${escapeHtml(p.id)}</b> — ${escapeHtml(pick(p.title,'en')||pick(p.title,'th'))}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.salePrice||p.rentPrice||p.price||'')} • ${(p.images||[]).length} foto</span></div><div><button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button><button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button></div></div>`).join('');
+}
+function cleanupObjectUrls(){imageObjectUrls.forEach(u=>URL.revokeObjectURL(u));imageObjectUrls=[]}
+function renderImages(existing=[]){
+  cleanupObjectUrls();
+  let html='';
+  if(imageFiles.length){
+    imageObjectUrls=imageFiles.map(f=>URL.createObjectURL(f));
+    html=imageFiles.map((f,i)=>`<div class="imageCard ${i===0?'cover':''}">${i===0?'<div class="coverBadge">KAPAK</div>':''}<img src="${imageObjectUrls[i]}" alt="Photo ${i+1}"><div class="imageNo">Foto ${i+1}</div><div class="imageActions"><button class="btn" onclick="setCover(${i})">Kapak yap</button><button class="btn dark" onclick="moveImg(${i},-1)">↑</button><button class="btn dark" onclick="moveImg(${i},1)">↓</button></div></div>`).join('');
+  } else if(existing.length){
+    html=existing.map((x,i)=>`<div class="imageCard ${i===0?'cover':''}">${i===0?'<div class="coverBadge">KAPAK</div>':''}<img src="${escapeHtml(x)}" alt="Photo ${i+1}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="photoName" style="display:none">${escapeHtml(x)}</div><div class="imageNo">Foto ${i+1}</div><div class="imageActions"><button class="btn" onclick="setExistingCover(${i})">Kapak yap</button><button class="btn dark" onclick="moveExistingImg(${i},-1)">↑</button><button class="btn dark" onclick="moveExistingImg(${i},1)">↓</button></div></div>`).join('');
+  }
+  $('imagePreview').innerHTML=html;
+}
+window.editProp=id=>{const p=properties.find(x=>x.id===id);if(p)setForm(p)};
+window.deleteProp=id=>{if(confirm(id+' silinsin mi?')){properties=properties.filter(p=>p.id!==id);delete pendingFilesById[id];renderList();clearForm();validate()}};
+window.setCover=i=>{if(i<0||i>=imageFiles.length)return;const [f]=imageFiles.splice(i,1);imageFiles.unshift(f);renderImages()};
+window.moveImg=(i,d)=>{const j=i+d;if(j<0||j>=imageFiles.length)return;[imageFiles[i],imageFiles[j]]=[imageFiles[j],imageFiles[i]];renderImages()};
+window.setExistingCover=i=>{if(i<0||i>=existingImagesState.length)return;const [x]=existingImagesState.splice(i,1);existingImagesState.unshift(x);renderImages(existingImagesState)};
+window.moveExistingImg=(i,d)=>{const j=i+d;if(j<0||j>=existingImagesState.length)return;[existingImagesState[i],existingImagesState[j]]=[existingImagesState[j],existingImagesState[i]];renderImages(existingImagesState)};
+
+function validate(){
+  const r=[];const ids=new Set();
+  properties.forEach((p,n)=>{if(!p.id)r.push(`Satır ${n+1}: ID yok`);if(ids.has(p.id))r.push(`Duplicate ID: ${p.id}`);ids.add(p.id);if(!pick(p.title))r.push(`${p.id}: Başlık yok`);if(!p.price&&!p.salePrice&&!p.rentPrice)r.push(`${p.id}: Fiyat yok`);if(!p.images||!p.images.length)r.push(`${p.id}: Foto yok`)});
+  const pending=Object.keys(pendingFilesById).map(id=>`${id}: ${pendingFilesById[id].length} yeni foto`).join('\n') || 'Yeni seçilen foto yok';
+  $('report').innerHTML=(r.length?'<span class="bad">HATA:</span>\n'+r.join('\n'):'<span class="ok">OK: properties.js üretilebilir.</span>')+'\n\nToplam ilan: '+properties.length+'\nBekleyen yeni görseller:\n'+pending;
+  return !r.length;
+}
+function makeJs(){return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
+function download(name,content,type='application/octet-stream'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
+async function buildZip(){
+  upsertCurrent(true);
+  if(!validate()){if(!confirm('Hata var. Yine de ZIP oluşturulsun mu?'))return;}
+  const zip=new JSZip();
+  zip.file('admin.html',document.documentElement.outerHTML);
+  zip.file('properties.js',makeJs());
+  zip.file('data/properties.json',JSON.stringify(properties,null,2));
+  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) admin.html dosyasını GitHub proje klasöründe eski admin.html üstüne kopyalayın.\n3) properties.js dosyasını eski properties.js üstüne kopyalayın.\n4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n5) GitHub Desktop: Commit + Push.');
+  for(const [id,files] of Object.entries(pendingFilesById)){
+    const p=properties.find(x=>x.id===id); if(!p) continue;
+    files.forEach((f,i)=>{const path=p.images[i]; if(path) zip.file(path,f);});
+  }
+  const blob=await zip.generateAsync({type:'blob'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='siriland-admin-extra-fields-export.zip';a.click();
+}
+
+function parseFbText(){
+  const s=$('fbText').value; if(!s.trim())return;
+  const set=(id,val)=>{if(val&&!$(id).value)$(id).value=val.trim()};
+  const sale=s.match(/(?:ราคาปกติ|ราคาขาย|Sale Price|ขาย)[^\d]*(\d[\d,.]*\s*(?:MB|บาท|THB|ล้าน)?)/i);
+  const rent=s.match(/(?:ค่าเช่า|Rent Price|rent)[^\d]*(\d[\d,.]*\s*(?:บาท|THB)?\s*\/?\s*(?:เดือน|month)?)/i);
+  const area=s.match(/(\d+(?:\.\d+)?)\s*(?:ตร\.ม\.|sqm|sq\.m|ตารางเมตร|ตร\.ว\.|sq\.wah)/i);
+  const bed=s.match(/(\d+)\s*(?:ห้องนอน|bed|bedroom)/i);
+  const bath=s.match(/(\d+)\s*(?:ห้องน้ำ|bath|bathroom)/i);
+  set('salePrice',sale?.[1]||''); set('rentPrice',rent?.[1]||''); set('price',sale?.[1]||rent?.[1]||''); set('area',area?area[0]:''); set('bedrooms',bed?bed[1]+' Bedrooms':''); set('bathrooms',bath?bath[1]+' Bathrooms':'');
+  if(/ผ่อนตรง|owner finance/i.test(s)) set('ownerFinance','Owner finance available');
+  if(/60\s*งวด|60\s*months/i.test(s)) set('installment','Up to 60 months');
+  if(/ค่าโอน|free transfer/i.test(s)) set('freeTransfer','Free transfer fee / tax by owner');
+  if(!$('title_en').value){const first=s.split('\n').map(x=>x.trim()).filter(Boolean)[0]||'';$('title_en').value=first;$('title_th').value=first;$('title_tr').value=first;$('title_zh').value=first;}
+  langs.forEach(l=>{if(!$('description_'+l).value)$('description_'+l).value=s.trim()});
+  alert('Metin okundu. Lütfen kontrol edip ZIP oluşturun.');
+}
+
+$('langTabs').addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(b)switchLang(b.dataset.lang)});
+$('saveBtn').onclick=()=>upsertCurrent(false);
+$('clearBtn').onclick=clearForm;
+$('validateBtn').onclick=()=>{upsertCurrent(true);validate()};
+$('downloadJson').onclick=()=>{upsertCurrent(true);download('properties.json',JSON.stringify(properties,null,2),'application/json')};
+$('downloadJs').onclick=()=>{upsertCurrent(true);download('properties.js',makeJs(),'text/javascript')};
+$('downloadZip').onclick=buildZip;
+$('parseBtn').onclick=parseFbText;
+$('imageFiles').onchange=e=>{imageFiles=Array.from(e.target.files||[]);coverIndex=0;existingImagesState=[];renderImages()};
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result);renderList();clearForm();validate();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
+$('city').addEventListener('change',()=>{if(!$('id').value.trim())$('id').value=nextId()});
+
+initLangForms();
+fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate()});
+</script>
+</body>
+</html>
