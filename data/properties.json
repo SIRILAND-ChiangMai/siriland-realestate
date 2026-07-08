@@ -2032,23 +2032,23 @@
   },
   {
     "id": "CM-0024",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2.89 MB",
+    "bedrooms": "Please update",
+    "bathrooms": "Please update",
+    "area": "38.45 SQ.M.",
+    "room": "Room 1021",
+    "floor": "10th Floor",
+    "map": "https://maps.app.goo.gl/unubbYrDY4wQvEqAA",
     "title": {
       "en": "Nakornping Condo",
       "th": "Nakornping Condo",
       "tr": "Nakornping Condo",
       "zh": "Nakornping Condo"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Ask for price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
       "en": "Nakornping Condo. Details are being updated by SIRILAND.",
       "th": "Nakornping Condo. Details are being updated by SIRILAND.",
@@ -2100,7 +2100,7 @@
       "images/nakornping-condo-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
