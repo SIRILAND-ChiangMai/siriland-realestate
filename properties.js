@@ -2111,23 +2111,23 @@ window.SIRILAND_PROPERTIES = [
   },
   {
     "id": "CM-0025",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2.79 MB",
+    "bedrooms": "1 Bedroom",
+    "bathrooms": "1 Bathroom",
+    "area": "38 SQ.M.",
+    "room": "Room 5/16",
+    "floor": "3rd Floor",
+    "map": "https://maps.app.goo.gl/r8ViNxQKgQE92Hqk6",
     "title": {
       "en": "Pansuk The Erben Condo Room 5/16",
       "th": "Pansuk The Erben Condo Room 5/16",
       "tr": "Pansuk The Erben Condo Room 5/16",
       "zh": "Pansuk The Erben Condo Room 5/16"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Ask for price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
       "en": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND.",
       "th": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND.",
@@ -2136,9 +2136,15 @@ window.SIRILAND_PROPERTIES = [
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
+        "Fully Furnished Luxury Design",
+        "✨ 24H Security",
+        "✨ Prime Location near MAYA / One Nimman / CMU",
+        "🆓 Free Electrical Appliances",
+        "🧺 Washer + Dryer",
+        "📺 Android TV 55” + 43”",
+        "❄️ 2 Air Conditioners",
+        "🍳 Electric Stove + Hood",
+        "💧 Water Filter"
       ],
       "th": [
         "Recovered from image folder",
@@ -2179,7 +2185,7 @@ window.SIRILAND_PROPERTIES = [
       "images/pansuk-the-erben-condo-room-5-16-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
