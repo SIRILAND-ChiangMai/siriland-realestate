@@ -1,0 +1,8 @@
+SIRILAND Firebase Kurulum
+
+1) Bu ZIP içindeki dosyaları proje ana klasörüne kopyala ve üzerine yaz.
+2) Firebase Realtime Database > Rules kısmına FIREBASE_RULES.json içeriğini yapıştır.
+3) GitHub Desktop Summary: Add Firebase visitor counter
+4) Commit + Push.
+5) Site: https://siriland-chiangmai.github.io/siriland-realestate/
+6) Dashboard: https://siriland-chiangmai.github.io/siriland-realestate/firebase-dashboard.html

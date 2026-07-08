@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SIRILAND Admin Dashboard - Visitors</title>
+  <style>
+    :root{--navy:#071a3d;--gold:#d6ad4b;--bg:#f5efe5;--card:#fff;--muted:#64748b;}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Tahoma,sans-serif;background:var(--bg);color:#071a3d}
+    header{background:var(--navy);color:white;padding:22px 28px;border-bottom:3px solid var(--gold)}
+    h1{margin:0;font-size:28px;letter-spacing:.5px}
+    .sub{color:#f3d98b;margin-top:6px}
+    main{max-width:1200px;margin:24px auto;padding:0 16px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .card{background:var(--card);border-radius:18px;padding:18px;border:1px solid #ead9bc;box-shadow:0 10px 30px rgba(7,26,61,.07)}
+    .label{font-size:13px;color:var(--muted);font-weight:700}
+    .num{font-size:34px;font-weight:900;margin-top:8px;color:#b98517}
+    .wide{grid-column:span 2}
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    th,td{text-align:left;padding:10px;border-bottom:1px solid #eee}
+    th{color:#64748b;font-size:13px}
+    .online-dot{display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:50%;margin-right:6px}
+    .footer{margin-top:18px;color:#64748b;font-size:13px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.wide{grid-column:span 2}}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}.wide{grid-column:span 1}}
+  </style>
+</head>
+<body>
+<header>
+  <h1>SIRILAND Admin Dashboard</h1>
+  <div class="sub">Visitor Counter • Online Users • Live Website Stats</div>
+</header>
+<main>
+  <div class="grid">
+    <div class="card"><div class="label">👥 Online Users</div><div class="num" id="online">-</div></div>
+    <div class="card"><div class="label">👁 Today Visitors</div><div class="num" id="today">-</div></div>
+    <div class="card"><div class="label">📅 This Month</div><div class="num" id="month">-</div></div>
+    <div class="card"><div class="label">🌍 Total Visitors</div><div class="num" id="total">-</div></div>
+
+    <div class="card wide">
+      <div class="label">📈 Recent Daily Visits</div>
+      <table><thead><tr><th>Date</th><th>Visits</th></tr></thead><tbody id="dailyRows"></tbody></table>
+    </div>
+
+    <div class="card wide">
+      <div class="label">🔥 Most Viewed Pages</div>
+      <table><thead><tr><th>Page</th><th>Views</th></tr></thead><tbody id="pageRows"></tbody></table>
+    </div>
+  </div>
+  <div class="footer">Realtime Database connected: siriland-realestate</div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig = {
+  "apiKey": "AIzaSyC-arJS1pZkcVEXhYgOOOqg3wPZpF5L_fE",
+  "authDomain": "siriland-realestate.firebaseapp.com",
+  "databaseURL": "https://siriland-realestate-default-rtdb.asia-southeast1.firebasedatabase.app",
+  "projectId": "siriland-realestate",
+  "storageBucket": "siriland-realestate.firebasestorage.app",
+  "messagingSenderId": "967829423088",
+  "appId": "1:967829423088:web:e768d4908994b077f05335",
+  "measurementId": "G-8E32GKRSCE"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+function pad(n){return String(n).padStart(2,'0')}
+function dateKey(d=new Date()){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+function monthKey(d=new Date()){return d.getFullYear()+'-'+pad(d.getMonth()+1)}
+function set(id,v){document.getElementById(id).textContent = v ?? 0}
+
+db.ref('online').on('value', snap => {
+  const val = snap.val() || {};
+  const cutoff = Date.now() - 120000;
+  set('online', Object.values(val).filter(x => x && x.at > cutoff).length);
+});
+db.ref('visits/daily/'+dateKey()).on('value', snap => set('today', snap.val() || 0));
+db.ref('visits/monthly/'+monthKey()).on('value', snap => set('month', snap.val() || 0));
+db.ref('visits/total').on('value', snap => set('total', snap.val() || 0));
+
+db.ref('visits/daily').limitToLast(14).on('value', snap => {
+  const data = snap.val() || {};
+  const rows = Object.entries(data).sort().reverse().map(([d,v])=>`<tr><td>${d}</td><td>${v}</td></tr>`).join('');
+  document.getElementById('dailyRows').innerHTML = rows || '<tr><td colspan="2">No data yet</td></tr>';
+});
+
+db.ref('visits/pages').limitToLast(30).on('value', snap => {
+  const data = snap.val() || {};
+  const rows = Object.entries(data).sort((a,b)=>b[1]-a[1]).slice(0,10)
+    .map(([p,v])=>`<tr><td>${decodeURIComponent(p)}</td><td>${v}</td></tr>`).join('');
+  document.getElementById('pageRows').innerHTML = rows || '<tr><td colspan="2">No data yet</td></tr>';
+});
+</script>
+</body>
+</html>
