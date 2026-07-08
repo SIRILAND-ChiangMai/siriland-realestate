@@ -2281,23 +2281,23 @@ window.SIRILAND_PROPERTIES = [
   },
   {
     "id": "CM-0027",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "6.19 MB",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathrooms",
+    "area": "87.5 sqm",
+    "room": "Please Room 813",
+    "floor": "8th Floor Corner",
+    "map": "https://maps.app.goo.gl/R7VDGsfYJJFLoz4U8",
     "title": {
       "en": "Srithana 2 Condo — 8th Floor",
       "th": "Srithana 2 Condo — 8th Floor",
       "tr": "Srithana 2 Condo — 8th Floor",
       "zh": "Srithana 2 Condo — 8th Floor"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Ask for price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
       "en": "Srithana 2 Condo — 8th Floor. Details are being updated by SIRILAND.",
       "th": "Srithana 2 Condo — 8th Floor. Details are being updated by SIRILAND.",
@@ -2349,7 +2349,7 @@ window.SIRILAND_PROPERTIES = [
       "images/srithana-2-condo-8th-floor-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
