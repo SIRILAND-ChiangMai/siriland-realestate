@@ -1,13 +1,14 @@
-SIRILAND Facebook / Instagram Post Text Patch
+SIRILAND Admin Fixed From admin(5)
 
-1) admin.html dosyasını proje ana klasörüne kopyala, üzerine yaz.
-2) GitHub Desktop Summary:
-   Add Facebook Instagram post text generator
-3) Commit + Push.
-
-Admin içinde:
-- Generate Post Text
-- Copy Facebook
-- Copy Instagram
-
-Metne ilan website linki ve ana website linki otomatik eklenir.
+1) ZIP içindeki admin.html dosyasını proje ana klasöründeki admin.html üstüne koy.
+2) Mevcut Facebook / Instagram özellikleri korunmuştur:
+   - Generate Post Text
+   - Copy Facebook
+   - Copy Instagram
+3) Placeholder temizliği eklendi:
+   - Ask for price
+   - Recovered from image folder
+   - Details updating
+4) Export ZIP / properties.js / properties.json üretimi korunmuştur.
+5) GitHub Desktop: Summary: Fix admin export and remove placeholders
+6) Commit + Push.

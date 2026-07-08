@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND Admin - City ID + Language UI</title>
+  <title>SIRILAND Admin - CMS 2030 Fixed</title>
   <style>
     :root{--navy:#071a3d;--gold:#d6ad4b;--bg:#f5f7fb;--line:#d9deea;--red:#b91c1c;--green:#0f7b3f}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,Tahoma,sans-serif;color:#172033}.wrap{max-width:1200px;margin:auto;padding:20px}
@@ -25,7 +25,7 @@
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND Professional CMS 2026</div><div class="muted">City seçimine göre doğru ID üretir. Üst dil sekmesine göre admin alan başlıkları değişir.</div></div>
+    <div><div class="logo">SIRILAND Professional CMS 2030 Fixed</div><div class="muted">Facebook/Instagram post, cover photo, extra fields and clean export fixed.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -33,7 +33,7 @@
       <button class="btn green" id="downloadZip">ZIP oluştur</button>
     </div>
   </div>
-  <div class="hint"><b>Önemli düzeltme:</b> Fotoğraf önizleme, kapak seçimi ve zorunlu alan kontrolü eklendi. Price bilinmiyorsa <b>Contact for Price</b> yaz.</div>
+  <div class="hint"><b>Önemli düzeltme:</b> Facebook/Instagram post, fotoğraf önizleme ve kapak seçimi korunmuştur. Export artık <b>Ask for price</b>, <b>Recovered from image folder</b>, <b>Details updating</b> gibi placeholder yazıları temizler. Fiyat bilinmiyorsa <b>Contact for Price</b> yaz.</div>
   <div class="grid">
     <div>
       <div class="panel">
@@ -60,12 +60,33 @@
         </div>
       </div>
       <div class="panel">
-        <h2 id="h_lang">2) 4 Dil İçerik</h2>
+        <h2>2) Extra Sale / Rent Details</h2>
+        <div class="grid3">
+          <div><label>🏷️ Sale Price</label><input id="salePrice" placeholder="3.2 MB / Unit"></div>
+          <div><label>💰 Rent Price</label><input id="rentPrice" placeholder="20,000 THB / Month"></div>
+          <div><label>💳 Owner Finance</label><input id="ownerFinance" placeholder="10% Down / Owner Finance Available"></div>
+          <div><label>📅 Installment</label><input id="installment" placeholder="60 months / 10,000 THB per month"></div>
+          <div><label>🎁 Free Transfer</label><input id="freeTransfer" placeholder="Free transfer / tax paid by owner"></div>
+          <div><label>⭐ Summary</label><input id="summary" placeholder="Short SEO summary"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2 id="h_lang">3) 4 Dil İçerik</h2>
         <div class="tabs" id="langTabs"></div>
         <div id="langForms"></div>
       </div>
       <div class="panel">
-        <h2 id="h_fb">3) Facebook Metni</h2>
+        <h2>5) Detail Lists</h2>
+        <div class="grid2">
+          <div><label>📍 Nearby (one per line)</label><textarea id="nearby" placeholder="Srimala Villa\nPhichit City Center"></textarea></div>
+          <div><label>📦 Features (one per line)</label><textarea id="features" placeholder="3 Floors\nCCTV\nBuilt-in Kitchen"></textarea></div>
+          <div><label>🛋 Furniture (one per line)</label><textarea id="furniture" placeholder="Partial furniture\nBuilt-in counter"></textarea></div>
+          <div><label>⚡ Appliances (one per line)</label><textarea id="appliances" placeholder="TV\nCCTV\nAir conditioner"></textarea></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 id="h_fb">4) Facebook Metni</h2>
         <textarea id="fbText" placeholder="Facebook ilan metnini buraya yapıştır..."></textarea>
         <button class="btn dark" id="parseBtn">Alanları otomatik doldur</button>
       </div>
@@ -85,7 +106,7 @@
       </div>
 
       <div class="panel">
-        <h2 id="h_images">4) Görseller</h2>
+        <h2 id="h_images">6) Görseller</h2>
         <p class="muted">Yeni ilanın fotoğraflarını seç. Kapak fotoğrafı ilk sıradadır. Artık fotoğraf önizlemesi ile kapak seçebilirsin.</p>
         <input type="file" id="imageFiles" accept="image/*" multiple>
         <div id="imagePreview" class="list"></div>
@@ -110,7 +131,7 @@ let imageFiles=[];
 let existingImageList=[];
 let pendingFilesById={};
 const langs=['en','th','tr','zh'];
-const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map'];
+const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map','salePrice','rentPrice','ownerFinance','installment','freeTransfer','summary','nearby','features','furniture','appliances'];
 const $=id=>document.getElementById(id);
 
 function escapeHtml(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
@@ -173,6 +194,9 @@ function getForm(){
   p.title={}; p.description={}; p.highlights={};
   langs.forEach(l=>{p.title[l]=$('title_'+l).value.trim();p.description[l]=$('description_'+l).value.trim();p.highlights[l]=$('highlights_'+l).value.split('\n').map(x=>x.trim()).filter(Boolean)});
   const existing=properties.find(x=>x.id===p.id);
+  ['nearby','features','furniture','appliances'].forEach(k=>{
+    p[k] = String(p[k]||'').split('\n').map(x=>x.trim()).filter(Boolean);
+  });
   if(imageFiles.length){
     const base=imageBaseFor(p);
     p.images=imageFiles.map((f,i)=>`images/${base}-${i+1}.${(f.name.split('.').pop()||'jpg').toLowerCase()}`);
@@ -180,17 +204,45 @@ function getForm(){
   } else {
     p.images=existingImageList.length ? existingImageList.slice() : ((existing&&existing.images)||[]);
   }
+  cleanProperty(p);
   p.createdAt=(existing&&existing.createdAt)||new Date().toISOString().slice(0,10);
   p.updatedAt=new Date().toISOString().slice(0,10);
   p.featured=existing?.featured!==undefined?existing.featured:true;
   p.contact={name:'Kwan',phone1:'092-005-6640',phone2:'090-650-7558',line:'@realcreamthailand'};
   return p;
 }
-function setForm(p){fields.forEach(f=>$(f).value=p[f]||'');langs.forEach(l=>{$('title_'+l).value=pick(p.title,l);$('description_'+l).value=pick(p.description,l);$('highlights_'+l).value=pickArr(p.highlights,l).join('\n')});imageFiles=[];existingImageList=(p.images||[]).slice();renderImages()}
+function setForm(p){p=cleanProperty(p);fields.forEach(f=>{$(f).value=Array.isArray(p[f])?p[f].join('\n'):(p[f]||'')});langs.forEach(l=>{$('title_'+l).value=pick(p.title,l);$('description_'+l).value=pick(p.description,l);$('highlights_'+l).value=pickArr(p.highlights,l).join('\n')});imageFiles=[];existingImageList=(p.images||[]).slice();renderImages()}
 function clearForm(){fields.forEach(f=>$(f).value='');$('city').value='Chiang Mai';$('id').value=nextId('Chiang Mai');$('status').value='Available';langs.forEach(l=>{$('title_'+l).value='';$('description_'+l).value='';$('highlights_'+l).value=''});imageFiles=[];existingImageList=[];renderImages();switchLang('en')}
-function isMissingValue(v){
+function isPlaceholderValue(v){
   const s=String(v||'').trim().toLowerCase();
-  return !s || s==='ask for price' || s==='please update' || s==='n/a' || s==='null' || s==='undefined';
+  return !s || s==='ask for price' || s==='please update' || s==='details updating' || s==='recovered from image folder' || s==='details are being updated by siriland.' || s==='n/a' || s==='null' || s==='undefined';
+}
+function isMissingValue(v){
+  return isPlaceholderValue(v);
+}
+function cleanLineArray(arr){
+  return (Array.isArray(arr)?arr:[]).map(x=>String(x||'').trim()).filter(x=>x && !isPlaceholderValue(x));
+}
+function cleanProperty(p){
+  p = p || {};
+  ['price','bedrooms','bathrooms','area','room','floor','salePrice','rentPrice','ownerFinance','installment','freeTransfer','summary'].forEach(k=>{
+    if(isPlaceholderValue(p[k])) p[k]='';
+  });
+  if(p.type && String(p.type).toLowerCase().includes('srimala villa shophouse')) p.type='Shophouse';
+  if(p.description && typeof p.description==='object'){
+    langs.forEach(l=>{ if(isPlaceholderValue(p.description[l]) || String(p.description[l]||'').toLowerCase().includes('details are being updated by siriland')) p.description[l]=''; });
+  }
+  if(p.highlights && typeof p.highlights==='object'){
+    langs.forEach(l=>{ p.highlights[l]=cleanLineArray(p.highlights[l]); });
+  }
+  ['nearby','features','furniture','appliances'].forEach(k=>{
+    if(Array.isArray(p[k])) p[k]=cleanLineArray(p[k]);
+    else if(typeof p[k]==='string') p[k]=cleanLineArray(p[k].split('\n'));
+  });
+  return p;
+}
+function cleanAllProperties(){
+  properties = (properties||[]).map(cleanProperty);
 }
 function validateCurrentForm(){
   const p=getForm();
@@ -219,7 +271,7 @@ function upsertCurrent(silent=false){
     $('report').innerHTML='<span class="bad">Eksik zorunlu alanlar:</span>\n- '+missing.join('\n- ');
     return false;
   }
-  const p=getForm();
+  const p=cleanProperty(getForm());
   const i=properties.findIndex(x=>x.id===p.id);
   if(i>=0) properties[i]=p; else properties.push(p);
   renderList(); validate();
@@ -283,13 +335,14 @@ function validate(){
   $('report').innerHTML=msg+'\n\nToplam ilan: '+properties.length+'\nBekleyen yeni görseller:\n'+pending;
   return !errors.length;
 }
-function makeJs(){return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
+function makeJs(){cleanAllProperties();return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
 function download(name,content,type='application/octet-stream'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
 async function buildZip(){
   if(hasFormData() && !upsertCurrent(true)) return;
   if(!validate()){if(!confirm('Hata var. Yine de ZIP oluşturulsun mu?'))return;}
   const zip=new JSZip();
   zip.file('properties.js',makeJs());
+  cleanAllProperties();
   zip.file('data/properties.json',JSON.stringify(properties,null,2));
   zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n4) GitHub Desktop: Commit + Push.\n\nNot: Export artık formdaki ilanı otomatik kaydeder.');
   for(const [id,files] of Object.entries(pendingFilesById)){
@@ -350,8 +403,19 @@ function generatePostText(){
   const mapLine = p.map ? '\n📍 Google Map:\n' + p.map + '\n' : '';
   const tags = makeHashtags(p);
 
+  const salePrice = cleanText(p.salePrice || '');
+  const rentPrice = cleanText(p.rentPrice || '');
+  const ownerFinance = cleanText(p.ownerFinance || '');
+  const installment = cleanText(p.installment || '');
+  const freeTransfer = cleanText(p.freeTransfer || '');
+  const summary = cleanText(p.summary || '');
   const specs = [
     price ? '💰 Price: ' + price : '',
+    salePrice ? '🏷️ Sale Price: ' + salePrice : '',
+    rentPrice ? '💰 Rent Price: ' + rentPrice : '',
+    ownerFinance ? '💳 Owner Finance: ' + ownerFinance : '',
+    installment ? '📅 Installment: ' + installment : '',
+    freeTransfer ? '🎁 Free Transfer: ' + freeTransfer : '',
     beds ? '🛏️ ' + beds : '',
     baths ? '🛁 ' + baths : '',
     area ? '📐 ' + area : '',
@@ -365,7 +429,7 @@ function generatePostText(){
 
 ${specs}
 
-${highlights ? highlights + '\n' : ''}${desc ? '\n' + desc + '\n' : ''}${mapLine}
+${highlights ? highlights + '\n' : ''}${summary ? '\n' + summary + '\n' : ''}${desc ? '\n' + desc + '\n' : ''}${mapLine}
 🌐 View full details & all photos:
 ${propUrl}
 
@@ -412,7 +476,7 @@ $('langTabs').addEventListener('click',e=>{const b=e.target.closest('[data-lang]
 $('saveBtn').onclick=()=>upsertCurrent(false);
 $('clearBtn').onclick=clearForm;
 $('validateBtn').onclick=()=>{upsertCurrent(true);validate()};
-$('downloadJson').onclick=()=>{upsertCurrent(true);download('properties.json',JSON.stringify(properties,null,2),'application/json')};
+$('downloadJson').onclick=()=>{upsertCurrent(true);cleanAllProperties();download('properties.json',JSON.stringify(properties,null,2),'application/json')};
 $('downloadJs').onclick=()=>{upsertCurrent(true);download('properties.js',makeJs(),'text/javascript')};
 $('downloadZip').onclick=buildZip;
 $('parseBtn').onclick=parseFbText;
@@ -424,11 +488,11 @@ $('copyIgBtn').onclick=()=>copyPost('instagramPost');
 $('city').onchange=()=>syncIdToCity(true);
 $('imageFiles').onchange=e=>{imageFiles=Array.from(e.target.files||[]);existingImageList=[];renderImages()};
 $('importBtn').onclick=()=>$('importFile').click();
-$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result);renderList();clearForm();validate();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
+$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result).map(cleanProperty);renderList();clearForm();validate();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
 
 initLangForms();
 updateUiLang('en');
-fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate()});
+fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s).map(cleanProperty);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate()});
 </script>
 </body>
 </html>
