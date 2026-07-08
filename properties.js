@@ -2280,85 +2280,6 @@ window.SIRILAND_PROPERTIES = [
     }
   },
   {
-    "id": "CM-0027",
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "6.19 MB",
-    "bedrooms": "2 Bedrooms",
-    "bathrooms": "2 Bathrooms",
-    "area": "87.5 sqm",
-    "room": "Please Room 813",
-    "floor": "8th Floor Corner",
-    "map": "https://maps.app.goo.gl/R7VDGsfYJJFLoz4U8",
-    "title": {
-      "en": "Srithana 2 Condo — 8th Floor",
-      "th": "Srithana 2 Condo — 8th Floor",
-      "tr": "Srithana 2 Condo — 8th Floor",
-      "zh": "Srithana 2 Condo — 8th Floor"
-    },
-    "description": {
-      "en": "Srithana 2 Condo — 8th Floor. Details are being updated by SIRILAND.",
-      "th": "Srithana 2 Condo — 8th Floor. Details are being updated by SIRILAND.",
-      "tr": "Srithana 2 Condo — 8th Floor. Details are being updated by SIRILAND.",
-      "zh": "Srithana 2 Condo — 8th Floor. Details are being updated by SIRILAND."
-    },
-    "highlights": {
-      "en": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "th": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "tr": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "zh": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ]
-    },
-    "images": [
-      "images/srithana-2-condo-8th-floor-1.jpg",
-      "images/srithana-2-condo-8th-floor-2.jpg",
-      "images/srithana-2-condo-8th-floor-3.jpg",
-      "images/srithana-2-condo-8th-floor-4.jpg",
-      "images/srithana-2-condo-8th-floor-5.jpg",
-      "images/srithana-2-condo-8th-floor-6.jpg",
-      "images/srithana-2-condo-8th-floor-7.jpg",
-      "images/srithana-2-condo-8th-floor-8.jpg",
-      "images/srithana-2-condo-8th-floor-9.jpg",
-      "images/srithana-2-condo-8th-floor-10.jpg",
-      "images/srithana-2-condo-8th-floor-11.jpg",
-      "images/srithana-2-condo-8th-floor-12.jpg",
-      "images/srithana-2-condo-8th-floor-13.jpg",
-      "images/srithana-2-condo-8th-floor-14.jpg",
-      "images/srithana-2-condo-8th-floor-15.jpg",
-      "images/srithana-2-condo-8th-floor-16.jpg",
-      "images/srithana-2-condo-8th-floor-17.jpg",
-      "images/srithana-2-condo-8th-floor-18.jpg",
-      "images/srithana-2-condo-8th-floor-19.jpg",
-      "images/srithana-2-condo-8th-floor-20.jpg"
-    ],
-    "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-08",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
     "id": "CM-0028",
     "title": {
       "en": "Srithana 2 Huay Kaew Nimman",
@@ -2438,103 +2359,24 @@ window.SIRILAND_PROPERTIES = [
     }
   },
   {
-    "id": "CM-0029",
-    "title": {
-      "en": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor",
-      "th": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor",
-      "tr": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor",
-      "zh": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor"
-    },
+    "id": "CM-0030",
     "city": "Chiang Mai",
     "type": "Condo",
     "deal": "Sale",
     "status": "Available",
-    "price": "Ask for price",
-    "bedrooms": "Please update",
+    "price": "3.69 MB",
+    "bedrooms": "2 Bedrooms",
     "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
-    "description": {
-      "en": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor. Details are being updated by SIRILAND.",
-      "th": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor. Details are being updated by SIRILAND.",
-      "tr": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor. Details are being updated by SIRILAND.",
-      "zh": "Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor. Details are being updated by SIRILAND."
-    },
-    "highlights": {
-      "en": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "th": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "tr": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ],
-      "zh": [
-        "Recovered from image folder",
-        "Details updating",
-        "Chiang Mai"
-      ]
-    },
-    "images": [
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-1.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-2.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-3.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-4.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-5.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-6.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-7.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-8.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-9.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-10.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-11.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-12.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-13.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-14.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-15.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-16.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-17.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-18.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-19.jpg",
-      "images/thanthip-garden-place-room-1708-1709-building-1-7th-floor-20.jpg"
-    ],
-    "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
-    "id": "CM-0030",
+    "area": "61.48 SQ.M.",
+    "room": "Unit 3609",
+    "floor": "3rd Floor",
+    "map": "https://maps.app.goo.gl/85u98y3mHX4VasbG7",
     "title": {
       "en": "The Next 1.3 Ruamchok",
       "th": "The Next 1.3 Ruamchok",
       "tr": "The Next 1.3 Ruamchok",
       "zh": "The Next 1.3 Ruamchok"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Ask for price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
       "en": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND.",
       "th": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND.",
@@ -2586,7 +2428,7 @@ window.SIRILAND_PROPERTIES = [
       "images/the-next-1-3-ruamchok-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
