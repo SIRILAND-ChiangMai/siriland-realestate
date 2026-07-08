@@ -1,14 +1,13 @@
-SIRILAND Admin Fixed From admin(5)
+SIRILAND Thai + English FB/IG Post Generator with Image Preview
 
-1) ZIP içindeki admin.html dosyasını proje ana klasöründeki admin.html üstüne koy.
-2) Mevcut Facebook / Instagram özellikleri korunmuştur:
-   - Generate Post Text
-   - Copy Facebook
-   - Copy Instagram
-3) Placeholder temizliği eklendi:
-   - Ask for price
-   - Recovered from image folder
-   - Details updating
-4) Export ZIP / properties.js / properties.json üretimi korunmuştur.
-5) GitHub Desktop: Summary: Fix admin export and remove placeholders
-6) Commit + Push.
+1) admin.html dosyasını proje ana klasörüne kopyala, üzerine yaz.
+2) GitHub Desktop Summary:
+   Add Thai English post generator with images
+3) Commit + Push.
+
+Kullanım:
+- İlanı düzenle veya doldur.
+- Generate TH+EN Post bas.
+- Copy Facebook veya Copy Instagram bas.
+- Fotoğraflar önizleme olarak altta görünür.
+Not: Facebook'a fotoğraflar otomatik yüklenmez; manuel seçilmesi gerekir.
