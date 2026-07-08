@@ -1943,23 +1943,23 @@ window.SIRILAND_PROPERTIES = [
   },
   {
     "id": "CM-0023",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2.89 MB",
+    "bedrooms": "1 Bedroom",
+    "bathrooms": "1 Bathrooms",
+    "area": "35 Sq.m.",
+    "room": "Please uUnit 236pdate",
+    "floor": "Please upd2nd Floorate",
+    "map": "https://maps.google.com/?q=Hillside+Condo+3+Nimmanhaemin+Soi+8+Chiang+Mai",
     "title": {
       "en": "Hillside 3 Condo Unit 236 — 2nd Floor",
       "th": "Hillside 3 Condo Unit 236 — 2nd Floor",
       "tr": "Hillside 3 Condo Unit 236 — 2nd Floor",
       "zh": "Hillside 3 Condo Unit 236 — 2nd Floor"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "Ask for price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
-    "map": "",
     "description": {
       "en": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND.",
       "th": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND.",
@@ -2021,7 +2021,7 @@ window.SIRILAND_PROPERTIES = [
       "images/hillside-3-condo-unit-236-2nd-floor-30.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
