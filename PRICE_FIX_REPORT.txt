@@ -1,0 +1,23 @@
+SIRILAND Price Fix + Required Fields Patch
+
+Toplam ilan: 34
+Contact for Price olarak düzeltilen ilan sayısı: 10
+
+- CM-0022 | Punna Residence 5 — 8 Storey Low Rise Condo | eski fiyat: Ask for price -> Contact for Price
+- CM-0023 | Hillside 3 Condo Unit 236 — 2nd Floor | eski fiyat: Ask for price -> Contact for Price
+- CM-0024 | Nakornping Condo | eski fiyat: Ask for price -> Contact for Price
+- CM-0025 | Pansuk The Erben Condo Room 5/16 | eski fiyat: Ask for price -> Contact for Price
+- CM-0026 | Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m. | eski fiyat: Ask for price -> Contact for Price
+- CM-0027 | Srithana 2 Condo — 8th Floor | eski fiyat: Ask for price -> Contact for Price
+- CM-0028 | Srithana 2 Huay Kaew Nimman | eski fiyat: Ask for price -> Contact for Price
+- CM-0029 | Thanthip Garden Place Room 1708–1709 Building 1 — 7th Floor | eski fiyat: Ask for price -> Contact for Price
+- CM-0030 | The Next 1.3 Ruamchok | eski fiyat: Ask for price -> Contact for Price
+- CM-0031 | Wiangpink Mansion Condo | eski fiyat: Ask for price -> Contact for Price
+
+Admin zorunlu alan kontrolü eklendi:
+- ID, City, Type, Deal, Status, Price
+- Bedrooms, Bathrooms, Area
+- Title
+- Images
+
+Not: Fiyat bilinmiyorsa Price alanına Contact for Price yaz. Oda/banyo/alan yoksa - veya N/A yazabilirsin.

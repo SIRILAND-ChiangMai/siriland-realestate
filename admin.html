@@ -25,7 +25,7 @@
       <button class="btn green" id="downloadZip">ZIP oluştur</button>
     </div>
   </div>
-  <div class="hint"><b>Önemli düzeltme:</b> Artık ZIP / properties.js indirirken formdaki ilan otomatik kaydedilir. Önceden “Save”e basılmadıysa yeni ilan export’a girmiyordu.</div>
+  <div class="hint"><b>Önemli düzeltme:</b> Artık ZIP / properties.js indirirken formdaki ilan otomatik kaydedilir. Yeni ilan kaydında ID, City, Type, Deal, Status, Price, Bedrooms, Bathrooms, Area, Title ve görsel alanları zorunludur. Fiyat bilinmiyorsa Price alanına Contact for Price yaz.</div>
   <div class="grid">
     <div>
       <div class="panel">
@@ -95,6 +95,8 @@ function slugify(s){return String(s||'property').toLowerCase().normalize('NFKD')
 function pick(v,l='en'){return v&&typeof v==='object'&&!Array.isArray(v)?(v[l]||v.en||v.th||v.tr||v.zh||''):(v||'')}
 function pickArr(v,l='en'){return v&&typeof v==='object'&&!Array.isArray(v)?(v[l]||v.en||v.th||v.tr||v.zh||[]):(Array.isArray(v)?v:[])}
 function hasFormData(){return fields.some(f=>$(f).value.trim()) || langs.some(l=>$('title_'+l).value.trim()||$('description_'+l).value.trim()||$('highlights_'+l).value.trim()) || imageFiles.length}
+function isMissingValue(v){const s=String(v||'').trim().toLowerCase();return !s||s==='please update'||s==='ask for price'||s==='undefined'||s==='null'}
+function requiredCheck(p){const missing=[];['id','city','type','deal','status','price','bedrooms','bathrooms','area'].forEach(f=>{if(isMissingValue(p[f])) missing.push(f)});if(isMissingValue(p.title?.en||p.title?.th||p.title?.tr||p.title?.zh)) missing.push('title');if(!p.images||!p.images.length) missing.push('images');return missing}
 const CITY_CODES={
   'Chiang Mai':'CM',
   'Bangkok':'BKK',
@@ -170,6 +172,14 @@ function upsertCurrent(silent=false){
   const p=getForm();
   const meaningful=pick(p.title,'en')||pick(p.title,'th')||p.price||p.city||p.type||p.images.length;
   if(!meaningful) return false;
+  const missing=requiredCheck(p);
+  if(missing.length){
+    alert('Eksik zorunlu alanlar: '+missing.join(', ')+'
+
+Fiyat bilinmiyorsa Price alanına Contact for Price yaz. Oda/banyo/alan yoksa - veya N/A yazabilirsin.');
+    validate();
+    return false;
+  }
   const i=properties.findIndex(x=>x.id===p.id);
   if(i>=0) properties[i]=p; else properties.push(p);
   renderList(); validate();
@@ -196,11 +206,33 @@ window.coverExisting=i=>{if(i<=0||i>=existingImageList.length)return;const f=exi
 window.removeExisting=i=>{if(confirm('Bu görsel listeden silinsin mi?')){existingImageList.splice(i,1);renderImages()}};
 
 function validate(){
-  const r=[];const ids=new Set();
-  properties.forEach((p,n)=>{if(!p.id)r.push(`Satır ${n+1}: ID yok`);if(ids.has(p.id))r.push(`Duplicate ID: ${p.id}`);ids.add(p.id);if(!pick(p.title))r.push(`${p.id}: Başlık yok`);if(!p.price)r.push(`${p.id}: Fiyat yok`);if(!p.images||!p.images.length)r.push(`${p.id}: Foto yok`)});
-  const pending=Object.keys(pendingFilesById).map(id=>`${id}: ${pendingFilesById[id].length} yeni foto`).join('\n') || 'Yeni seçilen foto yok';
-  $('report').innerHTML=(r.length?'<span class="bad">HATA:</span>\n'+r.join('\n'):'<span class="ok">OK: properties.js üretilebilir.</span>')+'\n\nToplam ilan: '+properties.length+'\nBekleyen yeni görseller:\n'+pending;
-  return !r.length;
+  const errors=[]; const warnings=[]; const ids=new Set();
+  properties.forEach((p,n)=>{
+    if(!p.id) errors.push(`Satır ${n+1}: ID yok`);
+    if(ids.has(p.id)) errors.push(`Duplicate ID: ${p.id}`);
+    ids.add(p.id);
+    if(!pick(p.title)) warnings.push(`${p.id}: Başlık yok`);
+    if(isMissingValue(p.price)) warnings.push(`${p.id}: Price eksik`);
+    ['bedrooms','bathrooms','area'].forEach(f=>{ if(isMissingValue(p[f])) warnings.push(`${p.id}: ${f} eksik`) });
+    if(!p.images||!p.images.length) warnings.push(`${p.id}: Foto yok`);
+  });
+  const pending=Object.keys(pendingFilesById).map(id=>`${id}: ${pendingFilesById[id].length} yeni foto`).join('
+') || 'Yeni seçilen foto yok';
+  let msg = errors.length ? '<span class="bad">HATA:</span>
+'+errors.join('
+') : '<span class="ok">OK: properties.js üretilebilir.</span>';
+  if(warnings.length) msg += '
+
+<span class="warn">UYARI:</span>
+'+warnings.slice(0,80).join('
+')+(warnings.length>80?'
+...':'');
+  $('report').innerHTML=msg+'
+
+Toplam ilan: '+properties.length+'
+Bekleyen yeni görseller:
+'+pending;
+  return !errors.length;
 }
 function makeJs(){return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
 function download(name,content,type='application/octet-stream'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
