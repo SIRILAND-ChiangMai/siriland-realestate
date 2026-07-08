@@ -67,7 +67,7 @@
           <div><label>💳 Owner Finance</label><input id="ownerFinance" placeholder="10% Down / Owner Finance Available"></div>
           <div><label>📅 Installment</label><input id="installment" placeholder="60 months / 10,000 THB per month"></div>
           <div><label>🎁 Free Transfer</label><input id="freeTransfer" placeholder="Free transfer / tax paid by owner"></div>
-          <div><label>⭐ Summary</label><input id="summary" placeholder="Short SEO summary"></div>
+          <div><label>⭐ Summary</label><input id="summary" placeholder="Short SEO summary"><button class="btn" type="button" id="generateSummaryBtn" style="margin-top:7px">Generate Summary</button></div>
         </div>
       </div>
       <div class="panel">
@@ -384,6 +384,34 @@ function makeHashtags(p){
     '#อสังหาริมทรัพย์'
   ].join('\n');
 }
+
+function generateSummary(){
+  const type = cleanText($('type').value).toLowerCase();
+  const city = cleanText($('city').value || 'Thailand');
+  const deal = cleanText($('deal').value).toLowerCase();
+  const price = cleanText($('price').value || $('salePrice').value || $('rentPrice').value);
+  const area = cleanText($('area').value);
+  const beds = cleanText($('bedrooms').value);
+  const ownerFinance = cleanText($('ownerFinance').value);
+  const freeTransfer = cleanText($('freeTransfer').value);
+  let summary = '';
+
+  if(type.includes('condo')){
+    summary = `Modern condominium in a prime ${city} location, suitable for living or investment. ${beds ? beds + ', ' : ''}${area ? area + ', ' : ''}${price ? 'priced at ' + price + '. ' : ''}Fully prepared for quality urban living.`;
+  } else if(type.includes('house') || type.includes('home')){
+    summary = `Beautiful home in a convenient ${city} location, offering comfortable living space for families or long-term investment. ${price ? 'Price: ' + price + '. ' : ''}`;
+  } else if(type.includes('shop') || type.includes('commercial')){
+    summary = `Prime commercial shophouse in ${city}, ideal for retail, office, café, clinic, or investment. ${deal.includes('rent') ? 'Available for sale or rent. ' : ''}${ownerFinance ? 'Owner financing available. ' : ''}${freeTransfer ? 'Free transfer benefits included. ' : ''}`;
+  } else if(type.includes('land')){
+    summary = `Excellent land opportunity in ${city}, suitable for residential, commercial, or investment purposes. ${area ? 'Land size: ' + area + '. ' : ''}${price ? 'Price: ' + price + '. ' : ''}`;
+  } else {
+    summary = `Prime property in ${city}, suitable for living, business, or investment. ${price ? 'Price: ' + price + '. ' : ''}Contact SIRILAND for more information or to schedule a viewing.`;
+  }
+
+  summary = summary.replace(/\s+/g,' ').trim();
+  $('summary').value = summary;
+}
+
 function generatePostText(){
   const p = getForm();
   const title = cleanText(pick(p.title,'en') || pick(p.title,'th') || p.id || 'SIRILAND Property');
@@ -482,6 +510,7 @@ $('downloadZip').onclick=buildZip;
 $('parseBtn').onclick=parseFbText;
 
 $('generatePostBtn').onclick=generatePostText;
+$('generateSummaryBtn').onclick=generateSummary;
 $('copyFbBtn').onclick=()=>copyPost('facebookPost');
 $('copyIgBtn').onclick=()=>copyPost('instagramPost');
 
