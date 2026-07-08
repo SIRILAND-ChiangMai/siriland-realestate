@@ -2718,14 +2718,24 @@
     "room": "",
     "floor": "3 Floors",
     "map": "https://maps.app.goo.gl/J36iCzsPpTPL6N3d9",
+    "salePrice": "3.2 MB",
+    "rentPrice": "Front 2 Connected Units: THB 20,000 / Month",
+    "ownerFinance": "",
+    "installment": "Year 1: THB 10,000 / Month / Unit Year 2 onwards: THB 15,000 / Month / Unit Up to 60 Months (5 Years)",
+    "freeTransfer": "Free Transfer",
+    "shortHighlight": "",
+    "nearby": [],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
     "title": {
-      "en": "",
+      "en": "Srimala Villa Shophouse",
       "th": "",
       "tr": "",
       "zh": ""
     },
     "description": {
-      "en": "",
+      "en": "4 Commercial Units\n3 Storeys\nFront 2 Units Connected\nRear Units Can Be Rented Separately\n3 Bathrooms (Front Units)\nBuilt-in Kitchen\nPartial Furniture\nCCTV System\nTV Included\nReady-to-use Shop Sign Structure\nRetail Shop\nCafé\nRestaurant\nClinic\nOffice\nShowroom\nWarehouse\nService Business\nInvestment",
       "th": "",
       "tr": "",
       "zh": ""

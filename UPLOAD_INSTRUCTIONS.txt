@@ -1,6 +1,5 @@
 1) Bu ZIP dosyasını açın.
-2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.
-3) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.
-4) GitHub Desktop: Commit + Push.
-
-Not: Export artık formdaki ilanı otomatik kaydeder.
+2) admin.html dosyasını GitHub proje klasöründe eski admin.html üstüne kopyalayın.
+3) properties.js dosyasını eski properties.js üstüne kopyalayın.
+4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.
+5) GitHub Desktop: Commit + Push.
