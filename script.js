@@ -118,5 +118,26 @@
   $('modalImg')?.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX; if(Math.abs(dx)>45) next(dx>0?-1:1)},{passive:true});
   ['cityFilter','typeFilter','dealFilter','searchInput'].forEach(id=>$(id)?.addEventListener('input', render));
   $('menuToggle')?.addEventListener('click',()=> $('mainNav').classList.toggle('show'));
-  applyI18n(); fillFilters(); render();
+
+  function openPropertyFromUrl(){
+    const params = new URLSearchParams(window.location.search);
+    const propertyId = params.get('property') || params.get('id');
+    if(!propertyId) return;
+    const found = DATA.find(p => String(p.id || '').toLowerCase() === String(propertyId).toLowerCase());
+    if(!found) return;
+
+    const cityFilter = $('cityFilter');
+    const typeFilter = $('typeFilter');
+    const dealFilter = $('dealFilter');
+    const searchInput = $('searchInput');
+    if(cityFilter) cityFilter.value = 'all';
+    if(typeFilter) typeFilter.value = 'all';
+    if(dealFilter) dealFilter.value = 'all';
+    if(searchInput) searchInput.value = found.id;
+    render();
+
+    setTimeout(() => openModal(found.id), 250);
+  }
+
+  applyI18n(); fillFilters(); render(); openPropertyFromUrl();
 })();
