@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND Admin - CMS 2030 Fixed</title>
+  <title>SIRILAND CMS PRO 2030 - Phase 1</title>
   <style>
     :root{--navy:#071a3d;--gold:#d6ad4b;--bg:#f5f7fb;--line:#d9deea;--red:#b91c1c;--green:#0f7b3f}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,Tahoma,sans-serif;color:#172033}.wrap{max-width:1200px;margin:auto;padding:20px}
@@ -19,13 +19,25 @@
     .postarea{min-height:220px;font-family:Arial,Tahoma,sans-serif;line-height:1.45}
     .copyrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 
-    @media(max-width:900px){.grid,.grid2,.grid3{grid-template-columns:1fr}.top{display:block}.imageCard{grid-template-columns:1fr}.thumbWrap{width:100%;height:180px}}
+
+    .dashboardGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
+    .statCard{background:linear-gradient(180deg,#ffffff,#fffaf0);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 4px 12px rgba(7,26,61,.05)}
+    .statLabel{font-size:12px;color:#64748b;font-weight:800;text-transform:uppercase;letter-spacing:.3px}
+    .statValue{font-size:26px;font-weight:900;color:var(--navy);margin-top:5px}
+    .miniList{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    .miniBox{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}
+    .miniBox h3{margin:0 0 8px;font-size:15px;color:var(--navy)}
+    .miniItem{font-size:13px;padding:5px 0;border-bottom:1px dashed #e5e7eb}
+    .qualityBar{height:8px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin-top:8px}
+    .qualityFill{height:100%;background:var(--gold);width:0%}
+
+    @media(max-width:900px){.dashboardGrid,.miniList,.grid,.grid2,.grid3{grid-template-columns:1fr}.top{display:block}.imageCard{grid-template-columns:1fr}.thumbWrap{width:100%;height:180px}}
   </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND Professional CMS 2030 Fixed</div><div class="muted">Facebook/Instagram post, cover photo, extra fields and clean export fixed.</div></div>
+    <div><div class="logo">SIRILAND CMS PRO 2030 — Phase 1</div><div class="muted">Dashboard + Property Manager + Facebook/Instagram + clean export preserved.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -34,6 +46,24 @@
     </div>
   </div>
   <div class="hint"><b>Önemli düzeltme:</b> Facebook/Instagram post, fotoğraf önizleme ve kapak seçimi korunmuştur. Export artık <b>Ask for price</b>, <b>Recovered from image folder</b>, <b>Details updating</b> gibi placeholder yazıları temizler. Fiyat bilinmiyorsa <b>Contact for Price</b> yaz.</div>
+
+  <div class="panel" id="dashboardPanel">
+    <h2>🏠 Dashboard — Phase 1</h2>
+    <div class="dashboardGrid">
+      <div class="statCard"><div class="statLabel">Toplam İlan</div><div class="statValue" id="statTotal">0</div></div>
+      <div class="statCard"><div class="statLabel">Satılık</div><div class="statValue" id="statSale">0</div></div>
+      <div class="statCard"><div class="statLabel">Kiralık</div><div class="statValue" id="statRent">0</div></div>
+      <div class="statCard"><div class="statLabel">Aktif</div><div class="statValue" id="statAvailable">0</div></div>
+      <div class="statCard"><div class="statLabel">Satıldı</div><div class="statValue" id="statSold">0</div></div>
+      <div class="statCard"><div class="statLabel">Kiraya Verildi</div><div class="statValue" id="statRented">0</div></div>
+      <div class="statCard"><div class="statLabel">Eksik Bilgili</div><div class="statValue" id="statMissing">0</div></div>
+      <div class="statCard"><div class="statLabel">Yeni Foto Bekleyen</div><div class="statValue" id="statPendingPhotos">0</div></div>
+    </div>
+    <div class="miniList">
+      <div class="miniBox"><h3>Son Eklenen İlanlar</h3><div id="lastAddedList"></div></div>
+      <div class="miniBox"><h3>Son Düzenlenen İlanlar</h3><div id="lastUpdatedList"></div></div>
+    </div>
+  </div>
   <div class="grid">
     <div>
       <div class="panel">
@@ -129,6 +159,7 @@
     </div>
     <div>
       <div class="panel"><h2>İlan Listesi</h2><div id="list" class="list"></div></div>
+      <div class="panel"><h2>İlan Kalite Puanı</h2><div class="statValue" id="qualityScore">0%</div><div class="qualityBar"><div class="qualityFill" id="qualityFill"></div></div><p class="muted">Aktif formdaki zorunlu alanlara göre hesaplanır.</p></div>
       <div class="panel"><h2>Test / Hata Kontrol</h2><div id="report" class="report"></div></div>
     </div>
   </div>
@@ -222,7 +253,7 @@ function getForm(){
   return p;
 }
 function setForm(p){p=cleanProperty(p);fields.forEach(f=>{$(f).value=Array.isArray(p[f])?p[f].join('\n'):(p[f]||'')});langs.forEach(l=>{$('title_'+l).value=pick(p.title,l);$('description_'+l).value=pick(p.description,l);$('highlights_'+l).value=pickArr(p.highlights,l).join('\n')});imageFiles=[];existingImageList=(p.images||[]).slice();renderImages()}
-function clearForm(){fields.forEach(f=>$(f).value='');$('city').value='Chiang Mai';$('id').value=nextId('Chiang Mai');$('status').value='Available';langs.forEach(l=>{$('title_'+l).value='';$('description_'+l).value='';$('highlights_'+l).value=''});imageFiles=[];existingImageList=[];renderImages();switchLang('en')}
+function clearForm(){fields.forEach(f=>$(f).value='');$('city').value='Chiang Mai';$('id').value=nextId('Chiang Mai');$('status').value='Available';langs.forEach(l=>{$('title_'+l).value='';$('description_'+l).value='';$('highlights_'+l).value=''});imageFiles=[];existingImageList=[];renderImages();switchLang('en');updateQualityScore();renderDashboard()}
 function isPlaceholderValue(v){
   const s=String(v||'').trim().toLowerCase();
   return !s || s==='ask for price' || s==='please update' || s==='details updating' || s==='recovered from image folder' || s==='details are being updated by siriland.' || s==='n/a' || s==='null' || s==='undefined';
@@ -289,7 +320,46 @@ function upsertCurrent(silent=false){
   return true;
 }
 
+function statusText(p){ return String(p.status||'').toLowerCase(); }
+function dealText(p){ return String(p.deal||'').toLowerCase(); }
+function propertyHasMissing(p){
+  if(!p.id || !p.city || !p.type || !p.deal || !p.status || isMissingValue(p.price) || isMissingValue(p.area) || !pick(p.title,'en') && !pick(p.title,'th') || !p.images || !p.images.length) return true;
+  const type=String(p.type||'').toLowerCase();
+  if(!type.includes('land') && (isMissingValue(p.bedrooms) || isMissingValue(p.bathrooms))) return true;
+  return false;
+}
+function formatMiniProperty(p){
+  const title=pick(p.title,'en')||pick(p.title,'th')||p.id||'';
+  return `<div class="miniItem"><b>${escapeHtml(p.id||'')}</b> — ${escapeHtml(title)}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.price||'')}</span></div>`;
+}
+function renderDashboard(){
+  const total=properties.length;
+  const sale=properties.filter(p=>dealText(p).includes('sale') || dealText(p).includes('ขาย')).length;
+  const rent=properties.filter(p=>dealText(p).includes('rent') || dealText(p).includes('เช่า')).length;
+  const available=properties.filter(p=>statusText(p).includes('available') || statusText(p).includes('พร้อม')).length;
+  const sold=properties.filter(p=>statusText(p).includes('sold') || statusText(p).includes('ขายแล้ว')).length;
+  const rented=properties.filter(p=>statusText(p).includes('rented') || statusText(p).includes('leased') || statusText(p).includes('เช่าแล้ว')).length;
+  const missing=properties.filter(propertyHasMissing).length;
+  const pending=Object.values(pendingFilesById).reduce((s,a)=>s+(a?a.length:0),0);
+  const set=(id,v)=>{const el=$(id); if(el) el.textContent=v};
+  set('statTotal',total); set('statSale',sale); set('statRent',rent); set('statAvailable',available); set('statSold',sold); set('statRented',rented); set('statMissing',missing); set('statPendingPhotos',pending);
+  const byCreated=[...properties].sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||''))).slice(0,5);
+  const byUpdated=[...properties].sort((a,b)=>String(b.updatedAt||'').localeCompare(String(a.updatedAt||''))).slice(0,5);
+  if($('lastAddedList')) $('lastAddedList').innerHTML=byCreated.map(formatMiniProperty).join('')||'<span class="muted">Henüz ilan yok</span>';
+  if($('lastUpdatedList')) $('lastUpdatedList').innerHTML=byUpdated.map(formatMiniProperty).join('')||'<span class="muted">Henüz ilan yok</span>';
+}
+function updateQualityScore(){
+  let p; try{ p=getForm(); }catch(e){ return; }
+  const checks=[p.id,p.city,p.type,p.deal,p.status,p.price,p.area,(pick(p.title,'en')||pick(p.title,'th')),p.images&&p.images.length?1:''];
+  const type=String(p.type||'').toLowerCase();
+  if(!type.includes('land')){ checks.push(p.bedrooms,p.bathrooms); }
+  const score=Math.round(checks.filter(x=>!isMissingValue(x)).length / checks.length * 100);
+  if($('qualityScore')) $('qualityScore').textContent=score+'%';
+  if($('qualityFill')) $('qualityFill').style.width=score+'%';
+}
 function renderList(){
+  renderDashboard();
+  updateQualityScore();
   $('list').innerHTML=properties.map(p=>`<div class="item"><div><b>${escapeHtml(p.id)}</b> — ${escapeHtml(pick(p.title,'en')||pick(p.title,'th'))}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.price||'')} • ${(p.images||[]).length} foto</span></div><div><button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button><button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button></div></div>`).join('');
 }
 function filePreview(f){ return URL.createObjectURL(f); }
@@ -343,6 +413,8 @@ function validate(){
   let msg=errors.length?'<span class="bad">HATA:</span>\n'+errors.join('\n'):'<span class="ok">OK: properties.js üretilebilir.</span>';
   if(warnings.length) msg+='\n\n<span class="warn">UYARI:</span>\n'+warnings.slice(0,100).join('\n')+(warnings.length>100?'\n...':'');
   $('report').innerHTML=msg+'\n\nToplam ilan: '+properties.length+'\nBekleyen yeni görseller:\n'+pending;
+  renderDashboard();
+  updateQualityScore();
   return !errors.length;
 }
 function makeJs(){cleanAllProperties();return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
@@ -539,6 +611,7 @@ $('copyIgBtn').onclick=()=>copyPost('instagramPost');
 
 $('city').onchange=()=>syncIdToCity(true);
 $('imageFiles').onchange=e=>{imageFiles=Array.from(e.target.files||[]);existingImageList=[];renderImages()};
+document.addEventListener('input',e=>{ if(e.target && ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) updateQualityScore(); });
 $('importBtn').onclick=()=>$('importFile').click();
 $('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result).map(cleanProperty);renderList();clearForm();validate();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
 

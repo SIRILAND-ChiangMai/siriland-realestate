@@ -1,13 +1,11 @@
-SIRILAND Thai + English FB/IG Post Generator with Image Preview
+1) ZIP içindeki admin.html dosyasını proje klasöründeki eski admin.html üzerine koy.
+2) GitHub Desktop: Commit + Push.
+3) Admin içinde properties.js yükle veya otomatik mevcut properties.js okunur.
 
-1) admin.html dosyasını proje ana klasörüne kopyala, üzerine yaz.
-2) GitHub Desktop Summary:
-   Add Thai English post generator with images
-3) Commit + Push.
-
-Kullanım:
-- İlanı düzenle veya doldur.
-- Generate TH+EN Post bas.
-- Copy Facebook veya Copy Instagram bas.
-- Fotoğraflar önizleme olarak altta görünür.
-Not: Facebook'a fotoğraflar otomatik yüklenmez; manuel seçilmesi gerekir.
+Phase 1 eklenenler:
+- Dashboard istatistik kartları
+- Son eklenen / son düzenlenen ilanlar
+- Eksik bilgili ilan sayısı
+- İlan kalite puanı
+- Mevcut Facebook/Instagram EN+TH post generator korunmuştur.
+- Clean export korunmuştur.
