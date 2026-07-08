@@ -1,11 +1,16 @@
-1) ZIP içindeki admin.html dosyasını proje klasöründeki eski admin.html üzerine koy.
-2) GitHub Desktop: Commit + Push.
-3) Admin içinde properties.js yükle veya otomatik mevcut properties.js okunur.
+SIRILAND CMS PRO Phase 2 CRM
 
-Phase 1 eklenenler:
-- Dashboard istatistik kartları
-- Son eklenen / son düzenlenen ilanlar
-- Eksik bilgili ilan sayısı
-- İlan kalite puanı
-- Mevcut Facebook/Instagram EN+TH post generator korunmuştur.
-- Clean export korunmuştur.
+1) ZIP içindeki admin.html dosyasını proje ana klasöründeki eski admin.html üstüne koy.
+2) GitHub Desktop: Summary = Add CRM Customer Manager Phase 2
+3) Commit + Push.
+
+Eklenenler:
+- CRM Dashboard
+- Customer Manager
+- Customer search/filter
+- Follow-up date
+- Sales pipeline
+- customers.json export/import
+- ZIP export içinde crm/customers.json
+
+Phase 1 özellikleri korunmuştur.

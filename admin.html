@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND CMS PRO 2030 - Phase 1</title>
+  <title>SIRILAND CMS PRO 2030 - Phase 2 CRM</title>
   <style>
     :root{--navy:#071a3d;--gold:#d6ad4b;--bg:#f5f7fb;--line:#d9deea;--red:#b91c1c;--green:#0f7b3f}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,Tahoma,sans-serif;color:#172033}.wrap{max-width:1200px;margin:auto;padding:20px}
@@ -31,13 +31,19 @@
     .qualityBar{height:8px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin-top:8px}
     .qualityFill{height:100%;background:var(--gold);width:0%}
 
-    @media(max-width:900px){.dashboardGrid,.miniList,.grid,.grid2,.grid3{grid-template-columns:1fr}.top{display:block}.imageCard{grid-template-columns:1fr}.thumbWrap{width:100%;height:180px}}
+
+    .crmPipeline{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}
+    .crmStage{border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px;min-height:80px}
+    .crmStage h4{margin:0 0 8px;font-size:12px;color:var(--navy);text-transform:uppercase}
+    .crmChip{display:inline-block;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800;background:#eef2ff;color:#172033;margin:2px}
+    .crmSearch{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+    @media(max-width:900px){.crmPipeline,.crmSearch,.dashboardGrid,.miniList,.grid,.grid2,.grid3{grid-template-columns:1fr}.top{display:block}.imageCard{grid-template-columns:1fr}.thumbWrap{width:100%;height:180px}}
   </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND CMS PRO 2030 — Phase 1</div><div class="muted">Dashboard + Property Manager + Facebook/Instagram + clean export preserved.</div></div>
+    <div><div class="logo">SIRILAND CMS PRO 2030 — Phase 2 CRM</div><div class="muted">Phase 1 preserved + CRM Customer Manager added.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -64,6 +70,18 @@
       <div class="miniBox"><h3>Son Düzenlenen İlanlar</h3><div id="lastUpdatedList"></div></div>
     </div>
   </div>
+
+  <div class="panel" id="crmPanel">
+    <h2>👥 CRM — Phase 2.1 Customer Manager</h2>
+    <div class="dashboardGrid">
+      <div class="statCard"><div class="statLabel">Total Customers</div><div class="statValue" id="crmTotal">0</div></div>
+      <div class="statCard"><div class="statLabel">New Leads</div><div class="statValue" id="crmNew">0</div></div>
+      <div class="statCard"><div class="statLabel">Follow-up Today</div><div class="statValue" id="crmToday">0</div></div>
+      <div class="statCard"><div class="statLabel">Closed</div><div class="statValue" id="crmClosed">0</div></div>
+    </div>
+    <div class="crmPipeline" id="crmPipeline"></div>
+  </div>
+
   <div class="grid">
     <div>
       <div class="panel">
@@ -152,6 +170,36 @@
         <div id="imagePreview" class="list"></div>
       </div>
       <div class="panel">
+        <h2>👤 Customer Manager</h2>
+        <div class="grid3">
+          <div><label>Customer ID</label><input id="customerId" placeholder="CUS-0001"></div>
+          <div><label>Name</label><input id="customerName" placeholder="Customer name"></div>
+          <div><label>Country</label><input id="customerCountry" placeholder="Thailand / China / Singapore"></div>
+          <div><label>Phone</label><input id="customerPhone"></div>
+          <div><label>LINE</label><input id="customerLine"></div>
+          <div><label>WhatsApp</label><input id="customerWhatsapp"></div>
+          <div><label>Email</label><input id="customerEmail"></div>
+          <div><label>Budget Min</label><input id="customerBudgetMin" placeholder="3 MB / 20000 THB"></div>
+          <div><label>Budget Max</label><input id="customerBudgetMax" placeholder="10 MB / 50000 THB"></div>
+          <div><label>Interested City</label><input id="customerCity" placeholder="Chiang Mai"></div>
+          <div><label>Property Type</label><input id="customerType" placeholder="Condo / House / Land"></div>
+          <div><label>Deal</label><input id="customerDeal" placeholder="Sale / Rent"></div>
+          <div><label>Status</label><select id="customerStatus"><option>New</option><option>Contacted</option><option>Viewing</option><option>Negotiation</option><option>Reserved</option><option>Closed</option><option>Lost</option></select></div>
+          <div><label>Interested Property IDs</label><input id="customerPropertyIds" placeholder="CM-0001, PCT-0001"></div>
+          <div><label>Last Contact Date</label><input id="customerLastContact" type="date"></div>
+          <div><label>Next Follow-up Date</label><input id="customerFollowup" type="date"></div>
+          <div><label>Viewing Date</label><input id="customerViewing" type="datetime-local"></div>
+        </div>
+        <label>Notes</label><textarea id="customerNotes" placeholder="Conversation notes, needs, objections, next action..."></textarea>
+        <div class="copyrow">
+          <button class="btn green" id="saveCustomerBtn" type="button">Save Customer</button>
+          <button class="btn dark" id="clearCustomerBtn" type="button">New Customer</button>
+          <button class="btn" id="exportCustomersBtn" type="button">Export customers.json</button>
+          <button class="btn" id="importCustomersBtn" type="button">Import customers.json</button><input type="file" id="importCustomersFile" accept=".json" hidden>
+        </div>
+      </div>
+
+      <div class="panel">
         <button class="btn green" id="saveBtn">İlanı Kaydet</button>
         <button class="btn dark" id="clearBtn">Yeni İlan</button>
         <button class="btn" id="validateBtn">Kontrol Et</button>
@@ -160,6 +208,10 @@
     <div>
       <div class="panel"><h2>İlan Listesi</h2><div id="list" class="list"></div></div>
       <div class="panel"><h2>İlan Kalite Puanı</h2><div class="statValue" id="qualityScore">0%</div><div class="qualityBar"><div class="qualityFill" id="qualityFill"></div></div><p class="muted">Aktif formdaki zorunlu alanlara göre hesaplanır.</p></div>
+      <div class="panel"><h2>👥 CRM Customer List</h2>
+        <div class="crmSearch"><input id="crmSearchInput" placeholder="Search customer"><select id="crmStatusFilter"><option value="all">All Status</option><option>New</option><option>Contacted</option><option>Viewing</option><option>Negotiation</option><option>Reserved</option><option>Closed</option><option>Lost</option></select><button class="btn" id="crmSearchBtn" type="button">Search</button></div>
+        <div id="customerList" class="list"></div>
+      </div>
       <div class="panel"><h2>Test / Hata Kontrol</h2><div id="report" class="report"></div></div>
     </div>
   </div>
@@ -167,6 +219,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
 let properties=[];
+let customers=[];
 let currentLang='en';
 let imageFiles=[];
 let existingImageList=[];
@@ -426,7 +479,9 @@ async function buildZip(){
   zip.file('properties.js',makeJs());
   cleanAllProperties();
   zip.file('data/properties.json',JSON.stringify(properties,null,2));
-  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n4) GitHub Desktop: Commit + Push.\n\nNot: Export artık formdaki ilanı otomatik kaydeder.');
+  saveCustomers();
+  zip.file('crm/customers.json',JSON.stringify(customers,null,2));
+  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n4) GitHub Desktop: Commit + Push.\n\nNot: Export artık formdaki ilanı otomatik kaydeder. CRM müşterileri crm/customers.json olarak eklenir.');
   for(const [id,files] of Object.entries(pendingFilesById)){
     const p=properties.find(x=>x.id===id); if(!p) continue;
     files.forEach((f,i)=>{const path=p.images[i]; if(path) zip.file(path,f);});
@@ -595,6 +650,80 @@ async function copyPost(id){
   }
 }
 
+
+function loadCustomers(){
+  try{ customers = JSON.parse(localStorage.getItem('siriland_customers') || '[]'); }
+  catch(e){ customers=[]; }
+}
+function saveCustomers(){ localStorage.setItem('siriland_customers', JSON.stringify(customers)); }
+function nextCustomerId(){
+  let max=0; customers.forEach(c=>{const m=String(c.id||'').match(/^CUS-(\d+)$/i); if(m) max=Math.max(max,+m[1]);});
+  return 'CUS-'+String(max+1).padStart(4,'0');
+}
+const customerFields=['customerId','customerName','customerCountry','customerPhone','customerLine','customerWhatsapp','customerEmail','customerBudgetMin','customerBudgetMax','customerCity','customerType','customerDeal','customerStatus','customerPropertyIds','customerLastContact','customerFollowup','customerViewing','customerNotes'];
+function getCustomerForm(){
+  const c={
+    id:$('customerId').value.trim() || nextCustomerId(),
+    name:$('customerName').value.trim(),
+    country:$('customerCountry').value.trim(),
+    phone:$('customerPhone').value.trim(),
+    line:$('customerLine').value.trim(),
+    whatsapp:$('customerWhatsapp').value.trim(),
+    email:$('customerEmail').value.trim(),
+    budgetMin:$('customerBudgetMin').value.trim(),
+    budgetMax:$('customerBudgetMax').value.trim(),
+    city:$('customerCity').value.trim(),
+    type:$('customerType').value.trim(),
+    deal:$('customerDeal').value.trim(),
+    status:$('customerStatus').value,
+    propertyIds:$('customerPropertyIds').value.split(',').map(x=>x.trim()).filter(Boolean),
+    lastContact:$('customerLastContact').value,
+    followup:$('customerFollowup').value,
+    viewing:$('customerViewing').value,
+    notes:$('customerNotes').value.trim()
+  };
+  const old=customers.find(x=>x.id===c.id);
+  c.createdAt = old?.createdAt || new Date().toISOString().slice(0,10);
+  c.updatedAt = new Date().toISOString().slice(0,10);
+  return c;
+}
+function setCustomerForm(c){
+  $('customerId').value=c.id||''; $('customerName').value=c.name||''; $('customerCountry').value=c.country||'';
+  $('customerPhone').value=c.phone||''; $('customerLine').value=c.line||''; $('customerWhatsapp').value=c.whatsapp||''; $('customerEmail').value=c.email||'';
+  $('customerBudgetMin').value=c.budgetMin||''; $('customerBudgetMax').value=c.budgetMax||''; $('customerCity').value=c.city||''; $('customerType').value=c.type||''; $('customerDeal').value=c.deal||'';
+  $('customerStatus').value=c.status||'New'; $('customerPropertyIds').value=(c.propertyIds||[]).join(', ');
+  $('customerLastContact').value=c.lastContact||''; $('customerFollowup').value=c.followup||''; $('customerViewing').value=c.viewing||''; $('customerNotes').value=c.notes||'';
+}
+function clearCustomerForm(){ customerFields.forEach(id=>{ const el=$(id); if(el) el.value=''; }); $('customerStatus').value='New'; $('customerId').value=nextCustomerId(); }
+function upsertCustomer(){
+  const c=getCustomerForm();
+  if(!c.name && !c.phone && !c.line && !c.whatsapp){ alert('Müşteri için en az isim veya telefon/LINE/WhatsApp gir.'); return; }
+  const i=customers.findIndex(x=>x.id===c.id); if(i>=0) customers[i]=c; else customers.push(c);
+  saveCustomers(); renderCRM(); clearCustomerForm(); alert('Customer saved: '+c.id);
+}
+window.editCustomer=id=>{ const c=customers.find(x=>x.id===id); if(c) setCustomerForm(c); };
+window.deleteCustomer=id=>{ if(confirm(id+' silinsin mi?')){ customers=customers.filter(x=>x.id!==id); saveCustomers(); renderCRM(); clearCustomerForm(); } };
+function renderCRM(){
+  const today=new Date().toISOString().slice(0,10);
+  const byStatus=s=>customers.filter(c=>String(c.status||'New').toLowerCase()===s.toLowerCase()).length;
+  if($('crmTotal')) $('crmTotal').textContent=customers.length;
+  if($('crmNew')) $('crmNew').textContent=byStatus('New');
+  if($('crmToday')) $('crmToday').textContent=customers.filter(c=>c.followup && c.followup<=today && !['Closed','Lost'].includes(c.status)).length;
+  if($('crmClosed')) $('crmClosed').textContent=byStatus('Closed');
+  const stages=['New','Contacted','Viewing','Negotiation','Reserved','Closed'];
+  if($('crmPipeline')) $('crmPipeline').innerHTML=stages.map(st=>`<div class="crmStage"><h4>${st}</h4>${customers.filter(c=>(c.status||'New')===st).slice(0,4).map(c=>`<span class="crmChip">${escapeHtml(c.name||c.id)}</span>`).join('')||'<span class="muted">-</span>'}</div>`).join('');
+  const q=($('crmSearchInput')?.value||'').toLowerCase().trim(); const filt=$('crmStatusFilter')?.value||'all';
+  const list=customers.filter(c=>{
+    const blob=[c.id,c.name,c.country,c.phone,c.line,c.whatsapp,c.email,c.city,c.type,c.deal,c.status,(c.propertyIds||[]).join(' '),c.notes].join(' ').toLowerCase();
+    return (filt==='all'||c.status===filt) && (!q||blob.includes(q));
+  }).sort((a,b)=>String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
+  if($('customerList')) $('customerList').innerHTML=list.map(c=>`<div class="item"><div><b>${escapeHtml(c.id)}</b> — ${escapeHtml(c.name||'No name')} <span class="crmChip">${escapeHtml(c.status||'New')}</span><br><span class="muted">${escapeHtml(c.country||'')} • ${escapeHtml(c.phone||c.line||c.whatsapp||'')} • Budget: ${escapeHtml((c.budgetMin||'')+' - '+(c.budgetMax||''))}</span><br><span class="muted">Follow-up: ${escapeHtml(c.followup||'-')} • Properties: ${escapeHtml((c.propertyIds||[]).join(', ')||'-')}</span></div><div><button class="btn dark" onclick="editCustomer('${escapeHtml(c.id)}')">Düzenle</button><button class="btn red" onclick="deleteCustomer('${escapeHtml(c.id)}')">Sil</button></div></div>`).join('') || '<p class="muted">No customers yet.</p>';
+}
+function exportCustomersJson(){ saveCustomers(); download('customers.json', JSON.stringify(customers,null,2), 'application/json'); }
+function importCustomersJson(file){
+  const rd=new FileReader(); rd.onload=()=>{try{const arr=JSON.parse(rd.result); if(!Array.isArray(arr)) throw new Error('customers.json array olmalı'); customers=arr; saveCustomers(); renderCRM(); alert('CRM yüklendi: '+customers.length+' müşteri');}catch(e){alert('CRM import hatası: '+e.message)}}; rd.readAsText(file);
+}
+
 $('langTabs').addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(b)switchLang(b.dataset.lang)});
 $('saveBtn').onclick=()=>upsertCurrent(false);
 $('clearBtn').onclick=clearForm;
@@ -608,16 +737,25 @@ $('generatePostBtn').onclick=generatePostText;
 $('generateSummaryBtn').onclick=generateSummary;
 $('copyFbBtn').onclick=()=>copyPost('facebookPost');
 $('copyIgBtn').onclick=()=>copyPost('instagramPost');
+$('saveCustomerBtn').onclick=upsertCustomer;
+$('clearCustomerBtn').onclick=clearCustomerForm;
+$('exportCustomersBtn').onclick=exportCustomersJson;
+$('importCustomersBtn').onclick=()=>$('importCustomersFile').click();
+$('importCustomersFile').onchange=e=>{const f=e.target.files[0]; if(f) importCustomersJson(f);};
+$('crmSearchBtn').onclick=renderCRM;
+$('crmSearchInput').oninput=renderCRM;
+$('crmStatusFilter').onchange=renderCRM;
 
 $('city').onchange=()=>syncIdToCity(true);
 $('imageFiles').onchange=e=>{imageFiles=Array.from(e.target.files||[]);existingImageList=[];renderImages()};
 document.addEventListener('input',e=>{ if(e.target && ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) updateQualityScore(); });
 $('importBtn').onclick=()=>$('importFile').click();
-$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result).map(cleanProperty);renderList();clearForm();validate();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
+$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result).map(cleanProperty);renderList();clearForm();validate();renderCRM();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
 
+loadCustomers();
 initLangForms();
 updateUiLang('en');
-fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s).map(cleanProperty);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate()});
+fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s).map(cleanProperty);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate();renderCRM();clearCustomerForm()});
 </script>
 </body>
 </html>
