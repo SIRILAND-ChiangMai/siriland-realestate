@@ -2588,32 +2588,61 @@ window.SIRILAND_PROPERTIES = [
   },
   {
     "id": "CM-0031",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "4.69 MB",
+    "bedrooms": "2 Bedroom",
+    "bathrooms": "2 Bathrooms",
+    "area": "71 sq.m",
+    "room": "Room 1008-9",
+    "floor": "10th floor",
+    "map": "https://maps.app.goo.gl/cHi4XGUstCAHv3uCA",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "Luxury Penthouse at Viengping Mansion, only 200 meters from MAYA Mall and close to Nimman Road."
+    ],
+    "features": [
+      "✨ Room 1008-9 | 10th Floor",
+      "📐 71 sq.m.",
+      "🛏️ 2 Bedrooms",
+      "🛁 2 Bathrooms",
+      "🌄 Large Balcony with Open View"
+    ],
+    "furniture": [
+      "FREE:",
+      "🆓 Dishwasher",
+      "🆓 Water Purifier",
+      "🆓 Front Load Washer",
+      "🆓 Dryer"
+    ],
+    "appliances": [],
     "title": {
       "en": "Wiangpink Mansion Condo",
       "th": "Wiangpink Mansion Condo",
       "tr": "Wiangpink Mansion Condo",
       "zh": "Wiangpink Mansion Condo"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "",
-    "bedrooms": "",
-    "bathrooms": "",
-    "area": "",
-    "room": "",
-    "floor": "",
-    "map": "",
     "description": {
-      "en": "",
+      "en": "Luxury Penthouse at Viengping Mansion, only 200 meters from MAYA Mall and close to Nimman Road.",
       "th": "",
       "tr": "",
       "zh": ""
     },
     "highlights": {
       "en": [
-        "Chiang Mai"
+        "Large Balcony with Open View",
+        "FREE:",
+        "🆓 Dishwasher",
+        "🆓 Water Purifier",
+        "🆓 Front Load Washer",
+        "🆓 Dryer"
       ],
       "th": [
         "Chiang Mai"
@@ -2648,20 +2677,14 @@ window.SIRILAND_PROPERTIES = [
       "images/wiangpink-mansion-condo-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-09",
     "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "BKK-0001",
@@ -2986,7 +3009,7 @@ window.SIRILAND_PROPERTIES = [
       "• Digital Door Lock"
     ],
     "title": {
-      "en": "Hillside Plaza & Condotel 4",
+      "en": "",
       "th": "",
       "tr": "",
       "zh": ""
@@ -3122,6 +3145,167 @@ window.SIRILAND_PROPERTIES = [
       "images/golden-3-storey-shophouse-in-phichit-city-center-28.jpg",
       "images/golden-3-storey-shophouse-in-phichit-city-center-29.jpg",
       "images/golden-3-storey-shophouse-in-phichit-city-center-30.jpg"
+    ],
+    "createdAt": "2026-07-09",
+    "updatedAt": "2026-07-09",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "PCT-0003",
+    "city": "Phichit",
+    "type": "Spacious 2-Storey House with Garden",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2,730,000",
+    "bedrooms": "2 Bedrooms + Large Living Room",
+    "bathrooms": "1 Bathroom",
+    "area": "2 Rai 3 Ngan 93.1 Sq.Wah",
+    "room": "Width: 12 meters Depth: 13 meters",
+    "floor": "",
+    "map": "Hua Dong, Mueang Phichit, Phichit",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "Transfer fee shared 50/50 between buyer and seller.",
+    "summary": "",
+    "nearby": [
+      "Location: Hua Dong Soi 2, next to Hua Dong Municipality, Phichit, Thailand",
+      "Enjoy peaceful countryside living while staying just minutes from Phichit City"
+    ],
+    "features": [
+      "Land Details",
+      "Total Land Area: 2 Rai 3 Ngan 93.1 Sq.Wah",
+      "(Approximately 4,772.4 sq.m.)",
+      "The property consists of 3 Chanote (Freehold) Land Titles:",
+      "Title 1: 1 Rai 0 Ngan 17 Sq.Wah",
+      "Title 2: 0 Rai 3 Ngan 84.5 Sq.Wah",
+      "Title 3: 0 Rai 3 Ngan 91.6 Sq.Wah",
+      "Approximate House Size",
+      "Width: 12 meters",
+      "Depth: 13 meters"
+    ],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Spacious 2-Storey House",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "House Features\nUpper Floor\n2 Bedrooms\nLarge Living Hall\n1 Bathroom\nGround Floor\n2 Bedrooms\n1 Kitchen\n1 Bathroom\nSpacious Multi-Purpose Living Area\n\nApproximate House Size\n\nWidth: 12 meters\nDepth: 13 meters\nLand Details\n\nTotal Land Area: 2 Rai 3 Ngan 93.1 Sq.Wah\n(Approximately 4,772.4 sq.m.)\n\nThe property consists of 3 Chanote (Freehold) Land Titles:\n\nTitle 1: 1 Rai 0 Ngan 17 Sq.Wah\nTitle 2: 0 Rai 3 Ngan 84.5 Sq.Wah\nTitle 3: 0 Rai 3 Ngan 91.6 Sq.Wah",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [
+        "Beautifully maintained garden",
+        "Water channels already completed",
+        "Fully fenced property",
+        "Private entrance and driveway",
+        "Clear land zoning",
+        "Peaceful surroundings",
+        "Large usable outdoor area",
+        "Excellent location close to Phichit City"
+      ],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/spacious-2-storey-house-1.jpg",
+      "images/spacious-2-storey-house-2.jpg",
+      "images/spacious-2-storey-house-3.jpg",
+      "images/spacious-2-storey-house-4.jpg",
+      "images/spacious-2-storey-house-5.jpg",
+      "images/spacious-2-storey-house-6.jpg",
+      "images/spacious-2-storey-house-7.jpg",
+      "images/spacious-2-storey-house-8.jpg"
+    ],
+    "createdAt": "2026-07-09",
+    "updatedAt": "2026-07-09",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "PCT-0004",
+    "city": "Phichit",
+    "type": "Pharmacy Business & Commercial Building",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "4.5MB",
+    "bedrooms": "2",
+    "bathrooms": "2",
+    "area": "21.8 sq.wah",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "Located in the Taphan Hin business district, Phichit Province",
+      "Just beyond the main Taphan Hin intersection",
+      "Frontage on the Phichit – Bang Mun Nak Road",
+      "High daily traffic with excellent business visibility",
+      "Non-flooded area"
+    ],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Pharmacy Business & Commercial Building for Sale",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "Fully built-in interior\nAir conditioning\nWater pump\nFurniture and business fixtures included\nReady to operate immediately",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [
+        "Taphan Hin",
+        "Located in the Taphan Hin business district, Phichit Province",
+        "Just beyond the main Taphan Hin intersection",
+        "Frontage on the Phichit – Bang Mun Nak Road",
+        "High daily traffic with excellent business visibility",
+        "Non-flooded area",
+        "Ideal For",
+        "Pharmacists looking to own and operate their own pharmacy",
+        "Investors seeking rental income or long-term capital appreciation",
+        "Entrepreneurs looking for a ready-to-run commercial property"
+      ],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/pharmacy-business-commercial-building-for-sale-1.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-2.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-3.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-4.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-5.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-6.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-7.jpg"
     ],
     "createdAt": "2026-07-09",
     "updatedAt": "2026-07-09",
