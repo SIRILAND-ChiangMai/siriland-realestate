@@ -1,16 +1,23 @@
-# Summary
+# SIRILAND CMS PRO Sprint 3.2 — Related Properties PRO
 
-This hotfix improves mobile property detail display and fixes the LINE contact flow.
+## Summary
+Sprint 3.2 adds Related Properties to the listing detail modal, recommending similar listings based on city, property type, deal type, project/title similarity, and nearby price range.
 
-## Changes
-- Mobile modal layout improved.
-- Important property details now show clearly: bedrooms, bathrooms, area, room, floor.
-- Ask About This Property form improved for mobile.
-- LINE button no longer uses broken LINE Share flow.
-- LINE message is copied to clipboard, then opens @realcreamthailand chat.
-- WhatsApp message includes property ID, title, price, details, and correct property link.
-- Correct GitHub Pages property URL: `/siriland-realestate/?property=ID`.
+## New Features
+- Similar Properties section inside property details.
+- Related cards ranked by city, type, deal and price similarity.
+- Mobile responsive related-property cards.
+- Related cards open the selected property directly.
 
-## Updated Files
+## Improvements
+- Better browsing flow from one property to another.
+- Helps visitors discover more listings without returning to the homepage.
+- Works with existing multilingual display and property URL system.
+
+## Files Updated
+- index.html
 - script.js
 - style.css
+
+## Notes
+This sprint does not change admin.html or properties.js.

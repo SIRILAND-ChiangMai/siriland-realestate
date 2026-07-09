@@ -1,9 +1,18 @@
-# SIRILAND Mobile Details + LINE Contact Fix
+# SIRILAND CMS PRO Sprint 3.2 — Installation
 
-1. ZIP'i çıkar.
-2. İçindeki `script.js` dosyasını projedeki eski `script.js` üstüne koy.
-3. İçindeki `style.css` dosyasını projedeki eski `style.css` üstüne koy.
-4. GitHub Desktop → Commit → Push.
-5. Telefonda sayfayı yeniden açarken cache için link sonuna `?v=312` ekle.
+1. Extract this ZIP.
+2. Copy these files into your GitHub project root and replace the old files:
+   - index.html
+   - script.js
+   - style.css
+3. Do not replace admin.html in this sprint.
+4. Commit and Push with GitHub Desktop.
+5. Open the website with cache refresh:
+   - Windows: Ctrl + F5
+   - Or add ?v=32 to the URL.
 
-Not: Admin dosyasına dokunma.
+## Test
+Open any listing detail. Under the photo thumbnails you should see:
+- Similar properties
+- Same city / same type / similar price range cards
+- Mobile friendly related property cards
