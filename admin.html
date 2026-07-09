@@ -373,6 +373,18 @@ function upsertCurrent(silent=false){
   return true;
 }
 
+function upsertCurrentForExport(){
+  // Export sırasında başka ilanların eksikleri export'u durdurmasın.
+  // Aktif formda veri varsa, eksik alan olsa bile mevcut değişikliği kaydeder ve sadece uyarı raporu verir.
+  if(!hasFormData()) return true;
+  const p=cleanProperty(getForm());
+  if(!p.id) p.id=nextId(p.city || $('city').value || 'Chiang Mai');
+  const i=properties.findIndex(x=>x.id===p.id);
+  if(i>=0) properties[i]=p; else properties.push(p);
+  renderList();
+  return true;
+}
+
 function statusText(p){ return String(p.status||'').toLowerCase(); }
 function dealText(p){ return String(p.deal||'').toLowerCase(); }
 function propertyHasMissing(p){
@@ -482,7 +494,7 @@ function exportReady(){
 
   // Only validate and save the property currently being edited.
   // Other old listings may still have missing fields; they should appear as warnings, not block the whole export.
-  if(hasFormData() && !upsertCurrent(true)) return false;
+  upsertCurrentForExport();
 
   cleanAllProperties();
 
@@ -524,7 +536,7 @@ function exportJsonText(){ cleanAllProperties(); return JSON.stringify(propertie
 
 async function buildZip(){
   if(!exportReady()) return;
-  if(!validate()){ if(!confirm('Uyarı var. Yine de ZIP oluşturulsun mu?')) return; }
+  // Warning mode: eksik alanlar rapora yazılır ama ZIP oluşturmayı durdurmaz.
   const zip=new JSZip();
   const jsText = makeJs();
   const jsonText = exportJsonText();
@@ -533,7 +545,7 @@ async function buildZip(){
   zip.file('data/properties.json', jsonText);
   saveCustomers();
   zip.file('crm/customers.json',JSON.stringify(customers,null,2));
-  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) properties.json dosyasını da eski properties.json üstüne kopyalayın.\n4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n5) GitHub Desktop: Commit + Push.\n\nNot: Export artık boş properties.json üretmez. Fiyat eksikse export durur. CRM müşterileri crm/customers.json olarak eklenir.');
+  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) properties.json dosyasını da eski properties.json üstüne kopyalayın.\n4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n5) GitHub Desktop: Commit + Push.\n\nNot: Export artık boş properties.json üretmez. Eksik fiyat/alan varsa raporda uyarı verir ama export durmaz. Duplicate ID varsa durur. CRM müşterileri crm/customers.json olarak eklenir.');
   for(const [id,files] of Object.entries(pendingFilesById)){
     const p=properties.find(x=>x.id===id); if(!p) continue;
     files.forEach((f,i)=>{const path=p.images[i]; if(path) zip.file(path,f);});
