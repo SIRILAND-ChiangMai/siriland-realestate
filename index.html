@@ -34,6 +34,20 @@
         <a href="#properties" class="btn primary" data-i18n="viewListings">View Listings</a>
         <a href="https://line.me/R/ti/p/@realcreamthailand" target="_blank" class="btn outline" data-i18n="lineOfficial">LINE Official</a>
       </div>
+      <div class="hero-search-pro" id="heroSearchPro">
+        <div class="hero-tabs">
+          <button class="active" data-hero-deal="all">All</button>
+          <button data-hero-deal="Sale">Buy</button>
+          <button data-hero-deal="Rent">Rent</button>
+        </div>
+        <div class="hero-search-grid">
+          <input id="heroSearchInput" type="search" placeholder="Search province, area, project, ID..." />
+          <select id="heroType"><option value="all">All Residential</option></select>
+          <select id="heroPrice"><option value="all">Any Price</option><option value="0-2000000">Under 2M</option><option value="2000000-4000000">2M - 4M</option><option value="4000000-7000000">4M - 7M</option><option value="7000000-999999999">7M+</option></select>
+          <select id="heroBedroom"><option value="all">Any Bedroom</option><option value="1">1+ Bedroom</option><option value="2">2+ Bedrooms</option><option value="3">3+ Bedrooms</option><option value="4">4+ Bedrooms</option></select>
+          <button id="heroSearchBtn" class="btn primary">Search</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -45,6 +59,23 @@
   </section>
 
   <main>
+    <section class="section home-showcase" id="homeShowcase">
+      <div class="section-head left-head"><span class="eyebrow dark">SIRILAND PRO</span><h2>Explore Thailand Property</h2></div>
+      <div class="quick-collections" id="quickCollections"></div>
+      <div class="showcase-block">
+        <div class="showcase-title"><h3>⭐ Featured Properties</h3><a href="#properties" data-home-filter="featured">View More ›</a></div>
+        <div class="mini-property-row" id="featuredRow"></div>
+      </div>
+      <div class="showcase-block">
+        <div class="showcase-title"><h3>🆕 New Listings</h3><a href="#properties" data-home-filter="new">View More ›</a></div>
+        <div class="mini-property-row" id="newRow"></div>
+      </div>
+      <div class="showcase-block">
+        <div class="showcase-title"><h3>💎 Owner Finance / Special Deals</h3><a href="#properties" data-home-filter="ownerFinance">View More ›</a></div>
+        <div class="mini-property-row" id="financeRow"></div>
+      </div>
+    </section>
+
     <section class="section" id="properties">
       <div class="section-head">
         <span class="eyebrow dark" data-i18n="featured">Featured Listings</span>
@@ -71,6 +102,7 @@
         <div class="map-list" id="mapPropertyList"></div>
       </div>
       <div class="grid" id="propertyGrid"></div>
+      <div class="pagination" id="pagination"></div>
     </section>
 
     <section class="finance" id="finance">

@@ -1,14 +1,15 @@
-# SIRILAND CMS PRO Sprint 3.3 — Map View
+# SIRILAND CMS PRO Sprint 3.4 — Installation
 
-## Install
 1. Extract this ZIP.
-2. Copy these files over the existing files in your GitHub project:
+2. Copy these files into your GitHub project root and replace the old files:
    - `index.html`
    - `script.js`
    - `style.css`
 3. Do not replace `admin.html`.
-4. Commit + Push in GitHub Desktop.
-5. Open the site with cache refresh: `?v=33`.
+4. Open GitHub Desktop → Commit → Push origin.
+5. Hard refresh the website: Ctrl+F5 or add `?v=34` to the URL.
 
 ## Notes
-This map view uses Google Maps embed links without requiring an API key. It reads property title/city/map URL from your existing `properties.js`.
+- This sprint is website-only.
+- It keeps existing Properties, Map View, Related Properties, Gallery, Contact and language buttons.
+- Admin panel is not changed.

@@ -3,6 +3,9 @@
   const I18N = window.SIRILAND_I18N || {};
   let lang = localStorage.getItem('siriland_lang') || 'en';
   let currentList = DATA.slice();
+  let currentPage = 1;
+  const pageSize = 4;
+  let activeHeroDeal = "all";
   let modalProperty = null;
   let modalIndex = 0;
   let touchX = 0;
@@ -110,6 +113,76 @@
     return '';
   };
 
+
+  function parsePriceNumber(v){
+    const s = String(v || '').toLowerCase().replace(/,/g,'').trim();
+    if(!s) return 0;
+    const m = s.match(/([0-9]+(?:\.[0-9]+)?)/);
+    if(!m) return 0;
+    let n = parseFloat(m[1]);
+    if(s.includes('mb') || s.includes('million') || s.includes('ล้าน')) n *= 1000000;
+    return Math.round(n);
+  }
+  function parseFirstNumber(v){
+    const m = String(v || '').match(/\d+(?:\.\d+)?/);
+    return m ? parseFloat(m[0]) : 0;
+  }
+  function propertyBlob(p){
+    return [p.id,p.city,p.type,p.deal,p.price,p.room,p.floor,p.area,p.bedrooms,p.bathrooms,p.status,p.map,p.salePrice,p.rentPrice,p.ownerFinance,p.installment,p.summary,pick(p.title),pick(p.description),...pickList(p.highlights),...(Array.isArray(p.features)?p.features:[]),...(Array.isArray(p.nearby)?p.nearby:[])].join(' ').toLowerCase();
+  }
+  function miniCard(p){
+    const title = pick(p.title);
+    return `<article class="mini-property-card" data-mini-id="${p.id}">
+      <div class="mini-photo"><img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'"><span>${(p.images||[]).length} photos</span></div>
+      <div class="mini-info"><div class="mini-meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div><h4>${title}</h4><strong>${translateText(p.price||'')}</strong><p>${[p.bedrooms,p.bathrooms,p.area].filter(Boolean).map(translateText).join(' • ')}</p></div>
+    </article>`;
+  }
+  function renderHomeShowcase(){
+    const cityCounts = [...new Set(DATA.map(p=>p.city).filter(Boolean))].slice(0,6).map(city => {
+      const count = DATA.filter(p=>p.city===city).length;
+      return `<button class="collection-card" data-collection-city="${city}"><strong>${trMap('city',city)}</strong><span>${count} listings</span></button>`;
+    }).join('');
+    const qc = $('quickCollections'); if(qc) qc.innerHTML = cityCounts;
+    const featured = DATA.filter(p=>p.featured !== false).slice(0,4);
+    const newest = DATA.slice().sort((a,b)=>String(b.updatedAt||b.createdAt||'').localeCompare(String(a.updatedAt||a.createdAt||''))).slice(0,4);
+    const finance = DATA.filter(p => propertyBlob(p).includes('owner finance') || propertyBlob(p).includes('ผ่อน') || propertyBlob(p).includes('free transfer') || propertyBlob(p).includes('0%')).slice(0,4);
+    if($('featuredRow')) $('featuredRow').innerHTML = featured.map(miniCard).join('');
+    if($('newRow')) $('newRow').innerHTML = newest.map(miniCard).join('');
+    if($('financeRow')) $('financeRow').innerHTML = (finance.length?finance:featured).map(miniCard).join('');
+  }
+  function fillHeroControls(){
+    const heroType = $('heroType'); if(!heroType) return;
+    const types=[...new Set(DATA.map(p=>p.type).filter(Boolean))].sort();
+    heroType.innerHTML = '<option value="all">All Residential</option>' + types.map(v=>`<option value="${v}">${trMap('type',v)}</option>`).join('');
+  }
+  function runHeroSearch(){
+    const q = ($('heroSearchInput')?.value || '').trim();
+    const typ = $('heroType')?.value || 'all';
+    const price = $('heroPrice')?.value || 'all';
+    const beds = $('heroBedroom')?.value || 'all';
+    if($('searchInput')) $('searchInput').value = q;
+    if($('typeFilter')) $('typeFilter').value = typ;
+    if($('dealFilter')) $('dealFilter').value = activeHeroDeal;
+    window.__sirilandPriceRange = price;
+    window.__sirilandMinBeds = beds;
+    currentPage = 1;
+    location.hash = '#properties';
+    render();
+  }
+  function renderPagination(total){
+    const el = $('pagination'); if(!el) return;
+    const pages = Math.max(1, Math.ceil(total / pageSize));
+    if(pages <= 1){ el.innerHTML = ''; return; }
+    const buttons = [];
+    buttons.push(`<button ${currentPage===1?'disabled':''} data-page="${currentPage-1}">‹ Prev</button>`);
+    for(let i=1;i<=pages;i++){
+      if(i===1 || i===pages || Math.abs(i-currentPage)<=1) buttons.push(`<button class="${i===currentPage?'active':''}" data-page="${i}">${i}</button>`);
+      else if(Math.abs(i-currentPage)===2) buttons.push('<span>...</span>');
+    }
+    buttons.push(`<button ${currentPage===pages?'disabled':''} data-page="${currentPage+1}">Next ›</button>`);
+    el.innerHTML = buttons.join('');
+  }
+
   function applyI18n(){
     document.documentElement.lang = lang;
     document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
@@ -125,6 +198,7 @@
     cityFilter.innerHTML=`<option value="all">${t('allCities')}</option>`+cities.map(v=>`<option value="${v}">${trMap('city',v)}</option>`).join('');
     typeFilter.innerHTML=`<option value="all">${t('allTypes')}</option>`+types.map(v=>`<option value="${v}">${trMap('type',v)}</option>`).join('');
     dealFilter.innerHTML=`<option value="all">${t('allDeals')}</option>`+deals.map(v=>`<option value="${v}">${trMap('deal',v)}</option>`).join('');
+    fillHeroControls();
   }
 
   function card(p){
@@ -184,12 +258,22 @@
   function render(){
     const city=$('cityFilter')?.value || 'all', type=$('typeFilter')?.value || 'all', deal=$('dealFilter')?.value || 'all';
     const q=($('searchInput')?.value || '').toLowerCase().trim();
+    const priceRange = window.__sirilandPriceRange || 'all';
+    const minBeds = window.__sirilandMinBeds || 'all';
     currentList=DATA.filter(p=>{
-      const blob=[p.id,p.city,p.type,p.deal,p.price,p.room,p.floor,p.area,p.bedrooms,p.bathrooms,p.status,p.map,pick(p.title),pick(p.description),...pickList(p.highlights)].join(' ').toLowerCase();
-      return (city==='all'||p.city===city) && (type==='all'||p.type===type) && (deal==='all'||p.deal===deal) && (!q||blob.includes(q));
+      const blob=propertyBlob(p);
+      const priceOk = priceRange === 'all' || (()=>{ const [min,max]=priceRange.split('-').map(Number); const n=parsePriceNumber(p.price || p.salePrice); return n && n>=min && n<=max; })();
+      const bedOk = minBeds === 'all' || parseFirstNumber(p.bedrooms) >= Number(minBeds);
+      return (city==='all'||p.city===city) && (type==='all'||p.type===type) && (deal==='all'||p.deal===deal) && (!q||blob.includes(q)) && priceOk && bedOk;
     });
+    const totalPages = Math.max(1, Math.ceil(currentList.length / pageSize));
+    if(currentPage > totalPages) currentPage = totalPages;
+    if(currentPage < 1) currentPage = 1;
+    const start = (currentPage - 1) * pageSize;
+    const pageItems = currentList.slice(start, start + pageSize);
     $('propertyCount').textContent = DATA.length + '+';
-    $('propertyGrid').innerHTML = currentList.length ? currentList.map(card).join('') : `<p>${t('noResults')}</p>`;
+    $('propertyGrid').innerHTML = pageItems.length ? pageItems.map(card).join('') : `<p>${t('noResults')}</p>`;
+    renderPagination(currentList.length);
     if(!$('mapView')?.classList.contains('hidden')) renderMapView();
   }
 
@@ -277,6 +361,22 @@
   }
   function next(delta){ if(!modalProperty) return; const n=(modalProperty.images||[]).length||1; modalIndex=(modalIndex+delta+n)%n; updateModal(); }
 
+
+  document.addEventListener('click', e => {
+    const pageBtn = e.target.closest('#pagination button[data-page]');
+    if(pageBtn){ currentPage = Number(pageBtn.dataset.page)||1; render(); document.getElementById('properties')?.scrollIntoView({behavior:'smooth'}); return; }
+    const heroDeal = e.target.closest('[data-hero-deal]');
+    if(heroDeal){ activeHeroDeal = heroDeal.dataset.heroDeal; document.querySelectorAll('[data-hero-deal]').forEach(b=>b.classList.toggle('active', b===heroDeal)); return; }
+    const collection = e.target.closest('[data-collection-city]');
+    if(collection){ if($('cityFilter')) $('cityFilter').value = collection.dataset.collectionCity; currentPage=1; location.hash='#properties'; render(); return; }
+    const mini = e.target.closest('[data-mini-id]');
+    if(mini){ const p=DATA.find(x=>x.id===mini.dataset.miniId); if(p) openModal(p.id); return; }
+    const homeFilter = e.target.closest('[data-home-filter]');
+    if(homeFilter){ currentPage=1; location.hash='#properties'; render(); return; }
+  });
+  $('heroSearchBtn')?.addEventListener('click', runHeroSearch);
+  $('heroSearchInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter') runHeroSearch(); });
+
   document.addEventListener('click', e=>{
     const langBtn=e.target.closest('#langSwitch button'); if(langBtn){lang=langBtn.dataset.lang; localStorage.setItem('siriland_lang',lang); applyI18n(); fillFilters(); render(); if(modalProperty) updateModal(); return;}
     const viewBtn=e.target.closest('#viewSwitch button'); if(viewBtn){setViewMode(viewBtn.dataset.view); return;}
@@ -289,7 +389,7 @@
   document.addEventListener('keydown', e=>{ if(!$('propertyModal')?.classList.contains('hidden')){ if(e.key==='ArrowLeft') next(-1); if(e.key==='ArrowRight') next(1); if(e.key==='Escape') $('propertyModal').classList.add('hidden'); }});
   $('modalImg')?.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX},{passive:true});
   $('modalImg')?.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX; if(Math.abs(dx)>45) next(dx>0?-1:1)},{passive:true});
-  ['cityFilter','typeFilter','dealFilter','searchInput'].forEach(id=>$(id)?.addEventListener('input', render));
+  ['cityFilter','typeFilter','dealFilter','searchInput'].forEach(id=>$(id)?.addEventListener('input', ()=>{currentPage=1; window.__sirilandPriceRange='all'; window.__sirilandMinBeds='all'; render();}));
   $('menuToggle')?.addEventListener('click',()=> $('mainNav').classList.toggle('show'));
 
   function openPropertyFromUrl(){
@@ -312,5 +412,5 @@
     setTimeout(() => openModal(found.id), 250);
   }
 
-  applyI18n(); fillFilters(); render(); setViewMode(localStorage.getItem('siriland_view_mode') || 'list'); openPropertyFromUrl();
+  applyI18n(); fillFilters(); renderHomeShowcase(); render(); setViewMode(localStorage.getItem('siriland_view_mode') || 'list'); openPropertyFromUrl();
 })();
