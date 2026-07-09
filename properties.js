@@ -2178,22 +2178,12 @@ window.SIRILAND_PROPERTIES = [
     "deal": "Sale",
     "status": "Available",
     "price": "2.89 MB",
-    "bedrooms": "1",
-    "bathrooms": "1",
+    "bedrooms": "",
+    "bathrooms": "",
     "area": "38.45 SQ.M.",
     "room": "Room 1021",
     "floor": "10th Floor",
     "map": "https://maps.app.goo.gl/unubbYrDY4wQvEqAA",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
     "title": {
       "en": "Nakornping Condo",
       "th": "Nakornping Condo",
@@ -2201,10 +2191,10 @@ window.SIRILAND_PROPERTIES = [
       "zh": "Nakornping Condo"
     },
     "description": {
-      "en": "🏙️ Luxury Condo Near Nimman & MAYA ✨Nakornping Condo | 10th Floor | 38.45 Sq.m.🛏️ 1 Bedroom with Mountain View💰 2.89 MB\n✅ Airbnb Allowed\n✅ Fully Furnished\n✅ Near MAYA / One Nimman / CMU\n☎️ Kwan 092-0056640\n☎️ 090-6507558\nLINE : @realcreamthailand\n🏙️ คอนโดหรูใกล้นิมมาน MAYA ✨\nนครพิงค์คอนโด ชั้น 10 ขนาด 38.45 ตร.ม.\n🛏️ 1 ห้องนอน วิวดอย พร้อมเฟอร์ครบ\n💰 ราคา 2.89 ล้านบาท\n✅ ทำ Airbnb ได้\n✅ Fully Furnished พร้อมอยู่\n✅ ใกล้ MAYA / One Nimman / CMU\n🏊 มีสระว่ายน้ำ\n🚗 อาคารจอดรถในร่ม\n🏢 สามารถทำ Airbnb ได้",
-      "th": "🏙️ Luxury Condo Near Nimman & MAYA ✨Nakornping Condo | 10th Floor | 38.45 Sq.m.🛏️ 1 Bedroom with Mountain View💰 2.89 MB\n✅ Airbnb Allowed\n✅ Fully Furnished\n✅ Near MAYA / One Nimman / CMU\n☎️ Kwan 092-0056640\n☎️ 090-6507558\nLINE : @realcreamthailand\n🏙️ คอนโดหรูใกล้นิมมาน MAYA ✨\nนครพิงค์คอนโด ชั้น 10 ขนาด 38.45 ตร.ม.\n🛏️ 1 ห้องนอน วิวดอย พร้อมเฟอร์ครบ\n💰 ราคา 2.89 ล้านบาท\n✅ ทำ Airbnb ได้\n✅ Fully Furnished พร้อมอยู่\n✅ ใกล้ MAYA / One Nimman / CMU\n🏊 มีสระว่ายน้ำ\n🚗 อาคารจอดรถในร่ม\n🏢 สามารถทำ Airbnb ได้",
-      "tr": "🏙️ Luxury Condo Near Nimman & MAYA ✨Nakornping Condo | 10th Floor | 38.45 Sq.m.🛏️ 1 Bedroom with Mountain View💰 2.89 MB\n✅ Airbnb Allowed\n✅ Fully Furnished\n✅ Near MAYA / One Nimman / CMU\n☎️ Kwan 092-0056640\n☎️ 090-6507558\nLINE : @realcreamthailand\n🏙️ คอนโดหรูใกล้นิมมาน MAYA ✨\nนครพิงค์คอนโด ชั้น 10 ขนาด 38.45 ตร.ม.\n🛏️ 1 ห้องนอน วิวดอย พร้อมเฟอร์ครบ\n💰 ราคา 2.89 ล้านบาท\n✅ ทำ Airbnb ได้\n✅ Fully Furnished พร้อมอยู่\n✅ ใกล้ MAYA / One Nimman / CMU\n🏊 มีสระว่ายน้ำ\n🚗 อาคารจอดรถในร่ม\n🏢 สามารถทำ Airbnb ได้",
-      "zh": "🏙️ Luxury Condo Near Nimman & MAYA ✨Nakornping Condo | 10th Floor | 38.45 Sq.m.🛏️ 1 Bedroom with Mountain View💰 2.89 MB\n✅ Airbnb Allowed\n✅ Fully Furnished\n✅ Near MAYA / One Nimman / CMU\n☎️ Kwan 092-0056640\n☎️ 090-6507558\nLINE : @realcreamthailand\n🏙️ คอนโดหรูใกล้นิมมาน MAYA ✨\nนครพิงค์คอนโด ชั้น 10 ขนาด 38.45 ตร.ม.\n🛏️ 1 ห้องนอน วิวดอย พร้อมเฟอร์ครบ\n💰 ราคา 2.89 ล้านบาท\n✅ ทำ Airbnb ได้\n✅ Fully Furnished พร้อมอยู่\n✅ ใกล้ MAYA / One Nimman / CMU\n🏊 มีสระว่ายน้ำ\n🚗 อาคารจอดรถในร่ม\n🏢 สามารถทำ Airbnb ได้"
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
     },
     "highlights": {
       "en": [
@@ -2243,14 +2233,20 @@ window.SIRILAND_PROPERTIES = [
       "images/nakornping-condo-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-09",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0025",
@@ -2584,23 +2580,33 @@ window.SIRILAND_PROPERTIES = [
   },
   {
     "id": "CM-0031",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "4.69 MB",
+    "bedrooms": "2",
+    "bathrooms": "2",
+    "area": "71 sq.m",
+    "room": "Room 1008-9",
+    "floor": "10th floor",
+    "map": "https://maps.app.goo.gl/cHi4XGUstCAHv3uCA",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
     "title": {
       "en": "Wiangpink Mansion Condo",
       "th": "Wiangpink Mansion Condo",
       "tr": "Wiangpink Mansion Condo",
       "zh": "Wiangpink Mansion Condo"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "",
-    "bedrooms": "",
-    "bathrooms": "",
-    "area": "",
-    "room": "",
-    "floor": "",
-    "map": "",
     "description": {
       "en": "",
       "th": "",
@@ -2644,20 +2650,14 @@ window.SIRILAND_PROPERTIES = [
       "images/wiangpink-mansion-condo-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-09",
     "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "BKK-0001",

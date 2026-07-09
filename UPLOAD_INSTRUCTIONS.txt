@@ -4,4 +4,4 @@
 4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.
 5) GitHub Desktop: Commit + Push.
 
-Not: Export artık boş properties.json üretmez. Fiyat eksikse export durur. CRM müşterileri crm/customers.json olarak eklenir.
+Not: Export artık boş properties.json üretmez. Eksik fiyat/oda/banyo/alan varsa raporda uyarı verir ama export durmaz. Duplicate ID varsa durur. CRM müşterileri crm/customers.json olarak eklenir.
