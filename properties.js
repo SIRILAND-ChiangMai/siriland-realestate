@@ -3132,6 +3132,90 @@ window.SIRILAND_PROPERTIES = [
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
+  },
+  {
+    "id": "PCT-0003",
+    "city": "Phichit",
+    "type": "Spacious 2-Storey House with Garden",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2,730,000",
+    "bedrooms": "2 Bedrooms + Large Living Room",
+    "bathrooms": "1 Bathroom",
+    "area": "2 Rai 3 Ngan 93.1 Sq.Wah",
+    "room": "Width: 12 meters Depth: 13 meters",
+    "floor": "",
+    "map": "Hua Dong, Mueang Phichit, Phichit",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "Transfer fee shared 50/50 between buyer and seller.",
+    "summary": "",
+    "nearby": [
+      "Location: Hua Dong Soi 2, next to Hua Dong Municipality, Phichit, Thailand",
+      "Enjoy peaceful countryside living while staying just minutes from Phichit City"
+    ],
+    "features": [
+      "Land Details",
+      "Total Land Area: 2 Rai 3 Ngan 93.1 Sq.Wah",
+      "(Approximately 4,772.4 sq.m.)",
+      "The property consists of 3 Chanote (Freehold) Land Titles:",
+      "Title 1: 1 Rai 0 Ngan 17 Sq.Wah",
+      "Title 2: 0 Rai 3 Ngan 84.5 Sq.Wah",
+      "Title 3: 0 Rai 3 Ngan 91.6 Sq.Wah",
+      "Approximate House Size",
+      "Width: 12 meters",
+      "Depth: 13 meters"
+    ],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Spacious 2-Storey House",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "House Features\nUpper Floor\n2 Bedrooms\nLarge Living Hall\n1 Bathroom\nGround Floor\n2 Bedrooms\n1 Kitchen\n1 Bathroom\nSpacious Multi-Purpose Living Area\n\nApproximate House Size\n\nWidth: 12 meters\nDepth: 13 meters\nLand Details\n\nTotal Land Area: 2 Rai 3 Ngan 93.1 Sq.Wah\n(Approximately 4,772.4 sq.m.)\n\nThe property consists of 3 Chanote (Freehold) Land Titles:\n\nTitle 1: 1 Rai 0 Ngan 17 Sq.Wah\nTitle 2: 0 Rai 3 Ngan 84.5 Sq.Wah\nTitle 3: 0 Rai 3 Ngan 91.6 Sq.Wah",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [
+        "Beautifully maintained garden",
+        "Water channels already completed",
+        "Fully fenced property",
+        "Private entrance and driveway",
+        "Clear land zoning",
+        "Peaceful surroundings",
+        "Large usable outdoor area",
+        "Excellent location close to Phichit City"
+      ],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/spacious-2-storey-house-1.jpg",
+      "images/spacious-2-storey-house-2.jpg",
+      "images/spacious-2-storey-house-3.jpg",
+      "images/spacious-2-storey-house-4.jpg",
+      "images/spacious-2-storey-house-5.jpg",
+      "images/spacious-2-storey-house-6.jpg",
+      "images/spacious-2-storey-house-7.jpg",
+      "images/spacious-2-storey-house-8.jpg"
+    ],
+    "createdAt": "2026-07-09",
+    "updatedAt": "2026-07-09",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
   }
 ];
 const properties = window.SIRILAND_PROPERTIES;
