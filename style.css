@@ -67,3 +67,33 @@
 .modal-body .desc,#modalDesc{white-space:normal;line-height:1.55}
 @media(max-width:900px){.detail-spec-grid{grid-template-columns:repeat(2,1fr)}.property-spec-line span{font-size:11px;padding:6px 9px}}
 @media(max-width:520px){.detail-spec-grid{grid-template-columns:1fr}.detail-spec-card{padding:10px}.modal-body .price{font-size:30px}.modal-body h3{font-size:22px}}
+
+/* Sprint 3.6 Final: Map clusters + mobile modal + lead form */
+.map-clusters{background:#fffaf0;border:1px solid rgba(216,178,92,.35);border-radius:18px;padding:12px;margin-bottom:12px;box-shadow:0 10px 24px rgba(7,17,31,.06)}
+.map-clusters-title{font-weight:1000;color:#07111f;margin-bottom:8px;font-size:13px;text-transform:uppercase;letter-spacing:.03em}
+.map-cluster-row{display:flex;gap:8px;flex-wrap:wrap}.map-cluster{border:0;border-radius:999px;background:#07111f;color:#fff;padding:8px 12px;display:flex;align-items:center;gap:8px;font-weight:900;cursor:pointer;box-shadow:0 6px 16px rgba(7,17,31,.14)}.map-cluster strong{background:#d8b25c;color:#07111f;border-radius:999px;min-width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center}.map-cluster span{white-space:nowrap}.map-cluster:hover{transform:translateY(-2px);opacity:.94}
+.lead-box{margin-top:22px;padding:20px;border:1px solid rgba(216,178,92,.5);border-radius:22px;background:#fffaf0}.lead-box h3{margin:0 0 14px;font-size:24px}.lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.lead-grid input,.lead-box textarea{width:100%;border:1px solid #ddd1c0;border-radius:14px;padding:13px 14px;font-size:15px;background:#fff}.lead-box textarea{min-height:110px;margin-top:12px;resize:vertical}.lead-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.lead-note{font-size:12px;color:#64748b;margin:10px 0 0;font-weight:800}.modal-body #modalDesc{margin-top:10px;color:#4d5b6b}.detail-spec-grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))!important}.property-spec-line{display:flex;gap:7px;flex-wrap:wrap}.property-spec-line span{background:#fffaf0;border:1px solid rgba(216,178,92,.35);border-radius:999px;padding:6px 10px;font-weight:900;font-size:12px;color:#07111f}
+@media(max-width:640px){.modal{padding:6px}.modal-card{border-radius:24px;max-height:94vh}.modal-body{padding:18px!important}.modal-body h3{font-size:22px;line-height:1.22}.modal-body .price,#modalPrice{font-size:32px!important;line-height:1.15}.modal-card img#modalImg{height:31vh!important}.thumbs img{width:76px!important;height:56px!important}.modal-actions .smallbtn,.lead-actions .smallbtn{flex:1;text-align:center}.lead-grid{grid-template-columns:1fr}.lead-box{padding:16px}.lead-box h3{font-size:22px}.map-cluster-row{display:grid;grid-template-columns:1fr 1fr}.map-cluster{justify-content:flex-start;padding:8px 10px}.map-list{padding-right:0}.map-item.active{outline:3px solid rgba(216,178,92,.35)}}
+
+/* Build 2026.07.09.01 — Map / Mobile / Contact fixes */
+.map-clusters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px;padding:10px;border:1px solid #e5e7eb;border-radius:14px;background:#fffaf0}
+.map-cluster-title{width:100%;font-weight:800;color:#071a3d;font-size:13px;margin-bottom:2px}
+.map-cluster{border:1px solid #d6ad4b;background:#fff;border-radius:999px;padding:7px 11px;display:flex;gap:7px;align-items:center;cursor:pointer;font-weight:800;color:#071a3d}
+.map-cluster span{background:#071a3d;color:#fff;border-radius:999px;padding:2px 7px;font-size:12px}
+.map-cluster.active,.map-cluster:hover{background:#d6ad4b;color:#071a3d}
+.map-item.active{outline:3px solid rgba(214,173,75,.55);background:#fffaf0}
+.detail-spec-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
+.detail-spec-card{border:1px solid #e5e7eb;border-radius:14px;padding:10px;background:#fff}
+.detail-spec-card small{display:block;color:#64748b;font-weight:800;font-size:11px;text-transform:uppercase}
+.detail-spec-card strong{display:block;color:#071a3d;margin-top:4px;font-size:15px}
+#modalWhatsApp{background:#1f9d55;color:#fff}
+@media(max-width:760px){
+  .modal-card{width:96vw;max-height:92vh;overflow:auto;border-radius:18px}
+  .modal-body{padding:14px}
+  .detail-spec-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .modal-actions .smallbtn{width:100%;text-align:center;margin:0}
+  .map-view{grid-template-columns:1fr!important}
+  .map-panel iframe,#propertyMapFrame{min-height:320px}
+  .map-item{grid-template-columns:92px 1fr!important}
+}

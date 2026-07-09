@@ -77,7 +77,7 @@
         ['Mountain View','วิวภูเขา'],
         ['Open View','วิวเปิดโล่ง'],
         ['Corner Unit','ห้องมุม'],
-        ['Spacious','กว้างขวาง'],['Garden','สวน'],['Large Living Hall','ห้องโถงใหญ่'],['Living Hall','ห้องโถง'],['Kitchen','ห้องครัว'],['Multi-Purpose Living Area','พื้นที่อเนกประสงค์'],['Land Size','ขนาดที่ดิน'],['Width','กว้าง'],['Depth','ลึก'],['Total Area','พื้นที่รวม'],['The property consists of','ทรัพย์ประกอบด้วย'],['Title Deed','โฉนด'],['Freehold','กรรมสิทธิ์'],['Chanote','โฉนด'],['Upper','ชั้นบน'],['Ground','ชั้นล่าง'],['Approximate','ประมาณ'],['Approximately','ประมาณ']
+        ['Spacious','กว้างขวาง'],['Garden','สวน'],['Large Living Hall','ห้องโถงใหญ่'],['Living Hall','ห้องโถง'],['Kitchen','ห้องครัว'],['Multi-Purpose Living Area','พื้นที่อเนกประสงค์'],['Land Size','ขนาดที่ดิน'],['Width','กว้าง'],['Depth','ลึก'],['Total Area','พื้นที่รวม'],['The property consists of','ทรัพย์ประกอบด้วย'],['Title Deed','โฉนด'],['Freehold','กรรมสิทธิ์'],['Chanote','โฉนด'],['Upper','ชั้นบน'],['Ground','ชั้นล่าง'],['Approximate','ประมาณ'],['Approximately','ประมาณ'],['Features','จุดเด่น'],['Details','รายละเอียด'],['Property','ทรัพย์'],['Parking','ที่จอดรถ'],['Car Park','ที่จอดรถ'],['Balcony','ระเบียง'],['Pool View','วิวสระว่ายน้ำ'],['Foreign Quota','โควต้าต่างชาติ'],['Airbnb Allowed','ปล่อยเช่ารายวันได้'],['Renovated','รีโนเวทใหม่'],['Free Transfer','ฟรีค่าโอน'],['Sale Price','ราคาขาย'],['Rent Price','ราคาเช่า'],['Owner finance','ผ่อนตรงกับเจ้าของ']
       ],
       tr: [], zh: []
     };
@@ -245,11 +245,22 @@
   }
 
   let selectedMapProperty = null;
+  const CITY_COORDS = {
+    'Chiang Mai':'18.7883,98.9853',
+    'Bangkok':'13.7563,100.5018',
+    'Phichit':'16.4429,100.3482',
+    'Phitsanulok':'16.8211,100.2659',
+    'Nakhon Sawan':'15.7047,100.1372'
+  };
   function propertyMapQuery(p){
+    if(p && (p.lat || p.latitude) && (p.lng || p.longitude)) return `${p.lat||p.latitude},${p.lng||p.longitude}`;
+    if(p && p.map) return String(p.map).trim();
     return [pick(p.title), p.city, p.type, 'Thailand'].filter(Boolean).join(' ');
   }
+  function cityMapQuery(city){ return CITY_COORDS[city] || [city,'Thailand'].filter(Boolean).join(' '); }
   function mapEmbedUrl(p){
-    return 'https://maps.google.com/maps?q=' + encodeURIComponent(propertyMapQuery(p)) + '&output=embed';
+    const q = propertyMapQuery(p);
+    return 'https://www.google.com/maps?q=' + encodeURIComponent(q) + '&z=16&output=embed';
   }
   function setMapProperty(p){
     if(!p) return;
@@ -259,6 +270,15 @@
     const btn = $('openSelectedMap');
     if(btn) btn.onclick = () => window.open(p.map || ('https://maps.google.com/?q=' + encodeURIComponent(propertyMapQuery(p))), '_blank');
     document.querySelectorAll('.map-item').forEach(el => el.classList.toggle('active', el.dataset.mapId === p.id));
+    const active = document.querySelector(`.map-item[data-map-id="${CSS.escape(p.id)}"]`);
+    if(active) active.scrollIntoView({block:'nearest',behavior:'smooth'});
+  }
+  function setMapCity(city){
+    const frame = $('propertyMapFrame');
+    if(frame) frame.src = 'https://www.google.com/maps?q=' + encodeURIComponent(cityMapQuery(city)) + '&z=12&output=embed';
+    const btn = $('openSelectedMap');
+    if(btn) btn.onclick = () => window.open('https://maps.google.com/?q=' + encodeURIComponent(cityMapQuery(city)), '_blank');
+    document.querySelectorAll('.map-cluster').forEach(el => el.classList.toggle('active', el.dataset.city === city));
   }
   function mapItem(p){
     const title = pick(p.title);
@@ -275,7 +295,10 @@
     const count = $('mapResultCount');
     if(count) count.textContent = currentList.length + (lang==='th'?' รายการ':lang==='tr'?' ilan':' listings');
     if(!mapList) return;
-    mapList.innerHTML = currentList.length ? currentList.slice(0,80).map(mapItem).join('') : '<p>No map results</p>';
+    const cityGroups = [...new Set(currentList.map(p=>p.city).filter(Boolean))]
+      .map(city => `<button class="map-cluster" data-city="${city}"><strong>${trMap('city',city)}</strong><span>${currentList.filter(p=>p.city===city).length}</span></button>`).join('');
+    const clusterHtml = cityGroups ? `<div class="map-clusters"><div class="map-cluster-title">📍 ${lang==='th'?'พื้นที่':'Areas'}</div>${cityGroups}</div>` : '';
+    mapList.innerHTML = currentList.length ? clusterHtml + currentList.slice(0,100).map(mapItem).join('') : '<p>No map results</p>';
     const first = currentList[0];
     if(first) setMapProperty(selectedMapProperty && currentList.some(p=>p.id===selectedMapProperty.id) ? selectedMapProperty : first);
   }
@@ -377,6 +400,29 @@
     if(!related.length){ target.innerHTML = ''; return; }
     target.innerHTML = `<div class="related-head"><div><span class="eyebrow dark">SIRILAND</span><h3>${l.title}</h3><p>${l.sub}</p></div></div><div class="related-grid">${related.map(relatedCard).join('')}</div>`;
   }
+
+  function propertyUrl(p){
+    const base = location.origin + location.pathname.replace(/[^/]*$/, '');
+    return base + '?property=' + encodeURIComponent(p.id || '');
+  }
+  function contactMessage(p){
+    return [
+      'Hello Kwan, I am interested in this property.',
+      '',
+      'Property ID: ' + (p.id || ''),
+      'Property: ' + pick(p.title),
+      'Price: ' + (p.price || p.salePrice || ''),
+      'Location: ' + [p.city, p.type].filter(Boolean).join(' / '),
+      'Website: ' + propertyUrl(p)
+    ].join('\n');
+  }
+  function lineContactUrl(p){
+    return 'https://line.me/R/oaMessage/@realcreamthailand/?' + encodeURIComponent(contactMessage(p));
+  }
+  function whatsappContactUrl(p){
+    return 'https://wa.me/66920056640?text=' + encodeURIComponent(contactMessage(p));
+  }
+
   function updateModal(){
     const p=modalProperty; if(!p) return; const imgs=p.images||[];
     $('modalImg').src=imgs[modalIndex] || 'images/logo.png';
@@ -398,6 +444,16 @@
     if(hiEl) hiEl.innerHTML=pickList(p.highlights).map(h=>hiEl.tagName==='UL'?`<li>${h}</li>`:`<span>${h}</span>`).join('');
     $('modalThumbs').innerHTML=imgs.map((src,i)=>`<img src="${src}" class="${i===modalIndex?'active':''}" data-thumb="${i}" onerror="this.style.display='none'">`).join('');
     $('modalMap').style.display=p.map?'inline-block':'none'; $('modalMap').href=p.map||'#';
+    const lineBtn = document.querySelector('.modal-actions a[href*="line.me"]');
+    if(lineBtn) lineBtn.href = lineContactUrl(p);
+    let waBtn = document.getElementById('modalWhatsApp');
+    if(!waBtn){
+      const actions = document.querySelector('.modal-actions');
+      if(actions){ waBtn = document.createElement('a'); waBtn.id='modalWhatsApp'; waBtn.className='smallbtn'; waBtn.target='_blank'; waBtn.textContent='WhatsApp'; actions.insertBefore(waBtn, $('modalMap')); }
+    }
+    if(waBtn) waBtn.href = whatsappContactUrl(p);
+    const copyBtn = $('copyLink');
+    if(copyBtn) copyBtn.onclick = async () => { try{ await navigator.clipboard.writeText(propertyUrl(p)); copyBtn.textContent='Copied'; setTimeout(()=>copyBtn.textContent='Copy Link',1200); }catch(e){ prompt('Copy link', propertyUrl(p)); } };
     renderRelatedProperties(p);
   }
   function next(delta){ if(!modalProperty) return; const n=(modalProperty.images||[]).length||1; modalIndex=(modalIndex+delta+n)%n; updateModal(); }
@@ -421,6 +477,7 @@
   document.addEventListener('click', e=>{
     const langBtn=e.target.closest('#langSwitch button'); if(langBtn){lang=langBtn.dataset.lang; localStorage.setItem('siriland_lang',lang); applyI18n(); fillFilters(); render(); if(modalProperty) updateModal(); return;}
     const viewBtn=e.target.closest('#viewSwitch button'); if(viewBtn){setViewMode(viewBtn.dataset.view); return;}
+    const mapCluster=e.target.closest('.map-cluster'); if(mapCluster){setMapCity(mapCluster.dataset.city); return;}
     const mapPick=e.target.closest('.map-item'); if(mapPick && !e.target.closest('button,a')){const p=DATA.find(x=>x.id===mapPick.dataset.mapId); if(p) setMapProperty(p); return;}
     const open=e.target.closest('[data-open], .photo, [data-related-open]'); if(open){openModal(open.dataset.open || open.dataset.id || open.dataset.relatedOpen); return;}
     const th=e.target.closest('[data-thumb]'); if(th){modalIndex=+th.dataset.thumb; updateModal(); return;}
