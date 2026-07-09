@@ -23,11 +23,17 @@
   // ===== SIRILAND CMS PRO Sprint 3.1 helpers =====
   const CONTACT = { phoneDisplay:'092-005-6640', phoneTel:'0920056640', phoneIntl:'66920056640', line:'@realcreamthailand' };
   function propertyUrl(prop){
-    const u = new URL(window.location.href);
-    u.search = '';
-    u.hash = '';
-    u.searchParams.set('property', prop?.id || '');
-    return u.toString();
+    const id = prop?.id || '';
+    const host = window.location.hostname || '';
+    const origin = window.location.origin || '';
+    let basePath = window.location.pathname || '/';
+    if(host.includes('github.io')){
+      basePath = '/siriland-realestate/';
+    } else {
+      basePath = basePath.replace(/\/[^/]*$/, '/');
+      if(!basePath || basePath === '/') basePath = '/';
+    }
+    return `${origin}${basePath}?property=${enc(id)}`;
   }
   function enc(v){ return encodeURIComponent(String(v || '')); }
   function getFavorites(){ try{return JSON.parse(localStorage.getItem('siriland_favorites')||'[]')}catch(e){return []} }
@@ -282,8 +288,8 @@
       if(action==='copy'){ navigator.clipboard?.writeText(propertyUrl(modalProperty)); alert(lang==='th'?'คัดลอกลิงก์แล้ว':'Link copied'); return; }
       if(action==='print'){ window.print(); return; }
       if(action==='favorite'){ toggleFavorite(modalProperty.id); return; }
-      if(action==='leadLine'){ window.open(`https://line.me/R/msg/text/?${enc(inquiryMessage(modalProperty,'LINE Inquiry'))}`,'_blank'); return; }
-      if(action==='leadWhatsapp'){ window.open(`https://wa.me/${CONTACT.phoneIntl}?text=${enc(inquiryMessage(modalProperty,'WhatsApp Inquiry'))}`,'_blank'); return; }
+      if(action==='leadLine'){ saveLead(modalProperty); window.open(`https://line.me/R/oaMessage/${CONTACT.line}/?${enc(inquiryMessage(modalProperty,'LINE Inquiry'))}`,'_blank'); return; }
+      if(action==='leadWhatsapp'){ saveLead(modalProperty); window.open(`https://wa.me/${CONTACT.phoneIntl}?text=${enc(inquiryMessage(modalProperty,'WhatsApp Inquiry'))}`,'_blank'); return; }
       if(action==='saveLead'){ saveLead(modalProperty); return; }
     }
     const open=e.target.closest('[data-open], .photo'); if(open){openModal(open.dataset.open || open.dataset.id); return;}

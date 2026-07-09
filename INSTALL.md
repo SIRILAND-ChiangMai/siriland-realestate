@@ -1,25 +1,12 @@
-# SIRILAND CMS PRO Sprint 3.1 — Installation
+SIRILAND LINE / WhatsApp Contact Fix
 
-## Files to replace
-Copy these files into your GitHub project root and replace the old files:
+1) ZIP'i çıkar.
+2) İçindeki script.js dosyasını projenin ana klasöründeki eski script.js üzerine kopyala.
+3) GitHub Desktop → Commit → Push.
+4) Siteyi Ctrl+F5 ile yenile veya URL sonuna ?v=linefix ekle.
 
-- `script.js`
-- `style.css`
-
-Do not replace `admin.html`, `properties.js`, `properties.json`, or images for this sprint.
-
-## Steps
-1. Extract this ZIP.
-2. Copy `script.js` and `style.css` to your project folder.
-3. When Windows asks **Replace the file?**, choose **Replace**.
-4. Open GitHub Desktop.
-5. Commit: `Sprint 3.1 property details pro`
-6. Push origin.
-7. Open your website with cache clear: `?v=31`
-
-## Test links
-Open a property directly:
-
-`https://siriland-chiangmai.github.io/siriland-realestate/?property=PCT-0001`
-
-The property modal should open automatically.
+Düzeltmeler:
+- Send via LINE artık LINE Share değil, direkt @realcreamthailand OA mesaj ekranını açar.
+- Mesaj içine Property ID, title, price, doğru property URL, harita, ad, telefon, LINE ID, bütçe ve mesaj eklenir.
+- Property URL GitHub Pages için /siriland-realestate/?property=ID şeklinde düzeltilir.
+- LINE / WhatsApp butonlarına basınca lead local CRM'e de kaydedilir.
