@@ -479,27 +479,44 @@ function exportReady(){
     $('report').innerHTML='<span class="bad">EXPORT STOPPED:</span> properties listesi boş. properties.js yüklemeden export yapma.';
     return false;
   }
+
+  // Only validate and save the property currently being edited.
+  // Other old listings may still have missing fields; they should appear as warnings, not block the whole export.
   if(hasFormData() && !upsertCurrent(true)) return false;
+
   cleanAllProperties();
+
+  // Hard stop only for data that can break the website/export file.
   const hardErrors=[];
+  const warnings=[];
   const ids=new Set();
   properties.forEach((p,idx)=>{
     const label=p.id || ('Row '+(idx+1));
     if(!p.id) hardErrors.push(label+': ID eksik');
     if(p.id && ids.has(p.id)) hardErrors.push(label+': Duplicate ID');
     ids.add(p.id);
-    if(!p.city) hardErrors.push(label+': City eksik');
-    if(!p.type) hardErrors.push(label+': Type eksik');
-    if(!p.deal) hardErrors.push(label+': Deal eksik');
-    if(!p.status) hardErrors.push(label+': Status eksik');
-    if(isMissingValue(p.price)) hardErrors.push(label+': Price eksik — fiyat yoksa Contact for Price yaz');
-    if(!pick(p.title,'en') && !pick(p.title,'th')) hardErrors.push(label+': Title eksik');
+
+    // Missing property details are warnings only.
+    if(!p.city) warnings.push(label+': City eksik');
+    if(!p.type) warnings.push(label+': Type eksik');
+    if(!p.deal) warnings.push(label+': Deal eksik');
+    if(!p.status) warnings.push(label+': Status eksik');
+    if(isMissingValue(p.price)) warnings.push(label+': Price eksik — fiyat yoksa Contact for Price yaz');
+    if(!pick(p.title,'en') && !pick(p.title,'th')) warnings.push(label+': Title eksik');
+    if(isMissingValue(p.area)) warnings.push(label+': Area eksik');
   });
+
   if(hardErrors.length){
     const msg='EXPORT STOPPED\n\n'+hardErrors.slice(0,80).join('\n')+(hardErrors.length>80?'\n...':'');
     alert(msg);
     $('report').innerHTML='<span class="bad">EXPORT STOPPED:</span>\n'+hardErrors.slice(0,120).join('\n')+(hardErrors.length>120?'\n...':'');
     return false;
+  }
+
+  if(warnings.length){
+    $('report').innerHTML='<span class="ok">EXPORT READY:</span> Dosya oluşturulabilir.\n\n<span class="warn">UYARI:</span>\n'+warnings.slice(0,120).join('\n')+(warnings.length>120?'\n...':'');
+  } else {
+    $('report').innerHTML='<span class="ok">EXPORT READY:</span> 0 hata, 0 uyarı.';
   }
   return true;
 }
