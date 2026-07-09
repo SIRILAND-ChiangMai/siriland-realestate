@@ -1,23 +1,17 @@
-# SIRILAND CMS PRO Sprint 3.2 — Related Properties PRO
+# SIRILAND CMS PRO Sprint 3.3
 
 ## Summary
-Sprint 3.2 adds Related Properties to the listing detail modal, recommending similar listings based on city, property type, deal type, project/title similarity, and nearby price range.
+Sprint 3.3 adds a mobile-friendly Map View for browsing listings with a List/Map toggle, embedded Google Maps panel, property cards, and quick detail/map actions.
 
 ## New Features
-- Similar Properties section inside property details.
-- Related cards ranked by city, type, deal and price similarity.
-- Mobile responsive related-property cards.
-- Related cards open the selected property directly.
+- List View / Map View switch
+- Embedded Google Maps panel
+- Map listing cards
+- Click property card to update map
+- Open selected property in Google Maps
+- Mobile responsive map layout
 
-## Improvements
-- Better browsing flow from one property to another.
-- Helps visitors discover more listings without returning to the homepage.
-- Works with existing multilingual display and property URL system.
-
-## Files Updated
+## Updated Files
 - index.html
 - script.js
 - style.css
-
-## Notes
-This sprint does not change admin.html or properties.js.

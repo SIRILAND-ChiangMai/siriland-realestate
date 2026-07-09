@@ -137,6 +137,50 @@
     </article>`;
   }
 
+  let selectedMapProperty = null;
+  function propertyMapQuery(p){
+    return [pick(p.title), p.city, p.type, 'Thailand'].filter(Boolean).join(' ');
+  }
+  function mapEmbedUrl(p){
+    return 'https://maps.google.com/maps?q=' + encodeURIComponent(propertyMapQuery(p)) + '&output=embed';
+  }
+  function setMapProperty(p){
+    if(!p) return;
+    selectedMapProperty = p;
+    const frame = $('propertyMapFrame');
+    if(frame) frame.src = mapEmbedUrl(p);
+    const btn = $('openSelectedMap');
+    if(btn) btn.onclick = () => window.open(p.map || ('https://maps.google.com/?q=' + encodeURIComponent(propertyMapQuery(p))), '_blank');
+    document.querySelectorAll('.map-item').forEach(el => el.classList.toggle('active', el.dataset.mapId === p.id));
+  }
+  function mapItem(p){
+    const title = pick(p.title);
+    const specs = [p.bedrooms, p.bathrooms, p.area].filter(Boolean).map(translateText).join(' • ');
+    return `<article class="map-item" data-map-id="${p.id}">
+      <img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'">
+      <div><div class="map-meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div>
+      <h4>${title}</h4><strong>${translateText(p.price||'')}</strong>${specs?`<p>${specs}</p>`:''}
+      <div class="map-actions"><button class="smallbtn goldbtn" data-open="${p.id}">${t('details')}</button>${p.map?`<a class="smallbtn" target="_blank" href="${p.map}">${t('map')}</a>`:''}</div></div>
+    </article>`;
+  }
+  function renderMapView(){
+    const mapList = $('mapPropertyList');
+    const count = $('mapResultCount');
+    if(count) count.textContent = currentList.length + ' listings';
+    if(!mapList) return;
+    mapList.innerHTML = currentList.length ? currentList.slice(0,80).map(mapItem).join('') : '<p>No map results</p>';
+    const first = currentList[0];
+    if(first) setMapProperty(selectedMapProperty && currentList.some(p=>p.id===selectedMapProperty.id) ? selectedMapProperty : first);
+  }
+  function setViewMode(mode){
+    const isMap = mode === 'map';
+    $('propertyGrid')?.classList.toggle('hidden', isMap);
+    $('mapView')?.classList.toggle('hidden', !isMap);
+    document.querySelectorAll('#viewSwitch button').forEach(btn=>btn.classList.toggle('active', btn.dataset.view === mode));
+    localStorage.setItem('siriland_view_mode', mode);
+    if(isMap) renderMapView();
+  }
+
   function render(){
     const city=$('cityFilter')?.value || 'all', type=$('typeFilter')?.value || 'all', deal=$('dealFilter')?.value || 'all';
     const q=($('searchInput')?.value || '').toLowerCase().trim();
@@ -146,6 +190,7 @@
     });
     $('propertyCount').textContent = DATA.length + '+';
     $('propertyGrid').innerHTML = currentList.length ? currentList.map(card).join('') : `<p>${t('noResults')}</p>`;
+    if(!$('mapView')?.classList.contains('hidden')) renderMapView();
   }
 
   function openModal(id, idx=0){
@@ -234,6 +279,8 @@
 
   document.addEventListener('click', e=>{
     const langBtn=e.target.closest('#langSwitch button'); if(langBtn){lang=langBtn.dataset.lang; localStorage.setItem('siriland_lang',lang); applyI18n(); fillFilters(); render(); if(modalProperty) updateModal(); return;}
+    const viewBtn=e.target.closest('#viewSwitch button'); if(viewBtn){setViewMode(viewBtn.dataset.view); return;}
+    const mapPick=e.target.closest('.map-item'); if(mapPick && !e.target.closest('button,a')){const p=DATA.find(x=>x.id===mapPick.dataset.mapId); if(p) setMapProperty(p); return;}
     const open=e.target.closest('[data-open], .photo, [data-related-open]'); if(open){openModal(open.dataset.open || open.dataset.id || open.dataset.relatedOpen); return;}
     const th=e.target.closest('[data-thumb]'); if(th){modalIndex=+th.dataset.thumb; updateModal(); return;}
     if(e.target.id==='modalClose' || e.target.id==='propertyModal') $('propertyModal').classList.add('hidden');
@@ -265,5 +312,5 @@
     setTimeout(() => openModal(found.id), 250);
   }
 
-  applyI18n(); fillFilters(); render(); openPropertyFromUrl();
+  applyI18n(); fillFilters(); render(); setViewMode(localStorage.getItem('siriland_view_mode') || 'list'); openPropertyFromUrl();
 })();

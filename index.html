@@ -56,6 +56,20 @@
         <select id="dealFilter"><option value="all" data-i18n="allDeals">All Deals</option></select>
         <input id="searchInput" type="search" placeholder="Search ID, project, room, area..." data-i18n-placeholder="searchPlaceholder" />
       </div>
+      <div class="view-switch" id="viewSwitch">
+        <button class="active" data-view="list">🏠 List View</button>
+        <button data-view="map">🗺️ Map View</button>
+      </div>
+      <div class="map-view hidden" id="mapView">
+        <div class="map-panel">
+          <div class="map-head">
+            <div><strong>🗺️ Property Map</strong><span id="mapResultCount">0 listings</span></div>
+            <button class="smallbtn goldbtn" id="openSelectedMap">Open Google Maps</button>
+          </div>
+          <iframe id="propertyMapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="map-list" id="mapPropertyList"></div>
+      </div>
       <div class="grid" id="propertyGrid"></div>
     </section>
 
