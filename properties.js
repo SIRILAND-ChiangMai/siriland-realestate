@@ -2927,6 +2927,92 @@ window.SIRILAND_PROPERTIES = [
       "line": "@realcreamthailand"
     },
     "summary": ""
+  },
+  {
+    "id": "CM-0032",
+    "city": "Chiang Mai",
+    "type": "Hillside Plaza & Condotel 4",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2,990,000 THB",
+    "bedrooms": "1",
+    "bathrooms": "1",
+    "area": "45.03 sq.m.",
+    "room": "Unit: 506",
+    "floor": "5",
+    "map": "https://maps.app.goo.gl/KirnqeC8Nzdeubki9",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "• MAYA Lifestyle Shopping Center – 2 min",
+      "• One Nimman – 2 min",
+      "• Bright Seeds International School – 1 min",
+      "• Chiang Mai University – 8 min",
+      "• Rajamangala University of Technology Lanna – 9 min",
+      "• Demonstration School, Chiang Mai University – 9 min",
+      "• Chiang Mai Ram Hospital – 5 min",
+      "• Maharaj Nakorn Chiang Mai Hospital – 5 min"
+    ],
+    "features": [
+      "Modern Luxury Interior",
+      "• Fully Built-in Furniture",
+      "• Fully Furnished",
+      "• Brand New Electrical & Plumbing System",
+      "• Digital Door Lock",
+      "• Premium Home Appliances Included",
+      "• Airbnb Friendly",
+      "• Large Swimming Pool",
+      "• Fitness Center",
+      "• Restaurant Inside the Building",
+      "• Spacious Parking Area",
+      "• 24-Hour Security",
+      "• One-Year After-Sales Warranty"
+    ],
+    "furniture": [],
+    "appliances": [
+      "• Water Purifier",
+      "• Front Load Washing Machine",
+      "• Front Load Dryer",
+      "• 2 Air Conditioners (12,000 BTU)",
+      "• 55-inch Android TV",
+      "• Electric Hob & Cooker Hood",
+      "• Water Heater",
+      "• Large Refrigerator",
+      "• Microwave",
+      "• Digital Door Lock"
+    ],
+    "title": {
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [],
+    "createdAt": "2026-07-09",
+    "updatedAt": "2026-07-09",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
   }
 ];
 const properties = window.SIRILAND_PROPERTIES;
