@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND CMS PRO 2030 - Phase 2 CRM</title>
+  <title>SIRILAND CMS PRO 2030 - Export Guard Fixed</title>
   <style>
     :root{--navy:#071a3d;--gold:#d6ad4b;--bg:#f5f7fb;--line:#d9deea;--red:#b91c1c;--green:#0f7b3f}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,Tahoma,sans-serif;color:#172033}.wrap{max-width:1200px;margin:auto;padding:20px}
@@ -43,7 +43,7 @@
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND CMS PRO 2030 — Phase 2 CRM</div><div class="muted">Phase 1 preserved + CRM Customer Manager added.</div></div>
+    <div><div class="logo">SIRILAND CMS PRO 2030 — Export Guard Fixed</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -472,22 +472,57 @@ function validate(){
 }
 function makeJs(){cleanAllProperties();return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
 function download(name,content,type='application/octet-stream'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
-async function buildZip(){
-  if(hasFormData() && !upsertCurrent(true)) return;
-  if(!validate()){if(!confirm('Hata var. Yine de ZIP oluşturulsun mu?'))return;}
-  const zip=new JSZip();
-  zip.file('properties.js',makeJs());
+
+function exportReady(){
+  if(properties.length === 0){
+    alert('EXPORT STOPPED\n\nproperties listesi boş görünüyor. Önce properties.js yükle veya sayfayı yenile. Boş JSON export edilmedi.');
+    $('report').innerHTML='<span class="bad">EXPORT STOPPED:</span> properties listesi boş. properties.js yüklemeden export yapma.';
+    return false;
+  }
+  if(hasFormData() && !upsertCurrent(true)) return false;
   cleanAllProperties();
-  zip.file('data/properties.json',JSON.stringify(properties,null,2));
+  const hardErrors=[];
+  const ids=new Set();
+  properties.forEach((p,idx)=>{
+    const label=p.id || ('Row '+(idx+1));
+    if(!p.id) hardErrors.push(label+': ID eksik');
+    if(p.id && ids.has(p.id)) hardErrors.push(label+': Duplicate ID');
+    ids.add(p.id);
+    if(!p.city) hardErrors.push(label+': City eksik');
+    if(!p.type) hardErrors.push(label+': Type eksik');
+    if(!p.deal) hardErrors.push(label+': Deal eksik');
+    if(!p.status) hardErrors.push(label+': Status eksik');
+    if(isMissingValue(p.price)) hardErrors.push(label+': Price eksik — fiyat yoksa Contact for Price yaz');
+    if(!pick(p.title,'en') && !pick(p.title,'th')) hardErrors.push(label+': Title eksik');
+  });
+  if(hardErrors.length){
+    const msg='EXPORT STOPPED\n\n'+hardErrors.slice(0,80).join('\n')+(hardErrors.length>80?'\n...':'');
+    alert(msg);
+    $('report').innerHTML='<span class="bad">EXPORT STOPPED:</span>\n'+hardErrors.slice(0,120).join('\n')+(hardErrors.length>120?'\n...':'');
+    return false;
+  }
+  return true;
+}
+function exportJsonText(){ cleanAllProperties(); return JSON.stringify(properties,null,2); }
+
+async function buildZip(){
+  if(!exportReady()) return;
+  if(!validate()){ if(!confirm('Uyarı var. Yine de ZIP oluşturulsun mu?')) return; }
+  const zip=new JSZip();
+  const jsText = makeJs();
+  const jsonText = exportJsonText();
+  zip.file('properties.js', jsText);
+  zip.file('properties.json', jsonText);
+  zip.file('data/properties.json', jsonText);
   saveCustomers();
   zip.file('crm/customers.json',JSON.stringify(customers,null,2));
-  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n4) GitHub Desktop: Commit + Push.\n\nNot: Export artık formdaki ilanı otomatik kaydeder. CRM müşterileri crm/customers.json olarak eklenir.');
+  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) properties.json dosyasını da eski properties.json üstüne kopyalayın.\n4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n5) GitHub Desktop: Commit + Push.\n\nNot: Export artık boş properties.json üretmez. Fiyat eksikse export durur. CRM müşterileri crm/customers.json olarak eklenir.');
   for(const [id,files] of Object.entries(pendingFilesById)){
     const p=properties.find(x=>x.id===id); if(!p) continue;
     files.forEach((f,i)=>{const path=p.images[i]; if(path) zip.file(path,f);});
   }
   const blob=await zip.generateAsync({type:'blob'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='siriland-new-property-export.zip';a.click();
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='siriland-export-fixed.zip';a.click();
 }
 
 function parseFbText(){
@@ -728,8 +763,8 @@ $('langTabs').addEventListener('click',e=>{const b=e.target.closest('[data-lang]
 $('saveBtn').onclick=()=>upsertCurrent(false);
 $('clearBtn').onclick=clearForm;
 $('validateBtn').onclick=()=>{upsertCurrent(true);validate()};
-$('downloadJson').onclick=()=>{upsertCurrent(true);cleanAllProperties();download('properties.json',JSON.stringify(properties,null,2),'application/json')};
-$('downloadJs').onclick=()=>{upsertCurrent(true);download('properties.js',makeJs(),'text/javascript')};
+$('downloadJson').onclick=()=>{ if(!exportReady()) return; download('properties.json',exportJsonText(),'application/json')};
+$('downloadJs').onclick=()=>{ if(!exportReady()) return; download('properties.js',makeJs(),'text/javascript')};
 $('downloadZip').onclick=buildZip;
 $('parseBtn').onclick=parseFbText;
 
