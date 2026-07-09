@@ -3034,5 +3034,103 @@
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
+  },
+  {
+    "id": "PCT-0002",
+    "city": "Phichit",
+    "type": "Golden 3-Storey Shophouse",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "4,190,000 THB",
+    "bedrooms": "3",
+    "bathrooms": "3",
+    "area": "",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "salePrice": "4,590,000 THB",
+    "rentPrice": "12,000 THB / Month",
+    "ownerFinance": "",
+    "installment": "Down Payment: 10% (459,000 THB) Monthly Payment: 20,000 THB Interest Rate: 0% Installment Period: 60 Months",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "Sri Sukho Medical Center",
+      "Phichit City Center"
+    ],
+    "features": [
+      "5 Bedrooms",
+      "3 Bathrooms",
+      "Built-in Kitchen",
+      "Steel Security Bars",
+      "Bird Protection System",
+      "Extended Living Space",
+      "Suitable for Home & Business",
+      "Bank Loan Available",
+      "Owner Financing Available",
+      "Full Legal Documents",
+      "Lawyer Contract"
+    ],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Golden 3-Storey Shophouse in Phichit City Center",
+      "th": "อาคารพาณิชย์ 3 ชั้น ทำเลทอง ใจกลางเมืองพิจิตร",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "A 3-storey commercial shophouse located in the heart of Phichit City, close to Sri Sukho Medical Center. Suitable for residential living, retail business, office, clinic, or investment.",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/golden-3-storey-shophouse-in-phichit-city-center-1.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-2.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-3.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-4.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-5.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-6.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-7.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-8.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-9.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-10.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-11.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-12.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-13.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-14.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-15.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-16.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-17.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-18.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-19.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-20.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-21.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-22.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-23.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-24.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-25.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-26.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-27.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-28.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-29.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-30.jpg"
+    ],
+    "createdAt": "2026-07-09",
+    "updatedAt": "2026-07-09",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
   }
 ]
