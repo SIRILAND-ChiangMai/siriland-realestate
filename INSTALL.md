@@ -5,7 +5,6 @@
    - index.html
    - script.js
    - style.css
-3. Do not replace admin.html.
-4. Do not replace properties.js.
-5. Commit + Push in GitHub Desktop.
-6. Open website with Ctrl+F5 or add ?v=2026070901.
+3. Do not replace admin.html or properties.js.
+4. Commit + Push.
+5. Refresh site with Ctrl+F5 or add ?v=2026070902.

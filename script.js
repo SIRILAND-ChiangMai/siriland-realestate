@@ -4,7 +4,7 @@
   let lang = localStorage.getItem('siriland_lang') || 'en';
   let currentList = DATA.slice();
   let currentPage = 1;
-  const pageSize = 4;
+  const pageSize = window.innerWidth <= 900 ? 6 : 8;
   let activeHeroDeal = "all";
   let modalProperty = null;
   let modalIndex = 0;
