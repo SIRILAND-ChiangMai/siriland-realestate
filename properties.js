@@ -2420,32 +2420,44 @@ window.SIRILAND_PROPERTIES = [
   },
   {
     "id": "CM-0028",
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "6.19 MB",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathroom",
+    "area": "87.5 sqm",
+    "room": "Room 813",
+    "floor": "8th Floor",
+    "map": "https://maps.app.goo.gl/R7VDGsfYJJFLoz4U8",
+    "salePrice": "6.19 MB",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "near MAYA, One Nimman and Think Park"
+    ],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
     "title": {
       "en": "Srithana 2 Huay Kaew Nimman",
       "th": "Srithana 2 Huay Kaew Nimman",
       "tr": "Srithana 2 Huay Kaew Nimman",
       "zh": "Srithana 2 Huay Kaew Nimman"
     },
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "",
-    "bedrooms": "",
-    "bathrooms": "",
-    "area": "",
-    "room": "",
-    "floor": "",
-    "map": "",
     "description": {
-      "en": "",
+      "en": "Room 813, 8th Floor Penthouse Corner Unit\n87.5 sqm | 2 Bedrooms | 2 Bathrooms\nLarge kitchen with Island Bar, 2 balconies and beautiful mountain view.\nModern Luxury design, fully furnished with built-in furniture and complete appliances. Ready to move in.",
       "th": "",
       "tr": "",
       "zh": ""
     },
     "highlights": {
       "en": [
-        "Chiang Mai"
+        "Large kitchen with Island Bar, 2 balconies"
       ],
       "th": [
         "Chiang Mai"
@@ -2480,20 +2492,14 @@ window.SIRILAND_PROPERTIES = [
       "images/srithana-2-huay-kaew-nimman-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
+    "updatedAt": "2026-07-09",
     "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0030",
