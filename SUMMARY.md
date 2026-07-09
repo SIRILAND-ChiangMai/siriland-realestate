@@ -1,32 +1,21 @@
-# SIRILAND CMS PRO Sprint 3.4 — Homepage PRO + Search PRO
+# SIRILAND CMS PRO Sprint 3.5 — Language PRO & Clean Property Details
 
 ## Summary
-SIRILAND CMS PRO Sprint 3.4 upgrades the public website with a DDProperty-inspired homepage experience, hero search panel, province collection cards, featured listings, new listings, owner-finance/special-deal sections, and 4-listings-per-page pagination for cleaner browsing.
+Sprint 3.5 improves multilingual property display and cleans the listing/detail pages so important property information appears clearly in the selected language.
 
 ## New Features
-- Homepage PRO hero search box
-- Buy / Rent / All search tabs
-- Search by location, project, ID, type, price range and bedrooms
-- Browse by province collection cards
-- Featured Properties section
-- New Listings section
-- Owner Finance / Special Deals section
-- 4 listings per page with pagination
-- Mobile-friendly homepage cards
+- Structured property specs: bedrooms, bathrooms, area, floor and room.
+- Cleaner listing cards with important specs instead of long mixed-language descriptions.
+- Modal detail page now shows a clear spec grid.
+- Better Thai translation fallback for common real estate phrases.
+- Related/map cards use structured translated specs.
 
-## Improvements
-- Cleaner browsing for large property databases
-- Faster user path from homepage to listing results
-- Homepage more similar to modern real estate portals
-- Existing Sprint 3.2 Related Properties and Sprint 3.3 Map View kept
+## Bug Fixes
+- Reduces mixed Thai/English text when TH language is selected.
+- Avoids showing long raw feature text on property cards.
+- Keeps Sprint 3.4 homepage and 4-listing pagination.
 
 ## Updated Files
 - index.html
 - script.js
 - style.css
-
-## Not Changed
-- admin.html
-- properties.js
-- properties.json
-- images

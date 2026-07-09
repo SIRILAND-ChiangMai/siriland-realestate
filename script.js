@@ -76,7 +76,8 @@
         ['Fully furnished','เฟอร์นิเจอร์ครบ'],
         ['Mountain View','วิวภูเขา'],
         ['Open View','วิวเปิดโล่ง'],
-        ['Corner Unit','ห้องมุม']
+        ['Corner Unit','ห้องมุม'],
+        ['Spacious','กว้างขวาง'],['Garden','สวน'],['Large Living Hall','ห้องโถงใหญ่'],['Living Hall','ห้องโถง'],['Kitchen','ห้องครัว'],['Multi-Purpose Living Area','พื้นที่อเนกประสงค์'],['Land Size','ขนาดที่ดิน'],['Width','กว้าง'],['Depth','ลึก'],['Total Area','พื้นที่รวม'],['The property consists of','ทรัพย์ประกอบด้วย'],['Title Deed','โฉนด'],['Freehold','กรรมสิทธิ์'],['Chanote','โฉนด'],['Upper','ชั้นบน'],['Ground','ชั้นล่าง'],['Approximate','ประมาณ'],['Approximately','ประมาณ']
       ],
       tr: [], zh: []
     };
@@ -130,6 +131,35 @@
   function propertyBlob(p){
     return [p.id,p.city,p.type,p.deal,p.price,p.room,p.floor,p.area,p.bedrooms,p.bathrooms,p.status,p.map,p.salePrice,p.rentPrice,p.ownerFinance,p.installment,p.summary,pick(p.title),pick(p.description),...pickList(p.highlights),...(Array.isArray(p.features)?p.features:[]),...(Array.isArray(p.nearby)?p.nearby:[])].join(' ').toLowerCase();
   }
+
+  const specLabels = {
+    en:{bed:'Bedrooms',bath:'Bathrooms',area:'Area',floor:'Floor',room:'Room',price:'Price'},
+    th:{bed:'ห้องนอน',bath:'ห้องน้ำ',area:'พื้นที่',floor:'ชั้น',room:'ห้อง',price:'ราคา'},
+    tr:{bed:'Yatak Odası',bath:'Banyo',area:'Alan',floor:'Kat',room:'Oda',price:'Fiyat'},
+    zh:{bed:'卧室',bath:'浴室',area:'面积',floor:'楼层',room:'房号',price:'价格'}
+  };
+  function cleanTranslatedValue(v){
+    return translateText(String(v || '').replace(/Features/gi,'').replace(/Approximate/gi,'ประมาณ').replace(/\s+/g,' ').trim());
+  }
+  function propertySpecs(p){
+    const L = specLabels[lang] || specLabels.en;
+    const rows = [];
+    if(p.bedrooms && !String(p.bedrooms).match(/^[-–]$/)) rows.push({key:'bed',label:L.bed,value:cleanTranslatedValue(p.bedrooms)});
+    if(p.bathrooms && !String(p.bathrooms).match(/^[-–]$/)) rows.push({key:'bath',label:L.bath,value:cleanTranslatedValue(p.bathrooms)});
+    if(p.area && !String(p.area).match(/^[-–]$/)) rows.push({key:'area',label:L.area,value:cleanTranslatedValue(p.area)});
+    if(p.floor && !String(p.floor).match(/^[-–]$/)) rows.push({key:'floor',label:L.floor,value:cleanTranslatedValue(p.floor)});
+    if(p.room && !String(p.room).match(/^[-–]$/)) rows.push({key:'room',label:L.room,value:cleanTranslatedValue(p.room)});
+    return rows;
+  }
+  function specsInline(p){ return propertySpecs(p).slice(0,4).map(x => `<span>${x.label}: ${x.value}</span>`).join(''); }
+  function specsGrid(p){ return propertySpecs(p).map(x => `<div class="detail-spec-card"><small>${x.label}</small><strong>${x.value}</strong></div>`).join(''); }
+  function propertyShortText(p){
+    const summary = p.summary && typeof p.summary === 'object' ? (p.summary[lang] || p.summary.en || p.summary.th || '') : (p.summary || '');
+    if(summary) return translateText(summary);
+    const specs = propertySpecs(p).slice(0,3).map(x => `${x.label}: ${x.value}`).join(' • ');
+    return specs || pick(p.description).slice(0,140);
+  }
+
   function miniCard(p){
     const title = pick(p.title);
     return `<article class="mini-property-card" data-mini-id="${p.id}">
@@ -202,10 +232,13 @@
   }
 
   function card(p){
-    const title=pick(p.title), desc=pick(p.description), highlights=pickList(p.highlights).slice(0,4), ov=overlayText(p.status);
+    const title=pick(p.title), highlights=pickList(p.highlights).slice(0,4), ov=overlayText(p.status);
+    const specs = specsInline(p);
     return `<article class="card">
       <div class="photo" data-id="${p.id}"><img src="${safeImg(p.images)}" alt="${title}" loading="lazy" onerror="this.src='images/logo.png'"><span class="badge">${trMap('deal',p.deal)}</span><span class="status">${trMap('status',p.status)}</span><span class="count">${(p.images||[]).length} ${t('photos')}</span>${ov?`<span class="sold-ribbon">${ov}</span>`:''}</div>
-      <div class="content"><div class="meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div><h3>${title}</h3><div class="price">${translateText(p.price||'')}</div><p class="desc">${desc}</p>
+      <div class="content"><div class="meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div><h3>${title}</h3><div class="price">${translateText(p.price||'')}</div>
+      ${specs?`<div class="property-spec-line">${specs}</div>`:''}
+      <p class="desc">${propertyShortText(p)}</p>
       <div class="chips">${highlights.map(h=>`<span>${h}</span>`).join('')}</div>
       <div class="actions"><button class="smallbtn goldbtn" data-open="${p.id}">${t('details')}</button>${p.map?`<a class="smallbtn" target="_blank" href="${p.map}">${t('map')}</a>`:''}<a class="smallbtn" target="_blank" href="https://line.me/R/ti/p/@realcreamthailand">${t('contact')}</a></div></div>
     </article>`;
@@ -229,7 +262,7 @@
   }
   function mapItem(p){
     const title = pick(p.title);
-    const specs = [p.bedrooms, p.bathrooms, p.area].filter(Boolean).map(translateText).join(' • ');
+    const specs = propertySpecs(p).slice(0,3).map(x=>`${x.label}: ${x.value}`).join(' • ');
     return `<article class="map-item" data-map-id="${p.id}">
       <img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'">
       <div><div class="map-meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div>
@@ -240,7 +273,7 @@
   function renderMapView(){
     const mapList = $('mapPropertyList');
     const count = $('mapResultCount');
-    if(count) count.textContent = currentList.length + ' listings';
+    if(count) count.textContent = currentList.length + (lang==='th'?' รายการ':lang==='tr'?' ilan':' listings');
     if(!mapList) return;
     mapList.innerHTML = currentList.length ? currentList.slice(0,80).map(mapItem).join('') : '<p>No map results</p>';
     const first = currentList[0];
@@ -318,7 +351,7 @@
   }
   function relatedCard(p){
     const title = pick(p.title);
-    const specs = [p.bedrooms, p.bathrooms, p.area].filter(Boolean).map(translateText).join(' • ');
+    const specs = propertySpecs(p).slice(0,3).map(x=>`${x.label}: ${x.value}`).join(' • ');
     return `<article class="related-card" data-related-open="${p.id}">
       <div class="related-photo"><img src="${safeImg(p.images)}" alt="${title}" loading="lazy" onerror="this.src='images/logo.png'"></div>
       <div class="related-body">
@@ -353,7 +386,15 @@
     $('modalPrice').textContent=translateText(p.price||'');
     const descEl = $('modalDescription') || $('modalDesc');
     const hiEl = $('modalHighlights') || $('modalChips');
-    if(descEl) descEl.textContent=pick(p.description);
+    let specBox = $('modalSpecBox');
+    if(!specBox && descEl){
+      specBox = document.createElement('div');
+      specBox.id = 'modalSpecBox';
+      specBox.className = 'detail-spec-grid';
+      descEl.parentNode.insertBefore(specBox, descEl);
+    }
+    if(specBox) specBox.innerHTML = specsGrid(p);
+    if(descEl) descEl.textContent=propertyShortText(p);
     if(hiEl) hiEl.innerHTML=pickList(p.highlights).map(h=>hiEl.tagName==='UL'?`<li>${h}</li>`:`<span>${h}</span>`).join('');
     $('modalThumbs').innerHTML=imgs.map((src,i)=>`<img src="${src}" class="${i===modalIndex?'active':''}" data-thumb="${i}" onerror="this.style.display='none'">`).join('');
     $('modalMap').style.display=p.map?'inline-block':'none'; $('modalMap').href=p.map||'#';
