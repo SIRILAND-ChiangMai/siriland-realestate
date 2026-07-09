@@ -59,32 +59,53 @@
   </section>
 
   <main>
-    <section class="section home-showcase" id="homeShowcase">
-      <div class="section-head left-head"><span class="eyebrow dark">SIRILAND PRO</span><h2>Explore Thailand Property</h2></div>
-      <div class="home-explore-layout">
-        <aside class="city-sidebar">
-          <div class="sidebar-title">Browse by City</div>
-          <div class="city-side-list" id="citySideList"></div>
+    <section class="section home-showcase sx-home" id="homeShowcase">
+      <div class="section-head sx-home-head">
+        <span class="eyebrow dark">SIRILAND PRO</span>
+        <h2>Explore Thailand Property</h2>
+        <p class="sx-home-subtitle">Browse by city, popular listings, best price and owner finance deals.</p>
+      </div>
+
+      <div class="sx-explore-grid">
+        <aside class="sx-city-panel">
+          <div class="sx-panel-title">📍 Browse by City</div>
+          <div class="sx-city-list" id="sxCityList"></div>
         </aside>
-        <div class="home-right-showcase">
-          <div class="pro-strip">
-            <div class="showcase-title compact"><h3>🔥 Popular Listings</h3><a href="#properties" data-home-filter="featured">View More ›</a></div>
-            <div class="small-property-grid" id="popularSmallRow"></div>
-          </div>
-          <div class="pro-strip two-col">
-            <div>
-              <div class="showcase-title compact"><h3>💰 Best Price</h3><a href="#properties" data-home-filter="bestPrice">View More ›</a></div>
-              <div class="side-property-list" id="bestPriceSmallRow"></div>
+
+        <div class="sx-content-panel">
+          <section class="sx-showcase-card sx-wide">
+            <div class="sx-showcase-head">
+              <h3>🔥 Popular Listings</h3>
+              <a href="#properties" data-home-filter="featured">View More ›</a>
             </div>
-            <div>
-              <div class="showcase-title compact"><h3>🏢 Popular Condo</h3><a href="#properties" data-home-filter="condo">View More ›</a></div>
-              <div class="side-property-list" id="condoSmallRow"></div>
+            <div class="sx-property-grid" id="sxPopularListings"></div>
+          </section>
+
+          <div class="sx-two-columns">
+            <section class="sx-showcase-card">
+              <div class="sx-showcase-head">
+                <h3>💰 Best Price</h3>
+                <a href="#properties" data-home-filter="bestPrice">View More ›</a>
+              </div>
+              <div class="sx-list" id="sxBestPrice"></div>
+            </section>
+
+            <section class="sx-showcase-card">
+              <div class="sx-showcase-head">
+                <h3>🏢 Popular Condo</h3>
+                <a href="#properties" data-home-filter="condo">View More ›</a>
+              </div>
+              <div class="sx-list" id="sxPopularCondo"></div>
+            </section>
+          </div>
+
+          <section class="sx-showcase-card sx-wide">
+            <div class="sx-showcase-head">
+              <h3>🏡 House / Owner Finance</h3>
+              <a href="#properties" data-home-filter="ownerFinance">View More ›</a>
             </div>
-          </div>
-          <div class="pro-strip">
-            <div class="showcase-title compact"><h3>🏡 House / Owner Finance</h3><a href="#properties" data-home-filter="ownerFinance">View More ›</a></div>
-            <div class="small-property-grid" id="financeRow"></div>
-          </div>
+            <div class="sx-property-grid" id="sxOwnerFinance"></div>
+          </section>
         </div>
       </div>
     </section>
