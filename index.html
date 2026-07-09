@@ -61,30 +61,40 @@
   <main>
     <section class="section home-showcase" id="homeShowcase">
       <div class="section-head left-head"><span class="eyebrow dark">SIRILAND PRO</span><h2>Explore Thailand Property</h2></div>
-      <div class="quick-collections" id="quickCollections"></div>
-      <div class="showcase-block">
-        <div class="showcase-title"><h3>⭐ Featured Properties</h3><a href="#properties" data-home-filter="featured">View More ›</a></div>
-        <div class="mini-property-row" id="featuredRow"></div>
-      </div>
-      <div class="showcase-block">
-        <div class="showcase-title"><h3>🆕 New Listings</h3><a href="#properties" data-home-filter="new">View More ›</a></div>
-        <div class="mini-property-row" id="newRow"></div>
-      </div>
-      <div class="showcase-block">
-        <div class="showcase-title"><h3>💎 Owner Finance / Special Deals</h3><a href="#properties" data-home-filter="ownerFinance">View More ›</a></div>
-        <div class="mini-property-row" id="financeRow"></div>
+      <div class="home-explore-layout">
+        <aside class="city-sidebar">
+          <div class="sidebar-title">Browse by City</div>
+          <div class="city-side-list" id="citySideList"></div>
+        </aside>
+        <div class="home-right-showcase">
+          <div class="pro-strip">
+            <div class="showcase-title compact"><h3>🔥 Popular Listings</h3><a href="#properties" data-home-filter="featured">View More ›</a></div>
+            <div class="small-property-grid" id="popularSmallRow"></div>
+          </div>
+          <div class="pro-strip two-col">
+            <div>
+              <div class="showcase-title compact"><h3>💰 Best Price</h3><a href="#properties" data-home-filter="bestPrice">View More ›</a></div>
+              <div class="side-property-list" id="bestPriceSmallRow"></div>
+            </div>
+            <div>
+              <div class="showcase-title compact"><h3>🏢 Popular Condo</h3><a href="#properties" data-home-filter="condo">View More ›</a></div>
+              <div class="side-property-list" id="condoSmallRow"></div>
+            </div>
+          </div>
+          <div class="pro-strip">
+            <div class="showcase-title compact"><h3>🏡 House / Owner Finance</h3><a href="#properties" data-home-filter="ownerFinance">View More ›</a></div>
+            <div class="small-property-grid" id="financeRow"></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="section" id="properties">
-      <div class="section-head listing-head">
-        <div>
-          <span class="eyebrow dark" data-i18n="featured">Featured Listings</span>
-          <h2 data-i18n="propertiesTitle">Properties for Sale & Rent</h2>
-        </div>
-        <div class="listing-count-note">8 listings per page</div>
+      <div class="section-head">
+        <span class="eyebrow dark" data-i18n="featured">Featured Listings</span>
+        <h2 data-i18n="propertiesTitle">Properties for Sale & Rent</h2>
       </div>
-      <div class="filters compact-filters">
+      <div class="filters">
         <select id="cityFilter"><option value="all" data-i18n="allCities">All Cities</option></select>
         <select id="typeFilter"><option value="all" data-i18n="allTypes">All Types</option></select>
         <select id="dealFilter"><option value="all" data-i18n="allDeals">All Deals</option></select>

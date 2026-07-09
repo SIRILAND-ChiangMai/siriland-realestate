@@ -167,18 +167,32 @@
       <div class="mini-info"><div class="mini-meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div><h4>${title}</h4><strong>${translateText(p.price||'')}</strong><p>${[p.bedrooms,p.bathrooms,p.area].filter(Boolean).map(translateText).join(' • ')}</p></div>
     </article>`;
   }
+  function miniCompactCard(p){
+    const title = pick(p.title);
+    return `<article class="mini-compact-card" data-mini-id="${p.id}">
+      <img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'">
+      <div><div class="mini-meta">${p.id} • ${trMap('city',p.city)}</div><h4>${title}</h4><strong>${translateText(p.price||'')}</strong><p>${[p.bedrooms,p.bathrooms,p.area].filter(Boolean).map(translateText).join(' • ')}</p></div>
+    </article>`;
+  }
   function renderHomeShowcase(){
-    const cityCounts = [...new Set(DATA.map(p=>p.city).filter(Boolean))].slice(0,6).map(city => {
+    const cityCounts = [...new Set(DATA.map(p=>p.city).filter(Boolean))].slice(0,8).map(city => {
       const count = DATA.filter(p=>p.city===city).length;
-      return `<button class="collection-card" data-collection-city="${city}"><strong>${trMap('city',city)}</strong><span>${count} listings</span></button>`;
+      return `<button class="city-side-card" data-collection-city="${city}"><strong>${trMap('city',city)}</strong><span>${count} listings</span></button>`;
     }).join('');
     const qc = $('quickCollections'); if(qc) qc.innerHTML = cityCounts;
+    if($('citySideList')) $('citySideList').innerHTML = cityCounts;
     const featured = DATA.filter(p=>p.featured !== false).slice(0,4);
     const newest = DATA.slice().sort((a,b)=>String(b.updatedAt||b.createdAt||'').localeCompare(String(a.updatedAt||a.createdAt||''))).slice(0,4);
+    const bestPrice = DATA.filter(p=>parsePriceNumber(p.price || p.salePrice)>0).sort((a,b)=>parsePriceNumber(a.price||a.salePrice)-parsePriceNumber(b.price||b.salePrice)).slice(0,3);
+    const condos = DATA.filter(p=>String(p.type||'').toLowerCase().includes('condo')).slice(0,3);
+    const houses = DATA.filter(p=>String(p.type||'').toLowerCase().includes('house')).slice(0,4);
     const finance = DATA.filter(p => propertyBlob(p).includes('owner finance') || propertyBlob(p).includes('ผ่อน') || propertyBlob(p).includes('free transfer') || propertyBlob(p).includes('0%')).slice(0,4);
     if($('featuredRow')) $('featuredRow').innerHTML = featured.map(miniCard).join('');
     if($('newRow')) $('newRow').innerHTML = newest.map(miniCard).join('');
-    if($('financeRow')) $('financeRow').innerHTML = (finance.length?finance:featured).map(miniCard).join('');
+    if($('popularSmallRow')) $('popularSmallRow').innerHTML = featured.map(miniCompactCard).join('');
+    if($('bestPriceSmallRow')) $('bestPriceSmallRow').innerHTML = (bestPrice.length?bestPrice:featured.slice(0,3)).map(miniCompactCard).join('');
+    if($('condoSmallRow')) $('condoSmallRow').innerHTML = (condos.length?condos:featured.slice(0,3)).map(miniCompactCard).join('');
+    if($('financeRow')) $('financeRow').innerHTML = (finance.length?finance:(houses.length?houses:featured)).map(miniCompactCard).join('');
   }
   function fillHeroControls(){
     const heroType = $('heroType'); if(!heroType) return;
