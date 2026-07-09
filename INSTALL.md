@@ -1,12 +1,10 @@
-SIRILAND LINE / WhatsApp Contact Fix
+SIRILAND Admin Warning Mode v3
 
-1) ZIP'i çıkar.
-2) İçindeki script.js dosyasını projenin ana klasöründeki eski script.js üzerine kopyala.
-3) GitHub Desktop → Commit → Push.
-4) Siteyi Ctrl+F5 ile yenile veya URL sonuna ?v=linefix ekle.
+1) ZIP'i çıkarın.
+2) İçindeki admin.html dosyasını proje klasöründeki eski admin.html üzerine kopyalayın.
+3) GitHub Desktop: Commit + Push.
 
-Düzeltmeler:
-- Send via LINE artık LINE Share değil, direkt @realcreamthailand OA mesaj ekranını açar.
-- Mesaj içine Property ID, title, price, doğru property URL, harita, ad, telefon, LINE ID, bütçe ve mesaj eklenir.
-- Property URL GitHub Pages için /siriland-realestate/?property=ID şeklinde düzeltilir.
-- LINE / WhatsApp butonlarına basınca lead local CRM'e de kaydedilir.
+Değişiklik:
+- Area / m² artık export'u durdurmaz.
+- Price, Bedrooms, Bathrooms, Map, Summary, Images sadece uyarı verir.
+- ZIP export sadece Duplicate ID gibi kritik hatalarda durur.

@@ -339,37 +339,39 @@ function cleanAllProperties(){
   properties = (properties||[]).map(cleanProperty);
 }
 function validateCurrentForm(){
+  // V3 Warning Mode: Price, Bedrooms, Bathrooms, Area, Map, Summary are warnings only.
+  // They must NOT stop Save, JSON, JS, or ZIP export.
   const p=getForm();
-  const missing=[];
-  if(!p.id) missing.push('ID');
-  if(!p.city) missing.push('City');
-  if(!p.type) missing.push('Type');
-  if(!p.deal) missing.push('Deal');
-  if(!p.status) missing.push('Status');
-  if(isMissingValue(p.price)) missing.push('Price veya Contact for Price');
-  if(!pick(p.title,'en') && !pick(p.title,'th')) missing.push('Title');
+  const warnings=[];
+  if(isMissingValue(p.price)) warnings.push('Price eksik — fiyat yoksa Contact for Price yaz');
   const type=String(p.type||'').toLowerCase();
   if(!type.includes('land')){
-    if(isMissingValue(p.bedrooms)) missing.push('Bedrooms');
-    if(isMissingValue(p.bathrooms)) missing.push('Bathrooms');
+    if(isMissingValue(p.bedrooms)) warnings.push('Bedrooms eksik');
+    if(isMissingValue(p.bathrooms)) warnings.push('Bathrooms eksik');
   }
-  if(isMissingValue(p.area)) missing.push('Area');
-  if(!p.images || !p.images.length) missing.push('Images');
-  return missing;
+  if(isMissingValue(p.area)) warnings.push('Area eksik');
+  if(!p.map) warnings.push('Map URL eksik');
+  if(!p.summary) warnings.push('Summary eksik');
+  if(!p.images || !p.images.length) warnings.push('Images yok');
+  return warnings;
 }
 function upsertCurrent(silent=false){
   if(!hasFormData()) return false;
-  const missing=validateCurrentForm();
-  if(missing.length){
-    alert('Eksik zorunlu alanlar:\n- '+missing.join('\n- ')+'\n\nFiyat bilinmiyorsa Price alanına: Contact for Price yaz.');
-    $('report').innerHTML='<span class="bad">Eksik zorunlu alanlar:</span>\n- '+missing.join('\n- ');
-    return false;
-  }
   const p=cleanProperty(getForm());
+  if(!p.id) p.id=nextId(p.city || $('city').value || 'Chiang Mai');
   const i=properties.findIndex(x=>x.id===p.id);
   if(i>=0) properties[i]=p; else properties.push(p);
-  renderList(); validate();
-  if(!silent) alert('Kaydedildi: '+p.id);
+  renderList();
+  validate();
+  const warnings=validateCurrentForm();
+  if(!silent){
+    if(warnings.length){
+      $('report').innerHTML='<span class="ok">Kaydedildi:</span> '+p.id+'\n\n<span class="warn">UYARI:</span>\n- '+warnings.join('\n- ')+'\n\nZIP yine oluşturulabilir.';
+      alert('Kaydedildi: '+p.id+'\n\nUyarılar var ama export durmaz.');
+    } else {
+      alert('Kaydedildi: '+p.id);
+    }
+  }
   return true;
 }
 
@@ -545,7 +547,7 @@ async function buildZip(){
   zip.file('data/properties.json', jsonText);
   saveCustomers();
   zip.file('crm/customers.json',JSON.stringify(customers,null,2));
-  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) properties.json dosyasını da eski properties.json üstüne kopyalayın.\n4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n5) GitHub Desktop: Commit + Push.\n\nNot: Export artık boş properties.json üretmez. Eksik fiyat/alan varsa raporda uyarı verir ama export durmaz. Duplicate ID varsa durur. CRM müşterileri crm/customers.json olarak eklenir.');
+  zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) properties.json dosyasını da eski properties.json üstüne kopyalayın.\n4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n5) GitHub Desktop: Commit + Push.\n\nNot: Export artık boş properties.json üretmez. Eksik fiyat/oda/banyo/alan varsa raporda uyarı verir ama export durmaz. Duplicate ID varsa durur. CRM müşterileri crm/customers.json olarak eklenir.');
   for(const [id,files] of Object.entries(pendingFilesById)){
     const p=properties.find(x=>x.id===id); if(!p) continue;
     files.forEach((f,i)=>{const path=p.images[i]; if(path) zip.file(path,f);});
