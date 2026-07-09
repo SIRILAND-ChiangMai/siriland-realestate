@@ -20,113 +20,71 @@
   const safeImg = (arr) => (arr && arr.length ? arr[0] : 'images/logo.png');
 
 
-  // ===== SIRILAND CMS PRO Sprint 3.1 helpers =====
-  const CONTACT = { phoneDisplay:'092-005-6640', phoneTel:'0920056640', phoneIntl:'66920056640', line:'@realcreamthailand' };
+  // ===== SIRILAND Contact / Lead Fix v3.1.2 =====
+  const CONTACT = { phoneDisplay:'092-005-6640', phoneTel:'0920056640', phoneIntl:'66920056640', lineId:'@realcreamthailand' };
+  function enc(v){ return encodeURIComponent(String(v || '')); }
   function propertyUrl(prop){
     const id = prop?.id || '';
-    const host = window.location.hostname || '';
-    const origin = window.location.origin || '';
-    let basePath = window.location.pathname || '/';
-    if(host.includes('github.io')){
-      basePath = '/siriland-realestate/';
-    } else {
-      basePath = basePath.replace(/\/[^/]*$/, '/');
-      if(!basePath || basePath === '/') basePath = '/';
-    }
+    const origin = window.location.origin || 'https://siriland-chiangmai.github.io';
+    let basePath = window.location.pathname || '/siriland-realestate/';
+    if ((window.location.hostname || '').includes('github.io')) basePath = '/siriland-realestate/';
+    else basePath = basePath.replace(/\/[^/]*$/, '/') || '/';
     return `${origin}${basePath}?property=${enc(id)}`;
   }
-  function enc(v){ return encodeURIComponent(String(v || '')); }
-  function getFavorites(){ try{return JSON.parse(localStorage.getItem('siriland_favorites')||'[]')}catch(e){return []} }
-  function setFavorites(arr){ localStorage.setItem('siriland_favorites', JSON.stringify([...new Set(arr)])); }
-  function isFavorite(id){ return getFavorites().includes(id); }
-  function toggleFavorite(id){
-    const fav=getFavorites();
-    const next=fav.includes(id) ? fav.filter(x=>x!==id) : fav.concat(id);
-    setFavorites(next);
-    if(modalProperty && modalProperty.id===id) updateModal();
-    render();
+  function copyText(txt){
+    if(navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(txt);
+    const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); return Promise.resolve();
   }
-  function shareText(prop){
-    return `${pick(prop.title)}\n${prop.id} • ${trMap('city',prop.city)} • ${trMap('type',prop.type)}\n${translateText(prop.price||'')}\n${propertyUrl(prop)}`;
-  }
-  function qrUrl(prop){ return `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${enc(propertyUrl(prop))}`; }
-  function lineShareUrl(prop){ return `https://line.me/R/msg/text/?${enc(shareText(prop))}`; }
-  function whatsappShareUrl(prop){ return `https://wa.me/?text=${enc(shareText(prop))}`; }
+  function lineChatUrl(){ return `https://line.me/R/ti/p/${CONTACT.lineId}`; }
+  function whatsappLeadUrl(prop){ return `https://wa.me/${CONTACT.phoneIntl}?text=${enc(inquiryMessage(prop,'WhatsApp'))}`; }
   function facebookShareUrl(prop){ return `https://www.facebook.com/sharer/sharer.php?u=${enc(propertyUrl(prop))}`; }
-  function streetViewUrl(prop){ return prop?.map ? `https://www.google.com/maps/search/?api=1&query=${enc(prop.map)}` : '#'; }
-  function inquiryMessage(prop, source='Website Inquiry'){
-    const name = document.getElementById('leadName')?.value || '';
-    const phone = document.getElementById('leadPhone')?.value || '';
-    const line = document.getElementById('leadLine')?.value || '';
-    const budget = document.getElementById('leadBudget')?.value || '';
-    const msg = document.getElementById('leadMessage')?.value || '';
-    return `Hello Kwan, I am interested in this property.\n\nProperty ID: ${prop.id}\nTitle: ${pick(prop.title)}\nPrice: ${prop.price || ''}\nLink: ${propertyUrl(prop)}\nMap: ${prop.map || ''}\n\nName: ${name}\nPhone: ${phone}\nLINE ID: ${line}\nBudget: ${budget}\nMessage: ${msg || 'Please send me more details.'}\n\nSource: ${source}`;
-  }
-  function leadRecord(prop){
-    return {
-      id:'LEAD-'+Date.now(), createdAt:new Date().toISOString(), status:'New Lead',
-      propertyId:prop.id, propertyTitle:pick(prop.title), propertyUrl:propertyUrl(prop), map:prop.map||'',
-      name:document.getElementById('leadName')?.value||'', phone:document.getElementById('leadPhone')?.value||'',
-      line:document.getElementById('leadLine')?.value||'', budget:document.getElementById('leadBudget')?.value||'',
-      message:document.getElementById('leadMessage')?.value||''
-    };
+  function qrUrl(prop){ return `https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=${enc(propertyUrl(prop))}`; }
+  function getLeadVal(id){ return document.getElementById(id)?.value?.trim() || ''; }
+  function inquiryMessage(prop, source='Website'){
+    return `Hello Kwan, I am interested in this property.\n\nProperty ID: ${prop.id || ''}\nTitle: ${pick(prop.title)}\nPrice: ${prop.price || ''}\nBedrooms: ${prop.bedrooms || ''}\nBathrooms: ${prop.bathrooms || ''}\nArea: ${prop.area || ''}\nLink: ${propertyUrl(prop)}\nMap: ${prop.map || ''}\n\nName: ${getLeadVal('leadName')}\nPhone: ${getLeadVal('leadPhone')}\nLINE ID: ${getLeadVal('leadLine')}\nBudget: ${getLeadVal('leadBudget')}\nMessage: ${getLeadVal('leadMessage') || 'Please send me more details.'}\n\nSource: ${source}`;
   }
   function saveLead(prop){
-    const rec=leadRecord(prop);
-    const all=JSON.parse(localStorage.getItem('siriland_leads')||'[]');
-    all.unshift(rec); localStorage.setItem('siriland_leads', JSON.stringify(all.slice(0,500)));
-    alert(lang==='th' ? 'บันทึกข้อมูลเรียบร้อยแล้ว กรุณากด LINE หรือ WhatsApp เพื่อส่งข้อความถึงขวัญ' : 'Inquiry saved. Please send via LINE or WhatsApp to contact Kwan.');
+    const rec={id:'LEAD-'+Date.now(),createdAt:new Date().toISOString(),status:'New Lead',propertyId:prop.id,propertyTitle:pick(prop.title),propertyUrl:propertyUrl(prop),name:getLeadVal('leadName'),phone:getLeadVal('leadPhone'),line:getLeadVal('leadLine'),budget:getLeadVal('leadBudget'),message:getLeadVal('leadMessage')};
+    try{const arr=JSON.parse(localStorage.getItem('siriland_leads')||'[]');arr.unshift(rec);localStorage.setItem('siriland_leads',JSON.stringify(arr.slice(0,500)));}catch(e){}
   }
-  function ensureSprint31Panel(prop){
-    const body=document.querySelector('#propertyModal .modal-body');
-    if(!body || !prop) return;
-    let box=document.getElementById('sprint31Panel');
-    const favLabel=isFavorite(prop.id) ? '❤️ Favorited' : '🤍 Favorite';
-    const th = lang==='th';
-    const askTitle = th ? 'สอบถามอสังหาริมทรัพย์นี้' : 'Ask About This Property';
-    const namePh = th ? 'ชื่อ' : 'Name';
-    const phonePh = th ? 'เบอร์โทร' : 'Phone';
-    const linePh = th ? 'LINE ID' : 'LINE ID';
-    const budgetPh = th ? 'งบประมาณ' : 'Budget';
-    const msgPh = th ? 'ข้อความ' : 'Message';
-    const defaultMsg = th ? 'สนใจอสังหาริมทรัพย์นี้ กรุณาส่งรายละเอียดเพิ่มเติมค่ะ' : "Hello, I'm interested in this property. Please send me more details.";
-    const html=`
-      <div class="sprint31-box">
-        <h4>Share / Contact</h4>
-        <div class="sprint31-actions">
-          <button class="smallbtn goldbtn" data-s31="copy">🔗 Copy Link</button>
+  function specLabel(k){
+    const m={en:{bedrooms:'Bedrooms',bathrooms:'Bathrooms',area:'Area',room:'Room',floor:'Floor',type:'Type',deal:'Deal',status:'Status'},th:{bedrooms:'ห้องนอน',bathrooms:'ห้องน้ำ',area:'พื้นที่',room:'เลขห้อง',floor:'ชั้น',type:'ประเภท',deal:'ขาย/เช่า',status:'สถานะ'},tr:{bedrooms:'Oda',bathrooms:'Banyo',area:'m² / Alan',room:'Oda No',floor:'Kat',type:'Tip',deal:'Satış/Kira',status:'Durum'},zh:{bedrooms:'卧室',bathrooms:'浴室',area:'面积',room:'房号',floor:'楼层',type:'类型',deal:'交易',status:'状态'}};
+    return (m[lang]&&m[lang][k])||m.en[k]||k;
+  }
+  function importantSpecs(prop){
+    const rows=[['bedrooms',prop.bedrooms],['bathrooms',prop.bathrooms],['area',prop.area],['room',prop.room],['floor',prop.floor]];
+    return rows.filter(([,v])=>String(v||'').trim()).map(([k,v])=>`<span><b>${specLabel(k)}:</b> ${translateText(v)}</span>`).join('');
+  }
+  function ensureModalSpecArea(){
+    let specs=document.getElementById('modalSpecs');
+    if(!specs){ specs=document.createElement('div'); specs.id='modalSpecs'; specs.className='modal-specs'; const price=$('modalPrice'); price?.insertAdjacentElement('afterend', specs); }
+    return specs;
+  }
+  function ensureLeadPanel(prop){
+    const body=document.querySelector('#propertyModal .modal-body'); if(!body||!prop) return;
+    let box=document.getElementById('leadContactPanel'); if(!box){ box=document.createElement('div'); box.id='leadContactPanel'; body.appendChild(box); }
+    const isTh=lang==='th';
+    box.innerHTML=`
+      <div class="s31-box share-box">
+        <h4>${isTh?'แชร์ / ติดต่อ':'Share / Contact'}</h4>
+        <div class="s31-actions">
+          <button class="smallbtn goldbtn" data-contact-action="copy">🔗 Copy Link</button>
           <a class="smallbtn" target="_blank" href="${facebookShareUrl(prop)}">Facebook</a>
-          <a class="smallbtn" target="_blank" href="${lineShareUrl(prop)}">LINE Share</a>
-          <a class="smallbtn" target="_blank" href="${whatsappShareUrl(prop)}">WhatsApp</a>
-          <button class="smallbtn" data-s31="print">🖨 Print</button>
-          <button class="smallbtn" data-s31="favorite">${favLabel}</button>
-          ${prop.map?`<a class="smallbtn" target="_blank" href="${prop.map}">📍 Google Maps</a>`:''}
-          ${prop.map?`<a class="smallbtn" target="_blank" href="${streetViewUrl(prop)}">Street View</a>`:''}
+          <a class="smallbtn" target="_blank" href="${whatsappLeadUrl(prop)}">WhatsApp</a>
+          <button class="smallbtn" data-contact-action="print">🖨 Print</button>
+          ${prop.map?`<a class="smallbtn" target="_blank" href="${prop.map}">📍 Map</a>`:''}
         </div>
-        <div class="sprint31-qr"><img src="${qrUrl(prop)}" alt="QR Code"><span>${th?'สแกนเพื่อเปิดประกาศนี้':'Scan to open this listing'}</span></div>
+        <div class="s31-qr"><img src="${qrUrl(prop)}" alt="QR"><span>${isTh?'สแกนเพื่อเปิดประกาศนี้':'Scan to open this listing'}</span></div>
       </div>
-      <div class="sprint31-box lead-box">
-        <h4>${askTitle}</h4>
-        <div class="lead-grid">
-          <input id="leadName" placeholder="${namePh}">
-          <input id="leadPhone" placeholder="${phonePh}">
-          <input id="leadLine" placeholder="${linePh}">
-          <input id="leadBudget" placeholder="${budgetPh}">
-        </div>
-        <textarea id="leadMessage" placeholder="${msgPh}">${defaultMsg}</textarea>
-        <div class="sprint31-actions">
-          <button class="smallbtn goldbtn" data-s31="leadLine">Send via LINE</button>
-          <button class="smallbtn" data-s31="leadWhatsapp">Send via WhatsApp</button>
-          <button class="smallbtn" data-s31="saveLead">Save Lead</button>
-          <a class="smallbtn" href="tel:${CONTACT.phoneTel}">📞 Call Kwan</a>
-        </div>
+      <div class="s31-box ask-box">
+        <h4>${isTh?'สอบถามอสังหาริมทรัพย์นี้':'Ask About This Property'}</h4>
+        <div class="lead-grid"><input id="leadName" placeholder="${isTh?'ชื่อ':'Name'}"><input id="leadPhone" placeholder="${isTh?'เบอร์โทร':'Phone'}"><input id="leadLine" placeholder="LINE ID"><input id="leadBudget" placeholder="${isTh?'งบประมาณ':'Budget'}"></div>
+        <textarea id="leadMessage">${isTh?'สนใจอสังหาริมทรัพย์นี้ กรุณาส่งรายละเอียดเพิ่มเติมค่ะ':"Hello, I'm interested in this property. Please send me more details."}</textarea>
+        <div class="s31-actions lead-actions"><button class="smallbtn goldbtn" data-contact-action="line">Send via LINE</button><a class="smallbtn" target="_blank" data-contact-whatsapp href="${whatsappLeadUrl(prop)}">Send via WhatsApp</a><button class="smallbtn" data-contact-action="save">Save Lead</button><a class="smallbtn" href="tel:${CONTACT.phoneTel}">📞 Call Kwan</a></div>
+        <p class="lead-note">LINE güvenliği nedeniyle mesaj otomatik gönderilmez; mesaj kopyalanır, LINE açılır, sadece yapıştırıp gönderirsin.</p>
       </div>`;
-    if(!box){
-      box=document.createElement('div'); box.id='sprint31Panel'; body.appendChild(box);
-    }
-    box.innerHTML=html;
   }
-  // ===== End Sprint 3.1 helpers =====
+  // ===== End Contact / Lead Fix =====
 
   const dict = {
     city:{'Chiang Mai':{th:'เชียงใหม่',tr:'Chiang Mai',zh:'清迈'},'Bangkok':{th:'กรุงเทพฯ',tr:'Bangkok',zh:'曼谷'},'Phitsanulok':{th:'พิษณุโลก',tr:'Phitsanulok',zh:'彭世洛'},'Phichit':{th:'พิจิตร',tr:'Phichit',zh:'披集'},'Nakhon Sawan':{th:'นครสวรรค์',tr:'Nakhon Sawan',zh:'那空沙旺'}},
@@ -242,7 +200,7 @@
       <div class="photo" data-id="${p.id}"><img src="${safeImg(p.images)}" alt="${title}" loading="lazy" onerror="this.src='images/logo.png'"><span class="badge">${trMap('deal',p.deal)}</span><span class="status">${trMap('status',p.status)}</span><span class="count">${(p.images||[]).length} ${t('photos')}</span>${ov?`<span class="sold-ribbon">${ov}</span>`:''}</div>
       <div class="content"><div class="meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div><h3>${title}</h3><div class="price">${translateText(p.price||'')}</div><p class="desc">${desc}</p>
       <div class="chips">${highlights.map(h=>`<span>${h}</span>`).join('')}</div>
-      <div class="actions"><button class="smallbtn goldbtn" data-open="${p.id}">${t('details')}</button><button class="smallbtn" data-fav="${p.id}">${isFavorite(p.id)?'❤️':'🤍'}</button>${p.map?`<a class="smallbtn" target="_blank" href="${p.map}">${t('map')}</a>`:''}<a class="smallbtn" target="_blank" href="https://line.me/R/ti/p/@realcreamthailand">${t('contact')}</a></div></div>
+      <div class="actions"><button class="smallbtn goldbtn" data-open="${p.id}">${t('details')}</button>${p.map?`<a class="smallbtn" target="_blank" href="${p.map}">${t('map')}</a>`:''}<a class="smallbtn" target="_blank" href="https://line.me/R/ti/p/@realcreamthailand">${t('contact')}</a></div></div>
     </article>`;
   }
 
@@ -268,30 +226,35 @@
     $('modalTitle').textContent=pick(p.title);
     $('modalMeta').textContent=`${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)} • ${trMap('deal',p.deal)} • ${trMap('status',p.status)}`;
     $('modalPrice').textContent=translateText(p.price||'');
+    ensureModalSpecArea().innerHTML = importantSpecs(p);
     const descEl = $('modalDescription') || $('modalDesc');
     const hiEl = $('modalHighlights') || $('modalChips');
-    if(descEl) descEl.textContent=pick(p.description);
-    if(hiEl) hiEl.innerHTML=pickList(p.highlights).map(h=>hiEl.tagName==='UL'?`<li>${h}</li>`:`<span>${h}</span>`).join('');
+    if(descEl) descEl.textContent = pick(p.summary) || pick(p.description);
+    const baseHighlights = pickList(p.highlights).slice(0,8);
+    if(hiEl) hiEl.innerHTML=baseHighlights.map(h=>hiEl.tagName==='UL'?`<li>${h}</li>`:`<span>${h}</span>`).join('');
     $('modalThumbs').innerHTML=imgs.map((src,i)=>`<img src="${src}" class="${i===modalIndex?'active':''}" data-thumb="${i}" onerror="this.style.display='none'">`).join('');
     $('modalMap').style.display=p.map?'inline-block':'none'; $('modalMap').href=p.map||'#';
-    const copyBtn = $('copyLink'); if(copyBtn) copyBtn.dataset.s31 = 'copy';
-    ensureSprint31Panel(p);
-    window.history.replaceState({}, '', propertyUrl(p));
+    const copyBtn = $('copyLink'); if(copyBtn) copyBtn.setAttribute('data-contact-action','copy');
+    ensureLeadPanel(p);
+    if(window.history && propertyUrl(p)) window.history.replaceState({}, '', propertyUrl(p));
   }
   function next(delta){ if(!modalProperty) return; const n=(modalProperty.images||[]).length||1; modalIndex=(modalIndex+delta+n)%n; updateModal(); }
 
   document.addEventListener('click', e=>{
     const langBtn=e.target.closest('#langSwitch button'); if(langBtn){lang=langBtn.dataset.lang; localStorage.setItem('siriland_lang',lang); applyI18n(); fillFilters(); render(); if(modalProperty) updateModal(); return;}
-    const fav=e.target.closest('[data-fav]'); if(fav){ e.preventDefault(); toggleFavorite(fav.dataset.fav); return; }
-    const s31=e.target.closest('[data-s31]'); if(s31 && modalProperty){
-      const action=s31.dataset.s31;
-      if(action==='copy'){ navigator.clipboard?.writeText(propertyUrl(modalProperty)); alert(lang==='th'?'คัดลอกลิงก์แล้ว':'Link copied'); return; }
+    const actionBtn=e.target.closest('[data-contact-action]');
+    if(actionBtn && modalProperty){
+      const action=actionBtn.dataset.contactAction;
+      if(action==='copy'){ copyText(propertyUrl(modalProperty)).then(()=>alert(lang==='th'?'คัดลอกลิงก์แล้ว':'Link copied')); return; }
       if(action==='print'){ window.print(); return; }
-      if(action==='favorite'){ toggleFavorite(modalProperty.id); return; }
-      if(action==='leadLine'){ saveLead(modalProperty); window.open(`https://line.me/R/oaMessage/${CONTACT.line}/?${enc(inquiryMessage(modalProperty,'LINE Inquiry'))}`,'_blank'); return; }
-      if(action==='leadWhatsapp'){ saveLead(modalProperty); window.open(`https://wa.me/${CONTACT.phoneIntl}?text=${enc(inquiryMessage(modalProperty,'WhatsApp Inquiry'))}`,'_blank'); return; }
-      if(action==='saveLead'){ saveLead(modalProperty); return; }
+      if(action==='save'){ saveLead(modalProperty); alert(lang==='th'?'บันทึกข้อมูลแล้ว':'Lead saved'); return; }
+      if(action==='line'){
+        const msg=inquiryMessage(modalProperty,'LINE'); saveLead(modalProperty);
+        copyText(msg).then(()=>{ alert(lang==='th'?'คัดลอกข้อความแล้ว กรุณาวางใน LINE แล้วส่ง':'Mesaj kopyalandı. LINE açılacak; yapıştırıp gönder.'); window.open(lineChatUrl(),'_blank'); });
+        return;
+      }
     }
+    const wa=e.target.closest('[data-contact-whatsapp]'); if(wa && modalProperty){ wa.href=whatsappLeadUrl(modalProperty); saveLead(modalProperty); }
     const open=e.target.closest('[data-open], .photo'); if(open){openModal(open.dataset.open || open.dataset.id); return;}
     const th=e.target.closest('[data-thumb]'); if(th){modalIndex=+th.dataset.thumb; updateModal(); return;}
     if(e.target.id==='modalClose' || e.target.id==='propertyModal') $('propertyModal').classList.add('hidden');

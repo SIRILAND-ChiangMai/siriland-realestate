@@ -1,10 +1,9 @@
-SIRILAND Admin Warning Mode v3
+# SIRILAND Mobile Details + LINE Contact Fix
 
-1) ZIP'i çıkarın.
-2) İçindeki admin.html dosyasını proje klasöründeki eski admin.html üzerine kopyalayın.
-3) GitHub Desktop: Commit + Push.
+1. ZIP'i çıkar.
+2. İçindeki `script.js` dosyasını projedeki eski `script.js` üstüne koy.
+3. İçindeki `style.css` dosyasını projedeki eski `style.css` üstüne koy.
+4. GitHub Desktop → Commit → Push.
+5. Telefonda sayfayı yeniden açarken cache için link sonuna `?v=312` ekle.
 
-Değişiklik:
-- Area / m² artık export'u durdurmaz.
-- Price, Bedrooms, Bathrooms, Map, Summary, Images sadece uyarı verir.
-- ZIP export sadece Duplicate ID gibi kritik hatalarda durur.
+Not: Admin dosyasına dokunma.
