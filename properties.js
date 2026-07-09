@@ -2993,9 +2993,9 @@ window.SIRILAND_PROPERTIES = [
     },
     "description": {
       "en": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "th": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026",
+      "tr": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026",
+      "zh": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026"
     },
     "highlights": {
       "en": [],
@@ -3003,7 +3003,28 @@ window.SIRILAND_PROPERTIES = [
       "tr": [],
       "zh": []
     },
-    "images": [],
+    "images": [
+      "images/cm-0032-1.jpg",
+      "images/cm-0032-2.jpg",
+      "images/cm-0032-3.jpg",
+      "images/cm-0032-4.jpg",
+      "images/cm-0032-5.jpg",
+      "images/cm-0032-6.jpg",
+      "images/cm-0032-7.jpg",
+      "images/cm-0032-8.jpg",
+      "images/cm-0032-9.jpg",
+      "images/cm-0032-10.jpg",
+      "images/cm-0032-11.jpg",
+      "images/cm-0032-12.jpg",
+      "images/cm-0032-13.jpg",
+      "images/cm-0032-14.jpg",
+      "images/cm-0032-15.jpg",
+      "images/cm-0032-16.jpg",
+      "images/cm-0032-17.jpg",
+      "images/cm-0032-18.jpg",
+      "images/cm-0032-19.jpg",
+      "images/cm-0032-20.jpg"
+    ],
     "createdAt": "2026-07-09",
     "updatedAt": "2026-07-09",
     "featured": true,
