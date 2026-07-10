@@ -3623,5 +3623,118 @@
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
+  },
+  {
+    "id": "CM-0034",
+    "city": "Chiang Mai",
+    "type": "Karnkanok 12 Village Phase 1, Soi 4",
+    "deal": "Rent",
+    "status": "Available",
+    "price": "35,000",
+    "bedrooms": "4",
+    "bathrooms": "4",
+    "area": "",
+    "room": "",
+    "floor": "",
+    "map": "https://maps.app.goo.gl/Dt4cs27NERo1iKZ4A",
+    "landSize": "",
+    "landAreaSqm": "",
+    "buildingArea": "",
+    "parking": "2",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "🏫 Unity International School",
+      "🏫 ABS International School",
+      "🏫 ACIS International School",
+      "Bangkok Hospital Chiang Mai",
+      "🏬 Central Festival Chiang Mai",
+      "🛒 Makro",
+      "🛍️ Big C"
+    ],
+    "features": [
+      "💵 Rent: THB 35,000 / Month",
+      "📌 1 Month Advance Payment",
+      "📌 2 Months Security Deposit",
+      "📌 Minimum 1-Year Contract",
+      "🚫 No Pets Allowed"
+    ],
+    "furniture": [
+      "🛋️ Sofa",
+      "🍽️ Dining Table (4 Seats)",
+      "🛏️ Complete Bedroom Furniture",
+      "✍️ Study Desk",
+      "❄️ 5 Air Conditioners",
+      "🚿 4 Water Heaters",
+      "🧊 Refrigerator",
+      "🍲 Microwave",
+      "🧺 Washing Machine",
+      "🚪 Remote-Controlled Gate",
+      "🪟 Premium Tostem Doors & Windows",
+      "🦟 Mosquito Screens"
+    ],
+    "appliances": [],
+    "title": {
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "Property Features\n🛏️ 4 Bedrooms\n🛁 4 Bathrooms\n🍳 2 Kitchens (Indoor & Outdoor)\n🚗 2 Covered Parking Spaces\n🏠 Extended Carport\n🌿 Backyard Area\n✨ Spacious Corner Plot\n🔒 Excellent Privacy\nFully Furnished\n\nThe property includes:\n\n🛋️ Sofa\n🍽️ Dining Table (4 Seats)\n🛏️ Complete Bedroom Furniture\n✍️ Study Desk\n❄️ 5 Air Conditioners\n🚿 4 Water Heaters\n🧊 Refrigerator\n🍲 Microwave\n🧺 Washing Machine\n🚪 Remote-Controlled Gate\n🪟 Premium Tostem Doors & Windows\n🦟 Mosquito Screens\nVillage Facilities\n🏊 Swimming Pool\n🏋️ Fitness Center\n🛡️ 24-Hour Security\n🚘 LPR (License Plate Recognition) Entrance System",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/cm-0034-1.jpg",
+      "images/cm-0034-2.jpg",
+      "images/cm-0034-3.jpg",
+      "images/cm-0034-4.jpg",
+      "images/cm-0034-5.jpg",
+      "images/cm-0034-6.jpg",
+      "images/cm-0034-7.jpg",
+      "images/cm-0034-8.jpg",
+      "images/cm-0034-9.jpg",
+      "images/cm-0034-10.jpg",
+      "images/cm-0034-11.jpg",
+      "images/cm-0034-12.jpg",
+      "images/cm-0034-13.jpg",
+      "images/cm-0034-14.jpg",
+      "images/cm-0034-15.jpg",
+      "images/cm-0034-16.jpg",
+      "images/cm-0034-17.jpg",
+      "images/cm-0034-18.jpg",
+      "images/cm-0034-19.jpg",
+      "images/cm-0034-20.jpg",
+      "images/cm-0034-21.jpg",
+      "images/cm-0034-22.jpg",
+      "images/cm-0034-23.jpg",
+      "images/cm-0034-24.jpg"
+    ],
+    "createdAt": "2026-07-10",
+    "updatedAt": "2026-07-10",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
   }
 ]
