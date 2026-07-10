@@ -3464,6 +3464,84 @@ window.SIRILAND_PROPERTIES = [
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
+  },
+  {
+    "id": "PCT-0006",
+    "city": "Phichit",
+    "type": "Brand New Commercial Shophouse",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "3.9M",
+    "bedrooms": "3",
+    "bathrooms": "3",
+    "area": "28.2 Sq.Wah",
+    "room": "",
+    "floor": "3",
+    "map": "",
+    "landSize": "",
+    "landAreaSqm": "",
+    "buildingArea": "",
+    "parking": "2",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "MAkro Imperial Scholl Lotus Tops"
+    ],
+    "features": [
+      "3 Flors"
+    ],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "New Commercial Shophouse for Sale",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "Free Included\nAir Conditioner\nWater Heater\nWater Pump\nWater Storage Tank\nBuyer Benefits\n\n✅ Free Transfer Fee\n\n✅ Free Taxes\n\n✅ Free Government Fees\n\n✅ No Hidden Costs\n\nMove in and start your business immediately.\nExcellent Location\nNext to Makro Phichit\nEasy Access to Main Road\nHigh Traffic Area\nExcellent Commercial Potential\nSuitable for Investment or Owner-Occupied Business",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/new-commercial-shophouse-for-sale-1.jpg",
+      "images/new-commercial-shophouse-for-sale-2.jpg",
+      "images/new-commercial-shophouse-for-sale-3.jpg",
+      "images/new-commercial-shophouse-for-sale-4.jpg",
+      "images/new-commercial-shophouse-for-sale-5.jpg",
+      "images/new-commercial-shophouse-for-sale-6.jpg",
+      "images/new-commercial-shophouse-for-sale-7.jpg",
+      "images/new-commercial-shophouse-for-sale-8.jpg",
+      "images/new-commercial-shophouse-for-sale-9.jpg",
+      "images/new-commercial-shophouse-for-sale-10.jpg",
+      "images/new-commercial-shophouse-for-sale-11.jpg",
+      "images/new-commercial-shophouse-for-sale-12.jpg"
+    ],
+    "createdAt": "2026-07-10",
+    "updatedAt": "2026-07-10",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
   }
 ];
 const properties = window.SIRILAND_PROPERTIES;
