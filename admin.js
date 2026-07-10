@@ -6,6 +6,8 @@ let currentLang='en';
 let imageFiles=[];
 let existingImageList=[];
 let pendingFilesById={};
+let mediaAnalysis=[];
+let mediaAnalysisToken=0;
 const langs=['en','th','tr','zh'];
 const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map','landSize','landAreaSqm','buildingArea','parking','titleDeed','roadAccess','frontage','zoning','utilities','salePrice','rentPrice','ownerFinance','installment','freeTransfer','summary','nearby','features','furniture','appliances'];
 const $=id=>document.getElementById(id);
@@ -102,8 +104,11 @@ function getForm(){
     p[k] = String(p[k]||'').split('\n').map(x=>x.trim()).filter(Boolean);
   });
   if(imageFiles.length){
-    const base=imageBaseFor(p);
-    p.images=imageFiles.map((f,i)=>`images/${base}-${i+1}.${(f.name.split('.').pop()||'jpg').toLowerCase()}`);
+    const base=mediaRenameBase()||imageBaseFor(p);
+    p.images=imageFiles.map((f,i)=>{
+      const ext=((f.name.split('.').pop()||'jpg').toLowerCase()).replace('jpeg','jpg');
+      return `images/${base}-${String(i+1).padStart(2,'0')}.${ext}`;
+    });
     pendingFilesById[p.id]=imageFiles.slice();
   } else {
     p.images=existingImageList.length ? existingImageList.slice() : ((existing&&existing.images)||[]);
@@ -373,37 +378,147 @@ function renderList(){
   updateQualityScore();
   $('list').innerHTML=properties.map(p=>`<div class="item"><div><b>${escapeHtml(p.id)}</b> — ${escapeHtml(pick(p.title,'en')||pick(p.title,'th'))}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.price||'')} • ${(p.images||[]).length} foto</span></div><div><button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button><button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button></div></div>`).join('');
 }
-function filePreview(f){ return URL.createObjectURL(f); }
-function imageCard(src, name, i, existing=false){
+function filePreview(f){
+  if(!f.__sirilandPreview) f.__sirilandPreview=URL.createObjectURL(f);
+  return f.__sirilandPreview;
+}
+function mediaFormatBytes(bytes){
+  const n=Number(bytes)||0;
+  if(n>=1024*1024) return (n/(1024*1024)).toFixed(2)+' MB';
+  if(n>=1024) return Math.round(n/1024)+' KB';
+  return n+' B';
+}
+function mediaRenameBase(){
+  const manual=String($('mediaRenamePrefix')?.value||'').trim();
+  if(manual) return slugify(manual);
+  const title=$('title_en')?.value||$('title_th')?.value||$('id')?.value||'property';
+  return slugify(title);
+}
+function mediaExportName(index,file){
+  const ext=((file?.name||'image.jpg').split('.').pop()||'jpg').toLowerCase().replace('jpeg','jpg');
+  return mediaRenameBase()+'-'+String(index+1).padStart(2,'0')+'.'+ext;
+}
+async function mediaFileHash(file){
+  try{
+    const buffer=await file.arrayBuffer();
+    const digest=await crypto.subtle.digest('SHA-256',buffer);
+    return [...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,'0')).join('');
+  }catch(e){
+    return [file.name,file.size,file.lastModified].join('|');
+  }
+}
+function mediaReadDimensions(file){
+  return new Promise(resolve=>{
+    const img=new Image();
+    const src=filePreview(file);
+    img.onload=()=>resolve({width:img.naturalWidth||0,height:img.naturalHeight||0});
+    img.onerror=()=>resolve({width:0,height:0});
+    img.src=src;
+  });
+}
+async function analyzeMediaFiles(){
+  const token=++mediaAnalysisToken;
+  const files=imageFiles.slice();
+  const minRes=Number($('mediaMinResolution')?.value||1600);
+  const maxBytes=Number($('mediaMaxFileSize')?.value||4)*1024*1024;
+  const results=[];
+  for(let i=0;i<files.length;i++){
+    const file=files[i];
+    const [dim,hash]=await Promise.all([mediaReadDimensions(file),mediaFileHash(file)]);
+    results.push({
+      index:i,name:file.name,size:file.size,width:dim.width,height:dim.height,hash,
+      lowRes:Math.max(dim.width,dim.height)<minRes,
+      large:file.size>maxBytes,
+      duplicate:false,
+      exportName:mediaExportName(i,file)
+    });
+  }
+  const counts={};
+  results.forEach(x=>counts[x.hash]=(counts[x.hash]||0)+1);
+  results.forEach(x=>x.duplicate=counts[x.hash]>1);
+  if(token!==mediaAnalysisToken) return;
+  mediaAnalysis=results;
+  renderImages();
+  renderMediaSummary();
+}
+function renderMediaSummary(){
+  const total=imageFiles.length||existingImageList.length;
+  const duplicate=mediaAnalysis.filter(x=>x.duplicate).length;
+  const lowRes=mediaAnalysis.filter(x=>x.lowRes).length;
+  const large=mediaAnalysis.filter(x=>x.large).length;
+  const size=imageFiles.reduce((a,f)=>a+(f.size||0),0);
+  const set=(id,value)=>{if($(id))$(id).textContent=value};
+  set('mediaStatTotal',total);
+  set('mediaStatCover',total?'1':'—');
+  set('mediaStatDuplicates',duplicate);
+  set('mediaStatLowRes',lowRes);
+  set('mediaStatLarge',large);
+  set('mediaStatSize',mediaFormatBytes(size));
+  if($('imageStats')){
+    $('imageStats').textContent=total
+      ? `${total} fotoğraf • Kapak: 1. fotoğraf • Export adı: ${mediaRenameBase()}-01.jpg`
+      : 'Henüz fotoğraf seçilmedi.';
+  }
+  if($('imageWarnings')){
+    const warnings=[];
+    if(duplicate) warnings.push(`⚠️ ${duplicate} duplicate fotoğraf bulundu.`);
+    if(lowRes) warnings.push(`⚠️ ${lowRes} fotoğraf minimum çözünürlüğün altında.`);
+    if(large) warnings.push(`⚠️ ${large} fotoğraf seçilen dosya boyutu limitini aşıyor.`);
+    $('imageWarnings').innerHTML=warnings.length?warnings.map(x=>`<div>${escapeHtml(x)}</div>`).join(''):'<div class="mediaAllGood">✅ Fotoğraf kalite kontrolü temiz.</div>';
+  }
+}
+function imageCard(src,name,i,existing=false){
   const cover=i===0?'<span class="coverTag">⭐ KAPAK</span>':'';
   const safe=escapeHtml(src);
-  const title=existing ? (name||('Mevcut görsel '+(i+1))) : (name||('Yeni görsel '+(i+1)));
-  return `<div class="imageCard" draggable="true" ondragstart="dragImgStart(${i}, ${existing})" ondragover="event.preventDefault()" ondrop="dropImg(${i}, ${existing})">
+  const title=existing?(name||('Mevcut görsel '+(i+1))):(name||('Yeni görsel '+(i+1)));
+  const info=!existing?mediaAnalysis.find(x=>x.index===i):null;
+  const badges=[];
+  if(info){
+    badges.push(`<span class="mediaInfoBadge">${info.width}×${info.height}</span>`);
+    badges.push(`<span class="mediaInfoBadge">${mediaFormatBytes(info.size)}</span>`);
+    if(info.duplicate) badges.push('<span class="mediaInfoBadge danger">Duplicate</span>');
+    if(info.lowRes) badges.push('<span class="mediaInfoBadge warning">Low resolution</span>');
+    if(info.large) badges.push('<span class="mediaInfoBadge warning">Large file</span>');
+  }
+  const exportName=!existing?(info?.exportName||mediaExportName(i,imageFiles[i])):String(name||'').split('/').pop();
+  return `<div class="imageCard mediaImageCard" draggable="true" ondragstart="dragImgStart(${i},${existing})" ondragover="event.preventDefault()" ondrop="dropImg(${i},${existing})">
     <div class="thumbWrap" onclick="window.open('${safe}','_blank')"><img src="${safe}" onerror="this.src='images/logo.png'">${cover}</div>
-    <div><div class="imgTitle">${i+1}. ${cover?'Kapak Fotoğrafı':'Fotoğraf'}</div><div class="imgPath">${escapeHtml(title)}</div>
-    <div class="imgActions"><button class="btn" onclick="${existing?'coverExisting':'coverImg'}(${i})">⭐ Kapak Yap</button><button class="btn dark" onclick="${existing?'moveExisting':'moveImg'}(${i},-1)">↑ Yukarı</button><button class="btn dark" onclick="${existing?'moveExisting':'moveImg'}(${i},1)">↓ Aşağı</button>${existing?`<button class="btn red" onclick="removeExisting(${i})">Sil</button>`:`<button class="btn red" onclick="removeImg(${i})">Sil</button>`}</div></div>
+    <div class="mediaImageInfo">
+      <div class="imgTitle">${i+1}. ${cover?'Kapak Fotoğrafı':'Fotoğraf'}</div>
+      <div class="imgPath">${escapeHtml(title)}</div>
+      <div class="mediaExportName">Export: ${escapeHtml(exportName)}</div>
+      <div class="mediaInfoBadges">${badges.join('')}</div>
+      <div class="imgActions">
+        <button class="btn" type="button" onclick="${existing?'coverExisting':'coverImg'}(${i})">⭐ Kapak Yap</button>
+        <button class="btn dark" type="button" onclick="${existing?'moveExisting':'moveImg'}(${i},-1)">↑</button>
+        <button class="btn dark" type="button" onclick="${existing?'moveExisting':'moveImg'}(${i},1)">↓</button>
+        <button class="btn red" type="button" onclick="${existing?'removeExisting':'removeImg'}(${i})">Sil</button>
+      </div>
+    </div>
   </div>`;
 }
 function renderImages(){
   if(imageFiles.length){
-    $('imagePreview').innerHTML=imageFiles.map((f,i)=>imageCard(filePreview(f), f.name, i, false)).join('');
-  } else {
-    $('imagePreview').innerHTML=existingImageList.map((x,i)=>imageCard(x, x, i, true)).join('');
+    $('imagePreview').innerHTML=imageFiles.map((f,i)=>imageCard(filePreview(f),f.name,i,false)).join('');
+  }else{
+    $('imagePreview').innerHTML=existingImageList.map((x,i)=>imageCard(x,x,i,true)).join('');
   }
+  renderMediaSummary();
 }
-let dragFromIndex=null; let dragExisting=false;
+let dragFromIndex=null;let dragExisting=false;
 window.dragImgStart=(i,existing)=>{dragFromIndex=i;dragExisting=existing};
 window.dropImg=(to,existing)=>{
-  if(dragFromIndex===null || dragExisting!==existing) return;
+  if(dragFromIndex===null||dragExisting!==existing)return;
   const arr=existing?existingImageList:imageFiles;
-  const item=arr.splice(dragFromIndex,1)[0]; arr.splice(to,0,item);
-  dragFromIndex=null; renderImages();
+  const item=arr.splice(dragFromIndex,1)[0];arr.splice(to,0,item);
+  dragFromIndex=null;
+  if(!existing) analyzeMediaFiles(); else renderImages();
 };
 window.editProp=id=>{const p=properties.find(x=>x.id===id);if(p)setForm(p)};
 window.deleteProp=id=>{if(confirm(id+' silinsin mi?')){properties=properties.filter(p=>p.id!==id);delete pendingFilesById[id];renderList();clearForm();validate()}};
-window.moveImg=(i,d)=>{const j=i+d;if(j<0||j>=imageFiles.length)return;[imageFiles[i],imageFiles[j]]=[imageFiles[j],imageFiles[i]];renderImages()};
-window.coverImg=i=>{if(i<=0||i>=imageFiles.length)return;const f=imageFiles.splice(i,1)[0];imageFiles.unshift(f);renderImages()};
-window.removeImg=i=>{if(i<0||i>=imageFiles.length)return;imageFiles.splice(i,1);renderImages();if(window.SIRILAND_MEDIA_REFRESH)window.SIRILAND_MEDIA_REFRESH();};
+window.moveImg=(i,d)=>{const j=i+d;if(j<0||j>=imageFiles.length)return;[imageFiles[i],imageFiles[j]]=[imageFiles[j],imageFiles[i]];analyzeMediaFiles()};
+window.coverImg=i=>{if(i<=0||i>=imageFiles.length)return;const f=imageFiles.splice(i,1)[0];imageFiles.unshift(f);analyzeMediaFiles()};
+window.removeImg=i=>{if(i<0||i>=imageFiles.length)return;const f=imageFiles.splice(i,1)[0];if(f?.__sirilandPreview)URL.revokeObjectURL(f.__sirilandPreview);analyzeMediaFiles()};
 window.moveExisting=(i,d)=>{const j=i+d;if(j<0||j>=existingImageList.length)return;[existingImageList[i],existingImageList[j]]=[existingImageList[j],existingImageList[i]];renderImages()};
 window.coverExisting=i=>{if(i<=0||i>=existingImageList.length)return;const f=existingImageList.splice(i,1)[0];existingImageList.unshift(f);renderImages()};
 window.removeExisting=i=>{if(confirm('Bu görsel listeden silinsin mi?')){existingImageList.splice(i,1);renderImages()}};
@@ -483,6 +598,36 @@ function exportReady(){
 }
 function exportJsonText(){ cleanAllProperties(); return JSON.stringify(properties,null,2); }
 
+
+async function mediaApplyWatermark(file){
+  if(!file || !String(file.type||'').startsWith('image/')) return file;
+  return new Promise(resolve=>{
+    const img=new Image();
+    img.onload=()=>{
+      try{
+        const canvas=document.createElement('canvas');
+        canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+        const ctx=canvas.getContext('2d');
+        ctx.drawImage(img,0,0);
+        const fontSize=Math.max(22,Math.round(canvas.width*0.026));
+        const pad=Math.max(16,Math.round(canvas.width*0.018));
+        ctx.font=`800 ${fontSize}px Arial`;
+        ctx.textBaseline='bottom';
+        const label='SIRILAND • Real Estate Thailand';
+        const width=ctx.measureText(label).width;
+        const boxH=fontSize+pad;
+        ctx.fillStyle='rgba(7,26,61,.72)';
+        ctx.fillRect(canvas.width-width-pad*2,canvas.height-boxH-pad/2,width+pad*2,boxH+pad/2);
+        ctx.fillStyle='#d6ad4b';
+        ctx.fillText(label,canvas.width-width-pad,canvas.height-pad);
+        canvas.toBlob(blob=>resolve(blob||file),file.type==='image/png'?'image/png':'image/jpeg',0.9);
+      }catch(e){resolve(file)}
+    };
+    img.onerror=()=>resolve(file);
+    img.src=filePreview(file);
+  });
+}
+
 async function buildZip(){
   if(!exportReady()) return;
   // Warning mode: eksik alanlar rapora yazılır ama ZIP oluşturmayı durdurmaz.
@@ -496,8 +641,13 @@ async function buildZip(){
   zip.file('crm/customers.json',JSON.stringify(customers,null,2));
   zip.file('UPLOAD_INSTRUCTIONS.txt','1) Bu ZIP dosyasını açın.\n2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.\n3) properties.json dosyasını da eski properties.json üstüne kopyalayın.\n4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.\n5) GitHub Desktop: Commit + Push.\n\nNot: Export artık boş properties.json üretmez. Eksik fiyat/oda/banyo/alan varsa raporda uyarı verir ama export durmaz. Duplicate ID varsa durur. CRM müşterileri crm/customers.json olarak eklenir.');
   for(const [id,files] of Object.entries(pendingFilesById)){
-    const p=properties.find(x=>x.id===id); if(!p) continue;
-    files.forEach((f,i)=>{const path=p.images[i]; if(path) zip.file(path,f);});
+    const p=properties.find(x=>x.id===id);if(!p)continue;
+    for(let i=0;i<files.length;i++){
+      const f=files[i],path=p.images[i];
+      if(!path)continue;
+      const output=$('mediaWatermark')?.checked?await mediaApplyWatermark(f):f;
+      zip.file(path,output);
+    }
   }
   const blob=await zip.generateAsync({type:'blob'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='siriland-export-fixed.zip';a.click();
@@ -761,7 +911,11 @@ $('crmStatusFilter').onchange=renderCRM;
 
 $('city').onchange=()=>syncIdToCity(true);
 $('type').addEventListener('input',updatePropertyTypeFields);
-$('imageFiles').onchange=e=>{imageFiles=Array.from(e.target.files||[]);existingImageList=[];renderImages()};
+$('imageFiles').onchange=e=>{
+  imageFiles=Array.from(e.target.files||[]);
+  existingImageList=[];
+  analyzeMediaFiles();
+};
 document.addEventListener('input',e=>{ if(e.target && ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) updateQualityScore(); });
 $('importBtn').onclick=()=>$('importFile').click();
 $('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result).map(cleanProperty);renderList();clearForm();validate();renderCRM();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
@@ -799,3 +953,34 @@ document.addEventListener('click',e=>{
     if(p){setForm(p);window.scrollTo({top:0,behavior:'smooth'});}
   }
 });
+
+
+function mediaAddFiles(files){
+  const incoming=Array.from(files||[]).filter(f=>String(f.type||'').startsWith('image/'));
+  if(!incoming.length)return;
+  imageFiles=[...imageFiles,...incoming];
+  existingImageList=[];
+  analyzeMediaFiles();
+}
+function mediaInit(){
+  const zone=$('imageDropZone');
+  if($('chooseImagesBtn'))$('chooseImagesBtn').onclick=()=>$('imageFiles').click();
+  if(zone){
+    ['dragenter','dragover'].forEach(name=>zone.addEventListener(name,e=>{e.preventDefault();zone.classList.add('dragging')}));
+    ['dragleave','drop'].forEach(name=>zone.addEventListener(name,e=>{e.preventDefault();zone.classList.remove('dragging')}));
+    zone.addEventListener('drop',e=>mediaAddFiles(e.dataTransfer?.files));
+    zone.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('imageFiles').click()}});
+  }
+  if($('sortImagesBtn'))$('sortImagesBtn').onclick=()=>{imageFiles.sort((a,b)=>a.name.localeCompare(b.name));analyzeMediaFiles()};
+  if($('refreshImageCheckBtn'))$('refreshImageCheckBtn').onclick=analyzeMediaFiles;
+  if($('renamePreviewBtn'))$('renamePreviewBtn').onclick=()=>analyzeMediaFiles();
+  if($('clearNewImagesBtn'))$('clearNewImagesBtn').onclick=()=>{
+    imageFiles.forEach(f=>{if(f.__sirilandPreview)URL.revokeObjectURL(f.__sirilandPreview)});
+    imageFiles=[];mediaAnalysis=[];renderImages();
+  };
+  ['mediaRenamePrefix','mediaMinResolution','mediaMaxFileSize'].forEach(id=>{
+    $(id)?.addEventListener(id==='mediaRenamePrefix'?'input':'change',()=>analyzeMediaFiles());
+  });
+  renderMediaSummary();
+}
+window.addEventListener('DOMContentLoaded',mediaInit);

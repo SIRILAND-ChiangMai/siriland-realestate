@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND CMS PRO 2030 - Sprint 4.4 Dashboard PRO</title>
-  <link rel="stylesheet" href="admin.css?v=2026071015">
+  <title>SIRILAND CMS PRO 2030 - Sprint 4.5 Media Manager PRO</title>
+  <link rel="stylesheet" href="admin.css?v=2026071016">
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND CMS PRO 2030 — Sprint 4.4 Dashboard PRO</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
+    <div><div class="logo">SIRILAND CMS PRO 2030 — Sprint 4.5 Media Manager PRO</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -210,23 +210,67 @@
       </div>
 
       <div class="panel mediaManagerPanel">
-        <h2 id="h_images">6) Media Manager PRO</h2>
-        <p class="muted">Fotoğrafları sürükleyip bırak veya seç. İlk fotoğraf kapaktır. Sıralama, kapak seçimi ve kalite kontrolü burada yapılır.</p>
+        <div class="mediaManagerHead">
+          <div>
+            <h2 id="h_images">🖼️ Media Manager PRO — Sprint 4.5</h2>
+            <p class="muted">Fotoğrafları sürükleyip bırak, sırala, kapak seç, kaliteyi kontrol et ve export sırasında otomatik yeniden adlandır.</p>
+          </div>
+          <span class="mediaProBadge">PRO</span>
+        </div>
+
         <div id="imageDropZone" class="imageDropZone" tabindex="0">
           <div class="dropIcon">📷</div>
           <b>Fotoğrafları buraya sürükle</b>
-          <span>veya bilgisayardan seç</span>
+          <span>JPG, PNG veya WEBP — çoklu seçim desteklenir</span>
           <button class="btn" type="button" id="chooseImagesBtn">Fotoğraf Seç</button>
           <input type="file" id="imageFiles" accept="image/jpeg,image/png,image/webp" multiple hidden>
         </div>
+
+        <div class="mediaSettingsGrid">
+          <div>
+            <label>Otomatik Dosya Adı</label>
+            <input id="mediaRenamePrefix" placeholder="İlan başlığından otomatik oluşturulur">
+          </div>
+          <div>
+            <label>Minimum Çözünürlük</label>
+            <select id="mediaMinResolution">
+              <option value="1200">1200 px</option>
+              <option value="1600" selected>1600 px</option>
+              <option value="2000">2000 px</option>
+            </select>
+          </div>
+          <div>
+            <label>Maksimum Dosya Boyutu</label>
+            <select id="mediaMaxFileSize">
+              <option value="2">2 MB</option>
+              <option value="4" selected>4 MB</option>
+              <option value="8">8 MB</option>
+            </select>
+          </div>
+          <div class="mediaCheckOption">
+            <label><input type="checkbox" id="mediaWatermark"> Exportta SIRILAND filigranı ekle</label>
+          </div>
+        </div>
+
         <div class="mediaToolbar">
+          <button class="btn" type="button" id="refreshImageCheckBtn">🔍 Kaliteyi Kontrol Et</button>
           <button class="btn dark" type="button" id="sortImagesBtn">A–Z Sırala</button>
-          <button class="btn" type="button" id="refreshImageCheckBtn">Kaliteyi Kontrol Et</button>
+          <button class="btn dark" type="button" id="renamePreviewBtn">Dosya Adlarını Önizle</button>
           <button class="btn red" type="button" id="clearNewImagesBtn">Yeni Fotoğrafları Temizle</button>
         </div>
+
+        <div class="imageStatsGrid">
+          <div class="imageStatCard"><span>Toplam</span><strong id="mediaStatTotal">0</strong></div>
+          <div class="imageStatCard"><span>Kapak</span><strong id="mediaStatCover">—</strong></div>
+          <div class="imageStatCard"><span>Duplicate</span><strong id="mediaStatDuplicates">0</strong></div>
+          <div class="imageStatCard"><span>Düşük Çözünürlük</span><strong id="mediaStatLowRes">0</strong></div>
+          <div class="imageStatCard"><span>Büyük Dosya</span><strong id="mediaStatLarge">0</strong></div>
+          <div class="imageStatCard"><span>Toplam Boyut</span><strong id="mediaStatSize">0 MB</strong></div>
+        </div>
+
         <div id="imageStats" class="imageStats">Henüz fotoğraf seçilmedi.</div>
         <div id="imageWarnings" class="imageWarnings"></div>
-        <div id="imagePreview" class="list"></div>
+        <div id="imagePreview" class="list mediaPreviewList"></div>
       </div>
       <div class="panel">
         <h2>👤 Customer Manager</h2>
@@ -276,7 +320,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071015"></script>
+<script src="admin.js?v=2026071016"></script>
 <script src="modules/dashboard.js?v=2026071012"></script>
 <script src="modules/crm.js?v=2026071012"></script>
 <script src="modules/export.js?v=2026071012"></script>

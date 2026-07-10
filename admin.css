@@ -83,3 +83,20 @@
 .dashboardMissingItem{display:flex;justify-content:space-between;gap:10px;cursor:pointer}.dashboardMissingItem span{color:#b45309;text-align:right}
 .dashboardMissingItem:hover{background:#fff7df}
 @media(max-width:900px){.dashboardProHead{align-items:flex-start;flex-direction:column}.dashboardProStats,.dashboardCharts,.dashboardRecentGrid{grid-template-columns:1fr}.dashboardHealth{grid-template-columns:1fr;justify-items:center}.dashboardChartBox{min-height:auto}}
+
+
+/* Sprint 4.5 — Media Manager PRO */
+.mediaManagerHead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.mediaManagerHead h2{margin:0 0 5px}.mediaProBadge{background:var(--navy);color:var(--gold);font-weight:900;border-radius:999px;padding:7px 12px;font-size:12px}
+.mediaSettingsGrid{display:grid;grid-template-columns:1.4fr .8fr .8fr 1.2fr;gap:10px;margin:14px 0}
+.mediaCheckOption{display:flex;align-items:flex-end}.mediaCheckOption label{border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff;width:100%;margin:0}
+.mediaCheckOption input{width:auto;margin-right:7px}
+.imageStatsGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:12px 0}
+.imageStatCard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px;text-align:center}.imageStatCard span{display:block;font-size:11px;color:#64748b;font-weight:800;text-transform:uppercase}.imageStatCard strong{display:block;color:var(--navy);font-size:18px;margin-top:4px}
+.imageDropZone.dragging{background:#fff7df;border-color:var(--gold);transform:scale(1.005)}
+.mediaPreviewList{max-height:650px}.mediaImageCard{transition:.16s ease}.mediaImageCard:hover{border-color:#d6ad4b;box-shadow:0 8px 22px rgba(7,26,61,.08)}
+.mediaImageInfo{min-width:0}.mediaExportName{font-family:monospace;font-size:12px;color:#0f7b3f;margin-top:5px;word-break:break-all}
+.mediaInfoBadges{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.mediaInfoBadge{font-size:11px;font-weight:800;border-radius:999px;padding:4px 7px;background:#eef2ff;color:#172033}.mediaInfoBadge.warning{background:#fff7df;color:#92400e}.mediaInfoBadge.danger{background:#fee2e2;color:#991b1b}
+.imageWarnings>div{padding:8px 10px;border-radius:10px;background:#fff7df;border:1px solid #f1d184;margin:5px 0;font-size:13px}.imageWarnings .mediaAllGood{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+@media(max-width:900px){.mediaSettingsGrid,.imageStatsGrid{grid-template-columns:1fr 1fr}.mediaManagerHead{flex-direction:column}}
+@media(max-width:520px){.mediaSettingsGrid,.imageStatsGrid{grid-template-columns:1fr}}
