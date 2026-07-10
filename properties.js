@@ -84,13 +84,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0002",
@@ -172,13 +166,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0003",
@@ -261,13 +249,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0004",
@@ -354,13 +336,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0005",
@@ -451,13 +427,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0006",
@@ -548,13 +518,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0007",
@@ -637,13 +601,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0008",
@@ -726,13 +684,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0009",
@@ -819,13 +771,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0010",
@@ -912,13 +858,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0011",
@@ -1001,13 +941,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0012",
@@ -1081,13 +1015,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0013",
@@ -1170,13 +1098,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0014",
@@ -1259,13 +1181,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0015",
@@ -1348,13 +1264,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0016",
@@ -1431,13 +1341,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0017",
@@ -1524,13 +1428,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0018",
@@ -1597,13 +1495,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0019",
@@ -1622,7 +1514,7 @@ window.SIRILAND_PROPERTIES = [
     "bathrooms": "-",
     "area": "61.6 Sq.Wah Usable Area: 250 Sq.M.",
     "room": "Soi 27",
-    "floor": "",
+    "floor": "211/190,",
     "map": "https://maps.app.goo.gl/yPM5qz9by9yBNaka6",
     "description": {
       "en": "Siwalee Klong Chol House No. Soi 27 (211/190,). 4 Bedrooms | Private Swimming Pool with Jacuzzi. Area 61.6 Sq.Wah Usable Area: 250 Sq.M. Soi 27 211/190,.",
@@ -1688,13 +1580,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0020",
@@ -1787,13 +1673,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0021",
@@ -1880,13 +1760,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "PIL-001",
@@ -1975,13 +1849,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0022",
@@ -1989,29 +1857,13 @@ window.SIRILAND_PROPERTIES = [
     "type": "Condo",
     "deal": "Sale",
     "status": "Available",
-    "price": "3.9 MB",
+    "price": "Ask for price",
     "bedrooms": "2 Bedrooms",
     "bathrooms": "2 Bathrooms",
     "area": "64.22 sq.m.",
-    "room": "416",
-    "floor": "",
+    "room": "Please update",
+    "floor": "Please update4th Floor",
     "map": "https://maps.google.com/?q=Punna+Residence+5+Chiang+Mai",
-    "salePrice": "3.9 MB",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "Free Transfer",
-    "summary": "",
-    "nearby": [
-      "Chiang Mai University"
-    ],
-    "features": [],
-    "furniture": [
-      "✅ Free transfer fee",
-      "✅ Foreign Freehold Quota Available",
-      "✅ Fully renovated (scheduled completion: 15 June 2026)"
-    ],
-    "appliances": [],
     "title": {
       "en": "Punna Residence 5 — 8 Storey Low Rise Condo",
       "th": "Punna Residence 5 — 8 Storey Low Rise Condo",
@@ -2019,33 +1871,38 @@ window.SIRILAND_PROPERTIES = [
       "zh": "Punna Residence 5 — 8 Storey Low Rise Condo"
     },
     "description": {
-      "en": "Punna Residence 5 is a luxury 8-storey low-rise condominium located on Huay Kaew Road, only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university, making it an excellent choice for students, professionals, investors, or anyone looking for a premium home in one of Chiang Mai's most desirable locations.",
-      "th": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
-      "tr": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
-      "zh": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes."
+      "en": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
+      "th": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND.",
+      "tr": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND.",
+      "zh": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND."
     },
     "highlights": {
       "en": [
         "Punna Residence 5",
-        "Building 4, 4th Floor",
-        "3 Balconies"
+        "Building 4, 4th Floor"
       ],
       "th": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ]
     },
     "images": [
-      "images/punna-residence-5-8-storey-low-rise-condo-5.jpg",
       "images/punna-residence-5-8-storey-low-rise-condo-1.jpg",
       "images/punna-residence-5-8-storey-low-rise-condo-2.jpg",
       "images/punna-residence-5-8-storey-low-rise-condo-3.jpg",
       "images/punna-residence-5-8-storey-low-rise-condo-4.jpg",
+      "images/punna-residence-5-8-storey-low-rise-condo-5.jpg",
       "images/punna-residence-5-8-storey-low-rise-condo-6.jpg",
       "images/punna-residence-5-8-storey-low-rise-condo-7.jpg",
       "images/punna-residence-5-8-storey-low-rise-condo-8.jpg",
@@ -2075,7 +1932,7 @@ window.SIRILAND_PROPERTIES = [
       "images/punna-residence-5-8-storey-low-rise-condo-32.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-09",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -2094,19 +1951,9 @@ window.SIRILAND_PROPERTIES = [
     "bedrooms": "1 Bedroom",
     "bathrooms": "1 Bathrooms",
     "area": "35 Sq.m.",
-    "room": "",
-    "floor": "",
+    "room": "Please uUnit 236pdate",
+    "floor": "Please upd2nd Floorate",
     "map": "https://maps.google.com/?q=Hillside+Condo+3+Nimmanhaemin+Soi+8+Chiang+Mai",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
     "title": {
       "en": "Hillside 3 Condo Unit 236 — 2nd Floor",
       "th": "Hillside 3 Condo Unit 236 — 2nd Floor",
@@ -2114,22 +1961,30 @@ window.SIRILAND_PROPERTIES = [
       "zh": "Hillside 3 Condo Unit 236 — 2nd Floor"
     },
     "description": {
-      "en": "Newest renovated unit in one of Chiang Mai’s most desirable locations, Nimmanhaemin Soi 8.\n✨ Unit 236, 2nd Floor\n✨ 1 Bedroom\n✨ 35 Sq.m.\n✨ Large Balcony\n✨ Airbnb Allowed\n📌 Special Price: 2.89 MB\n✅ Free Transfer Fee\n✅ Foreign Freehold Quota Available\n✅ Renovation Completed by August 2026",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "en": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND.",
+      "th": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND.",
+      "tr": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND.",
+      "zh": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND."
     },
     "highlights": {
       "en": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "th": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2166,7 +2021,7 @@ window.SIRILAND_PROPERTIES = [
       "images/hillside-3-condo-unit-236-2nd-floor-30.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-09",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -2182,22 +2037,12 @@ window.SIRILAND_PROPERTIES = [
     "deal": "Sale",
     "status": "Available",
     "price": "2.89 MB",
-    "bedrooms": "1",
-    "bathrooms": "1",
+    "bedrooms": "Please update",
+    "bathrooms": "Please update",
     "area": "38.45 SQ.M.",
     "room": "Room 1021",
     "floor": "10th Floor",
     "map": "https://maps.app.goo.gl/unubbYrDY4wQvEqAA",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
     "title": {
       "en": "Nakornping Condo",
       "th": "Nakornping Condo",
@@ -2205,22 +2050,30 @@ window.SIRILAND_PROPERTIES = [
       "zh": "Nakornping Condo"
     },
     "description": {
-      "en": "🏙️ Luxury Condo Near Nimman & MAYA ✨Nakornping Condo | 10th Floor | 38.45 Sq.m.🛏️ 1 Bedroom with Mountain View💰 2.89 MB\n✅ Airbnb Allowed\n✅ Fully Furnished\n✅ Near MAYA / One Nimman / CMU\n☎️ Kwan 092-0056640\n☎️ 090-6507558\nLINE : @realcreamthailand\n🏙️ คอนโดหรูใกล้นิมมาน MAYA ✨\nนครพิงค์คอนโด ชั้น 10 ขนาด 38.45 ตร.ม.\n🛏️ 1 ห้องนอน วิวดอย พร้อมเฟอร์ครบ\n💰 ราคา 2.89 ล้านบาท\n✅ ทำ Airbnb ได้\n✅ Fully Furnished พร้อมอยู่\n✅ ใกล้ MAYA / One Nimman / CMU\n🏊 มีสระว่ายน้ำ\n🚗 อาคารจอดรถในร่ม\n🏢 สามารถทำ Airbnb ได้",
-      "th": "🏙️ Luxury Condo Near Nimman & MAYA ✨Nakornping Condo | 10th Floor | 38.45 Sq.m.🛏️ 1 Bedroom with Mountain View💰 2.89 MB\n✅ Airbnb Allowed\n✅ Fully Furnished\n✅ Near MAYA / One Nimman / CMU\n☎️ Kwan 092-0056640\n☎️ 090-6507558\nLINE : @realcreamthailand\n🏙️ คอนโดหรูใกล้นิมมาน MAYA ✨\nนครพิงค์คอนโด ชั้น 10 ขนาด 38.45 ตร.ม.\n🛏️ 1 ห้องนอน วิวดอย พร้อมเฟอร์ครบ\n💰 ราคา 2.89 ล้านบาท\n✅ ทำ Airbnb ได้\n✅ Fully Furnished พร้อมอยู่\n✅ ใกล้ MAYA / One Nimman / CMU\n🏊 มีสระว่ายน้ำ\n🚗 อาคารจอดรถในร่ม\n🏢 สามารถทำ Airbnb ได้",
-      "tr": "🏙️ Luxury Condo Near Nimman & MAYA ✨Nakornping Condo | 10th Floor | 38.45 Sq.m.🛏️ 1 Bedroom with Mountain View💰 2.89 MB\n✅ Airbnb Allowed\n✅ Fully Furnished\n✅ Near MAYA / One Nimman / CMU\n☎️ Kwan 092-0056640\n☎️ 090-6507558\nLINE : @realcreamthailand\n🏙️ คอนโดหรูใกล้นิมมาน MAYA ✨\nนครพิงค์คอนโด ชั้น 10 ขนาด 38.45 ตร.ม.\n🛏️ 1 ห้องนอน วิวดอย พร้อมเฟอร์ครบ\n💰 ราคา 2.89 ล้านบาท\n✅ ทำ Airbnb ได้\n✅ Fully Furnished พร้อมอยู่\n✅ ใกล้ MAYA / One Nimman / CMU\n🏊 มีสระว่ายน้ำ\n🚗 อาคารจอดรถในร่ม\n🏢 สามารถทำ Airbnb ได้",
-      "zh": "🏙️ Luxury Condo Near Nimman & MAYA ✨Nakornping Condo | 10th Floor | 38.45 Sq.m.🛏️ 1 Bedroom with Mountain View💰 2.89 MB\n✅ Airbnb Allowed\n✅ Fully Furnished\n✅ Near MAYA / One Nimman / CMU\n☎️ Kwan 092-0056640\n☎️ 090-6507558\nLINE : @realcreamthailand\n🏙️ คอนโดหรูใกล้นิมมาน MAYA ✨\nนครพิงค์คอนโด ชั้น 10 ขนาด 38.45 ตร.ม.\n🛏️ 1 ห้องนอน วิวดอย พร้อมเฟอร์ครบ\n💰 ราคา 2.89 ล้านบาท\n✅ ทำ Airbnb ได้\n✅ Fully Furnished พร้อมอยู่\n✅ ใกล้ MAYA / One Nimman / CMU\n🏊 มีสระว่ายน้ำ\n🚗 อาคารจอดรถในร่ม\n🏢 สามารถทำ Airbnb ได้"
+      "en": "Nakornping Condo. Details are being updated by SIRILAND.",
+      "th": "Nakornping Condo. Details are being updated by SIRILAND.",
+      "tr": "Nakornping Condo. Details are being updated by SIRILAND.",
+      "zh": "Nakornping Condo. Details are being updated by SIRILAND."
     },
     "highlights": {
       "en": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "th": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2247,7 +2100,7 @@ window.SIRILAND_PROPERTIES = [
       "images/nakornping-condo-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-09",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -2276,10 +2129,10 @@ window.SIRILAND_PROPERTIES = [
       "zh": "Pansuk The Erben Condo Room 5/16"
     },
     "description": {
-      "en": "",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "en": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND.",
+      "th": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND.",
+      "tr": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND.",
+      "zh": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND."
     },
     "highlights": {
       "en": [
@@ -2294,12 +2147,18 @@ window.SIRILAND_PROPERTIES = [
         "💧 Water Filter"
       ],
       "th": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2333,13 +2192,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0026",
@@ -2361,10 +2214,10 @@ window.SIRILAND_PROPERTIES = [
       "zh": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m."
     },
     "description": {
-      "en": "",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "en": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND.",
+      "th": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND.",
+      "tr": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND.",
+      "zh": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND."
     },
     "highlights": {
       "en": [
@@ -2379,12 +2232,18 @@ window.SIRILAND_PROPERTIES = [
         "✅ Airbnb Allowed"
       ],
       "th": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2418,62 +2277,52 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0028",
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "6.19 MB",
-    "bedrooms": "2 Bedrooms",
-    "bathrooms": "2 Bathroom",
-    "area": "87.5 sqm",
-    "room": "Room 813",
-    "floor": "8th Floor",
-    "map": "https://maps.app.goo.gl/R7VDGsfYJJFLoz4U8",
-    "salePrice": "6.19 MB",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [
-      "near MAYA, One Nimman and Think Park"
-    ],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
     "title": {
       "en": "Srithana 2 Huay Kaew Nimman",
       "th": "Srithana 2 Huay Kaew Nimman",
       "tr": "Srithana 2 Huay Kaew Nimman",
       "zh": "Srithana 2 Huay Kaew Nimman"
     },
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "Ask for price",
+    "bedrooms": "Please update",
+    "bathrooms": "Please update",
+    "area": "Please update",
+    "room": "Please update",
+    "floor": "Please update",
+    "map": "",
     "description": {
-      "en": "Room 813, 8th Floor Penthouse Corner Unit\n87.5 sqm | 2 Bedrooms | 2 Bathrooms\nLarge kitchen with Island Bar, 2 balconies and beautiful mountain view.\nModern Luxury design, fully furnished with built-in furniture and complete appliances. Ready to move in.",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "en": "Srithana 2 Huay Kaew Nimman. Details are being updated by SIRILAND.",
+      "th": "Srithana 2 Huay Kaew Nimman. Details are being updated by SIRILAND.",
+      "tr": "Srithana 2 Huay Kaew Nimman. Details are being updated by SIRILAND.",
+      "zh": "Srithana 2 Huay Kaew Nimman. Details are being updated by SIRILAND."
     },
     "highlights": {
       "en": [
-        "Large kitchen with Island Bar, 2 balconies"
+        "Recovered from image folder",
+        "Details updating",
+        "Chiang Mai"
       ],
       "th": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2500,7 +2349,7 @@ window.SIRILAND_PROPERTIES = [
       "images/srithana-2-huay-kaew-nimman-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-09",
+    "updatedAt": "2026-07-07",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -2517,7 +2366,7 @@ window.SIRILAND_PROPERTIES = [
     "status": "Available",
     "price": "3.69 MB",
     "bedrooms": "2 Bedrooms",
-    "bathrooms": "",
+    "bathrooms": "Please update",
     "area": "61.48 SQ.M.",
     "room": "Unit 3609",
     "floor": "3rd Floor",
@@ -2529,22 +2378,30 @@ window.SIRILAND_PROPERTIES = [
       "zh": "The Next 1.3 Ruamchok"
     },
     "description": {
-      "en": "",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "en": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND.",
+      "th": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND.",
+      "tr": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND.",
+      "zh": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND."
     },
     "highlights": {
       "en": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "th": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2578,79 +2435,52 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "CM-0031",
-    "city": "Chiang Mai",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "4.69 MB",
-    "bedrooms": "2 Bedroom",
-    "bathrooms": "2 Bathrooms",
-    "area": "71 sq.m",
-    "room": "Room 1008-9",
-    "floor": "10th floor",
-    "map": "https://maps.app.goo.gl/cHi4XGUstCAHv3uCA",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [
-      "Luxury Penthouse at Viengping Mansion, only 200 meters from MAYA Mall and close to Nimman Road."
-    ],
-    "features": [
-      "✨ Room 1008-9 | 10th Floor",
-      "📐 71 sq.m.",
-      "🛏️ 2 Bedrooms",
-      "🛁 2 Bathrooms",
-      "🌄 Large Balcony with Open View"
-    ],
-    "furniture": [
-      "FREE:",
-      "🆓 Dishwasher",
-      "🆓 Water Purifier",
-      "🆓 Front Load Washer",
-      "🆓 Dryer"
-    ],
-    "appliances": [],
     "title": {
       "en": "Wiangpink Mansion Condo",
       "th": "Wiangpink Mansion Condo",
       "tr": "Wiangpink Mansion Condo",
       "zh": "Wiangpink Mansion Condo"
     },
+    "city": "Chiang Mai",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "Ask for price",
+    "bedrooms": "Please update",
+    "bathrooms": "Please update",
+    "area": "Please update",
+    "room": "Please update",
+    "floor": "Please update",
+    "map": "",
     "description": {
-      "en": "Luxury Penthouse at Viengping Mansion, only 200 meters from MAYA Mall and close to Nimman Road.",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "en": "Wiangpink Mansion Condo. Details are being updated by SIRILAND.",
+      "th": "Wiangpink Mansion Condo. Details are being updated by SIRILAND.",
+      "tr": "Wiangpink Mansion Condo. Details are being updated by SIRILAND.",
+      "zh": "Wiangpink Mansion Condo. Details are being updated by SIRILAND."
     },
     "highlights": {
       "en": [
-        "Large Balcony with Open View",
-        "FREE:",
-        "🆓 Dishwasher",
-        "🆓 Water Purifier",
-        "🆓 Front Load Washer",
-        "🆓 Dryer"
+        "Recovered from image folder",
+        "Details updating",
+        "Chiang Mai"
       ],
       "th": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
+        "Recovered from image folder",
+        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2677,7 +2507,7 @@ window.SIRILAND_PROPERTIES = [
       "images/wiangpink-mansion-condo-20.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-09",
+    "updatedAt": "2026-07-07",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -2781,13 +2611,7 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "BKK-0002",
@@ -2879,56 +2703,94 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "PCT-0001",
     "city": "Phichit",
     "type": "Shophouse",
-    "deal": "Sale",
+    "deal": "Sale/Rent",
     "status": "Available",
-    "price": "3,200,000 THB / Unit",
-    "bedrooms": "3",
-    "bathrooms": "3",
-    "area": "",
-    "room": "",
+    "price": "3.2 MB / Unit",
+    "bedrooms": "-",
+    "bathrooms": "3 Bathrooms",
+    "area": "Please update",
+    "room": "4 Units",
     "floor": "3 Floors",
     "map": "https://maps.app.goo.gl/J36iCzsPpTPL6N3d9",
-    "salePrice": "3.2 MB",
-    "rentPrice": "Front 2 Connected Units: THB 20,000 / Month",
-    "ownerFinance": "",
-    "installment": "Year 1: THB 10,000 / Month / Unit Year 2 onwards: THB 15,000 / Month / Unit Up to 60 Months (5 Years)",
-    "freeTransfer": "Free Transfer",
+    "salePrice": "3.2 MB / Unit",
+    "rentPrice": "Front 2 connected units: 20,000 THB/month | Rear units: 8,500 THB/month/unit",
+    "ownerFinance": "Available, 10% down payment",
+    "installment": "Year 1: 10,000 THB/month/unit | Year 2 onwards: 15,000 THB/month/unit | Up to 60 months",
+    "freeTransfer": "Owner pays all transfer fees and taxes",
     "shortHighlight": "",
-    "nearby": [],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
+    "nearby": [
+      "Srimala Villa",
+      "Phichit City Center"
+    ],
+    "features": [
+      "4 commercial units",
+      "3 floors",
+      "Front 2 units connected",
+      "Rear units can be rented separately",
+      "Built-in kitchen",
+      "CCTV",
+      "TV",
+      "Shop sign structure"
+    ],
+    "furniture": [
+      "Partial furniture",
+      "Built-in kitchen counter"
+    ],
+    "appliances": [
+      "TV",
+      "CCTV"
+    ],
     "title": {
-      "en": "Srimala Villa Shophouse",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "en": "Srimala Villa Shophouse — Phichit",
+      "th": "อาคารพาณิชย์หน้าโครงการศรีมาลาวิลล่า พิจิตร",
+      "tr": "Srimala Villa Ticari Bina — Phichit",
+      "zh": "披集 Srimala Villa 商业楼"
     },
     "description": {
-      "en": "4 Commercial Units\n3 Storeys\nFront 2 Units Connected\nRear Units Can Be Rented Separately\n3 Bathrooms (Front Units)\nBuilt-in Kitchen\nPartial Furniture\nCCTV System\nTV Included\nReady-to-use Shop Sign Structure\nRetail Shop\nCafé\nRestaurant\nClinic\nOffice\nShowroom\nWarehouse\nService Business\nInvestment",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "en": "Commercial shophouses in front of Srimala Villa, Phichit. 4 units, 3 floors, available for sale or rent. Suitable for shop, cafe, clinic, office, showroom, warehouse or investment.",
+      "th": "อาคารพาณิชย์หน้าโครงการศรีมาลาวิลล่า พิจิตร รวม 4 คูหา อาคาร 3 ชั้น ซื้อหรือเช่าได้ เหมาะเปิดร้าน คาเฟ่ คลินิก ออฟฟิศ โชว์รูม โกดัง หรือการลงทุน",
+      "tr": "Phichit Srimala Villa önü 4 üniteli, 3 katlı ticari bina. Satılık veya kiralık. Mağaza, kafe, klinik, ofis, showroom, depo veya yatırım için uygundur.",
+      "zh": "位于披集 Srimala Villa 项目前方，4间商业楼，3层，可售可租，适合商店、咖啡厅、诊所、办公室、展厅、仓库或投资。"
     },
     "highlights": {
       "en": [
-        "Prime Location, Owner Financing, Free Transfer, Investment Opportunity..."
+        "Prime Phichit location",
+        "Front of Srimala Villa",
+        "4 commercial units",
+        "Sale or rent available",
+        "Owner financing available",
+        "Free transfer fees"
       ],
-      "th": [],
-      "tr": [],
-      "zh": []
+      "th": [
+        "ทำเลดีในตัวเมืองพิจิตร",
+        "หน้าโครงการศรีมาลาวิลล่า",
+        "รวม 4 คูหา",
+        "ซื้อหรือเช่าได้",
+        "ผ่อนตรงกับเจ้าของได้",
+        "ฟรีค่าโอนและภาษี"
+      ],
+      "tr": [
+        "Phichit merkez konum",
+        "Srimala Villa önü",
+        "4 ticari ünite",
+        "Satılık veya kiralık",
+        "Sahibinden taksit imkanı",
+        "Devir ve vergi masrafı ücretsiz"
+      ],
+      "zh": [
+        "披集市中心好位置",
+        "Srimala Villa 项目前方",
+        "4间商业楼",
+        "可售可租",
+        "业主分期付款",
+        "免费过户及税费"
+      ]
     },
     "images": [
       "images/pct-0001-1.jpg",
@@ -2942,680 +2804,6 @@ window.SIRILAND_PROPERTIES = [
     ],
     "createdAt": "2026-07-08",
     "updatedAt": "2026-07-08",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    },
-    "summary": ""
-  },
-  {
-    "id": "CM-0032",
-    "city": "Chiang Mai",
-    "type": "Hillside Plaza & Condotel 4",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "2,990,000 THB",
-    "bedrooms": "1",
-    "bathrooms": "1",
-    "area": "45.03 sq.m.",
-    "room": "Unit: 506",
-    "floor": "5",
-    "map": "https://maps.app.goo.gl/KirnqeC8Nzdeubki9",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [
-      "• MAYA Lifestyle Shopping Center – 2 min",
-      "• One Nimman – 2 min",
-      "• Bright Seeds International School – 1 min",
-      "• Chiang Mai University – 8 min",
-      "• Rajamangala University of Technology Lanna – 9 min",
-      "• Demonstration School, Chiang Mai University – 9 min",
-      "• Chiang Mai Ram Hospital – 5 min",
-      "• Maharaj Nakorn Chiang Mai Hospital – 5 min"
-    ],
-    "features": [
-      "Modern Luxury Interior",
-      "• Fully Built-in Furniture",
-      "• Fully Furnished",
-      "• Brand New Electrical & Plumbing System",
-      "• Digital Door Lock",
-      "• Premium Home Appliances Included",
-      "• Airbnb Friendly",
-      "• Large Swimming Pool",
-      "• Fitness Center",
-      "• Restaurant Inside the Building",
-      "• Spacious Parking Area",
-      "• 24-Hour Security",
-      "• One-Year After-Sales Warranty"
-    ],
-    "furniture": [],
-    "appliances": [
-      "• Water Purifier",
-      "• Front Load Washing Machine",
-      "• Front Load Dryer",
-      "• 2 Air Conditioners (12,000 BTU)",
-      "• 55-inch Android TV",
-      "• Electric Hob & Cooker Hood",
-      "• Water Heater",
-      "• Large Refrigerator",
-      "• Microwave",
-      "• Digital Door Lock"
-    ],
-    "title": {
-      "en": "",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "description": {
-      "en": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026",
-      "th": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026",
-      "tr": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026",
-      "zh": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026"
-    },
-    "highlights": {
-      "en": [],
-      "th": [],
-      "tr": [],
-      "zh": []
-    },
-    "images": [
-      "images/cm-0032-1.jpg",
-      "images/cm-0032-2.jpg",
-      "images/cm-0032-3.jpg",
-      "images/cm-0032-4.jpg",
-      "images/cm-0032-5.jpg",
-      "images/cm-0032-6.jpg",
-      "images/cm-0032-7.jpg",
-      "images/cm-0032-8.jpg",
-      "images/cm-0032-9.jpg",
-      "images/cm-0032-10.jpg",
-      "images/cm-0032-11.jpg",
-      "images/cm-0032-12.jpg",
-      "images/cm-0032-13.jpg",
-      "images/cm-0032-14.jpg",
-      "images/cm-0032-15.jpg",
-      "images/cm-0032-16.jpg",
-      "images/cm-0032-17.jpg",
-      "images/cm-0032-18.jpg",
-      "images/cm-0032-19.jpg",
-      "images/cm-0032-20.jpg"
-    ],
-    "createdAt": "2026-07-09",
-    "updatedAt": "2026-07-09",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
-    "id": "PCT-0002",
-    "city": "Phichit",
-    "type": "Golden 3-Storey Shophouse",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "4,190,000 THB",
-    "bedrooms": "3",
-    "bathrooms": "3",
-    "area": "",
-    "room": "",
-    "floor": "",
-    "map": "",
-    "salePrice": "4,590,000 THB",
-    "rentPrice": "12,000 THB / Month",
-    "ownerFinance": "",
-    "installment": "Down Payment: 10% (459,000 THB) Monthly Payment: 20,000 THB Interest Rate: 0% Installment Period: 60 Months",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [
-      "Sri Sukho Medical Center",
-      "Phichit City Center"
-    ],
-    "features": [
-      "5 Bedrooms",
-      "3 Bathrooms",
-      "Built-in Kitchen",
-      "Steel Security Bars",
-      "Bird Protection System",
-      "Extended Living Space",
-      "Suitable for Home & Business",
-      "Bank Loan Available",
-      "Owner Financing Available",
-      "Full Legal Documents",
-      "Lawyer Contract"
-    ],
-    "furniture": [],
-    "appliances": [],
-    "title": {
-      "en": "Golden 3-Storey Shophouse in Phichit City Center",
-      "th": "อาคารพาณิชย์ 3 ชั้น ทำเลทอง ใจกลางเมืองพิจิตร",
-      "tr": "",
-      "zh": ""
-    },
-    "description": {
-      "en": "A 3-storey commercial shophouse located in the heart of Phichit City, close to Sri Sukho Medical Center. Suitable for residential living, retail business, office, clinic, or investment.",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "highlights": {
-      "en": [],
-      "th": [],
-      "tr": [],
-      "zh": []
-    },
-    "images": [
-      "images/golden-3-storey-shophouse-in-phichit-city-center-1.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-2.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-3.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-4.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-5.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-6.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-7.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-8.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-9.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-10.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-11.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-12.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-13.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-14.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-15.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-16.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-17.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-18.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-19.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-20.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-21.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-22.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-23.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-24.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-25.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-26.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-27.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-28.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-29.jpg",
-      "images/golden-3-storey-shophouse-in-phichit-city-center-30.jpg"
-    ],
-    "createdAt": "2026-07-09",
-    "updatedAt": "2026-07-09",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
-    "id": "PCT-0003",
-    "city": "Phichit",
-    "type": "Spacious 2-Storey House with Garden",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "2,730,000",
-    "bedrooms": "2 Bedrooms + Large Living Room",
-    "bathrooms": "1 Bathroom",
-    "area": "2 Rai 3 Ngan 93.1 Sq.Wah",
-    "room": "Width: 12 meters Depth: 13 meters",
-    "floor": "",
-    "map": "Hua Dong, Mueang Phichit, Phichit",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "Transfer fee shared 50/50 between buyer and seller.",
-    "summary": "",
-    "nearby": [
-      "Location: Hua Dong Soi 2, next to Hua Dong Municipality, Phichit, Thailand",
-      "Enjoy peaceful countryside living while staying just minutes from Phichit City"
-    ],
-    "features": [
-      "Land Details",
-      "Total Land Area: 2 Rai 3 Ngan 93.1 Sq.Wah",
-      "(Approximately 4,772.4 sq.m.)",
-      "The property consists of 3 Chanote (Freehold) Land Titles:",
-      "Title 1: 1 Rai 0 Ngan 17 Sq.Wah",
-      "Title 2: 0 Rai 3 Ngan 84.5 Sq.Wah",
-      "Title 3: 0 Rai 3 Ngan 91.6 Sq.Wah",
-      "Approximate House Size",
-      "Width: 12 meters",
-      "Depth: 13 meters"
-    ],
-    "furniture": [],
-    "appliances": [],
-    "title": {
-      "en": "Spacious 2-Storey House",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "description": {
-      "en": "House Features\nUpper Floor\n2 Bedrooms\nLarge Living Hall\n1 Bathroom\nGround Floor\n2 Bedrooms\n1 Kitchen\n1 Bathroom\nSpacious Multi-Purpose Living Area\n\nApproximate House Size\n\nWidth: 12 meters\nDepth: 13 meters\nLand Details\n\nTotal Land Area: 2 Rai 3 Ngan 93.1 Sq.Wah\n(Approximately 4,772.4 sq.m.)\n\nThe property consists of 3 Chanote (Freehold) Land Titles:\n\nTitle 1: 1 Rai 0 Ngan 17 Sq.Wah\nTitle 2: 0 Rai 3 Ngan 84.5 Sq.Wah\nTitle 3: 0 Rai 3 Ngan 91.6 Sq.Wah",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "highlights": {
-      "en": [
-        "Beautifully maintained garden",
-        "Water channels already completed",
-        "Fully fenced property",
-        "Private entrance and driveway",
-        "Clear land zoning",
-        "Peaceful surroundings",
-        "Large usable outdoor area",
-        "Excellent location close to Phichit City"
-      ],
-      "th": [],
-      "tr": [],
-      "zh": []
-    },
-    "images": [
-      "images/spacious-2-storey-house-1.jpg",
-      "images/spacious-2-storey-house-2.jpg",
-      "images/spacious-2-storey-house-3.jpg",
-      "images/spacious-2-storey-house-4.jpg",
-      "images/spacious-2-storey-house-5.jpg",
-      "images/spacious-2-storey-house-6.jpg",
-      "images/spacious-2-storey-house-7.jpg",
-      "images/spacious-2-storey-house-8.jpg"
-    ],
-    "createdAt": "2026-07-09",
-    "updatedAt": "2026-07-09",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
-    "id": "PCT-0004",
-    "city": "Phichit",
-    "type": "Pharmacy Business & Commercial Building",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "4.5MB",
-    "bedrooms": "2",
-    "bathrooms": "2",
-    "area": "21.8 sq.wah",
-    "room": "",
-    "floor": "",
-    "map": "",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [
-      "Located in the Taphan Hin business district, Phichit Province",
-      "Just beyond the main Taphan Hin intersection",
-      "Frontage on the Phichit – Bang Mun Nak Road",
-      "High daily traffic with excellent business visibility",
-      "Non-flooded area"
-    ],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
-    "title": {
-      "en": "Pharmacy Business & Commercial Building for Sale",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "description": {
-      "en": "Fully built-in interior\nAir conditioning\nWater pump\nFurniture and business fixtures included\nReady to operate immediately",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "highlights": {
-      "en": [
-        "Taphan Hin",
-        "Located in the Taphan Hin business district, Phichit Province",
-        "Just beyond the main Taphan Hin intersection",
-        "Frontage on the Phichit – Bang Mun Nak Road",
-        "High daily traffic with excellent business visibility",
-        "Non-flooded area",
-        "Ideal For",
-        "Pharmacists looking to own and operate their own pharmacy",
-        "Investors seeking rental income or long-term capital appreciation",
-        "Entrepreneurs looking for a ready-to-run commercial property"
-      ],
-      "th": [],
-      "tr": [],
-      "zh": []
-    },
-    "images": [
-      "images/pharmacy-business-commercial-building-for-sale-1.jpg",
-      "images/pharmacy-business-commercial-building-for-sale-2.jpg",
-      "images/pharmacy-business-commercial-building-for-sale-3.jpg",
-      "images/pharmacy-business-commercial-building-for-sale-4.jpg",
-      "images/pharmacy-business-commercial-building-for-sale-5.jpg",
-      "images/pharmacy-business-commercial-building-for-sale-6.jpg",
-      "images/pharmacy-business-commercial-building-for-sale-7.jpg"
-    ],
-    "createdAt": "2026-07-09",
-    "updatedAt": "2026-07-09",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
-    "id": "PCT-0005",
-    "city": "Phichit",
-    "type": "House",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "3,790,000",
-    "bedrooms": "4",
-    "bathrooms": "2",
-    "area": "183.35 sq.m.",
-    "room": "",
-    "floor": "",
-    "map": "",
-    "landSize": "224 sq.m",
-    "landAreaSqm": "",
-    "buildingArea": "183.35 sq.m.",
-    "parking": "",
-    "titleDeed": "",
-    "roadAccess": "",
-    "frontage": "",
-    "zoning": "",
-    "utilities": "",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [
-      "Phichit City Center",
-      "Schools",
-      "Hospitals",
-      "Shopping Centers",
-      "Local Markets",
-      "Restaurants & Cafés",
-      "Government Offices",
-      "Easy access to major roads"
-    ],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
-    "title": {
-      "en": "Brand New 2-Storey House for Sale in Phichit City",
-      "th": "Brand New 2-Storey House for Sale in Phichit City",
-      "tr": "Brand New 2-Storey House for Sale in Phichit City",
-      "zh": "Brand New 2-Storey House for Sale in Phichit City"
-    },
-    "description": {
-      "en": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today.",
-      "th": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today.",
-      "tr": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today.",
-      "zh": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today."
-    },
-    "highlights": {
-      "en": [
-        "Brand-new home",
-        "✅ Large family living area",
-        "✅ Modern design",
-        "✅ Quiet residential neighborhood",
-        "✅ Excellent value under THB 4 million",
-        "✅ Perfect for family living or investment"
-      ],
-      "th": [],
-      "tr": [],
-      "zh": []
-    },
-    "images": [
-      "images/brand-new-2-storey-house-for-sale-in-phichit-city-1.jpg",
-      "images/brand-new-2-storey-house-for-sale-in-phichit-city-2.jpg",
-      "images/brand-new-2-storey-house-for-sale-in-phichit-city-3.jpg",
-      "images/brand-new-2-storey-house-for-sale-in-phichit-city-4.jpg",
-      "images/brand-new-2-storey-house-for-sale-in-phichit-city-5.jpg",
-      "images/brand-new-2-storey-house-for-sale-in-phichit-city-6.jpg",
-      "images/brand-new-2-storey-house-for-sale-in-phichit-city-7.jpg",
-      "images/brand-new-2-storey-house-for-sale-in-phichit-city-8.jpg",
-      "images/brand-new-2-storey-house-for-sale-in-phichit-city-9.jpg"
-    ],
-    "createdAt": "2026-07-10",
-    "updatedAt": "2026-07-10",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
-    "id": "PCT-0006",
-    "city": "Phichit",
-    "type": "Brand New Commercial Shophouse",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "3.9M",
-    "bedrooms": "3",
-    "bathrooms": "3",
-    "area": "28.2 Sq.Wah",
-    "room": "",
-    "floor": "3",
-    "map": "",
-    "landSize": "",
-    "landAreaSqm": "",
-    "buildingArea": "",
-    "parking": "2",
-    "titleDeed": "",
-    "roadAccess": "",
-    "frontage": "",
-    "zoning": "",
-    "utilities": "",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [
-      "MAkro Imperial Scholl Lotus Tops"
-    ],
-    "features": [
-      "3 Flors"
-    ],
-    "furniture": [],
-    "appliances": [],
-    "title": {
-      "en": "New Commercial Shophouse for Sale",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "description": {
-      "en": "Free Included\nAir Conditioner\nWater Heater\nWater Pump\nWater Storage Tank\nBuyer Benefits\n\n✅ Free Transfer Fee\n\n✅ Free Taxes\n\n✅ Free Government Fees\n\n✅ No Hidden Costs\n\nMove in and start your business immediately.\nExcellent Location\nNext to Makro Phichit\nEasy Access to Main Road\nHigh Traffic Area\nExcellent Commercial Potential\nSuitable for Investment or Owner-Occupied Business",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "highlights": {
-      "en": [],
-      "th": [],
-      "tr": [],
-      "zh": []
-    },
-    "images": [
-      "images/new-commercial-shophouse-for-sale-1.jpg",
-      "images/new-commercial-shophouse-for-sale-2.jpg",
-      "images/new-commercial-shophouse-for-sale-3.jpg",
-      "images/new-commercial-shophouse-for-sale-4.jpg",
-      "images/new-commercial-shophouse-for-sale-5.jpg",
-      "images/new-commercial-shophouse-for-sale-6.jpg",
-      "images/new-commercial-shophouse-for-sale-7.jpg",
-      "images/new-commercial-shophouse-for-sale-8.jpg",
-      "images/new-commercial-shophouse-for-sale-9.jpg",
-      "images/new-commercial-shophouse-for-sale-10.jpg",
-      "images/new-commercial-shophouse-for-sale-11.jpg",
-      "images/new-commercial-shophouse-for-sale-12.jpg"
-    ],
-    "createdAt": "2026-07-10",
-    "updatedAt": "2026-07-10",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
-    "id": "CM-0033",
-    "city": "Chiang Mai",
-    "type": "",
-    "deal": "",
-    "status": "Available",
-    "price": "",
-    "bedrooms": "",
-    "bathrooms": "",
-    "area": "",
-    "room": "",
-    "floor": "",
-    "map": "",
-    "landSize": "",
-    "landAreaSqm": "",
-    "buildingArea": "",
-    "parking": "",
-    "titleDeed": "",
-    "roadAccess": "",
-    "frontage": "",
-    "zoning": "",
-    "utilities": "",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
-    "title": {
-      "en": "",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "description": {
-      "en": "",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "highlights": {
-      "en": [],
-      "th": [],
-      "tr": [],
-      "zh": []
-    },
-    "images": [],
-    "createdAt": "2026-07-10",
-    "updatedAt": "2026-07-10",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
-  },
-  {
-    "id": "PCT-0007",
-    "city": "Phichit",
-    "type": "Double Commercial Shophouses",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "7.8MB",
-    "bedrooms": "5",
-    "bathrooms": "3",
-    "area": "55 Sq.Wah",
-    "room": "2",
-    "floor": "3",
-    "map": "",
-    "landSize": "",
-    "landAreaSqm": "",
-    "buildingArea": "",
-    "parking": "6",
-    "titleDeed": "",
-    "roadAccess": "",
-    "frontage": "",
-    "zoning": "",
-    "utilities": "",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [
-      "Prime Location",
-      "Beside Makro Phichit",
-      "Excellent Visibility",
-      "Easy Customer Access",
-      "High Traffic Location",
-      "Strong Future Investment Potential"
-    ],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
-    "title": {
-      "en": "Double Commercial Shophouses",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "description": {
-      "en": "Free Included\nAir Conditioner\nWater Heater\nWater Pump\nWater Storage Tank\nBuyer Benefits\n\n✅ Free Transfer Fee\n\n✅ Free Taxes\n\n✅ Free Government Fees\n\n✅ No Hidden Costs\n\nMove in and start your business immediately.\n\nExcellent Location\nNext to Makro Phichit\nEasy Access to Main Road\nHigh Traffic Area\nExcellent Commercial Potential\nSuitable for Investment or Owner-Occupied Business",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "highlights": {
-      "en": [],
-      "th": [],
-      "tr": [],
-      "zh": []
-    },
-    "images": [
-      "images/double-commercial-shophouses-1.jpg",
-      "images/double-commercial-shophouses-2.jpg",
-      "images/double-commercial-shophouses-3.jpg",
-      "images/double-commercial-shophouses-4.jpg",
-      "images/double-commercial-shophouses-5.jpg",
-      "images/double-commercial-shophouses-6.jpg",
-      "images/double-commercial-shophouses-7.jpg",
-      "images/double-commercial-shophouses-8.jpg",
-      "images/double-commercial-shophouses-9.jpg",
-      "images/double-commercial-shophouses-10.jpg",
-      "images/double-commercial-shophouses-11.jpg",
-      "images/double-commercial-shophouses-12.jpg"
-    ],
-    "createdAt": "2026-07-10",
-    "updatedAt": "2026-07-10",
     "featured": true,
     "contact": {
       "name": "Kwan",

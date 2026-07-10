@@ -1,5 +1,5 @@
 
-console.info('SIRILAND Admin Build 2026.07.10.12 loaded');
+console.info('SIRILAND Admin Build 2026.07.10.13 loaded');
 let properties=[];
 let customers=[];
 let currentLang='en';
@@ -109,8 +109,8 @@ function getForm(){
     p.images=existingImageList.length ? existingImageList.slice() : ((existing&&existing.images)||[]);
   }
   cleanProperty(p);
-  p.createdAt=(existing&&existing.createdAt)||new Date().toISOString().slice(0,10);
-  p.updatedAt=new Date().toISOString().slice(0,10);
+  p.createdAt=(existing&&existing.createdAt)||new Date().toISOString();
+  p.updatedAt=new Date().toISOString();
   p.featured=existing?.featured!==undefined?existing.featured:true;
   p.contact={name:'Kwan',phone1:'092-005-6640',phone2:'090-650-7558',line:'@realcreamthailand'};
   return p;
@@ -261,10 +261,33 @@ function updateQualityScore(){
   if($('qualityScore')) $('qualityScore').textContent=score+'%';
   if($('qualityFill')) $('qualityFill').style.width=score+'%';
 }
+function isGhostProperty(p){
+  if(!p || typeof p!=='object') return true;
+  const title=String(pick(p.title,'en')||pick(p.title,'th')||'').trim();
+  const type=String(p.type||'').trim();
+  const price=String(p.price||p.salePrice||p.rentPrice||'').trim();
+  const images=Array.isArray(p.images)?p.images.filter(Boolean):[];
+  // A record with only an ID/city but no real listing content is a ghost.
+  return !title && !type && !price && images.length===0;
+}
+function removeGhostProperties(showReport=false){
+  const ghosts=properties.filter(isGhostProperty).map(p=>p.id||'(ID yok)');
+  if(ghosts.length){
+    properties=properties.filter(p=>!isGhostProperty(p));
+    ghosts.forEach(id=>delete pendingFilesById[id]);
+    if(showReport && $('report')) $('report').innerHTML='<span class="warn">Ghost Property Removed:</span> '+ghosts.join(', ');
+  }
+  return ghosts;
+}
 function renderList(){
   renderDashboard();
   updateQualityScore();
-  $('list').innerHTML=properties.map(p=>`<div class="item"><div><b>${escapeHtml(p.id)}</b> — ${escapeHtml(pick(p.title,'en')||pick(p.title,'th'))}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.price||'')} • ${(p.images||[]).length} foto</span></div><div><button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button><button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button></div></div>`).join('');
+  const q=String($('propertyListSearch')?.value||'').trim().toLowerCase();
+  const visible=properties.filter(p=>{
+    const blob=[p.id,p.city,p.type,p.deal,p.status,p.price,pick(p.title,'en'),pick(p.title,'th')].join(' ').toLowerCase();
+    return !q || blob.includes(q);
+  });
+  $('list').innerHTML=visible.map(p=>`<div class="item"><div><b>${escapeHtml(p.id)}</b> — ${escapeHtml(pick(p.title,'en')||pick(p.title,'th'))}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.price||'')} • ${(p.images||[]).length} foto</span></div><div><button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button><button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button></div></div>`).join('') || '<p class="muted">Eşleşen ilan yok.</p>';
 }
 function filePreview(f){ return URL.createObjectURL(f); }
 function imageCard(src, name, i, existing=false){
@@ -293,7 +316,7 @@ window.dropImg=(to,existing)=>{
   dragFromIndex=null; renderImages();
 };
 window.editProp=id=>{const p=properties.find(x=>x.id===id);if(p)setForm(p)};
-window.deleteProp=id=>{if(confirm(id+' silinsin mi?')){properties=properties.filter(p=>p.id!==id);delete pendingFilesById[id];renderList();clearForm();validate()}};
+window.deleteProp=id=>{if(confirm(id+' silinsin mi?')){properties=properties.filter(p=>String(p.id)!==String(id));delete pendingFilesById[id];renderList();clearForm();validate();if($('report'))$('report').innerHTML='<span class="ok">SİLİNDİ:</span> '+escapeHtml(id)+' artık export dosyasına eklenmeyecek.';}};
 window.moveImg=(i,d)=>{const j=i+d;if(j<0||j>=imageFiles.length)return;[imageFiles[i],imageFiles[j]]=[imageFiles[j],imageFiles[i]];renderImages()};
 window.coverImg=i=>{if(i<=0||i>=imageFiles.length)return;const f=imageFiles.splice(i,1)[0];imageFiles.unshift(f);renderImages()};
 window.removeImg=i=>{if(i<0||i>=imageFiles.length)return;imageFiles.splice(i,1);renderImages();if(window.SIRILAND_MEDIA_REFRESH)window.SIRILAND_MEDIA_REFRESH();};
@@ -323,10 +346,11 @@ function validate(){
   updateQualityScore();
   return !errors.length;
 }
-function makeJs(){cleanAllProperties();return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
+function makeJs(){removeGhostProperties(false);cleanAllProperties();return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
 function download(name,content,type='application/octet-stream'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
 
 function exportReady(){
+  const removedGhosts=removeGhostProperties(false);
   if(properties.length === 0){
     alert('EXPORT STOPPED\n\nproperties listesi boş görünüyor. Önce properties.js yükle veya sayfayı yenile. Boş JSON export edilmedi.');
     $('report').innerHTML='<span class="bad">EXPORT STOPPED:</span> properties listesi boş. properties.js yüklemeden export yapma.';
@@ -367,6 +391,8 @@ function exportReady(){
     return false;
   }
 
+  if(removedGhosts.length) warnings.unshift('Ghost Property Removed: '+removedGhosts.join(', '));
+
   if(warnings.length){
     $('report').innerHTML='<span class="ok">EXPORT READY:</span> Dosya oluşturulabilir.\n\n<span class="warn">UYARI:</span>\n'+warnings.slice(0,120).join('\n')+(warnings.length>120?'\n...':'');
   } else {
@@ -374,7 +400,7 @@ function exportReady(){
   }
   return true;
 }
-function exportJsonText(){ cleanAllProperties(); return JSON.stringify(properties,null,2); }
+function exportJsonText(){ removeGhostProperties(false); cleanAllProperties(); return JSON.stringify(properties,null,2); }
 
 async function buildZip(){
   if(!exportReady()) return;
@@ -651,16 +677,17 @@ $('importCustomersFile').onchange=e=>{const f=e.target.files[0]; if(f) importCus
 $('crmSearchBtn').onclick=renderCRM;
 $('crmSearchInput').oninput=renderCRM;
 $('crmStatusFilter').onchange=renderCRM;
+if($('propertyListSearch')) $('propertyListSearch').oninput=renderList;
 
 $('city').onchange=()=>syncIdToCity(true);
 $('type').addEventListener('input',updatePropertyTypeFields);
 $('imageFiles').onchange=e=>{imageFiles=Array.from(e.target.files||[]);existingImageList=[];renderImages()};
 document.addEventListener('input',e=>{ if(e.target && ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) updateQualityScore(); });
 $('importBtn').onclick=()=>$('importFile').click();
-$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result).map(cleanProperty);renderList();clearForm();validate();renderCRM();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
+$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result).map(cleanProperty);removeGhostProperties(true);renderList();clearForm();validate();renderCRM();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
 
 loadCustomers();
 initLangForms();
 updateUiLang('en');
 updatePropertyTypeFields();
-fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s).map(cleanProperty);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate();renderCRM();clearCustomerForm()});
+fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s).map(cleanProperty);removeGhostProperties(true);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate();renderCRM();clearCustomerForm()});

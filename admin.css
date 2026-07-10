@@ -38,3 +38,6 @@
 .imageDropZone{border:2px dashed #d6ad4b;border-radius:18px;background:#fffaf0;padding:24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px;transition:.18s ease;cursor:pointer;outline:none}
 .imageDropZone:hover,.imageDropZone:focus,.imageDropZone.dragover{background:#fff3cb;border-color:#a97812;transform:translateY(-1px)}
 .dropIcon{font-size:34px}.imageDropZone span{font-size:13px;color:#64748b}.mediaToolbar{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 8px}.imageStats{border:1px solid #d9deea;border-radius:12px;padding:10px 12px;background:#f8fafc;font-size:13px;font-weight:700}.imageWarnings{margin:8px 0}.imageWarning{border-left:4px solid #b45309;background:#fff7ed;border-radius:8px;padding:8px 10px;margin:5px 0;font-size:12px}.imageOk{border-left:4px solid #0f7b3f;background:#ecfdf5;border-radius:8px;padding:8px 10px;margin:5px 0;font-size:12px}.imageMeta{font-size:12px;color:#475569;margin-top:5px}.imageCard.badImage{border-color:#f59e0b;background:#fffaf0}
+
+/* Build 2026.07.10.13 */
+#propertyListSearch{min-height:42px;font-weight:700}

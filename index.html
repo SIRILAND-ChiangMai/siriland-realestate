@@ -10,6 +10,15 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynZpGgVqjMZPZ8V0RjD8fT6Q0v9E=" crossorigin="" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
+<style id="siriland-card-spec-fix">
+/* Build 2026.07.10.13 — clearer property specification pills */
+#propertyGrid .siriland-spec-row{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important;min-height:34px!important;margin-top:10px!important;line-height:1.2!important;overflow:visible!important}
+#propertyGrid .siriland-spec-pill{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;min-height:28px!important;padding:5px 10px!important;border:1px solid rgba(214,173,75,.55)!important;border-radius:999px!important;background:#fffaf0!important;color:#111827!important;font-size:13px!important;font-weight:800!important;line-height:1.15!important;letter-spacing:0!important;white-space:nowrap!important;text-rendering:optimizeLegibility!important;-webkit-font-smoothing:antialiased!important;box-shadow:0 1px 3px rgba(7,26,61,.08)!important}
+#propertyGrid .siriland-spec-pill img,#propertyGrid .siriland-spec-pill svg{width:15px!important;height:15px!important;flex:0 0 auto!important}
+.siriland-recent-note{grid-column:1/-1;padding:18px;border:1px solid #e5c66c;border-radius:14px;background:#fffaf0;font-weight:800;text-align:center}
+@media(max-width:640px){#propertyGrid .siriland-spec-row{gap:6px!important}.siriland-spec-pill{font-size:12.5px!important;padding:5px 8px!important;min-height:27px!important}}
+</style>
 </head>
 <body>
   <header class="site-header">
@@ -264,10 +273,87 @@
 
   <footer><p>© SIRILAND Real Estate Thailand</p></footer>
   <script src="data/i18n.js"></script>
-  <script src="properties.js"></script>
+  <script src="properties.js?v=2026071013"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=2026071013"></script>
   <script src="visitor-counter.js"></script>
-</body>
+\n<script id="siriland-recent24-and-spec-fix">\n(function(){
+  'use strict';
+  let recent24Mode=false;
+  const DAY=24*60*60*1000;
+  function parseCreatedAt(value){
+    if(!value) return NaN;
+    const s=String(value).trim();
+    // Legacy YYYY-MM-DD entries are treated as local midnight; new CMS entries include exact time.
+    const d=/^\d{4}-\d{2}-\d{2}$/.test(s)?new Date(s+'T00:00:00'):new Date(s);
+    return d.getTime();
+  }
+  function recentIds(){
+    const now=Date.now();
+    return new Set((window.SIRILAND_PROPERTIES||[]).filter(p=>{
+      const t=parseCreatedAt(p.createdAt);
+      return Number.isFinite(t) && t<=now && (now-t)<=DAY;
+    }).map(p=>String(p.id||'').trim()).filter(Boolean));
+  }
+  function cardId(card){
+    const text=card.textContent||'';
+    const m=text.match(/\b(?:CM|BKK|PCT|PLK|NKS)-\d{4,}\b/i);
+    return m?m[0].toUpperCase():'';
+  }
+  function propertyCards(){
+    const grid=document.getElementById('propertyGrid');
+    if(!grid) return [];
+    return Array.from(grid.children).filter(el=>el.nodeType===1 && !el.classList.contains('siriland-recent-note'));
+  }
+  function applyRecent24(){
+    if(!recent24Mode) return;
+    const grid=document.getElementById('propertyGrid'); if(!grid) return;
+    grid.querySelectorAll('.siriland-recent-note').forEach(x=>x.remove());
+    const ids=recentIds(); let shown=0;
+    propertyCards().forEach(card=>{
+      const ok=ids.has(cardId(card));
+      card.style.display=ok?'':'none'; if(ok) shown++;
+    });
+    if(!shown){
+      const note=document.createElement('div'); note.className='siriland-recent-note';
+      note.textContent='Son 24 saatte eklenen yeni ilan bulunamadı.'; grid.appendChild(note);
+    }
+  }
+  function isNewListingsTrigger(el){
+    const a=el.closest('[data-home-filter],a,button'); if(!a) return false;
+    const f=String(a.getAttribute('data-home-filter')||'').toLowerCase();
+    const t=String(a.textContent||'').trim().toLowerCase();
+    return /^(new|recent|latest|newlistings|recentlyadded)$/.test(f.replace(/[\s_-]/g,'')) || /new listings|recently added|latest listings|yeni ilan|ilan baru|ประกาศใหม่/i.test(t);
+  }
+  document.addEventListener('click',function(e){
+    if(isNewListingsTrigger(e.target)){
+      recent24Mode=true;
+      setTimeout(applyRecent24,80); setTimeout(applyRecent24,350);
+    } else if(e.target.closest('#cityFilter,#typeFilter,#dealFilter,#searchInput,.filters,[data-home-filter]')){
+      const a=e.target.closest('[data-home-filter]');
+      if(!a || !isNewListingsTrigger(a)) recent24Mode=false;
+    }
+  },true);
+  ['cityFilter','typeFilter','dealFilter','searchInput'].forEach(id=>document.addEventListener('change',e=>{if(e.target.id===id)recent24Mode=false},true));
+  document.addEventListener('input',e=>{if(e.target.id==='searchInput')recent24Mode=false},true);
+
+  function decorateSpecs(){
+    const grid=document.getElementById('propertyGrid'); if(!grid) return;
+    grid.querySelectorAll('*').forEach(el=>{
+      if(el.children.length<2 || el.children.length>8 || el.classList.contains('siriland-spec-row')) return;
+      const txt=(el.textContent||'').trim();
+      const iconHits=(txt.match(/[🛏🛁🚿🏠🏢🚗📐]/g)||[]).length;
+      if(iconHits>=2 && txt.length<120){
+        el.classList.add('siriland-spec-row');
+        Array.from(el.children).forEach(ch=>ch.classList.add('siriland-spec-pill'));
+      }
+    });
+    if(recent24Mode) applyRecent24();
+  }
+  const obs=new MutationObserver(()=>{clearTimeout(window.__sxDecorTimer);window.__sxDecorTimer=setTimeout(decorateSpecs,40)});
+  document.addEventListener('DOMContentLoaded',()=>{const g=document.getElementById('propertyGrid');if(g){obs.observe(g,{childList:true,subtree:true});decorateSpecs();}});
+  window.addEventListener('load',decorateSpecs);
+})();
+</script>\n</body>
 </html>
