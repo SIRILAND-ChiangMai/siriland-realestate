@@ -1,12 +1,6 @@
-# Build 2026.07.10.10 — Media Manager PRO
+# Build 2026.07.10.11 Summary
 
-- Sürükle-bırak çoklu fotoğraf yükleme
-- Yeni fotoğrafları mevcut seçime ekleme
-- Tekrarlanan dosyaları otomatik atlama
-- JPG, PNG ve WEBP format kontrolü
-- Dosya boyutu ve çözünürlük kalite uyarıları
-- Kapak fotoğrafı seçimi ve sürükle-bırak sıralama korunur
-- A–Z otomatik sıralama
-- Yeni fotoğrafları tek tıkla temizleme
-- Fotoğraf sayısı, toplam boyut ve kapak adı özeti
-- Export, CRM, autosave ve validator özellikleri korunur
+- Legacy invalid Floor/Room values are no longer fatal export errors.
+- Invalid legacy values are automatically cleared during export.
+- Deleting a listing and generating a new ZIP now works even when older listings contain malformed fields.
+- Duplicate IDs and missing IDs remain hard-stop errors.

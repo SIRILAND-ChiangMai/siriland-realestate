@@ -145,6 +145,10 @@ function cleanProperty(p){
   ['price','bedrooms','bathrooms','area','room','floor','salePrice','rentPrice','ownerFinance','installment','freeTransfer','summary'].forEach(k=>{
     if(isPlaceholderValue(p[k])) p[k]='';
   });
+  // Legacy bozuk Floor/Room değerleri export sırasında temizlenir.
+  // Böylece eski ilanlardaki hatalar yeni ilan silme/güncelleme işlemini engellemez.
+  if(p.floor && isInvalidStructuredValue(p.floor,'floor')) p.floor='';
+  if(p.room && isInvalidStructuredValue(p.room,'room')) p.room='';
   if(p.type && String(p.type).toLowerCase().includes('srimala villa shophouse')) p.type='Shophouse';
   if(p.description && typeof p.description==='object'){
     langs.forEach(l=>{ if(isPlaceholderValue(p.description[l]) || String(p.description[l]||'').toLowerCase().includes('details are being updated by siriland')) p.description[l]=''; });
@@ -351,7 +355,7 @@ function exportReady(){
     if(isMissingValue(p.price)) warnings.push(label+': Price eksik — fiyat yoksa Contact for Price yaz');
     if(!pick(p.title,'en') && !pick(p.title,'th')) warnings.push(label+': Title eksik');
     if(isMissingValue(p.area) && isMissingValue(p.landSize)) warnings.push(label+': Area/Land Size eksik');
-    structuredFieldErrors(p).forEach(x=>hardErrors.push(x));
+    structuredFieldErrors(p).forEach(x=>warnings.push('Temizlendi: '+x));
   });
 
   if(hardErrors.length){
