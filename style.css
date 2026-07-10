@@ -189,3 +189,18 @@
 .sx-small-card p{font-size:11px!important;}
 @media(max-width:1100px){.sx-explore-grid{grid-template-columns:1fr!important}.sx-city-panel{position:relative!important;top:auto!important}.sx-city-list{display:grid!important;grid-template-columns:repeat(4,1fr)!important}.sx-property-grid{grid-template-columns:repeat(2,1fr)!important}.sx-two-columns{grid-template-columns:1fr!important}}
 @media(max-width:700px){.sx-home-head h2{font-size:32px!important}.sx-home-subtitle{font-size:13px!important}.sx-city-list{grid-template-columns:repeat(2,1fr)!important}.sx-property-grid{grid-template-columns:1fr!important}.sx-showcase-head h3{font-size:19px!important}.sx-showcase-card{padding:13px!important;border-radius:18px!important}.sx-explore-grid{gap:14px!important}.sx-small-card{grid-template-columns:82px 1fr!important}.sx-small-card img{width:82px!important;height:64px!important}.sx-card-photo{height:150px!important}}
+
+
+/* Build 2026.07.09.05 — Slim listing cards: remove duplicated specs */
+#properties .slim-card .desc,
+#properties .slim-card .chips{display:none!important;}
+#properties .slim-card .content{padding:14px 15px!important;gap:5px!important;}
+#properties .slim-card .content h3{font-size:17px!important;line-height:1.24!important;min-height:42px!important;margin:4px 0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+#properties .slim-card .price{font-size:22px!important;line-height:1.1!important;margin:2px 0 4px!important;}
+#properties .slim-card .meta{font-size:11px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+#properties .slim-card .photo{height:178px!important;}
+#properties .compact-specs{display:flex!important;flex-wrap:wrap!important;gap:6px!important;margin:6px 0 10px!important;}
+#properties .compact-specs span{background:#fffaf0!important;border:1px solid rgba(216,178,92,.36)!important;border-radius:999px!important;padding:5px 8px!important;font-size:12px!important;font-weight:900!important;color:#07111f!important;line-height:1.1!important;}
+#properties .slim-card .actions{gap:7px!important;margin-top:6px!important;}
+#properties .slim-card .smallbtn{padding:8px 10px!important;font-size:12px!important;}
+@media(max-width:900px){#properties .slim-card .photo{height:168px!important;}#properties .slim-card .content h3{min-height:auto!important;font-size:16px!important;}#properties .compact-specs span{font-size:11px!important;padding:5px 7px!important;}}

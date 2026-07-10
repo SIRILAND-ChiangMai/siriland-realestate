@@ -151,7 +151,10 @@
     if(p.room && !String(p.room).match(/^[-–]$/)) rows.push({key:'room',label:L.room,value:cleanTranslatedValue(p.room)});
     return rows;
   }
-  function specsInline(p){ return propertySpecs(p).slice(0,4).map(x => `<span>${x.label}: ${x.value}</span>`).join(''); }
+  function specsInline(p){
+    const icon = {bed:'🛏', bath:'🚿', area:'📐', floor:'🏢', room:'🚪'};
+    return propertySpecs(p).slice(0,4).map(x => `<span>${icon[x.key]||''} ${x.value}</span>`).join('');
+  }
   function specsGrid(p){ return propertySpecs(p).map(x => `<div class="detail-spec-card"><small>${x.label}</small><strong>${x.value}</strong></div>`).join(''); }
   function propertyShortText(p){
     const summary = p.summary && typeof p.summary === 'object' ? (p.summary[lang] || p.summary.en || p.summary.th || '') : (p.summary || '');
@@ -281,15 +284,17 @@
   }
 
   function card(p){
-    const title=pick(p.title), highlights=pickList(p.highlights).slice(0,4), ov=overlayText(p.status);
+    const title=pick(p.title), ov=overlayText(p.status);
     const specs = specsInline(p);
-    return `<article class="card">
+    return `<article class="card slim-card">
       <div class="photo" data-id="${p.id}"><img src="${safeImg(p.images)}" alt="${title}" loading="lazy" onerror="this.src='images/logo.png'"><span class="badge">${trMap('deal',p.deal)}</span><span class="status">${trMap('status',p.status)}</span><span class="count">${(p.images||[]).length} ${t('photos')}</span>${ov?`<span class="sold-ribbon">${ov}</span>`:''}</div>
-      <div class="content"><div class="meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div><h3>${title}</h3><div class="price">${translateText(p.price||'')}</div>
-      ${specs?`<div class="property-spec-line">${specs}</div>`:''}
-      <p class="desc">${propertyShortText(p)}</p>
-      <div class="chips">${highlights.map(h=>`<span>${h}</span>`).join('')}</div>
-      <div class="actions"><button class="smallbtn goldbtn" data-open="${p.id}">${t('details')}</button>${p.map?`<a class="smallbtn" target="_blank" href="${p.map}">${t('map')}</a>`:''}<a class="smallbtn" target="_blank" href="https://line.me/R/ti/p/@realcreamthailand">${t('contact')}</a></div></div>
+      <div class="content">
+        <div class="meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div>
+        <h3>${title}</h3>
+        <div class="price">${translateText(p.price||p.salePrice||'')}</div>
+        ${specs?`<div class="property-spec-line compact-specs">${specs}</div>`:''}
+        <div class="actions"><button class="smallbtn goldbtn" data-open="${p.id}">${t('details')}</button>${p.map?`<a class="smallbtn" target="_blank" href="${p.map}">${t('map')}</a>`:''}<a class="smallbtn" target="_blank" href="https://line.me/R/ti/p/@realcreamthailand">${t('contact')}</a></div>
+      </div>
     </article>`;
   }
 
