@@ -1,13 +1,14 @@
-SIRILAND HOUSE COLLECTION FILTER FIX
+SIRILAND RENT FILTER FIX
 
 Düzeltme:
-- Homepage'de Houses kartında 4 ilan yazıyorsa tıklayınca 4 ilan gösterilir.
-- Farklı House türleri (House, Pool House, Detached House vb.) artık tek koleksiyonda birlikte filtrelenir.
-- Deep Link düzeltmesi korunmuştur.
+- Deal filtresinde Rent artık ayrı seçenek olarak görünür.
+- Rent seçildiğinde Rent ve Sale/Rent ilanları gösterilir.
+- Sale seçildiğinde Sale ve Sale/Rent ilanları gösterilir.
+- Önceki ilan linki ve House koleksiyonu düzeltmeleri korunmuştur.
 
 Kurulum:
 1. script.js dosyasını GitHub klasöründeki eski script.js üzerine kopyalayın.
-2. GitHub Desktop Summary: Fix house collection filter
+2. GitHub Desktop Summary: Fix rent filter
 3. Commit to main
 4. Push origin
-5. Site açıldıktan sonra Ctrl + Shift + R yapın.
+5. Siteyi açıp Ctrl + Shift + R yapın.

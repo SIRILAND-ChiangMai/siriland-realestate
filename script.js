@@ -393,7 +393,9 @@
     const cityFilter=$('cityFilter'), typeFilter=$('typeFilter'), dealFilter=$('dealFilter');
     const cities=[...new Set(DATA.map(p=>p.city).filter(Boolean))].sort();
     const types=[...new Set(DATA.map(p=>p.type).filter(Boolean))].sort();
-    const deals=[...new Set(DATA.map(p=>p.deal).filter(Boolean))].sort();
+    const rawDeals=[...new Set(DATA.map(p=>p.deal).filter(Boolean))];
+    const deals=['Sale','Rent'];
+    if(rawDeals.some(v=>String(v).toLowerCase().includes('sale/rent'))) deals.push('Sale/Rent');
     cityFilter.innerHTML=`<option value="all">${t('allCities')}</option>`+cities.map(v=>`<option value="${v}">${trMap('city',v)}</option>`).join('');
     typeFilter.innerHTML=`<option value="all">${t('allTypes')}</option>`+types.map(v=>`<option value="${v}">${trMap('type',v)}</option>`).join('');
     dealFilter.innerHTML=`<option value="all">${t('allDeals')}</option>`+deals.map(v=>`<option value="${v}">${trMap('deal',v)}</option>`).join('');
@@ -596,7 +598,14 @@ function renderMapView(){
         !collectionFilter ||
         (collectionFilter === 'house' && propertyType.includes('house')) ||
         (collectionFilter === 'condo' && propertyType.includes('condo'));
-      return (city==='all'||p.city===city) && (type==='all'||p.type===type) && (deal==='all'||p.deal===deal) && (!q||blob.includes(q)) && priceOk && bedOk && collectionOk && advancedFilterPass(p);
+      const propertyDeal = String(p.deal || '').toLowerCase().replace(/\s+/g,'');
+      const selectedDeal = String(deal || '').toLowerCase().replace(/\s+/g,'');
+      const dealOk =
+        selectedDeal === 'all' ||
+        (selectedDeal === 'sale' && (propertyDeal === 'sale' || propertyDeal === 'sale/rent')) ||
+        (selectedDeal === 'rent' && (propertyDeal === 'rent' || propertyDeal === 'sale/rent')) ||
+        propertyDeal === selectedDeal;
+      return (city==='all'||p.city===city) && (type==='all'||p.type===type) && dealOk && (!q||blob.includes(q)) && priceOk && bedOk && collectionOk && advancedFilterPass(p);
     });
     const totalPages = Math.max(1, Math.ceil(currentList.length / pageSize));
     if(currentPage > totalPages) currentPage = totalPages;
