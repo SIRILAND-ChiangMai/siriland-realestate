@@ -1,7 +1,11 @@
-1) Bu ZIP dosyasını açın.
-2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.
-3) properties.json dosyasını da eski properties.json üstüne kopyalayın.
-4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.
-5) GitHub Desktop: Commit + Push.
+SIRILAND PROPERTY DEEP LINK FIX
 
-Not: Export artık boş properties.json üretmez. Eksik fiyat/oda/banyo/alan varsa raporda uyarı verir ama export durmaz. Duplicate ID varsa durur. CRM müşterileri crm/customers.json olarak eklenir.
+1. script.js dosyasını GitHub proje klasöründeki eski script.js üzerine kopyalayın.
+2. GitHub Desktop Summary:
+   Fix property direct links
+3. Commit to main > Push origin
+4. Site açıldıktan sonra Ctrl + Shift + R yapın.
+
+Test:
+Ana sitede bir ilanı açın > Copy Link > bağlantıyı yeni gizli sekmede açın.
+İlgili ilan modalı otomatik açılmalıdır.

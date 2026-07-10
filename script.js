@@ -671,8 +671,15 @@ function renderMapView(){
   }
 
   function propertyUrl(p){
-    const base = location.origin + location.pathname.replace(/[^/]*$/, '');
-    return base + '?property=' + encodeURIComponent(p.id || '');
+    const id = encodeURIComponent(String(p?.id || '').trim());
+    const url = new URL(window.location.href);
+    url.search = '';
+    url.hash = '';
+    // GitHub Pages proje klasörünü koru; index.html varsa kaldır.
+    url.pathname = url.pathname.replace(/\/index\.html?$/i, '/');
+    url.searchParams.set('property', id);
+    url.hash = 'property-' + id;
+    return url.toString();
   }
   function contactMessage(p){
     return [
@@ -777,7 +784,14 @@ function renderMapView(){
     const mapPick=e.target.closest('.map-item'); if(mapPick && !e.target.closest('button,a')){const p=DATA.find(x=>x.id===mapPick.dataset.mapId); if(p) setMapProperty(p); return;}
     const open=e.target.closest('[data-open], .photo, [data-related-open]'); if(open){openModal(open.dataset.open || open.dataset.id || open.dataset.relatedOpen); return;}
     const th=e.target.closest('[data-thumb]'); if(th){modalIndex=+th.dataset.thumb; updateModal(); return;}
-    if(e.target.id==='modalClose' || e.target.id==='propertyModal') $('propertyModal').classList.add('hidden');
+    if(e.target.id==='modalClose' || e.target.id==='propertyModal'){
+      $('propertyModal').classList.add('hidden');
+      const cleanUrl = new URL(window.location.href);
+      cleanUrl.searchParams.delete('property');
+      cleanUrl.searchParams.delete('id');
+      if(/^#property-/i.test(cleanUrl.hash)) cleanUrl.hash = '';
+      history.replaceState({}, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
+    }
     if(e.target.id==='modalPrev') next(-1); if(e.target.id==='modalNext') next(1);
   });
   document.addEventListener('keydown', e=>{ if(!$('propertyModal')?.classList.contains('hidden')){ if(e.key==='ArrowLeft') next(-1); if(e.key==='ArrowRight') next(1); if(e.key==='Escape') $('propertyModal').classList.add('hidden'); }});
@@ -788,25 +802,67 @@ function renderMapView(){
   $('clearAdvancedFilters')?.addEventListener('click',()=>{['filterPriceMin','filterPriceMax','filterMinBedrooms','filterMinBathrooms','filterMinArea','filterMinLandArea','filterTitleDeed','filterRoadAccess','filterMinBuildingArea','filterMinParking'].forEach(id=>{if($(id)) $(id).value=''});currentPage=1;render();});
   $('menuToggle')?.addEventListener('click',()=> $('mainNav').classList.toggle('show'));
 
-  function openPropertyFromUrl(){
+  function requestedPropertyId(){
     const params = new URLSearchParams(window.location.search);
-    const propertyId = params.get('property') || params.get('id');
-    if(!propertyId) return;
-    const found = DATA.find(p => String(p.id || '').toLowerCase() === String(propertyId).toLowerCase());
-    if(!found) return;
-
-    const cityFilter = $('cityFilter');
-    const typeFilter = $('typeFilter');
-    const dealFilter = $('dealFilter');
-    const searchInput = $('searchInput');
-    if(cityFilter) cityFilter.value = 'all';
-    if(typeFilter) typeFilter.value = 'all';
-    if(dealFilter) dealFilter.value = 'all';
-    if(searchInput) searchInput.value = found.id;
-    render();
-
-    setTimeout(() => openModal(found.id), 250);
+    let propertyId = params.get('property') || params.get('id') || '';
+    if(!propertyId){
+      const hash = decodeURIComponent(window.location.hash || '');
+      const match = hash.match(/^#(?:property[-=\/]|property=)(.+)$/i);
+      if(match) propertyId = match[1];
+    }
+    return String(propertyId || '').trim();
   }
 
-  applyI18n(); fillFilters(); updateAdvancedFilters(); renderHomeShowcase(); render(); setViewMode(localStorage.getItem('siriland_view_mode') || 'list'); openPropertyFromUrl();
+  function openPropertyFromUrl(attempt=0){
+    const propertyId = requestedPropertyId();
+    if(!propertyId) return false;
+
+    const found = DATA.find(p =>
+      String(p.id || '').trim().toLowerCase() === propertyId.toLowerCase()
+    );
+
+    // properties.js geç yüklendiyse kısa süre tekrar dene.
+    if(!found){
+      if(attempt < 12) setTimeout(() => openPropertyFromUrl(attempt + 1), 250);
+      return false;
+    }
+
+    if($('cityFilter')) $('cityFilter').value = 'all';
+    if($('typeFilter')) $('typeFilter').value = 'all';
+    if($('dealFilter')) $('dealFilter').value = 'all';
+    if($('searchInput')) $('searchInput').value = '';
+    window.__sirilandPriceRange = 'all';
+    window.__sirilandMinBeds = 'all';
+    currentPage = 1;
+    render();
+
+    const propertiesSection = document.getElementById('properties');
+    if(propertiesSection) propertiesSection.scrollIntoView({block:'start'});
+
+    setTimeout(() => {
+      openModal(found.id);
+      const canonical = propertyUrl(found);
+      history.replaceState({property: found.id}, '', canonical);
+    }, 120);
+    return true;
+  }
+
+  function bootSiriland(){
+    applyI18n();
+    fillFilters();
+    updateAdvancedFilters();
+    renderHomeShowcase();
+    render();
+    setViewMode(localStorage.getItem('siriland_view_mode') || 'list');
+    openPropertyFromUrl();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', bootSiriland, {once:true});
+  }else{
+    bootSiriland();
+  }
+
+  window.addEventListener('popstate', () => openPropertyFromUrl());
+  window.addEventListener('hashchange', () => openPropertyFromUrl());
 })();
