@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND CMS PRO 2030 - Sprint 4.3 GitHub Assistant</title>
-  <link rel="stylesheet" href="admin.css?v=2026071014">
+  <title>SIRILAND CMS PRO 2030 - Sprint 4.4 Dashboard PRO</title>
+  <link rel="stylesheet" href="admin.css?v=2026071015">
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND CMS PRO 2030 — Sprint 4.3 GitHub Assistant</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
+    <div><div class="logo">SIRILAND CMS PRO 2030 — Sprint 4.4 Dashboard PRO</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -53,21 +53,57 @@
   </div>
 
 
-  <div class="panel" id="dashboardPanel">
-    <h2>🏠 Dashboard — Phase 1</h2>
-    <div class="dashboardGrid">
+  <div class="panel dashboardProPanel" id="dashboardPanel">
+    <div class="dashboardProHead">
+      <div>
+        <h2>📊 Dashboard PRO — Sprint 4.4</h2>
+        <p class="muted">Portföy, şehir, ilan türü, fiyat, kalite ve son hareketleri tek ekranda gösterir.</p>
+      </div>
+      <button class="btn dark" id="refreshDashboardBtn" type="button">Dashboard Yenile</button>
+    </div>
+
+    <div class="dashboardGrid dashboardProStats">
       <div class="statCard"><div class="statLabel">Toplam İlan</div><div class="statValue" id="statTotal">0</div></div>
+      <div class="statCard"><div class="statLabel">Aktif</div><div class="statValue" id="statAvailable">0</div></div>
       <div class="statCard"><div class="statLabel">Satılık</div><div class="statValue" id="statSale">0</div></div>
       <div class="statCard"><div class="statLabel">Kiralık</div><div class="statValue" id="statRent">0</div></div>
-      <div class="statCard"><div class="statLabel">Aktif</div><div class="statValue" id="statAvailable">0</div></div>
+      <div class="statCard"><div class="statLabel">Ortalama Fiyat</div><div class="statValue compactValue" id="statAveragePrice">฿0</div></div>
+      <div class="statCard"><div class="statLabel">Toplam Portföy Değeri</div><div class="statValue compactValue" id="statPortfolioValue">฿0</div></div>
+      <div class="statCard"><div class="statLabel">Ortalama Kalite</div><div class="statValue" id="statAverageQuality">0%</div></div>
+      <div class="statCard"><div class="statLabel">Eksik Bilgili</div><div class="statValue" id="statMissing">0</div></div>
       <div class="statCard"><div class="statLabel">Satıldı</div><div class="statValue" id="statSold">0</div></div>
       <div class="statCard"><div class="statLabel">Kiraya Verildi</div><div class="statValue" id="statRented">0</div></div>
-      <div class="statCard"><div class="statLabel">Eksik Bilgili</div><div class="statValue" id="statMissing">0</div></div>
-      <div class="statCard"><div class="statLabel">Yeni Foto Bekleyen</div><div class="statValue" id="statPendingPhotos">0</div></div>
+      <div class="statCard"><div class="statLabel">Owner Finance</div><div class="statValue" id="statOwnerFinance">0</div></div>
+      <div class="statCard"><div class="statLabel">Fotoğraf Bekleyen</div><div class="statValue" id="statPendingPhotos">0</div></div>
     </div>
-    <div class="miniList">
+
+    <div class="dashboardCharts">
+      <section class="dashboardChartBox">
+        <div class="dashboardChartTitle"><h3>Listings by City</h3><span id="cityChartTotal">0 ilan</span></div>
+        <div id="cityChart" class="barChart"></div>
+      </section>
+      <section class="dashboardChartBox">
+        <div class="dashboardChartTitle"><h3>Listings by Type</h3><span id="typeChartTotal">0 tür</span></div>
+        <div id="typeChart" class="barChart"></div>
+      </section>
+      <section class="dashboardChartBox">
+        <div class="dashboardChartTitle"><h3>Price Distribution</h3><span>Satılık portföy</span></div>
+        <div id="priceChart" class="barChart"></div>
+      </section>
+      <section class="dashboardChartBox">
+        <div class="dashboardChartTitle"><h3>Data Health</h3><span id="dataHealthLabel">0%</span></div>
+        <div class="dashboardHealth">
+          <div class="dashboardDonut" id="dataHealthDonut"><strong id="dataHealthValue">0%</strong></div>
+          <div id="dataHealthBreakdown" class="healthBreakdown"></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="miniList dashboardRecentGrid">
+      <div class="miniBox"><h3>Son 24 Saatte Eklenen</h3><div id="recent24List"></div></div>
       <div class="miniBox"><h3>Son Eklenen İlanlar</h3><div id="lastAddedList"></div></div>
       <div class="miniBox"><h3>Son Düzenlenen İlanlar</h3><div id="lastUpdatedList"></div></div>
+      <div class="miniBox"><h3>Eksik Veri Raporu</h3><div id="dashboardMissingList"></div></div>
     </div>
   </div>
 
@@ -240,7 +276,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071014"></script>
+<script src="admin.js?v=2026071015"></script>
 <script src="modules/dashboard.js?v=2026071012"></script>
 <script src="modules/crm.js?v=2026071012"></script>
 <script src="modules/export.js?v=2026071012"></script>

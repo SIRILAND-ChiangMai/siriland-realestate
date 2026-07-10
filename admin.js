@@ -229,21 +229,128 @@ function formatMiniProperty(p){
   const title=pick(p.title,'en')||pick(p.title,'th')||p.id||'';
   return `<div class="miniItem"><b>${escapeHtml(p.id||'')}</b> — ${escapeHtml(title)}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.price||'')}</span></div>`;
 }
+function dashboardPriceNumber(value){
+  const s=String(value||'').toLowerCase().replace(/,/g,'').trim();
+  if(!s || /contact|ask|update|pending|n\/a/.test(s)) return 0;
+  const m=s.match(/([0-9]+(?:\.[0-9]+)?)/);
+  if(!m) return 0;
+  let n=Number(m[1]);
+  if(s.includes('mb') || s.includes('million') || s.includes('ล้าน')) n*=1000000;
+  return Number.isFinite(n)?n:0;
+}
+function dashboardMoney(value){
+  const n=Number(value)||0;
+  if(n>=1000000000) return '฿'+(n/1000000000).toFixed(2).replace(/\.00$/,'')+'B';
+  if(n>=1000000) return '฿'+(n/1000000).toFixed(2).replace(/\.00$/,'')+'M';
+  if(n>=1000) return '฿'+Math.round(n/1000)+'K';
+  return '฿'+Math.round(n).toLocaleString();
+}
+function dashboardDateValue(value){
+  const d=new Date(value||0);
+  return Number.isNaN(d.getTime())?0:d.getTime();
+}
+function dashboardIsRecent24(p){
+  const ts=dashboardDateValue(p.createdAt);
+  return ts>0 && Date.now()-ts<=24*60*60*1000 && Date.now()>=ts;
+}
+function dashboardPropertyQuality(p){
+  const title=pick(p.title,'en')||pick(p.title,'th');
+  const checks=[
+    !!p.id, !!p.city, !!p.type, !!p.deal, !!p.status,
+    !isMissingValue(p.price||p.salePrice||p.rentPrice),
+    !!title, Array.isArray(p.images)&&p.images.length>0,
+    !!pick(p.description,'en')||!!pick(p.description,'th'),
+    !!p.map
+  ];
+  return Math.round(checks.filter(Boolean).length/checks.length*100);
+}
+function dashboardMissingFields(p){
+  const missing=[];
+  if(!p.id) missing.push('ID');
+  if(!p.city) missing.push('City');
+  if(!p.type) missing.push('Type');
+  if(!p.deal) missing.push('Deal');
+  if(isMissingValue(p.price||p.salePrice||p.rentPrice)) missing.push('Price');
+  if(!pick(p.title,'en')&&!pick(p.title,'th')) missing.push('Title');
+  if(!Array.isArray(p.images)||!p.images.length) missing.push('Images');
+  if(!p.map) missing.push('Map');
+  return missing;
+}
+function renderDashboardBars(targetId, rows, total){
+  const target=$(targetId);
+  if(!target) return;
+  const max=Math.max(1,...rows.map(r=>r.value));
+  target.innerHTML=rows.length?rows.map(r=>{
+    const width=Math.max(4,Math.round(r.value/max*100));
+    const percent=total?Math.round(r.value/total*100):0;
+    return `<div class="barRow"><div class="barRowHead"><span>${escapeHtml(r.label)}</span><b>${r.value} <small>(${percent}%)</small></b></div><div class="barTrack"><div class="barFill" style="width:${width}%"></div></div></div>`;
+  }).join(''):'<span class="muted">Veri yok</span>';
+}
 function renderDashboard(){
   const total=properties.length;
-  const sale=properties.filter(p=>dealText(p).includes('sale') || dealText(p).includes('ขาย')).length;
-  const rent=properties.filter(p=>dealText(p).includes('rent') || dealText(p).includes('เช่า')).length;
-  const available=properties.filter(p=>statusText(p).includes('available') || statusText(p).includes('พร้อม')).length;
-  const sold=properties.filter(p=>statusText(p).includes('sold') || statusText(p).includes('ขายแล้ว')).length;
-  const rented=properties.filter(p=>statusText(p).includes('rented') || statusText(p).includes('leased') || statusText(p).includes('เช่าแล้ว')).length;
-  const missing=properties.filter(propertyHasMissing).length;
-  const pending=Object.values(pendingFilesById).reduce((s,a)=>s+(a?a.length:0),0);
-  const set=(id,v)=>{const el=$(id); if(el) el.textContent=v};
-  set('statTotal',total); set('statSale',sale); set('statRent',rent); set('statAvailable',available); set('statSold',sold); set('statRented',rented); set('statMissing',missing); set('statPendingPhotos',pending);
-  const byCreated=[...properties].sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||''))).slice(0,5);
-  const byUpdated=[...properties].sort((a,b)=>String(b.updatedAt||'').localeCompare(String(a.updatedAt||''))).slice(0,5);
+  const dealText=p=>String(p.deal||'').toLowerCase();
+  const statusText=p=>String(p.status||'').toLowerCase();
+  const sale=properties.filter(p=>dealText(p).includes('sale')).length;
+  const rent=properties.filter(p=>dealText(p).includes('rent')).length;
+  const available=properties.filter(p=>statusText(p).includes('available')).length;
+  const sold=properties.filter(p=>statusText(p).includes('sold')).length;
+  const rented=properties.filter(p=>statusText(p).includes('rent')||statusText(p).includes('lease')).length;
+  const ownerFinance=properties.filter(p=>!isMissingValue(p.ownerFinance)||!isMissingValue(p.installment)).length;
+  const pending=properties.filter(p=>!Array.isArray(p.images)||p.images.length===0).length;
+  const missingRows=properties.map(p=>({p,missing:dashboardMissingFields(p)})).filter(x=>x.missing.length);
+  const missing=missingRows.length;
+
+  const prices=properties.map(p=>dashboardPriceNumber(p.price||p.salePrice)).filter(n=>n>0);
+  const portfolioValue=prices.reduce((a,b)=>a+b,0);
+  const averagePrice=prices.length?portfolioValue/prices.length:0;
+  const qualities=properties.map(dashboardPropertyQuality);
+  const averageQuality=qualities.length?Math.round(qualities.reduce((a,b)=>a+b,0)/qualities.length):0;
+
+  const set=(id,val)=>{if($(id))$(id).textContent=val};
+  set('statTotal',total); set('statSale',sale); set('statRent',rent); set('statAvailable',available);
+  set('statSold',sold); set('statRented',rented); set('statMissing',missing); set('statPendingPhotos',pending);
+  set('statOwnerFinance',ownerFinance); set('statAveragePrice',dashboardMoney(averagePrice));
+  set('statPortfolioValue',dashboardMoney(portfolioValue)); set('statAverageQuality',averageQuality+'%');
+
+  const countsBy=key=>{
+    const map={};
+    properties.forEach(p=>{const label=String(p[key]||'Unknown').trim()||'Unknown';map[label]=(map[label]||0)+1});
+    return Object.entries(map).map(([label,value])=>({label,value})).sort((a,b)=>b.value-a.value||a.label.localeCompare(b.label));
+  };
+  const cityRows=countsBy('city');
+  const typeRows=countsBy('type');
+  renderDashboardBars('cityChart',cityRows,total);
+  renderDashboardBars('typeChart',typeRows,total);
+  set('cityChartTotal',total+' ilan');
+  set('typeChartTotal',typeRows.length+' tür');
+
+  const priceBuckets=[
+    {label:'0–2M',min:0,max:2000000,value:0},
+    {label:'2–5M',min:2000000,max:5000000,value:0},
+    {label:'5–10M',min:5000000,max:10000000,value:0},
+    {label:'10–20M',min:10000000,max:20000000,value:0},
+    {label:'20M+',min:20000000,max:Infinity,value:0}
+  ];
+  prices.forEach(n=>{const b=priceBuckets.find(x=>n>=x.min&&n<x.max);if(b)b.value++});
+  renderDashboardBars('priceChart',priceBuckets,prices.length);
+
+  const health=Math.max(0,Math.min(100,averageQuality));
+  set('dataHealthLabel',health+'%');
+  set('dataHealthValue',health+'%');
+  if($('dataHealthDonut')) $('dataHealthDonut').style.setProperty('--health',health*3.6+'deg');
+  if($('dataHealthBreakdown')) $('dataHealthBreakdown').innerHTML=[
+    ['Tam ilan',properties.filter(p=>dashboardPropertyQuality(p)>=90).length],
+    ['İyileştirilmeli',properties.filter(p=>dashboardPropertyQuality(p)>=70&&dashboardPropertyQuality(p)<90).length],
+    ['Eksik',properties.filter(p=>dashboardPropertyQuality(p)<70).length]
+  ].map(([a,b])=>`<div><span>${a}</span><strong>${b}</strong></div>`).join('');
+
+  const byCreated=properties.slice().sort((a,b)=>dashboardDateValue(b.createdAt)-dashboardDateValue(a.createdAt)).slice(0,6);
+  const byUpdated=properties.slice().sort((a,b)=>dashboardDateValue(b.updatedAt)-dashboardDateValue(a.updatedAt)).slice(0,6);
+  const recent24=properties.filter(dashboardIsRecent24).sort((a,b)=>dashboardDateValue(b.createdAt)-dashboardDateValue(a.createdAt)).slice(0,10);
   if($('lastAddedList')) $('lastAddedList').innerHTML=byCreated.map(formatMiniProperty).join('')||'<span class="muted">Henüz ilan yok</span>';
   if($('lastUpdatedList')) $('lastUpdatedList').innerHTML=byUpdated.map(formatMiniProperty).join('')||'<span class="muted">Henüz ilan yok</span>';
+  if($('recent24List')) $('recent24List').innerHTML=recent24.map(formatMiniProperty).join('')||'<span class="muted">Son 24 saatte yeni ilan yok</span>';
+  if($('dashboardMissingList')) $('dashboardMissingList').innerHTML=missingRows.slice(0,10).map(x=>`<div class="miniItem dashboardMissingItem" data-edit-id="${escapeHtml(x.p.id||'')}"><b>${escapeHtml(x.p.id||'No ID')}</b><span>${escapeHtml(x.missing.join(', '))}</span></div>`).join('')||'<span class="ok">Eksik veri yok</span>';
 }
 function updateQualityScore(){
   let p;
@@ -682,3 +789,13 @@ function gh43Init(){if(!$('gh43Panel'))return;const settings=gh43Read(GH43_SETTI
 const _gh43BuildZip=buildZip;
 buildZip=async function(){const before=gh43GetChanges();const result=await _gh43BuildZip();const now=new Date();const version=now.getFullYear()+'.'+String(now.getMonth()+1).padStart(2,'0')+'.'+String(now.getDate()).padStart(2,'0')+'-'+String(now.getHours()).padStart(2,'0')+String(now.getMinutes()).padStart(2,'0');gh43Write(GH43_LAST_EXPORT_KEY,{version,exportedAt:now.toLocaleString(),changes:before,files:gh43FilesChanged()});gh43Write(GH43_SNAPSHOT_KEY,gh43Snapshot());gh43Render();return result};
 window.addEventListener('DOMContentLoaded',gh43Init);
+
+
+document.addEventListener('click',e=>{
+  if(e.target.closest('#refreshDashboardBtn')) renderDashboard();
+  const missingItem=e.target.closest('.dashboardMissingItem[data-edit-id]');
+  if(missingItem){
+    const p=properties.find(x=>x.id===missingItem.dataset.editId);
+    if(p){setForm(p);window.scrollTo({top:0,behavior:'smooth'});}
+  }
+});
