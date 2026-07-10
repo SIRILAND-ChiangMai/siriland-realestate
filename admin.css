@@ -186,3 +186,27 @@
 .directSaveStatus{margin-top:12px;border-radius:11px;padding:10px 12px;background:#eef2ff;color:#334155;font-size:13px;font-weight:700}
 .directSaveStatus.working{background:#fff7df;color:#92400e}.directSaveStatus.ok{background:#dcfce7;color:#166534}.directSaveStatus.error{background:#fee2e2;color:#991b1b}
 @media(max-width:700px){.directSaveHead{flex-direction:column}.directSaveActions .btn{width:100%}}
+
+
+/* Sprint 5.2 — Smart Publish PRO */
+.smartPublishPanel{background:linear-gradient(145deg,#fff,#f6f9ff);border:2px solid #5b78d1}
+.smartPublishHead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.smartPublishHead h2{margin:0 0 5px}.smartVersionBadge{background:var(--navy);color:var(--gold);border-radius:999px;padding:8px 13px;font-weight:900}
+.smartPublishStats{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:14px 0}.smartStat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px;text-align:center}.smartStat span{display:block;font-size:10px;color:#64748b;font-weight:800;text-transform:uppercase}.smartStat strong{display:block;font-size:21px;color:var(--navy);margin-top:4px}
+.smartPublishActions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.smartPublishGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.smartBox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;min-height:170px}.smartBox h3{margin:0 0 9px;color:var(--navy)}
+.smartList{display:grid;gap:6px;max-height:260px;overflow:auto}.smartList>div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed #d9deea;padding:7px 0}.smartList small{color:#64748b;text-align:right}.smartAdded{color:#0f7b3f}.smartUpdated{color:#1d4ed8}.smartDeleted{color:#b91c1c}.smartAllGood{color:#0f7b3f;font-weight:800}
+#smartCommitMessage{font-family:monospace;margin-top:6px}
+@media(max-width:1000px){.smartPublishStats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:800px){.smartPublishGrid{grid-template-columns:1fr}.smartPublishHead{flex-direction:column}}
+@media(max-width:520px){.smartPublishStats{grid-template-columns:1fr 1fr}}
+
+
+/* Auto ID + Dynamic Property Form */
+.formModeToolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;background:linear-gradient(145deg,#fff,#f7fbff);border:1px solid #b9c8e8}
+.formModeToolbar h2{margin:0 0 4px}.formModeActions{display:flex;gap:8px;flex-wrap:wrap}
+.formModeActions .activeMode{outline:3px solid rgba(214,173,75,.35);box-shadow:0 0 0 1px var(--gold)}
+.type-note{grid-column:1/-1;background:#eef6ff;border:1px solid #bdd7f3;border-radius:10px;padding:10px;color:#234d75;font-size:13px}
+.simpleFormMode .advancedOnly{display:none!important}
+[data-property-field],[data-deal-field]{transition:opacity .15s ease}
+@media(max-width:760px){.formModeToolbar{align-items:flex-start;flex-direction:column}.formModeActions .btn{width:100%}}

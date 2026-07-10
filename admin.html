@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SIRILAND CMS PRO 2030 - Integrated Publish Manager PRO</title>
-  <link rel="stylesheet" href="admin.css?v=2026071021">
+  <link rel="stylesheet" href="admin.css?v=2026071024">
 </head>
 <body>
 
@@ -183,6 +183,63 @@
     </div>
   </div>
 
+
+  <div class="panel smartPublishPanel" id="smartPublishPanel">
+    <div class="smartPublishHead">
+      <div>
+        <h2>🧠 Sprint 5.2 — Smart Publish PRO</h2>
+        <p class="muted">İlan, fiyat, fotoğraf ve dosya değişikliklerini karşılaştırır; validator, sürüm ve rollback raporu oluşturur.</p>
+      </div>
+      <span class="smartVersionBadge" id="smartPublishVersion">v1</span>
+    </div>
+
+    <div class="smartPublishStats">
+      <div class="smartStat"><span>Added Listings</span><strong id="smartAddedCount">0</strong></div>
+      <div class="smartStat"><span>Updated Listings</span><strong id="smartUpdatedCount">0</strong></div>
+      <div class="smartStat"><span>Deleted Listings</span><strong id="smartDeletedCount">0</strong></div>
+      <div class="smartStat"><span>Price Changes</span><strong id="smartPriceCount">0</strong></div>
+      <div class="smartStat"><span>Image Changes</span><strong id="smartImageCount">0</strong></div>
+      <div class="smartStat"><span>Validator Errors</span><strong id="smartErrorCount">0</strong></div>
+    </div>
+
+    <div class="smartPublishActions">
+      <button class="btn" type="button" id="smartAnalyzeBtn">🔍 Değişiklikleri Analiz Et</button>
+      <button class="btn dark" type="button" id="smartSaveVersionBtn">💾 Sürüm Kaydet</button>
+      <button class="btn dark" type="button" id="smartExportReportBtn">📄 Raporu İndir</button>
+      <button class="btn red" type="button" id="smartRollbackBtn">↩ Son Sürüme Dön</button>
+    </div>
+
+    <div class="smartPublishGrid">
+      <section class="smartBox">
+        <h3>Property Changes</h3>
+        <div id="smartPropertyChanges" class="smartList"></div>
+      </section>
+      <section class="smartBox">
+        <h3>Price Changes</h3>
+        <div id="smartPriceChanges" class="smartList"></div>
+      </section>
+      <section class="smartBox">
+        <h3>Image Changes</h3>
+        <div id="smartImageChanges" class="smartList"></div>
+      </section>
+      <section class="smartBox">
+        <h3>Validator PRO</h3>
+        <div id="smartValidatorReport" class="smartList"></div>
+      </section>
+      <section class="smartBox">
+        <h3>Property Timeline</h3>
+        <div id="smartTimeline" class="smartList"></div>
+      </section>
+      <section class="smartBox">
+        <h3>Version History</h3>
+        <div id="smartVersionHistory" class="smartList"></div>
+      </section>
+    </div>
+
+    <label>Smart Commit Message</label>
+    <textarea id="smartCommitMessage" rows="4" readonly></textarea>
+  </div>
+
 <div class="panel propertyDatabasePanel" id="propertyDatabasePanel">
     <div class="propertyDbHead">
       <div>
@@ -244,6 +301,18 @@
     <div class="crmPipeline" id="crmPipeline"></div>
   </div>
 
+
+  <div class="panel formModeToolbar">
+    <div>
+      <h2>🧩 Dynamic Property Form</h2>
+      <p class="muted">Şehir seçilince ID otomatik oluşur. Property Type seçilince yalnızca ilgili alanlar gösterilir.</p>
+    </div>
+    <div class="formModeActions">
+      <button class="btn green" id="simpleFormModeBtn" type="button">Hızlı Mod</button>
+      <button class="btn dark" id="advancedFormModeBtn" type="button">Gelişmiş Mod</button>
+    </div>
+  </div>
+
   <div class="grid">
     <div>
       <div class="panel">
@@ -279,24 +348,24 @@
           <div class="type-note" id="propertyTypeNote">Select a property type. The form will show the most relevant fields.</div>
         </div>
       </div>
-      <div class="panel">
-        <h2>2) Extra Sale / Rent Details</h2>
+      <div class="panel conditionalPanel" id="saleRentDetailsPanel">
+        <h2>2) Satış / Kiralama Detayları</h2>
         <div class="grid3">
-          <div><label>🏷️ Sale Price</label><input id="salePrice" placeholder="3.2 MB / Unit"></div>
-          <div><label>💰 Rent Price</label><input id="rentPrice" placeholder="20,000 THB / Month"></div>
-          <div><label>💳 Owner Finance</label><input id="ownerFinance" placeholder="10% Down / Owner Finance Available"></div>
-          <div><label>📅 Installment</label><input id="installment" placeholder="60 months / 10,000 THB per month"></div>
-          <div><label>🎁 Free Transfer</label><input id="freeTransfer" placeholder="Free transfer / tax paid by owner"></div>
+          <div data-deal-field="sale"><label>🏷️ Sale Price</label><input id="salePrice" placeholder="3.2 MB / Unit"></div>
+          <div data-deal-field="rent"><label>💰 Rent Price</label><input id="rentPrice" placeholder="20,000 THB / Month"></div>
+          <div data-deal-field="sale advanced"><label>💳 Owner Finance</label><input id="ownerFinance" placeholder="10% Down / Owner Finance Available"></div>
+          <div data-deal-field="sale advanced"><label>📅 Installment</label><input id="installment" placeholder="60 months / 10,000 THB per month"></div>
+          <div data-deal-field="sale advanced"><label>🎁 Free Transfer</label><input id="freeTransfer" placeholder="Free transfer / tax paid by owner"></div>
           <div><label>⭐ Summary</label><input id="summary" placeholder="Short SEO summary"><button class="btn" type="button" id="generateSummaryBtn" style="margin-top:7px">Generate Summary</button></div>
         </div>
       </div>
-      <div class="panel">
-        <h2 id="h_lang">3) 4 Dil İçerik</h2>
+      <div class="panel" id="languageContentPanel">
+        <h2 id="h_lang">3) İlan Başlığı ve Açıklaması</h2>
         <div class="tabs" id="langTabs"></div>
         <div id="langForms"></div>
       </div>
-      <div class="panel">
-        <h2>5) Detail Lists</h2>
+      <div class="panel advancedOnly" id="detailListsPanel">
+        <h2>5) Gelişmiş Özellik Listeleri</h2>
         <div class="grid2">
           <div><label>📍 Nearby (one per line)</label><textarea id="nearby" placeholder="Srimala Villa\nPhichit City Center"></textarea></div>
           <div><label>📦 Features (one per line)</label><textarea id="features" placeholder="3 Floors\nCCTV\nBuilt-in Kitchen"></textarea></div>
@@ -305,13 +374,13 @@
         </div>
       </div>
 
-      <div class="panel">
-        <h2 id="h_fb">4) Facebook Metni</h2>
+      <div class="panel advancedOnly" id="facebookParsePanel">
+        <h2 id="h_fb">4) Facebook Metninden Otomatik Doldur</h2>
         <textarea id="fbText" placeholder="Facebook ilan metnini buraya yapıştır..."></textarea>
         <button class="btn dark" id="parseBtn">Alanları otomatik doldur</button>
       </div>
 
-      <div class="panel">
+      <div class="panel advancedOnly" id="socialPostPanel">
         <h2>📘 Facebook / Instagram Post Text</h2>
         <p class="muted">İlan bilgilerine göre Facebook ve Instagram paylaşım metni üretir. Website linki otomatik eklenir.</p>
         <div class="grid3">
@@ -474,7 +543,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071021"></script>
+<script src="admin.js?v=2026071024"></script>
 <script src="modules/dashboard.js?v=2026071012"></script>
 <script src="modules/crm.js?v=2026071012"></script>
 <script src="modules/export.js?v=2026071012"></script>

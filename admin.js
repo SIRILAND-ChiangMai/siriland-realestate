@@ -1767,3 +1767,383 @@ window.addEventListener('DOMContentLoaded',directSaveInit);
 
 /* Mevcut save işlemi tamamlandıktan sonra CMS klasörüne de yaz. */
 $('saveBtn')?.addEventListener('click',directSaveAfterPropertySave);
+
+
+/* Sprint 5.2 — Smart Publish PRO */
+const SMART_KEYS={
+  versions:'siriland_smart_versions_v1',
+  baseline:'siriland_smart_baseline_v1',
+  timeline:'siriland_property_timeline_v1'
+};
+let smartLastAnalysis=null;
+
+function smartClone(v){return JSON.parse(JSON.stringify(v))}
+function smartGet(key,fallback){
+  try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}
+  catch(e){return fallback}
+}
+function smartSet(key,value){localStorage.setItem(key,JSON.stringify(value))}
+function smartSignature(p){
+  const copy=smartClone(p||{});
+  delete copy.updatedAt;
+  delete copy.createdAt;
+  return JSON.stringify(copy);
+}
+function smartPriceValue(p){return String(p?.price||p?.salePrice||p?.rentPrice||'').trim()}
+function smartImages(p){return Array.isArray(p?.images)?p.images:[]}
+function smartBaseline(){return smartGet(SMART_KEYS.baseline,[])}
+function smartVersions(){return smartGet(SMART_KEYS.versions,[])}
+function smartTimelineData(){return smartGet(SMART_KEYS.timeline,{})}
+
+function smartValidateProperty(p){
+  const errors=[];
+  if(!String(p.id||'').trim()) errors.push('Missing ID');
+  if(!String(p.city||'').trim()) errors.push('Missing City');
+  if(!String(p.type||'').trim()) errors.push('Missing Type');
+  if(!String(p.deal||'').trim()) errors.push('Missing Deal');
+  if(!String(p.status||'').trim()) errors.push('Missing Status');
+  if(isMissingValue(p.price||p.salePrice||p.rentPrice)) errors.push('Missing Price');
+  if(!pick(p.title,'en')&&!pick(p.title,'th')) errors.push('Missing Title');
+  if(!pick(p.description,'en')&&!pick(p.description,'th')) errors.push('Missing Description');
+  if(!smartImages(p).length) errors.push('Missing Images');
+  if(!String(p.map||'').trim()) errors.push('Missing Map');
+  if(String(p.deal||'').toLowerCase().includes('rent') && isMissingValue(p.rentPrice||p.price)) errors.push('Missing Rent Price');
+  return errors;
+}
+function smartAnalyze(){
+  const baseline=smartBaseline();
+  const oldMap=new Map((baseline||[]).map(p=>[p.id,p]));
+  const newMap=new Map((properties||[]).map(p=>[p.id,p]));
+  const added=[],updated=[],deleted=[],priceChanges=[],imageChanges=[],validator=[];
+
+  for(const [id,p] of newMap){
+    if(!oldMap.has(id)) added.push(id);
+    else{
+      const old=oldMap.get(id);
+      if(smartSignature(old)!==smartSignature(p)) updated.push(id);
+      const oldPrice=smartPriceValue(old),newPrice=smartPriceValue(p);
+      if(oldPrice!==newPrice) priceChanges.push({id,from:oldPrice,to:newPrice});
+      const oldImgs=smartImages(old),newImgs=smartImages(p);
+      const addedImgs=newImgs.filter(x=>!oldImgs.includes(x));
+      const removedImgs=oldImgs.filter(x=>!newImgs.includes(x));
+      if(addedImgs.length||removedImgs.length) imageChanges.push({id,added:addedImgs.length,removed:removedImgs.length});
+    }
+    const errs=smartValidateProperty(p);
+    if(errs.length) validator.push({id,errors:errs});
+  }
+  for(const [id] of oldMap){if(!newMap.has(id))deleted.push(id)}
+
+  smartLastAnalysis={added,updated,deleted,priceChanges,imageChanges,validator,analyzedAt:new Date().toISOString()};
+  smartRenderAnalysis();
+  smartUpdateTimeline();
+  return smartLastAnalysis;
+}
+function smartRenderAnalysis(){
+  const a=smartLastAnalysis||{added:[],updated:[],deleted:[],priceChanges:[],imageChanges:[],validator:[]};
+  const set=(id,v)=>{if($(id))$(id).textContent=v};
+  set('smartAddedCount',a.added.length);
+  set('smartUpdatedCount',a.updated.length);
+  set('smartDeletedCount',a.deleted.length);
+  set('smartPriceCount',a.priceChanges.length);
+  set('smartImageCount',a.imageChanges.length);
+  set('smartErrorCount',a.validator.length);
+
+  if($('smartPropertyChanges')) $('smartPropertyChanges').innerHTML=[
+    ...a.added.map(id=>`<div><b>${escapeHtml(id)}</b><span class="smartAdded">Added</span></div>`),
+    ...a.updated.map(id=>`<div><b>${escapeHtml(id)}</b><span class="smartUpdated">Updated</span></div>`),
+    ...a.deleted.map(id=>`<div><b>${escapeHtml(id)}</b><span class="smartDeleted">Deleted</span></div>`)
+  ].join('')||'<span class="muted">Değişiklik yok</span>';
+
+  if($('smartPriceChanges')) $('smartPriceChanges').innerHTML=a.priceChanges.map(x=>
+    `<div><b>${escapeHtml(x.id)}</b><small>${escapeHtml(x.from||'—')} → ${escapeHtml(x.to||'—')}</small></div>`
+  ).join('')||'<span class="muted">Fiyat değişikliği yok</span>';
+
+  if($('smartImageChanges')) $('smartImageChanges').innerHTML=a.imageChanges.map(x=>
+    `<div><b>${escapeHtml(x.id)}</b><small>+${x.added} / -${x.removed} fotoğraf</small></div>`
+  ).join('')||'<span class="muted">Fotoğraf değişikliği yok</span>';
+
+  if($('smartValidatorReport')) $('smartValidatorReport').innerHTML=a.validator.map(x=>
+    `<div><b>${escapeHtml(x.id||'No ID')}</b><small>${escapeHtml(x.errors.join(', '))}</small></div>`
+  ).join('')||'<span class="smartAllGood">✅ Validator temiz</span>';
+
+  const commit=[
+    'Smart publish update',
+    '',
+    `Added: ${a.added.length}`,
+    `Updated: ${a.updated.length}`,
+    `Deleted: ${a.deleted.length}`,
+    `Price changes: ${a.priceChanges.length}`,
+    `Image changes: ${a.imageChanges.length}`,
+    `Validator errors: ${a.validator.length}`
+  ].join('\n');
+  if($('smartCommitMessage'))$('smartCommitMessage').value=commit;
+}
+function smartUpdateTimeline(){
+  const data=smartTimelineData();
+  const now=new Date().toISOString();
+  const analysis=smartLastAnalysis||smartAnalyze();
+  const touch=(id,type,detail)=>{
+    data[id]=Array.isArray(data[id])?data[id]:[];
+    const last=data[id][0];
+    const sig=type+'|'+detail;
+    if(last?.sig===sig)return;
+    data[id].unshift({date:now,type,detail,sig});
+    data[id]=data[id].slice(0,20);
+  };
+  analysis.added.forEach(id=>touch(id,'Created','Property added'));
+  analysis.updated.forEach(id=>touch(id,'Updated','Property updated'));
+  analysis.deleted.forEach(id=>touch(id,'Deleted','Property deleted'));
+  analysis.priceChanges.forEach(x=>touch(x.id,'Price',`${x.from||'—'} → ${x.to||'—'}`));
+  analysis.imageChanges.forEach(x=>touch(x.id,'Images',`+${x.added} / -${x.removed}`));
+  smartSet(SMART_KEYS.timeline,data);
+  smartRenderTimeline();
+}
+function smartRenderTimeline(){
+  const data=smartTimelineData();
+  const rows=[];
+  Object.entries(data).forEach(([id,events])=>(events||[]).slice(0,3).forEach(ev=>rows.push({id,...ev})));
+  rows.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  if($('smartTimeline'))$('smartTimeline').innerHTML=rows.slice(0,20).map(x=>
+    `<div><b>${escapeHtml(x.id)}</b><small>${escapeHtml(x.type)} • ${escapeHtml(x.detail)} • ${new Date(x.date).toLocaleString()}</small></div>`
+  ).join('')||'<span class="muted">Timeline boş</span>';
+}
+function smartSaveVersion(label='Manual version'){
+  const a=smartAnalyze();
+  const versions=smartVersions();
+  const version={
+    id:'v'+String((versions[0]?.number||0)+1),
+    number:(versions[0]?.number||0)+1,
+    createdAt:new Date().toISOString(),
+    label,
+    count:properties.length,
+    analysis:smartClone(a),
+    properties:smartClone(properties)
+  };
+  versions.unshift(version);
+  smartSet(SMART_KEYS.versions,versions.slice(0,20));
+  smartSet(SMART_KEYS.baseline,smartClone(properties));
+  smartRenderVersions();
+  smartAnalyze();
+  return version;
+}
+function smartRenderVersions(){
+  const versions=smartVersions();
+  if($('smartPublishVersion'))$('smartPublishVersion').textContent=versions[0]?.id||'v1';
+  if($('smartVersionHistory'))$('smartVersionHistory').innerHTML=versions.map(v=>
+    `<div><b>${escapeHtml(v.id)}</b><small>${escapeHtml(v.label)} • ${v.count} ilan • ${new Date(v.createdAt).toLocaleString()}</small></div>`
+  ).join('')||'<span class="muted">Henüz sürüm yok</span>';
+}
+function smartRollback(){
+  const versions=smartVersions();
+  const latest=versions[0];
+  if(!latest){alert('Geri dönülecek sürüm yok.');return}
+  if(!confirm(`${latest.id} sürümüne dönülsün mü? Mevcut liste önce yeni sürüm olarak kaydedilecek.`))return;
+  smartSaveVersion('Before rollback');
+  properties=smartClone(latest.properties||[]);
+  smartSet(SMART_KEYS.baseline,smartClone(properties));
+  renderList();clearForm();validate();smartAnalyze();
+  alert(`${latest.id} sürümüne dönüldü.`);
+}
+function smartExportReport(){
+  const a=smartLastAnalysis||smartAnalyze();
+  const report={
+    version:smartVersions()[0]?.id||'v1',
+    createdAt:new Date().toISOString(),
+    totals:{properties:properties.length,added:a.added.length,updated:a.updated.length,deleted:a.deleted.length,priceChanges:a.priceChanges.length,imageChanges:a.imageChanges.length,validatorErrors:a.validator.length},
+    ...a
+  };
+  const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
+  const link=document.createElement('a');
+  link.href=URL.createObjectURL(blob);
+  link.download=`smart-publish-report-${Date.now()}.json`;
+  link.click();
+  setTimeout(()=>URL.revokeObjectURL(link.href),500);
+}
+function smartInit(){
+  if(!smartBaseline().length)smartSet(SMART_KEYS.baseline,smartClone(properties));
+  smartAnalyze();
+  smartRenderVersions();
+  smartRenderTimeline();
+  $('smartAnalyzeBtn')?.addEventListener('click',smartAnalyze);
+  $('smartSaveVersionBtn')?.addEventListener('click',()=>{const v=smartSaveVersion('Manual version');alert(`Sürüm kaydedildi: ${v.id}`)});
+  $('smartExportReportBtn')?.addEventListener('click',smartExportReport);
+  $('smartRollbackBtn')?.addEventListener('click',smartRollback);
+}
+window.addEventListener('DOMContentLoaded',smartInit);
+
+
+/* Auto ID + Dynamic Property Form */
+const SIRILAND_FORM_MODE_KEY='siriland_form_mode_v1';
+const SIRILAND_ID_REGISTRY_KEY='siriland_id_registry_v1';
+
+function sirilandCityCode(city){
+  const map={
+    'Chiang Mai':'CM',
+    'Bangkok':'BKK',
+    'Phichit':'PCT',
+    'Phitsanulok':'PLK',
+    'Nakhon Sawan':'NKS'
+  };
+  return map[city] || String(city||'OTH').replace(/[^A-Za-z]/g,'').slice(0,3).toUpperCase() || 'OTH';
+}
+function sirilandGetIdRegistry(){
+  try{return JSON.parse(localStorage.getItem(SIRILAND_ID_REGISTRY_KEY)||'{}')}
+  catch(e){return {}}
+}
+function sirilandSaveIdRegistry(reg){localStorage.setItem(SIRILAND_ID_REGISTRY_KEY,JSON.stringify(reg||{}))}
+function sirilandRebuildIdRegistry(){
+  const reg=sirilandGetIdRegistry();
+  properties.forEach(p=>{
+    const m=String(p.id||'').match(/^([A-Z]+)-(\d+)$/i);
+    if(!m)return;
+    const code=m[1].toUpperCase(),num=Number(m[2]);
+    reg[code]=Math.max(Number(reg[code]||0),num);
+  });
+  sirilandSaveIdRegistry(reg);
+  return reg;
+}
+function sirilandNextId(city){
+  const code=sirilandCityCode(city||$('city')?.value);
+  const reg=sirilandRebuildIdRegistry();
+  const next=Math.max(Number(reg[code]||0),0)+1;
+  return `${code}-${String(next).padStart(4,'0')}`;
+}
+function sirilandReserveId(id){
+  const m=String(id||'').match(/^([A-Z]+)-(\d+)$/i);
+  if(!m)return;
+  const reg=sirilandGetIdRegistry();
+  const code=m[1].toUpperCase(),num=Number(m[2]);
+  reg[code]=Math.max(Number(reg[code]||0),num);
+  sirilandSaveIdRegistry(reg);
+}
+function sirilandEnsureAutomaticId(force=false){
+  const city=$('city')?.value;
+  if(!city||!$('id'))return;
+  const current=String($('id').value||'').trim();
+  const editing=properties.some(p=>p.id===current);
+  if(editing&&!force)return;
+  if(force||!current||/^([A-Z]+)-0001$/i.test(current)){
+    $('id').value=sirilandNextId(city);
+    updateQualityScore?.();
+  }
+}
+function sirilandTypeKind(type){
+  const s=String(type||'').trim().toLowerCase();
+  if(/land|ที่ดิน|arsa|土地/.test(s))return 'land';
+  if(/condo|apartment|คอนโด|公寓|daire/.test(s))return 'condo';
+  if(/house|villa|บ้าน|住宅|ev/.test(s))return 'house';
+  if(/shop|commercial|office|warehouse|factory|hotel|resort|อาคาร|โกดัง/.test(s))return 'commercial';
+  return 'other';
+}
+function sirilandDealKind(deal){
+  const s=String(deal||'').toLowerCase();
+  return {
+    sale:s.includes('sale'),
+    rent:s.includes('rent')
+  };
+}
+function sirilandSetVisible(selector,visible){
+  document.querySelectorAll(selector).forEach(el=>{el.style.display=visible?'':'none'});
+}
+function sirilandApplyDynamicForm(){
+  const type=sirilandTypeKind($('type')?.value);
+  const deal=sirilandDealKind($('deal')?.value);
+  const mode=localStorage.getItem(SIRILAND_FORM_MODE_KEY)||'simple';
+  const advanced=mode==='advanced';
+
+  document.body.classList.toggle('simpleFormMode',!advanced);
+  document.body.classList.toggle('advancedFormMode',advanced);
+
+  // Base property-type fields.
+  const show = {
+    bedrooms: type==='condo'||type==='house'||type==='commercial'||type==='other',
+    bathrooms: type==='condo'||type==='house'||type==='commercial'||type==='other',
+    area: type==='condo'||type==='house'||type==='commercial'||type==='other',
+    room: type==='condo'||type==='commercial',
+    floor: type==='condo'||type==='commercial',
+    landSize: type==='land'||type==='house'||type==='commercial',
+    landAreaSqm: type==='land',
+    buildingArea: type==='house'||type==='commercial',
+    parking: type==='house'||type==='commercial'||type==='condo',
+    titleDeed: type==='land'||type==='house'||type==='commercial',
+    roadAccess: type==='land'||type==='house'||type==='commercial',
+    frontage: type==='land'||type==='commercial',
+    zoning: type==='land'||type==='commercial',
+    utilities: type==='land'||type==='house'||type==='commercial'
+  };
+
+  Object.entries(show).forEach(([field,visible])=>{
+    sirilandSetVisible(`[data-property-field="${field}"]`,visible);
+  });
+
+  // Land must never show residential room fields.
+  if(type==='land'){
+    ['bedrooms','bathrooms','room','floor','parking','buildingArea'].forEach(field=>{
+      sirilandSetVisible(`[data-property-field="${field}"]`,false);
+    });
+  }
+
+  // Sale / rent fields.
+  document.querySelectorAll('[data-deal-field]').forEach(el=>{
+    const rules=String(el.dataset.dealField||'').split(/\s+/);
+    let visible=(rules.includes('sale')&&deal.sale)||(rules.includes('rent')&&deal.rent);
+    if(rules.includes('advanced')&&!advanced)visible=false;
+    el.style.display=visible?'':'none';
+  });
+
+  // Advanced panels.
+  document.querySelectorAll('.advancedOnly').forEach(el=>{
+    el.style.display=advanced?'':'none';
+  });
+
+  const note=$('propertyTypeNote');
+  if(note){
+    const messages={
+      land:'Land seçildi: oda, banyo, kat ve room alanları gizlendi. Yalnızca arazi bilgileri gösteriliyor.',
+      condo:'Condo seçildi: oda, banyo, alan, floor ve room alanları gösteriliyor.',
+      house:'House seçildi: oda, banyo, yapı alanı, arazi ve parking alanları gösteriliyor.',
+      commercial:'Commercial seçildi: bina, kat, room, parking ve ticari alan bilgileri gösteriliyor.',
+      other:'Property type yazıldıkça uygun alanlar otomatik düzenlenir.'
+    };
+    note.textContent=messages[type]||messages.other;
+  }
+
+  document.querySelectorAll('#simpleFormModeBtn,#advancedFormModeBtn').forEach(btn=>btn.classList.remove('activeMode'));
+  $(advanced?'advancedFormModeBtn':'simpleFormModeBtn')?.classList.add('activeMode');
+}
+function sirilandSetFormMode(mode){
+  localStorage.setItem(SIRILAND_FORM_MODE_KEY,mode);
+  sirilandApplyDynamicForm();
+}
+function sirilandDynamicFormInit(){
+  sirilandRebuildIdRegistry();
+  if(!localStorage.getItem(SIRILAND_FORM_MODE_KEY))localStorage.setItem(SIRILAND_FORM_MODE_KEY,'simple');
+
+  $('city')?.addEventListener('change',()=>{
+    sirilandEnsureAutomaticId(true);
+    sirilandApplyDynamicForm();
+  });
+  $('type')?.addEventListener('input',sirilandApplyDynamicForm);
+  $('type')?.addEventListener('change',sirilandApplyDynamicForm);
+  $('deal')?.addEventListener('input',sirilandApplyDynamicForm);
+  $('deal')?.addEventListener('change',sirilandApplyDynamicForm);
+
+  $('simpleFormModeBtn')?.addEventListener('click',()=>sirilandSetFormMode('simple'));
+  $('advancedFormModeBtn')?.addEventListener('click',()=>sirilandSetFormMode('advanced'));
+
+  $('clearBtn')?.addEventListener('click',()=>setTimeout(()=>{
+    sirilandEnsureAutomaticId(true);
+    sirilandApplyDynamicForm();
+  },50));
+
+  $('saveBtn')?.addEventListener('click',()=>setTimeout(()=>{
+    sirilandReserveId($('id')?.value);
+  },50));
+
+  // First load: city selected, ID auto-generated.
+  setTimeout(()=>{
+    sirilandEnsureAutomaticId(false);
+    sirilandApplyDynamicForm();
+  },150);
+}
+window.addEventListener('DOMContentLoaded',sirilandDynamicFormInit);
