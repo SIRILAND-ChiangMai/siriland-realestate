@@ -1,14 +1,17 @@
-SIRILAND RENT FILTER FIX
+SIRILAND HERO SEARCH FIX
 
-Düzeltme:
-- Deal filtresinde Rent artık ayrı seçenek olarak görünür.
-- Rent seçildiğinde Rent ve Sale/Rent ilanları gösterilir.
-- Sale seçildiğinde Sale ve Sale/Rent ilanları gösterilir.
-- Önceki ilan linki ve House koleksiyonu düzeltmeleri korunmuştur.
+Düzeltildi:
+- Üstteki Hero Search artık Search butonuyla çalışır.
+- Enter tuşuyla arama çalışır.
+- All / Buy / Rent sekmeleri çalışır.
+- Property Type, Price ve Bedroom filtreleri birlikte uygulanır.
+- Sonuçlara otomatik kaydırır.
+- Alt filtrelerle senkronize olur.
+- Önceki Rent, House Collection ve Property Link düzeltmeleri korunmuştur.
 
 Kurulum:
 1. script.js dosyasını GitHub klasöründeki eski script.js üzerine kopyalayın.
-2. GitHub Desktop Summary: Fix rent filter
+2. GitHub Desktop Summary: Fix hero search
 3. Commit to main
 4. Push origin
 5. Siteyi açıp Ctrl + Shift + R yapın.
