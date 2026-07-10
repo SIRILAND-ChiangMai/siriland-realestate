@@ -361,6 +361,7 @@
     if($('dealFilter')) $('dealFilter').value = activeHeroDeal;
     window.__sirilandPriceRange = price;
     window.__sirilandMinBeds = beds;
+    window.__sirilandCollectionFilter = '';
     currentPage = 1;
     location.hash = '#properties';
     render();
@@ -585,11 +586,17 @@ function renderMapView(){
     const q=($('searchInput')?.value || '').toLowerCase().trim();
     const priceRange = window.__sirilandPriceRange || 'all';
     const minBeds = window.__sirilandMinBeds || 'all';
+    const collectionFilter = window.__sirilandCollectionFilter || '';
     currentList=DATA.filter(p=>{
       const blob=propertyBlob(p);
       const priceOk = priceRange === 'all' || (()=>{ const [min,max]=priceRange.split('-').map(Number); const n=parsePriceNumber(p.price || p.salePrice); return n && n>=min && n<=max; })();
       const bedOk = minBeds === 'all' || parseFirstNumber(p.bedrooms) >= Number(minBeds);
-      return (city==='all'||p.city===city) && (type==='all'||p.type===type) && (deal==='all'||p.deal===deal) && (!q||blob.includes(q)) && priceOk && bedOk && advancedFilterPass(p);
+      const propertyType = String(p.type || '').toLowerCase();
+      const collectionOk =
+        !collectionFilter ||
+        (collectionFilter === 'house' && propertyType.includes('house')) ||
+        (collectionFilter === 'condo' && propertyType.includes('condo'));
+      return (city==='all'||p.city===city) && (type==='all'||p.type===type) && (deal==='all'||p.deal===deal) && (!q||blob.includes(q)) && priceOk && bedOk && collectionOk && advancedFilterPass(p);
     });
     const totalPages = Math.max(1, Math.ceil(currentList.length / pageSize));
     if(currentPage > totalPages) currentPage = totalPages;
@@ -766,9 +773,9 @@ function renderMapView(){
       if($('typeFilter')) $('typeFilter').value='all';
       if($('dealFilter')) $('dealFilter').value='all';
       if($('searchInput')) $('searchInput').value='';
-      window.__sirilandPriceRange='all'; window.__sirilandMinBeds='all';
-      if(f === 'condo' && $('typeFilter')) $('typeFilter').value = [...new Set(DATA.map(p=>p.type).filter(Boolean))].find(x=>String(x).toLowerCase().includes('condo')) || 'all';
-      if(f === 'house' && $('typeFilter')) $('typeFilter').value = [...new Set(DATA.map(p=>p.type).filter(Boolean))].find(x=>String(x).toLowerCase().includes('house')) || 'all';
+      window.__sirilandPriceRange='all'; window.__sirilandMinBeds='all'; window.__sirilandCollectionFilter='';
+      if(f === 'condo') window.__sirilandCollectionFilter = 'condo';
+      if(f === 'house') window.__sirilandCollectionFilter = 'house';
       if(f === 'bestPrice') window.__sirilandPriceRange = '0-4000000';
       if(f === 'ownerFinance' && $('searchInput')) $('searchInput').value = 'owner finance ผ่อน free transfer 0%';
       if(f === 'luxury') window.__sirilandPriceRange = '7000000-999999999';
@@ -797,7 +804,7 @@ function renderMapView(){
   document.addEventListener('keydown', e=>{ if(!$('propertyModal')?.classList.contains('hidden')){ if(e.key==='ArrowLeft') next(-1); if(e.key==='ArrowRight') next(1); if(e.key==='Escape') $('propertyModal').classList.add('hidden'); }});
   $('modalImg')?.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX},{passive:true});
   $('modalImg')?.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX; if(Math.abs(dx)>45) next(dx>0?-1:1)},{passive:true});
-  ['cityFilter','typeFilter','dealFilter','searchInput'].forEach(id=>$(id)?.addEventListener('input', ()=>{currentPage=1; window.__sirilandPriceRange='all'; window.__sirilandMinBeds='all'; if(id==='typeFilter') updateAdvancedFilters(); render();}));
+  ['cityFilter','typeFilter','dealFilter','searchInput'].forEach(id=>$(id)?.addEventListener('input', ()=>{currentPage=1; window.__sirilandPriceRange='all'; window.__sirilandMinBeds='all'; window.__sirilandCollectionFilter=''; if(id==='typeFilter') updateAdvancedFilters(); render();}));
   ['filterPriceMin','filterPriceMax','filterMinBedrooms','filterMinBathrooms','filterMinArea','filterMinLandArea','filterTitleDeed','filterRoadAccess','filterMinBuildingArea','filterMinParking'].forEach(id=>$(id)?.addEventListener('input',()=>{currentPage=1;render();}));
   $('clearAdvancedFilters')?.addEventListener('click',()=>{['filterPriceMin','filterPriceMax','filterMinBedrooms','filterMinBathrooms','filterMinArea','filterMinLandArea','filterTitleDeed','filterRoadAccess','filterMinBuildingArea','filterMinParking'].forEach(id=>{if($(id)) $(id).value=''});currentPage=1;render();});
   $('menuToggle')?.addEventListener('click',()=> $('mainNav').classList.toggle('show'));
@@ -833,6 +840,7 @@ function renderMapView(){
     if($('searchInput')) $('searchInput').value = '';
     window.__sirilandPriceRange = 'all';
     window.__sirilandMinBeds = 'all';
+    window.__sirilandCollectionFilter = '';
     currentPage = 1;
     render();
 
