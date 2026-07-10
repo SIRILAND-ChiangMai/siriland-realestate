@@ -1,3 +1,5 @@
+
+console.info('SIRILAND Admin Build 2026.07.10.12 loaded');
 let properties=[];
 let customers=[];
 let currentLang='en';
