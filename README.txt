@@ -1,27 +1,25 @@
-SIRILAND CMS 2026 - Module 1: Smart City ID
+SIRILAND CMS PRO 2030 — Sprint 4.2
 
-Bu modül sadece admin.html dosyasını günceller.
-Canlı site dosyaları (index.html, script.js, properties.js, style.css) değişmez.
+KOLAY KURULUM
+1. install-sprint-4.2.html dosyasını Chrome ile açın.
+2. En güncel admin.html dosyanızı seçin.
+3. Sprint 4.2 Kur ve İndir butonuna basın.
+4. İnen admin-sprint-4.2.html dosyasını açıp test edin.
+5. Sorun yoksa adını admin.html yapın ve GitHub proje klasöründeki eski admin.html üzerine kopyalayın.
 
-Eklenenler:
-- City artık seçim alanı oldu.
-- Chiang Mai -> CM-0001, CM-0002...
-- Bangkok -> BKK-0001, BKK-0002...
-- Phitsanulok -> PLK-0001, PLK-0002...
-- Phichit -> PCT-0001, PCT-0002...
-- Nakhon Sawan -> NKS-0001, NKS-0002...
-- Aynı ID iki kez kaydedilemez.
-- Bangkok için yanlış BK- kodu otomatik BKK- olur.
+EKLENENLER
+- Publish Manager PRO ekranı
+- Export progress
+- Publish checklist
+- Missing data report (ilan ID tıklanabilir)
+- New / Updated / Deleted listing comparison
+- Export versioning
+- Export history and statistics
+- publish/export-summary.json
+- publish/missing-data-report.json
+- publish/changes.json
+- Ready for GitHub status
+- Existing ZIP button redirected to Publish ZIP
 
-Kurulum:
-1) ZIP'i aç.
-2) İçindeki admin.html dosyasını GitHub proje klasörüne kopyala ve eski admin.html üzerine yaz.
-3) GitHub Desktop Summary: CMS2026 module 1 smart city ID
-4) Commit / Push.
-
-Test:
-- Admin'i aç.
-- Yeni İlan'a bas.
-- City olarak Bangkok seç.
-- ID otomatik BKK-0003 gibi gelmeli.
-- Phitsanulok seçince PLK-0001 gelmeli.
+NOT
+İlk exportta bütün ilanlar New Listings görünebilir. İlk başarılı exporttan sonra snapshot kaydedilir ve sonraki exportlarda gerçek değişiklikler gösterilir.
