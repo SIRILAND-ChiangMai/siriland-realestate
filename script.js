@@ -134,6 +134,52 @@
     const m = String(v || '').match(/\d+(?:\.\d+)?/);
     return m ? parseFloat(m[0]) : 0;
   }
+  const advancedLabels = {
+    en:{title:'Advanced Filters',clear:'Clear',priceMin:'Min price (THB)',priceMax:'Max price (THB)',bed:'Min bedrooms',bath:'Min bathrooms',area:'Min internal area (sqm)',land:'Min land area (sqm)',deed:'Title deed / Chanote',road:'Road access',building:'Min building area (sqm)',parking:'Min parking'},
+    th:{title:'ตัวกรองเพิ่มเติม',clear:'ล้าง',priceMin:'ราคาต่ำสุด (บาท)',priceMax:'ราคาสูงสุด (บาท)',bed:'ห้องนอนขั้นต่ำ',bath:'ห้องน้ำขั้นต่ำ',area:'พื้นที่ใช้สอยขั้นต่ำ (ตร.ม.)',land:'พื้นที่ดินขั้นต่ำ (ตร.ม.)',deed:'เอกสารสิทธิ์ / โฉนด',road:'ทางเข้าออก',building:'พื้นที่อาคารขั้นต่ำ (ตร.ม.)',parking:'ที่จอดรถขั้นต่ำ'},
+    tr:{title:'Gelişmiş Filtreler',clear:'Temizle',priceMin:'En düşük fiyat (THB)',priceMax:'En yüksek fiyat (THB)',bed:'En az yatak odası',bath:'En az banyo',area:'En az iç alan (m²)',land:'En az arsa alanı (m²)',deed:'Tapu türü / Chanote',road:'Yol erişimi',building:'En az bina alanı (m²)',parking:'En az otopark'},
+    zh:{title:'高级筛选',clear:'清除',priceMin:'最低价格（泰铢）',priceMax:'最高价格（泰铢）',bed:'最少卧室',bath:'最少浴室',area:'最小室内面积（平方米）',land:'最小土地面积（平方米）',deed:'地契 / Chanote',road:'道路通行',building:'最小建筑面积（平方米）',parking:'最少停车位'}
+  };
+  function inputNumber(id){ const v=String($(id)?.value||'').replace(/,/g,'').trim(); return v===''?null:Number(v); }
+  function includesLoose(value, query){ return !query || String(value||'').toLowerCase().includes(String(query).toLowerCase().trim()); }
+  function typeKind(type){ const s=String(type||'').toLowerCase(); if(s.includes('land')||s.includes('ที่ดิน')||s.includes('arsa')) return 'land'; if(s.includes('commercial')||s.includes('shop')||s.includes('warehouse')||s.includes('office')||s.includes('hotel')||s.includes('resort')||s.includes('factory')) return 'commercial'; return 'residential'; }
+  function updateAdvancedFilters(){
+    const type=$('typeFilter')?.value||'all';
+    const kind=type==='all'?'all':typeKind(type);
+    document.querySelectorAll('#advancedFilters [data-filter-group]').forEach(el=>{ const g=el.dataset.filterGroup; el.hidden=!(kind==='all'||g===kind||(kind==='commercial'&&g==='residential')); });
+    const L=advancedLabels[lang]||advancedLabels.en;
+    if($('advancedFilterTitle')) $('advancedFilterTitle').textContent=L.title;
+    if($('clearAdvancedFilters')) $('clearAdvancedFilters').textContent=L.clear;
+    const ph={filterPriceMin:L.priceMin,filterPriceMax:L.priceMax,filterMinBedrooms:L.bed,filterMinBathrooms:L.bath,filterMinArea:L.area,filterMinLandArea:L.land,filterTitleDeed:L.deed,filterRoadAccess:L.road,filterMinBuildingArea:L.building,filterMinParking:L.parking};
+    Object.entries(ph).forEach(([id,text])=>{if($(id)) $(id).placeholder=text});
+  }
+  function advancedFilterPass(p){
+    const price=parsePriceNumber(p.price||p.salePrice||p.rentPrice);
+    const minPrice=inputNumber('filterPriceMin'), maxPrice=inputNumber('filterPriceMax');
+    if(minPrice!==null && (!price || price<minPrice)) return false;
+    if(maxPrice!==null && (!price || price>maxPrice)) return false;
+    const kind=typeKind(p.type);
+    const minBed=inputNumber('filterMinBedrooms'), minBath=inputNumber('filterMinBathrooms'), minArea=inputNumber('filterMinArea');
+    if(kind!=='land'){
+      if(minBed!==null && parseFirstNumber(p.bedrooms)<minBed) return false;
+      if(minBath!==null && parseFirstNumber(p.bathrooms)<minBath) return false;
+      if(minArea!==null && parseFirstNumber(p.area)<minArea) return false;
+    }
+    if(kind==='land'){
+      const minLand=inputNumber('filterMinLandArea');
+      const landNum=parseFirstNumber(p.landAreaSqm||p.landSize||p.area);
+      if(minLand!==null && landNum<minLand) return false;
+      if(!includesLoose(p.titleDeed,$('filterTitleDeed')?.value)) return false;
+      if(!includesLoose(p.roadAccess,$('filterRoadAccess')?.value)) return false;
+    }
+    if(kind==='commercial'){
+      const minBuilding=inputNumber('filterMinBuildingArea'), minParking=inputNumber('filterMinParking');
+      if(minBuilding!==null && parseFirstNumber(p.buildingArea||p.area)<minBuilding) return false;
+      if(minParking!==null && parseFirstNumber(p.parking)<minParking) return false;
+    }
+    return true;
+  }
+
   function propertyBlob(p){
     return [p.id,p.city,p.type,p.deal,p.price,p.room,p.floor,p.area,p.bedrooms,p.bathrooms,p.status,p.map,p.salePrice,p.rentPrice,p.ownerFinance,p.installment,p.summary,p.landSize,p.landAreaSqm,p.buildingArea,p.parking,p.titleDeed,p.roadAccess,p.frontage,p.zoning,p.utilities,pick(p.title),pick(p.description),...pickList(p.highlights),...(Array.isArray(p.features)?p.features:[]),...(Array.isArray(p.nearby)?p.nearby:[])].join(' ').toLowerCase();
   }
@@ -522,7 +568,7 @@ function renderMapView(){
       const blob=propertyBlob(p);
       const priceOk = priceRange === 'all' || (()=>{ const [min,max]=priceRange.split('-').map(Number); const n=parsePriceNumber(p.price || p.salePrice); return n && n>=min && n<=max; })();
       const bedOk = minBeds === 'all' || parseFirstNumber(p.bedrooms) >= Number(minBeds);
-      return (city==='all'||p.city===city) && (type==='all'||p.type===type) && (deal==='all'||p.deal===deal) && (!q||blob.includes(q)) && priceOk && bedOk;
+      return (city==='all'||p.city===city) && (type==='all'||p.type===type) && (deal==='all'||p.deal===deal) && (!q||blob.includes(q)) && priceOk && bedOk && advancedFilterPass(p);
     });
     const totalPages = Math.max(1, Math.ceil(currentList.length / pageSize));
     if(currentPage > totalPages) currentPage = totalPages;
@@ -704,7 +750,7 @@ function renderMapView(){
   $('heroSearchInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter') runHeroSearch(); });
 
   document.addEventListener('click', e=>{
-    const langBtn=e.target.closest('#langSwitch button'); if(langBtn){lang=langBtn.dataset.lang; localStorage.setItem('siriland_lang',lang); applyI18n(); fillFilters(); fillHeroControls(); renderHomeShowcase(); render(); if(modalProperty) updateModal(); return;}
+    const langBtn=e.target.closest('#langSwitch button'); if(langBtn){lang=langBtn.dataset.lang; localStorage.setItem('siriland_lang',lang); applyI18n(); fillFilters(); fillHeroControls(); updateAdvancedFilters(); renderHomeShowcase(); render(); if(modalProperty) updateModal(); return;}
     const viewBtn=e.target.closest('#viewSwitch button'); if(viewBtn){setViewMode(viewBtn.dataset.view); return;}
     const mapCluster=e.target.closest('.map-cluster'); if(mapCluster){setMapCity(mapCluster.dataset.city); return;}
     const mapPick=e.target.closest('.map-item'); if(mapPick && !e.target.closest('button,a')){const p=DATA.find(x=>x.id===mapPick.dataset.mapId); if(p) setMapProperty(p); return;}
@@ -716,7 +762,9 @@ function renderMapView(){
   document.addEventListener('keydown', e=>{ if(!$('propertyModal')?.classList.contains('hidden')){ if(e.key==='ArrowLeft') next(-1); if(e.key==='ArrowRight') next(1); if(e.key==='Escape') $('propertyModal').classList.add('hidden'); }});
   $('modalImg')?.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX},{passive:true});
   $('modalImg')?.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX; if(Math.abs(dx)>45) next(dx>0?-1:1)},{passive:true});
-  ['cityFilter','typeFilter','dealFilter','searchInput'].forEach(id=>$(id)?.addEventListener('input', ()=>{currentPage=1; window.__sirilandPriceRange='all'; window.__sirilandMinBeds='all'; render();}));
+  ['cityFilter','typeFilter','dealFilter','searchInput'].forEach(id=>$(id)?.addEventListener('input', ()=>{currentPage=1; window.__sirilandPriceRange='all'; window.__sirilandMinBeds='all'; if(id==='typeFilter') updateAdvancedFilters(); render();}));
+  ['filterPriceMin','filterPriceMax','filterMinBedrooms','filterMinBathrooms','filterMinArea','filterMinLandArea','filterTitleDeed','filterRoadAccess','filterMinBuildingArea','filterMinParking'].forEach(id=>$(id)?.addEventListener('input',()=>{currentPage=1;render();}));
+  $('clearAdvancedFilters')?.addEventListener('click',()=>{['filterPriceMin','filterPriceMax','filterMinBedrooms','filterMinBathrooms','filterMinArea','filterMinLandArea','filterTitleDeed','filterRoadAccess','filterMinBuildingArea','filterMinParking'].forEach(id=>{if($(id)) $(id).value=''});currentPage=1;render();});
   $('menuToggle')?.addEventListener('click',()=> $('mainNav').classList.toggle('show'));
 
   function openPropertyFromUrl(){
@@ -739,5 +787,5 @@ function renderMapView(){
     setTimeout(() => openModal(found.id), 250);
   }
 
-  applyI18n(); fillFilters(); renderHomeShowcase(); render(); setViewMode(localStorage.getItem('siriland_view_mode') || 'list'); openPropertyFromUrl();
+  applyI18n(); fillFilters(); updateAdvancedFilters(); renderHomeShowcase(); render(); setViewMode(localStorage.getItem('siriland_view_mode') || 'list'); openPropertyFromUrl();
 })();

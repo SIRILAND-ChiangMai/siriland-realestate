@@ -125,6 +125,21 @@
         <select id="dealFilter"><option value="all" data-i18n="allDeals">All Deals</option></select>
         <input id="searchInput" type="search" placeholder="Search ID, project, room, area..." data-i18n-placeholder="searchPlaceholder" />
       </div>
+      <div class="advanced-filters" id="advancedFilters">
+        <div class="advanced-filter-title"><strong id="advancedFilterTitle">Advanced Filters</strong><button type="button" id="clearAdvancedFilters">Clear</button></div>
+        <div class="advanced-filter-grid">
+          <input id="filterPriceMin" inputmode="decimal" placeholder="Min price (THB)" />
+          <input id="filterPriceMax" inputmode="decimal" placeholder="Max price (THB)" />
+          <input id="filterMinBedrooms" inputmode="numeric" placeholder="Min bedrooms" data-filter-group="residential" />
+          <input id="filterMinBathrooms" inputmode="numeric" placeholder="Min bathrooms" data-filter-group="residential" />
+          <input id="filterMinArea" inputmode="decimal" placeholder="Min internal area (sqm)" data-filter-group="residential" />
+          <input id="filterMinLandArea" inputmode="decimal" placeholder="Min land area (sqm)" data-filter-group="land" />
+          <input id="filterTitleDeed" placeholder="Title deed / Chanote" data-filter-group="land" />
+          <input id="filterRoadAccess" placeholder="Road access" data-filter-group="land" />
+          <input id="filterMinBuildingArea" inputmode="decimal" placeholder="Min building area (sqm)" data-filter-group="commercial" />
+          <input id="filterMinParking" inputmode="numeric" placeholder="Min parking" data-filter-group="commercial" />
+        </div>
+      </div>
       <div class="view-switch" id="viewSwitch">
         <button class="active" data-view="list" data-i18n="listView">🏠 List View</button>
         <button data-view="map" data-i18n="mapView">🗺️ Map View</button>

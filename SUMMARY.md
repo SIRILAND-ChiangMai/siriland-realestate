@@ -1,11 +1,17 @@
-# Build 2026.07.10.05 — Dynamic Property Engine
+# Build 2026.07.10.06 — Type-Aware Advanced Search
 
-SIRILAND now uses property-type-aware fields and cards. Land listings no longer display irrelevant bedroom, bathroom, room, or floor information. The admin form dynamically adapts for Land, Condo, House, and Commercial properties, while the website automatically renders the most relevant specifications for each type.
+## Summary
+SIRILAND now adapts its advanced search controls to the selected property type. Land listings use land-specific filters, while residential and commercial listings use their own relevant fields.
 
 ## New Features
-- Dynamic admin fields by property type
-- Dedicated land fields: land size, sqm, title deed, road access, frontage, zoning, utilities
-- House/commercial fields: building area, land size, parking
-- Type-aware cards and property details
-- Land listings excluded from bedroom/bathroom requirements
-- Existing listings remain compatible
+- Min/max price filters
+- Land: minimum land area, title deed and road access
+- Condo/House: bedrooms, bathrooms and internal area
+- Commercial: building area and parking
+- TH / EN / TR / ZH filter labels
+- One-click advanced filter reset
+
+## Updated Files
+- index.html
+- script.js
+- style.css

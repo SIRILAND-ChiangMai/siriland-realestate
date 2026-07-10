@@ -1,17 +1,12 @@
-# SIRILAND Build 2026.07.10.05 — Dynamic Property Engine
+# SIRILAND Build 2026.07.10.06 — Type-Aware Advanced Search
 
 1. ZIP dosyasını çıkarın.
-2. Proje ana klasöründeki şu dosyaların üzerine yazın:
-   - admin.html
-   - index.html
-   - script.js
-   - style.css
-3. properties.js ve images klasörüne dokunmayın.
-4. GitHub Desktop: Commit → Push origin.
-5. Tarayıcıda Ctrl+F5 yapın veya URL sonuna ?v=2026071005 ekleyin.
+2. `index.html`, `script.js` ve `style.css` dosyalarını proje ana klasöründeki aynı adlı dosyaların üzerine kopyalayın.
+3. `admin.html`, `properties.js` ve `images` klasörüne dokunmayın.
+4. GitHub Desktop üzerinden Commit + Push yapın.
+5. Siteyi `?v=2026071006` ekleyerek veya Ctrl+F5 ile yenileyin.
 
-## Kontrol
-- Admin'de Type alanına Land yazınca Bedroom/Bathroom/Room/Floor gizlenir.
-- Land Size, Title Deed, Road Access, Frontage, Zoning ve Utilities görünür.
-- Website kartında arsa için oda/banyo yerine arsa bilgileri çıkar.
-- House/Commercial için Land Size, Building Area ve Parking kullanılabilir.
+Kontrol:
+- Land seçildiğinde arsa alanı, tapu ve yol filtreleri görünür.
+- Condo/House seçildiğinde oda, banyo ve iç alan filtreleri görünür.
+- Commercial seçildiğinde bina alanı ve otopark filtreleri görünür.

@@ -291,3 +291,12 @@
 .map-location-status{display:inline-flex;margin-top:5px;border-radius:999px;padding:4px 7px;font-size:10px;font-weight:900}.map-location-status.exact{background:#e8f7ed;color:#0f7b3f}.map-location-status.city{background:#fff2d6;color:#8a5b20}
 .marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(216,178,92,.38)}.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background:#07111f;color:#d8b25c;font-weight:1000}
 @media(max-width:640px){.leaflet-property-popup{grid-template-columns:84px 1fr;min-width:240px}.leaflet-property-popup img{width:84px;height:84px}.siriland-city-marker{min-width:88px}.siriland-city-marker span{max-width:48px}}
+
+
+/* Build 2026.07.10.06 — Type-aware Advanced Search */
+.advanced-filters{margin:-4px 0 14px;background:#fff;border:1px solid #eadfca;border-radius:16px;padding:11px 12px;box-shadow:0 8px 18px rgba(7,17,31,.04)}
+.advanced-filter-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px;color:#07111f}.advanced-filter-title strong{font-size:13px;text-transform:uppercase;letter-spacing:.05em}.advanced-filter-title button{border:0;background:#f3eadc;color:#07111f;border-radius:999px;padding:6px 11px;font-weight:900;cursor:pointer}
+.advanced-filter-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.advanced-filter-grid input{min-width:0;border:1px solid #ddd1c0;border-radius:11px;padding:9px 10px;background:#fff;font-size:12px;font-weight:700}.advanced-filter-grid input[hidden]{display:none!important}
+@media(max-width:1100px){.advanced-filter-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.advanced-filters{padding:10px}.advanced-filter-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.advanced-filter-grid{grid-template-columns:1fr}}
