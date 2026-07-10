@@ -1,24 +1,9 @@
-# SIRILAND Modular Admin — Installation
+# Installation
 
-1. ZIP dosyasını çıkarın.
-2. Proje köküne `admin.html`, `admin.css`, `admin.js` dosyalarını kopyalayın.
-3. `modules` klasörünü olduğu gibi proje köküne kopyalayın.
-4. Eski `admin.html` dosyasının yedeğini alın ve yenisiyle değiştirin.
-5. GitHub Desktop: Commit + Push.
-6. Tarayıcıda **Ctrl+F5** ile sert yenileme yapın.
+1. Extract the ZIP.
+2. Copy all files and the complete `modules` folder into the GitHub project root.
+3. Replace the existing modular admin files when Windows asks.
+4. Commit and push with GitHub Desktop.
+5. Open `admin.html` and press `Ctrl + F5` once.
 
-## Düzeltilen kritik hata
-`updateQualityScore()` içinde `type` değişkeni tanımlanmadan kullanılıyordu. Bu nedenle Kaydet, Kontrol Et ve ZIP Oluştur işlemleri duruyordu. Değişken artık kontrol listesinden önce tanımlanır.
-
-## Dosya yapısı
-- admin.html
-- admin.css
-- admin.js
-- modules/dashboard.js
-- modules/crm.js
-- modules/export.js
-- modules/property.js
-- modules/language.js
-- modules/image-manager.js
-- modules/validator.js
-- modules/quality.js
+Do not delete `properties.js`, `properties.json`, or the `images` folder.

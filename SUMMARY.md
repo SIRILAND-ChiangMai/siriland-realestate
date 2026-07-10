@@ -1,9 +1,16 @@
-# SIRILAND Modular Admin Fixed
+# SIRILAND Admin Build 2026.07.10.08
 
-- `Cannot access type before initialization` hatası düzeltildi.
-- Admin CSS ve JavaScript, HTML içinden ayrıldı.
-- Modül klasörü ve güvenli entegrasyon kancaları eklendi.
-- Kaydet, Kontrol Et, JSON/JS indirme ve ZIP oluşturma akışı korundu.
-- CRM, FB/IG post üretici, görsel sıralama ve dinamik property type alanları korundu.
+## Added
+- Automatic property-form draft save every 10 seconds.
+- Draft recovery prompt after refresh or accidental browser close.
+- Manual **Taslak Kaydet**, **Taslağı Geri Yükle**, and **Taslağı Sil** buttons.
+- Uses browser localStorage only; does not change properties.js or exported data.
 
-> Not: İşlevsel çekirdek, geriye dönük uyumluluk ve inline `onclick` çağrıları bozulmasın diye `admin.js` içinde tutuldu. Modüller, sonraki sürümlerde çekirdeğin güvenli biçimde parçalara ayrılması için hazır altyapıdır.
+## Preserved
+- Save Property
+- Validation
+- JSON / JS download
+- ZIP export
+- CRM
+- Image manager
+- Dynamic property fields
