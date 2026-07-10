@@ -3316,6 +3316,154 @@ window.SIRILAND_PROPERTIES = [
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
+  },
+  {
+    "id": "CM-0033",
+    "city": "Chiang Mai",
+    "type": "",
+    "deal": "",
+    "status": "Available",
+    "price": "",
+    "bedrooms": "",
+    "bathrooms": "",
+    "area": "",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "landSize": "",
+    "landAreaSqm": "",
+    "buildingArea": "",
+    "parking": "",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [],
+    "createdAt": "2026-07-10",
+    "updatedAt": "2026-07-10",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "PCT-0005",
+    "city": "Phichit",
+    "type": "House",
+    "deal": "",
+    "status": "Available",
+    "price": "3,790,000",
+    "bedrooms": "4",
+    "bathrooms": "2",
+    "area": "183.35 sq.m.",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "landSize": "224 sq.m",
+    "landAreaSqm": "",
+    "buildingArea": "183.35 sq.m.",
+    "parking": "",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "Phichit City Center",
+      "Schools",
+      "Hospitals",
+      "Shopping Centers",
+      "Local Markets",
+      "Restaurants & Cafés",
+      "Government Offices",
+      "Easy access to major roads"
+    ],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Brand New 2-Storey House for Sale in Phichit City",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today.",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [
+        "Brand-new home",
+        "✅ Large family living area",
+        "✅ Modern design",
+        "✅ Quiet residential neighborhood",
+        "✅ Excellent value under THB 4 million",
+        "✅ Perfect for family living or investment"
+      ],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-1.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-2.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-3.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-4.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-5.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-6.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-7.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-8.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-9.jpg"
+    ],
+    "createdAt": "2026-07-10",
+    "updatedAt": "2026-07-10",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
   }
 ];
 const properties = window.SIRILAND_PROPERTIES;
