@@ -268,7 +268,7 @@ function imageCard(src, name, i, existing=false){
   return `<div class="imageCard" draggable="true" ondragstart="dragImgStart(${i}, ${existing})" ondragover="event.preventDefault()" ondrop="dropImg(${i}, ${existing})">
     <div class="thumbWrap" onclick="window.open('${safe}','_blank')"><img src="${safe}" onerror="this.src='images/logo.png'">${cover}</div>
     <div><div class="imgTitle">${i+1}. ${cover?'Kapak Fotoğrafı':'Fotoğraf'}</div><div class="imgPath">${escapeHtml(title)}</div>
-    <div class="imgActions"><button class="btn" onclick="${existing?'coverExisting':'coverImg'}(${i})">⭐ Kapak Yap</button><button class="btn dark" onclick="${existing?'moveExisting':'moveImg'}(${i},-1)">↑ Yukarı</button><button class="btn dark" onclick="${existing?'moveExisting':'moveImg'}(${i},1)">↓ Aşağı</button>${existing?`<button class="btn red" onclick="removeExisting(${i})">Sil</button>`:''}</div></div>
+    <div class="imgActions"><button class="btn" onclick="${existing?'coverExisting':'coverImg'}(${i})">⭐ Kapak Yap</button><button class="btn dark" onclick="${existing?'moveExisting':'moveImg'}(${i},-1)">↑ Yukarı</button><button class="btn dark" onclick="${existing?'moveExisting':'moveImg'}(${i},1)">↓ Aşağı</button>${existing?`<button class="btn red" onclick="removeExisting(${i})">Sil</button>`:`<button class="btn red" onclick="removeImg(${i})">Sil</button>`}</div></div>
   </div>`;
 }
 function renderImages(){
@@ -290,6 +290,7 @@ window.editProp=id=>{const p=properties.find(x=>x.id===id);if(p)setForm(p)};
 window.deleteProp=id=>{if(confirm(id+' silinsin mi?')){properties=properties.filter(p=>p.id!==id);delete pendingFilesById[id];renderList();clearForm();validate()}};
 window.moveImg=(i,d)=>{const j=i+d;if(j<0||j>=imageFiles.length)return;[imageFiles[i],imageFiles[j]]=[imageFiles[j],imageFiles[i]];renderImages()};
 window.coverImg=i=>{if(i<=0||i>=imageFiles.length)return;const f=imageFiles.splice(i,1)[0];imageFiles.unshift(f);renderImages()};
+window.removeImg=i=>{if(i<0||i>=imageFiles.length)return;imageFiles.splice(i,1);renderImages();if(window.SIRILAND_MEDIA_REFRESH)window.SIRILAND_MEDIA_REFRESH();};
 window.moveExisting=(i,d)=>{const j=i+d;if(j<0||j>=existingImageList.length)return;[existingImageList[i],existingImageList[j]]=[existingImageList[j],existingImageList[i]];renderImages()};
 window.coverExisting=i=>{if(i<=0||i>=existingImageList.length)return;const f=existingImageList.splice(i,1)[0];existingImageList.unshift(f);renderImages()};
 window.removeExisting=i=>{if(confirm('Bu görsel listeden silinsin mi?')){existingImageList.splice(i,1);renderImages()}};

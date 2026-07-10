@@ -139,10 +139,23 @@
         <textarea id="instagramPost" class="postarea" placeholder="Instagram metni burada oluşacak..."></textarea>
       </div>
 
-      <div class="panel">
-        <h2 id="h_images">6) Görseller</h2>
-        <p class="muted">Yeni ilanın fotoğraflarını seç. Kapak fotoğrafı ilk sıradadır. Artık fotoğraf önizlemesi ile kapak seçebilirsin.</p>
-        <input type="file" id="imageFiles" accept="image/*" multiple>
+      <div class="panel mediaManagerPanel">
+        <h2 id="h_images">6) Media Manager PRO</h2>
+        <p class="muted">Fotoğrafları sürükleyip bırak veya seç. İlk fotoğraf kapaktır. Sıralama, kapak seçimi ve kalite kontrolü burada yapılır.</p>
+        <div id="imageDropZone" class="imageDropZone" tabindex="0">
+          <div class="dropIcon">📷</div>
+          <b>Fotoğrafları buraya sürükle</b>
+          <span>veya bilgisayardan seç</span>
+          <button class="btn" type="button" id="chooseImagesBtn">Fotoğraf Seç</button>
+          <input type="file" id="imageFiles" accept="image/jpeg,image/png,image/webp" multiple hidden>
+        </div>
+        <div class="mediaToolbar">
+          <button class="btn dark" type="button" id="sortImagesBtn">A–Z Sırala</button>
+          <button class="btn" type="button" id="refreshImageCheckBtn">Kaliteyi Kontrol Et</button>
+          <button class="btn red" type="button" id="clearNewImagesBtn">Yeni Fotoğrafları Temizle</button>
+        </div>
+        <div id="imageStats" class="imageStats">Henüz fotoğraf seçilmedi.</div>
+        <div id="imageWarnings" class="imageWarnings"></div>
         <div id="imagePreview" class="list"></div>
       </div>
       <div class="panel">

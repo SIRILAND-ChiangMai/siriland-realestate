@@ -1,15 +1,9 @@
-# SIRILAND Build 2026.07.10.09 — Data Validator Hotfix
+# SIRILAND Admin Build 2026.07.10.10 — Media Manager PRO
 
-1. ZIP dosyasını çıkarın.
-2. Proje kökünde aşağıdaki dosyaların üzerine yazın:
-   - index.html
-   - script.js
-   - style.css
-   - admin.html
-   - admin.css
-   - admin.js
-3. `modules` klasörünü eksiksiz şekilde mevcut `modules` klasörünün üzerine kopyalayın.
+1. ZIP içindeki `admin.html`, `admin.css`, `admin.js` ve `modules` klasörünü proje köküne kopyalayın.
+2. Aynı isimli dosyaların üzerine yazın.
+3. `properties.js`, `properties.json` ve `images` klasörüne dokunmayın.
 4. GitHub Desktop ile Commit + Push yapın.
-5. Website ve admin panelinde Ctrl + F5 yapın.
+5. Admin sayfasını Ctrl+F5 ile yenileyin.
 
-`properties.js`, `properties.json` ve `images` klasörüne dokunmayın.
+Test: Fotoğrafları kutuya sürükleyin, kapak seçin, sıralayın ve ZIP oluşturun.
