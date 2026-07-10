@@ -4,12 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SIRILAND CMS PRO 2030 - Integrated Publish Manager PRO</title>
-  <link rel="stylesheet" href="admin.css?v=2026071019">
+  <link rel="stylesheet" href="admin.css?v=2026071021">
 </head>
 <body>
+
+<button type="button" class="publishFloatingButton" onclick="document.getElementById('integratedPublishPanel')?.scrollIntoView({behavior:'smooth',block:'start'})">
+  🚀 Publish
+</button>
+
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND CMS PRO 2030 — Property Database Manager PRO</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
+    <div><div class="logo">SIRILAND CMS PRO 2030 — Integrated Publish Manager PRO</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -18,6 +23,77 @@
     </div>
   </div>
   <div class="hint"><b>Önemli düzeltme:</b> Facebook/Instagram post, fotoğraf önizleme ve kapak seçimi korunmuştur. Export artık <b>Ask for price</b>, <b>Recovered from image folder</b>, <b>Details updating</b> gibi placeholder yazıları temizler. Fiyat bilinmiyorsa <b>Contact for Price</b> yaz.</div>
+
+  <div class="publishTopNotice">
+    <strong>🚀 Publish Manager hazır:</strong>
+    Aşağıdaki panelden CMS, GitHub ve Backup klasörlerini seçip yayınlayabilirsin.
+  </div>
+
+<div class="panel integratedPublishPanel" id="integratedPublishPanel">
+    <div class="integratedPublishHead">
+      <div>
+        <h2>🚀 Integrated Publish Manager PRO</h2>
+        <p class="muted">CMS klasörünü GitHub repository’ye yedekli ve kontrollü şekilde aktarır.</p>
+      </div>
+      <span class="publishBrowserBadge" id="publishBrowserBadge">CHECKING</span>
+    </div>
+
+    <div class="publishPathGrid">
+      <div class="publishPathCard">
+        <span>1</span>
+        <div><b>CMS Source</b><small id="publishCmsPath">Seçilmedi</small></div>
+        <button class="btn dark" id="selectCmsFolderBtn" type="button">Klasör Seç</button>
+      </div>
+      <div class="publishPathCard">
+        <span>2</span>
+        <div><b>GitHub Repository</b><small id="publishGithubPath">Seçilmedi</small></div>
+        <button class="btn dark" id="selectGithubFolderBtn" type="button">Klasör Seç</button>
+      </div>
+      <div class="publishPathCard">
+        <span>3</span>
+        <div><b>Backup Folder</b><small id="publishBackupPath">Seçilmedi</small></div>
+        <button class="btn dark" id="selectBackupFolderBtn" type="button">Klasör Seç</button>
+      </div>
+    </div>
+
+    <div class="publishChecklistGrid">
+      <div><span id="publishCheckBrowser">○</span> Chrome / Edge desteği</div>
+      <div><span id="publishCheckCms">○</span> CMS klasörü hazır</div>
+      <div><span id="publishCheckGithub">○</span> GitHub repository hazır</div>
+      <div><span id="publishCheckBackup">○</span> Backup klasörü hazır</div>
+      <div><span id="publishCheckProperties">○</span> properties.js bulundu</div>
+      <div><span id="publishCheckGit">○</span> .git klasörü bulundu</div>
+    </div>
+
+    <div class="publishActions">
+      <button class="btn" id="testPublishPathsBtn" type="button">Test Paths</button>
+      <button class="btn green publishMainBtn" id="integratedPublishBtn" type="button">🚀 Backup + Publish</button>
+      <button class="btn dark" id="copyPublishCommitBtn" type="button">Commit Mesajını Kopyala</button>
+      <button class="btn red" id="resetPublishFoldersBtn" type="button">Klasörleri Sıfırla</button>
+    </div>
+
+    <div class="publishProgressWrap">
+      <div class="publishProgressBar"><div id="publishProgressFill"></div></div>
+      <span id="publishProgressText">Hazır</span>
+    </div>
+
+    <div class="publishResultGrid">
+      <div class="publishResultCard"><span>New Files</span><strong id="publishNewCount">0</strong></div>
+      <div class="publishResultCard"><span>Updated Files</span><strong id="publishUpdatedCount">0</strong></div>
+      <div class="publishResultCard"><span>Unchanged</span><strong id="publishUnchangedCount">0</strong></div>
+      <div class="publishResultCard"><span>Backup</span><strong id="publishBackupStatus">—</strong></div>
+    </div>
+
+    <label>Commit Message</label>
+    <input id="integratedCommitMessage" readonly placeholder="Publish tamamlanınca otomatik oluşur">
+
+    <div id="integratedPublishLog" class="integratedPublishLog">Publish Manager hazır.</div>
+
+    <div class="publishWarning">
+      Bu özellik yalnızca <b>Chrome veya Microsoft Edge</b> ile çalışır. Admin sayfasını Firefox’ta açarsan klasör seçme butonları çalışmaz.
+    </div>
+  </div>
+
   <div class="panel gh43-panel" id="gh43Panel">
     <div class="gh43-head">
       <div>
@@ -104,73 +180,6 @@
       <div class="miniBox"><h3>Son Eklenen İlanlar</h3><div id="lastAddedList"></div></div>
       <div class="miniBox"><h3>Son Düzenlenen İlanlar</h3><div id="lastUpdatedList"></div></div>
       <div class="miniBox"><h3>Eksik Veri Raporu</h3><div id="dashboardMissingList"></div></div>
-    </div>
-  </div>
-
-  
-  
-  <div class="panel integratedPublishPanel" id="integratedPublishPanel">
-    <div class="integratedPublishHead">
-      <div>
-        <h2>🚀 Integrated Publish Manager PRO</h2>
-        <p class="muted">CMS klasörünü GitHub repository’ye yedekli ve kontrollü şekilde aktarır.</p>
-      </div>
-      <span class="publishBrowserBadge" id="publishBrowserBadge">CHECKING</span>
-    </div>
-
-    <div class="publishPathGrid">
-      <div class="publishPathCard">
-        <span>1</span>
-        <div><b>CMS Source</b><small id="publishCmsPath">Seçilmedi</small></div>
-        <button class="btn dark" id="selectCmsFolderBtn" type="button">Klasör Seç</button>
-      </div>
-      <div class="publishPathCard">
-        <span>2</span>
-        <div><b>GitHub Repository</b><small id="publishGithubPath">Seçilmedi</small></div>
-        <button class="btn dark" id="selectGithubFolderBtn" type="button">Klasör Seç</button>
-      </div>
-      <div class="publishPathCard">
-        <span>3</span>
-        <div><b>Backup Folder</b><small id="publishBackupPath">Seçilmedi</small></div>
-        <button class="btn dark" id="selectBackupFolderBtn" type="button">Klasör Seç</button>
-      </div>
-    </div>
-
-    <div class="publishChecklistGrid">
-      <div><span id="publishCheckBrowser">○</span> Chrome / Edge desteği</div>
-      <div><span id="publishCheckCms">○</span> CMS klasörü hazır</div>
-      <div><span id="publishCheckGithub">○</span> GitHub repository hazır</div>
-      <div><span id="publishCheckBackup">○</span> Backup klasörü hazır</div>
-      <div><span id="publishCheckProperties">○</span> properties.js bulundu</div>
-      <div><span id="publishCheckGit">○</span> .git klasörü bulundu</div>
-    </div>
-
-    <div class="publishActions">
-      <button class="btn" id="testPublishPathsBtn" type="button">Test Paths</button>
-      <button class="btn green publishMainBtn" id="integratedPublishBtn" type="button">🚀 Backup + Publish</button>
-      <button class="btn dark" id="copyPublishCommitBtn" type="button">Commit Mesajını Kopyala</button>
-      <button class="btn red" id="resetPublishFoldersBtn" type="button">Klasörleri Sıfırla</button>
-    </div>
-
-    <div class="publishProgressWrap">
-      <div class="publishProgressBar"><div id="publishProgressFill"></div></div>
-      <span id="publishProgressText">Hazır</span>
-    </div>
-
-    <div class="publishResultGrid">
-      <div class="publishResultCard"><span>New Files</span><strong id="publishNewCount">0</strong></div>
-      <div class="publishResultCard"><span>Updated Files</span><strong id="publishUpdatedCount">0</strong></div>
-      <div class="publishResultCard"><span>Unchanged</span><strong id="publishUnchangedCount">0</strong></div>
-      <div class="publishResultCard"><span>Backup</span><strong id="publishBackupStatus">—</strong></div>
-    </div>
-
-    <label>Commit Message</label>
-    <input id="integratedCommitMessage" readonly placeholder="Publish tamamlanınca otomatik oluşur">
-
-    <div id="integratedPublishLog" class="integratedPublishLog">Publish Manager hazır.</div>
-
-    <div class="publishWarning">
-      Bu özellik yalnızca <b>Chrome veya Microsoft Edge</b> ile çalışır. Admin sayfasını Firefox’ta açarsan klasör seçme butonları çalışmaz.
     </div>
   </div>
 
@@ -419,10 +428,20 @@
         </div>
       </div>
 
-      <div class="panel">
-        <button class="btn green" id="saveBtn">İlanı Kaydet</button>
-        <button class="btn dark" id="clearBtn">Yeni İlan</button>
-        <button class="btn" id="validateBtn">Kontrol Et</button>
+      <div class="panel directSavePanel">
+        <div class="directSaveHead">
+          <div>
+            <h2>💾 Direct Save to CMS</h2>
+            <p class="muted">İlanı kaydeder ve doğrudan 01_CMS içindeki properties.js, JSON ve yeni fotoğrafları günceller.</p>
+          </div>
+          <span class="directSaveBadge" id="directSaveBadge">CMS CHECK</span>
+        </div>
+        <div class="directSaveActions">
+          <button class="btn green directSaveMain" id="saveBtn">İlanı Kaydet + CMS Güncelle</button>
+          <button class="btn dark" id="clearBtn">Yeni İlan</button>
+          <button class="btn" id="validateBtn">Kontrol Et</button>
+        </div>
+        <div class="directSaveStatus" id="directSaveStatus">Henüz doğrudan kayıt yapılmadı.</div>
       </div>
     </div>
     <div>
@@ -455,7 +474,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071019"></script>
+<script src="admin.js?v=2026071021"></script>
 <script src="modules/dashboard.js?v=2026071012"></script>
 <script src="modules/crm.js?v=2026071012"></script>
 <script src="modules/export.js?v=2026071012"></script>

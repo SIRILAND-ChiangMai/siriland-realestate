@@ -1,25 +1,32 @@
-SIRILAND INTEGRATED PUBLISH MANAGER PRO
+SIRILAND DIRECT SAVE TO CMS PRO
 
-Kurulum:
-1. admin.html, admin.js ve admin.css dosyalarını 01_CMS ve GitHub repository içindeki eski dosyaların üzerine kopyalayın.
-2. Admin sayfasını Google Chrome veya Microsoft Edge ile açın.
-3. Integrated Publish Manager panelinde:
-   - CMS Source: 01_CMS
-   - GitHub Repository: 09_GitHub/siriland-realestate
-   - Backup Folder: 02_Backup
-4. Test Paths
-5. Backup + Publish
-6. GitHub Desktop:
-   - Ctrl+V
+Yeni çalışma düzeni:
+1. Admin'de ilan bilgilerini ve fotoğrafları gir.
+2. "İlanı Kaydet + CMS Güncelle" butonuna bas.
+3. Sistem doğrudan 01_CMS içine şunları yazar:
+   - properties.js
+   - properties.json
+   - data/properties.json
+   - crm/customers.json
+   - yeni ilan fotoğrafları
+4. Sonra üstteki "Backup + Publish" butonuna bas.
+5. GitHub Desktop:
    - Commit to main
    - Push origin
 
-Neden Chrome / Edge?
-Tarayıcının klasöre doğrudan yazma özelliği File System Access API kullanır.
-Firefox bu özelliği desteklemez.
+Ek güvenlik:
+- Her doğrudan kayıt öncesi mevcut properties.js dosyası:
+  02_Backup/Autosave
+  klasörüne yedeklenir.
+- Admin içinde kayıt başarılı, CMS yazma başarısız olursa açık hata mesajı gösterilir.
+- Chrome veya Edge gereklidir.
 
-Güvenlik:
-- GitHub repository önce tamamen Backup klasörüne kopyalanır.
-- Yalnızca değişen/yeni CMS dosyaları GitHub klasörüne yazılır.
-- .git, node_modules ve Publish_Manager klasörleri kopyalanmaz.
-- Publish raporu Backup/PublishReports içine kaydedilir.
+Kurulum:
+admin.html, admin.js ve admin.css dosyalarını:
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+içindeki eski dosyaların üzerine kopyala.
+
+Aynı üç dosyayı GitHub repository içine de kopyala:
+E:\SIRILAND_2030_Harddisk_Structure\09_GitHub\siriland-realestate
+
+Sonra Chrome'da 01_CMS\admin.html aç ve Ctrl + Shift + R yap.

@@ -148,3 +148,41 @@
 .integratedPublishLog{background:#0b1220;color:#dbeafe;border-radius:12px;padding:12px;min-height:140px;max-height:260px;overflow:auto;font-family:monospace;font-size:12px;margin-top:10px}.integratedPublishLog div{padding:3px 0}.integratedPublishLog .ok{color:#86efac}.integratedPublishLog .error{color:#fca5a5}
 .publishWarning{margin-top:10px;background:#fff7df;border:1px solid #f1d184;border-radius:12px;padding:10px;font-size:13px}
 @media(max-width:900px){.publishPathGrid,.publishChecklistGrid,.publishResultGrid{grid-template-columns:1fr}.integratedPublishHead{flex-direction:column}}
+
+
+/* Integrated Publish Manager visibility fix */
+.publishTopNotice{
+  margin:10px 0 12px;
+  padding:11px 14px;
+  border-radius:12px;
+  background:#eaf7ef;
+  border:1px solid #9bd5ad;
+  color:#075b2e;
+  font-size:14px;
+}
+.publishFloatingButton{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:9999;
+  border:0;
+  border-radius:999px;
+  padding:13px 18px;
+  background:#0f7b3f;
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 10px 28px rgba(7,26,61,.25);
+}
+.publishFloatingButton:hover{transform:translateY(-1px)}
+#integratedPublishPanel{scroll-margin-top:14px}
+
+
+/* Direct Save to CMS PRO */
+.directSavePanel{border:2px solid #0f7b3f;background:linear-gradient(145deg,#fff,#f0fbf5)}
+.directSaveHead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.directSaveHead h2{margin:0 0 5px}.directSaveBadge{background:#b77900;color:#fff;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900}.directSaveBadge.ok{background:#0f7b3f}.directSaveBadge.bad{background:#b91c1c}
+.directSaveActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.directSaveMain{font-size:15px;padding:12px 18px}
+.directSaveStatus{margin-top:12px;border-radius:11px;padding:10px 12px;background:#eef2ff;color:#334155;font-size:13px;font-weight:700}
+.directSaveStatus.working{background:#fff7df;color:#92400e}.directSaveStatus.ok{background:#dcfce7;color:#166534}.directSaveStatus.error{background:#fee2e2;color:#991b1b}
+@media(max-width:700px){.directSaveHead{flex-direction:column}.directSaveActions .btn{width:100%}}

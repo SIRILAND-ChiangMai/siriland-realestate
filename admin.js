@@ -1652,3 +1652,118 @@ async function integratedPublishInit(){
   });
 }
 window.addEventListener('DOMContentLoaded',integratedPublishInit);
+
+
+/* Direct Save to CMS PRO */
+function directSaveStatus(message,type='info'){
+  const el=$('directSaveStatus');
+  if(!el)return;
+  el.textContent=message;
+  el.className='directSaveStatus '+type;
+}
+async function directSaveEnsureCmsHandle(){
+  if(!publishHandles.cms) publishHandles.cms=await publishLoadHandle('cms');
+  if(!publishHandles.cms) throw new Error('Önce Integrated Publish Manager içinden CMS Source klasörünü seç.');
+  const ok=await publishRequestPermission(publishHandles.cms,'readwrite');
+  if(!ok) throw new Error('CMS klasörü için yazma izni verilmedi.');
+  return publishHandles.cms;
+}
+async function directSaveBackupCurrentProperties(cms){
+  if(!publishHandles.backup) publishHandles.backup=await publishLoadHandle('backup');
+  if(!publishHandles.backup) return null;
+  const allowed=await publishRequestPermission(publishHandles.backup,'readwrite');
+  if(!allowed) return null;
+
+  const current=await publishReadFile(cms,'properties.js');
+  if(!current) return null;
+
+  const autosave=await publishHandles.backup.getDirectoryHandle('Autosave',{create:true});
+  const stamp=publishStamp();
+  const handle=await autosave.getFileHandle('properties-before-save-'+stamp+'.js',{create:true});
+  const writable=await handle.createWritable();
+  await writable.write(current);
+  await writable.close();
+  return handle.name;
+}
+function directSaveBuildPropertyFiles(){
+  const json=JSON.stringify(properties,null,2);
+  return {
+    js:new Blob([
+      'window.SIRILAND_PROPERTIES = ',json,';\n',
+      'const properties = window.SIRILAND_PROPERTIES;\n'
+    ],{type:'text/javascript'}),
+    json:new Blob([json],{type:'application/json'})
+  };
+}
+async function directSavePendingImages(cms){
+  let written=0;
+  for(const [id,files] of Object.entries(pendingFilesById)){
+    const p=properties.find(x=>x.id===id);
+    if(!p || !Array.isArray(files))continue;
+    for(let i=0;i<files.length;i++){
+      const path=p.images?.[i];
+      if(!path)continue;
+      const source=$('mediaWatermark')?.checked?await mediaApplyWatermark(files[i]):files[i];
+      await publishWriteFile(cms,path,source);
+      written++;
+    }
+  }
+  return written;
+}
+async function directSaveAllToCms(){
+  const cms=await directSaveEnsureCmsHandle();
+  directSaveStatus('Önce güvenli yedek alınıyor...','working');
+
+  const backupName=await directSaveBackupCurrentProperties(cms);
+  const files=directSaveBuildPropertyFiles();
+
+  directSaveStatus('properties.js ve JSON dosyaları yazılıyor...','working');
+  await publishWriteFile(cms,'properties.js',files.js);
+  await publishWriteFile(cms,'properties.json',files.json);
+  await publishWriteFile(cms,'data/properties.json',files.json);
+
+  const crmBlob=new Blob([JSON.stringify(customers,null,2)],{type:'application/json'});
+  await publishWriteFile(cms,'crm/customers.json',crmBlob);
+
+  directSaveStatus('Yeni fotoğraflar yazılıyor...','working');
+  const imageCount=await directSavePendingImages(cms);
+
+  pendingFilesById={};
+  localStorage.setItem('siriland_properties_backup',JSON.stringify(properties));
+  localStorage.setItem('siriland_last_property_count',String(properties.length));
+
+  const now=new Date().toLocaleString();
+  directSaveStatus(
+    `CMS güncellendi • ${properties.length} ilan • ${imageCount} yeni fotoğraf • ${backupName?'Yedek: '+backupName:'Yedek alınamadı'} • ${now}`,
+    'ok'
+  );
+
+  if($('directSaveBadge')){
+    $('directSaveBadge').textContent='CMS UPDATED';
+    $('directSaveBadge').classList.add('ok');
+  }
+}
+async function directSaveAfterPropertySave(){
+  try{
+    directSaveStatus('İlan kaydediliyor...','working');
+    await new Promise(resolve=>setTimeout(resolve,120));
+    await directSaveAllToCms();
+    alert('İlan kaydedildi ve 01_CMS güncellendi.\n\nŞimdi sadece 🚀 Backup + Publish butonuna bas.');
+  }catch(e){
+    console.error(e);
+    directSaveStatus('Doğrudan kayıt hatası: '+e.message,'error');
+    alert('İlan admin içinde kaydedildi fakat 01_CMS güncellenemedi:\n\n'+e.message);
+  }
+}
+function directSaveInit(){
+  const supported=publishSupported();
+  if($('directSaveBadge')){
+    $('directSaveBadge').textContent=supported?'READY':'CHROME / EDGE';
+    $('directSaveBadge').classList.toggle('bad',!supported);
+  }
+  if(!supported) directSaveStatus('Bu özellik için admin sayfasını Chrome veya Edge ile aç.','error');
+}
+window.addEventListener('DOMContentLoaded',directSaveInit);
+
+/* Mevcut save işlemi tamamlandıktan sonra CMS klasörüne de yaz. */
+$('saveBtn')?.addEventListener('click',directSaveAfterPropertySave);
