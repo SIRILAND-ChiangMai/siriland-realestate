@@ -2684,3 +2684,13 @@ setForm=function(p){
     }
   },150);
 };
+
+
+/* Sprint 5.0 Phase 1 hook */
+$('saveBtn')?.addEventListener('click',()=>{
+  setTimeout(()=>{
+    if(window.SIRILAND_CORE?.onPropertySaved){
+      window.SIRILAND_CORE.onPropertySaved($('id')?.value);
+    }
+  },350);
+});

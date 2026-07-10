@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SIRILAND CMS PRO 2030 - Integrated Publish Manager PRO</title>
-  <link rel="stylesheet" href="admin.css?v=2026071028">
+  <link rel="stylesheet" href="admin.css?v=2026071029">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
@@ -244,6 +244,57 @@
 
     <label>Smart Commit Message</label>
     <textarea id="smartCommitMessage" rows="4" readonly></textarea>
+  </div>
+
+
+  <div class="panel coreRefactorPanel" id="coreRefactorPanel">
+    <div class="coreRefactorHead">
+      <div>
+        <h2>🏗️ Sprint 5.0 — Core Refactor Phase 1</h2>
+        <p class="muted">Mevcut website çalışmaya devam ederken ilanları ayrı JSON dosyalarına ve hızlı incremental publish sistemine hazırlar.</p>
+      </div>
+      <span class="corePhaseBadge">FOUNDATION</span>
+    </div>
+
+    <div class="coreRefactorStats">
+      <div><span>Properties</span><strong id="corePropertyCount">0</strong></div>
+      <div><span>JSON Files</span><strong id="coreJsonCount">0</strong></div>
+      <div><span>Changed</span><strong id="coreChangedCount">0</strong></div>
+      <div><span>Deleted</span><strong id="coreDeletedCount">0</strong></div>
+      <div><span>Last Build</span><strong id="coreLastBuild">—</strong></div>
+    </div>
+
+    <div class="coreRefactorActions">
+      <button class="btn" id="coreAnalyzeBtn" type="button">Değişiklikleri Analiz Et</button>
+      <button class="btn dark" id="coreBuildFilesBtn" type="button">Property JSON Dosyalarını Oluştur</button>
+      <button class="btn green" id="coreIncrementalPublishBtn" type="button">⚡ Sadece Değişenleri Publish Et</button>
+      <button class="btn dark" id="coreExportArchitectureBtn" type="button">Mimari Raporu İndir</button>
+      <button class="btn red" id="coreResetManifestBtn" type="button">Manifesti Sıfırla</button>
+    </div>
+
+    <div class="coreRefactorGrid">
+      <section>
+        <h3>Changed Properties</h3>
+        <div id="coreChangedList" class="coreRefactorList"></div>
+      </section>
+      <section>
+        <h3>Generated Files</h3>
+        <div id="coreGeneratedList" class="coreRefactorList"></div>
+      </section>
+      <section>
+        <h3>Architecture Status</h3>
+        <div id="coreArchitectureStatus" class="coreRefactorList"></div>
+      </section>
+      <section>
+        <h3>Publish Log</h3>
+        <div id="corePublishLog" class="corePublishLog">Core Refactor hazır.</div>
+      </section>
+    </div>
+
+    <div class="coreRefactorNote">
+      <b>Güvenli geçiş:</b> Website şimdilik mevcut <code>properties.js</code> dosyasını kullanmaya devam eder.
+      Yeni <code>properties/CM-0001.json</code> ve <code>properties-index.json</code> dosyaları paralel olarak oluşturulur.
+    </div>
   </div>
 
 <div class="panel propertyDatabasePanel" id="propertyDatabasePanel">
@@ -681,7 +732,12 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071028"></script>
+<script src="admin.js?v=2026071029"></script>
+  <script src="admin-modules/core-utils.js?v=2026071029"></script>
+  <script src="admin-modules/property-store.js?v=2026071029"></script>
+  <script src="admin-modules/incremental-publish.js?v=2026071029"></script>
+  <script src="admin-modules/core-refactor-ui.js?v=2026071029"></script>
+
 <script src="modules/dashboard.js?v=2026071012"></script>
 <script src="modules/crm.js?v=2026071012"></script>
 <script src="modules/export.js?v=2026071012"></script>

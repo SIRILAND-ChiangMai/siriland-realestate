@@ -1,5 +1,463 @@
 [
   {
+    "id": "BKK-0001",
+    "title": {
+      "en": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "th": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "tr": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "zh": "Bangkok Luxury Condo — Sathorn / Suanplu"
+    },
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "12.99 MB",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathrooms",
+    "area": "94.80 sqm",
+    "room": "",
+    "floor": "7th Floor",
+    "map": "",
+    "description": {
+      "en": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
+      "th": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
+      "tr": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
+      "zh": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026."
+    },
+    "highlights": {
+      "en": [
+        "Sathorn / Suanplu Bangkok",
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "94.80 sqm",
+        "Tenant 45,000 THB/month",
+        "Lease until 31 Oct 2026"
+      ],
+      "th": [
+        "Sathorn / Suanplu Bangkok",
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "94.80 sqm",
+        "Tenant 45,000 THB/month",
+        "Lease until 31 Oct 2026"
+      ],
+      "tr": [
+        "Sathorn / Suanplu Bangkok",
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "94.80 sqm",
+        "Tenant 45,000 THB/month",
+        "Lease until 31 Oct 2026"
+      ],
+      "zh": [
+        "Sathorn / Suanplu Bangkok",
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "94.80 sqm",
+        "Tenant 45,000 THB/month",
+        "Lease until 31 Oct 2026"
+      ]
+    },
+    "images": [
+      "images/bkk-01-3.jpg",
+      "images/bkk-01-10.jpg",
+      "images/bkk-01-2.jpg",
+      "images/bkk-01-5.jpg",
+      "images/bkk-01-6.jpg",
+      "images/bkk-01-7.jpg",
+      "images/bkk-01-8.jpg",
+      "images/bkk-01-9.jpg",
+      "images/bkk-01-1.jpg",
+      "images/bkk-01-4.jpg",
+      "images/bkk-01-11.jpg",
+      "images/bkk-01-12.jpg",
+      "images/bkk-01-13.jpg",
+      "images/bkk-01-14.jpg",
+      "images/bkk-01-15.jpg",
+      "images/bkk-01-16.jpg",
+      "images/bkk-01-17.jpg",
+      "images/bkk-01-18.jpg",
+      "images/bkk-01-19.jpg",
+      "images/bkk-01-20.jpg",
+      "images/bkk-01-21.jpg",
+      "images/bkk-01-22.jpg",
+      "images/bkk-01-23.jpg",
+      "images/bkk-01-24.jpg",
+      "images/bkk-01-25.jpg",
+      "images/bkk-01-26.jpg",
+      "images/bkk-01-27.jpg",
+      "images/bkk-01-28.jpg",
+      "images/bkk-01-29.jpg"
+    ],
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
+  },
+  {
+    "id": "BKK-0002",
+    "title": {
+      "en": "Living Nest Ramkhamhaeng",
+      "th": "Living Nest Ramkhamhaeng",
+      "tr": "Living Nest Ramkhamhaeng",
+      "zh": "Living Nest Ramkhamhaeng"
+    },
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "3.29 MB",
+    "bedrooms": "1 Bedroom",
+    "bathrooms": "1 Bathroom",
+    "area": "51.61 sqm",
+    "room": "845/61",
+    "floor": "5th Floor",
+    "map": "",
+    "description": {
+      "en": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng.",
+      "th": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng.",
+      "tr": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng.",
+      "zh": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng."
+    },
+    "highlights": {
+      "en": [
+        "Living Nest Ramkhamhaeng",
+        "1 Bedroom",
+        "1 Bathroom",
+        "51.61 sqm",
+        "5th Floor",
+        "Near The Mall Ramkhamhaeng"
+      ],
+      "th": [
+        "Living Nest Ramkhamhaeng",
+        "1 Bedroom",
+        "1 Bathroom",
+        "51.61 sqm",
+        "5th Floor",
+        "Near The Mall Ramkhamhaeng"
+      ],
+      "tr": [
+        "Living Nest Ramkhamhaeng",
+        "1 Bedroom",
+        "1 Bathroom",
+        "51.61 sqm",
+        "5th Floor",
+        "Near The Mall Ramkhamhaeng"
+      ],
+      "zh": [
+        "Living Nest Ramkhamhaeng",
+        "1 Bedroom",
+        "1 Bathroom",
+        "51.61 sqm",
+        "5th Floor",
+        "Near The Mall Ramkhamhaeng"
+      ]
+    },
+    "images": [
+      "images/bkk-lvnst-01-1.jpg",
+      "images/bkk-lvnst-01-2.jpg",
+      "images/bkk-lvnst-01-3.jpg",
+      "images/bkk-lvnst-01-4.jpg",
+      "images/bkk-lvnst-01-5.jpg",
+      "images/bkk-lvnst-01-6.jpg",
+      "images/bkk-lvnst-01-7.jpg",
+      "images/bkk-lvnst-01-8.jpg",
+      "images/bkk-lvnst-01-9.jpg",
+      "images/bkk-lvnst-01-10.jpg",
+      "images/bkk-lvnst-01-11.jpg",
+      "images/bkk-lvnst-01-12.jpg",
+      "images/bkk-lvnst-01-13.jpg",
+      "images/bkk-lvnst-01-14.jpg",
+      "images/bkk-lvnst-01-15.jpg",
+      "images/bkk-lvnst-01-16.jpg",
+      "images/bkk-lvnst-01-17.jpg",
+      "images/bkk-lvnst-01-18.jpg",
+      "images/bkk-lvnst-01-19.jpg",
+      "images/bkk-lvnst-01-20.jpg",
+      "images/bkk-lvnst-01-21.jpg",
+      "images/bkk-lvnst-01-22.jpg",
+      "images/bkk-lvnst-01-23.jpg",
+      "images/bkk-lvnst-01-24.jpg"
+    ],
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
+  },
+  {
+    "id": "BKK-0003",
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "3.29 MB",
+    "bedrooms": "1 Bedroom",
+    "bathrooms": "1 Bathroom",
+    "area": "37.5 sqm",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "latitude": "",
+    "longitude": "",
+    "landSize": "",
+    "landAreaSqm": "",
+    "buildingArea": "",
+    "parking": "",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "3.29 MB",
+    "rentPrice": "",
+    "ownerFinance": "10% Down Payment",
+    "installment": "60 Months / 20,000 THB per Month / 0% Interest",
+    "freeTransfer": "",
+    "summary": "Investment condo at Supalai Veranda Rama 9 with tenant and owner-finance option.",
+    "nearby": [],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Supalai Veranda Rama 9 Condo for Sale",
+      "th": "Supalai Veranda Rama 9 Condo for Sale",
+      "tr": "Supalai Veranda Rama 9 Condo for Sale",
+      "zh": "Supalai Veranda Rama 9 Condo for Sale"
+    },
+    "description": {
+      "en": "Condo for sale at Supalai Veranda Rama 9, Bangkok. 1 bedroom, 1 bathroom, 37.5 sqm. Cash price 3.29 MB. Tenant income approximately 12,000 THB per month. Owner finance option: 10% down payment and up to 60 months at 0% interest, approximately 20,000 THB per month.",
+      "th": "Condo for sale at Supalai Veranda Rama 9, Bangkok. 1 bedroom, 1 bathroom, 37.5 sqm. Cash price 3.29 MB. Tenant income approximately 12,000 THB per month. Owner finance option: 10% down payment and up to 60 months at 0% interest, approximately 20,000 THB per month.",
+      "tr": "Condo for sale at Supalai Veranda Rama 9, Bangkok. 1 bedroom, 1 bathroom, 37.5 sqm. Cash price 3.29 MB. Tenant income approximately 12,000 THB per month. Owner finance option: 10% down payment and up to 60 months at 0% interest, approximately 20,000 THB per month.",
+      "zh": "Condo for sale at Supalai Veranda Rama 9, Bangkok. 1 bedroom, 1 bathroom, 37.5 sqm. Cash price 3.29 MB. Tenant income approximately 12,000 THB per month. Owner finance option: 10% down payment and up to 60 months at 0% interest, approximately 20,000 THB per month."
+    },
+    "highlights": {
+      "en": [
+        "1 Bedroom",
+        "1 Bathroom",
+        "37.5 sqm",
+        "Tenant 12,000 THB/Month",
+        "Owner Finance Available",
+        "10% Down Payment",
+        "0% Interest up to 60 Months"
+      ],
+      "th": [
+        "1 Bedroom",
+        "1 Bathroom",
+        "37.5 sqm",
+        "Tenant 12,000 THB/Month",
+        "Owner Finance Available",
+        "10% Down Payment",
+        "0% Interest up to 60 Months"
+      ],
+      "tr": [
+        "1 Bedroom",
+        "1 Bathroom",
+        "37.5 sqm",
+        "Tenant 12,000 THB/Month",
+        "Owner Finance Available",
+        "10% Down Payment",
+        "0% Interest up to 60 Months"
+      ],
+      "zh": [
+        "1 Bedroom",
+        "1 Bathroom",
+        "37.5 sqm",
+        "Tenant 12,000 THB/Month",
+        "Owner Finance Available",
+        "10% Down Payment",
+        "0% Interest up to 60 Months"
+      ]
+    },
+    "images": [
+      "images/supalai-veranda-rama-9-condo-for-sale-01.jpg",
+      "images/supalai-veranda-rama-9-condo-for-sale-02.jpg",
+      "images/supalai-veranda-rama-9-condo-for-sale-03.jpg",
+      "images/supalai-veranda-rama-9-condo-for-sale-04.jpg",
+      "images/supalai-veranda-rama-9-condo-for-sale-05.jpg",
+      "images/supalai-veranda-rama-9-condo-for-sale-06.jpg",
+      "images/supalai-veranda-rama-9-condo-for-sale-07.jpg",
+      "images/supalai-veranda-rama-9-condo-for-sale-08.jpg",
+      "images/supalai-veranda-rama-9-condo-for-sale-09.jpg"
+    ],
+    "createdAt": "2026-07-10T15:20:51+07:00",
+    "updatedAt": "2026-07-10",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "BKK-0004",
+    "title": {
+      "en": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
+      "th": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
+      "tr": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
+      "zh": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale"
+    },
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "12.0 MB",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathrooms",
+    "area": "97.50 sqm",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "description": {
+      "en": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
+      "th": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
+      "tr": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
+      "zh": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026."
+    },
+    "highlights": {
+      "en": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ],
+      "th": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ],
+      "tr": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ],
+      "zh": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ]
+    },
+    "images": [],
+    "createdAt": "2026-07-10T15:20:51+07:00",
+    "updatedAt": "2026-07-10T15:20:51+07:00",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "12.0 MB",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "Spacious 97.50 sqm condo for sale in Sathorn-Suanplu, Bangkok."
+  },
+  {
+    "id": "BKK-0005",
+    "title": {
+      "en": "The Tree Sukhumvit 71-Ekkamai Condo for Rent",
+      "th": "The Tree Sukhumvit 71-Ekkamai Condo for Rent",
+      "tr": "The Tree Sukhumvit 71-Ekkamai Condo for Rent",
+      "zh": "The Tree Sukhumvit 71-Ekkamai Condo for Rent"
+    },
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Rent",
+    "status": "Leased Out",
+    "price": "16,000 THB / Month",
+    "bedrooms": "1 Bedroom + 1 Multi-purpose Room",
+    "bathrooms": "1 Bathroom",
+    "area": "34.57 sqm",
+    "room": "",
+    "floor": "10th Floor",
+    "map": "",
+    "description": {
+      "en": "Condo at The Tree Sukhumvit 71-Ekkamai, Bangkok. 1 bedroom plus 1 multi-purpose room, 1 bathroom, 34.57 sqm on the 10th floor. Rental price 16,000 THB per month. Currently leased out.",
+      "th": "Condo at The Tree Sukhumvit 71-Ekkamai, Bangkok. 1 bedroom plus 1 multi-purpose room, 1 bathroom, 34.57 sqm on the 10th floor. Rental price 16,000 THB per month. Currently leased out.",
+      "tr": "Condo at The Tree Sukhumvit 71-Ekkamai, Bangkok. 1 bedroom plus 1 multi-purpose room, 1 bathroom, 34.57 sqm on the 10th floor. Rental price 16,000 THB per month. Currently leased out.",
+      "zh": "Condo at The Tree Sukhumvit 71-Ekkamai, Bangkok. 1 bedroom plus 1 multi-purpose room, 1 bathroom, 34.57 sqm on the 10th floor. Rental price 16,000 THB per month. Currently leased out."
+    },
+    "highlights": {
+      "en": [
+        "1 Bedroom + 1 Multi-purpose Room",
+        "1 Bathroom",
+        "34.57 sqm",
+        "10th Floor",
+        "16,000 THB/Month",
+        "Leased Out"
+      ],
+      "th": [
+        "1 Bedroom + 1 Multi-purpose Room",
+        "1 Bathroom",
+        "34.57 sqm",
+        "10th Floor",
+        "16,000 THB/Month",
+        "Leased Out"
+      ],
+      "tr": [
+        "1 Bedroom + 1 Multi-purpose Room",
+        "1 Bathroom",
+        "34.57 sqm",
+        "10th Floor",
+        "16,000 THB/Month",
+        "Leased Out"
+      ],
+      "zh": [
+        "1 Bedroom + 1 Multi-purpose Room",
+        "1 Bathroom",
+        "34.57 sqm",
+        "10th Floor",
+        "16,000 THB/Month",
+        "Leased Out"
+      ]
+    },
+    "images": [],
+    "createdAt": "2026-07-10T15:20:51+07:00",
+    "updatedAt": "2026-07-10T15:20:51+07:00",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "",
+    "rentPrice": "16,000 THB / Month",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "Condo for rent at The Tree Sukhumvit 71-Ekkamai, currently leased out."
+  },
+  {
     "id": "CM-0001",
     "title": {
       "en": "Srithana 2 Huay Kaew Room 813 (8th Floor Corner Unit)",
@@ -1889,132 +2347,18 @@
     "summary": ""
   },
   {
-    "id": "PIL-001",
-    "title": {
-      "en": "PILLOK HOME 3 Bedroom House",
-      "th": "PILLOK HOME 3 Bedroom House",
-      "tr": "PILLOK HOME 3 Bedroom House",
-      "zh": "PILLOK HOME 3 Bedroom House"
-    },
-    "titles": {
-      "en": "PILLOK HOME 3 Bedroom House",
-      "th": "บ้านเดี่ยว PILLOK HOME 3 ห้องนอน",
-      "tr": "PILLOK HOME 3 Yatak Odalı Ev",
-      "zh": "PILLOK HOME 三卧独栋住宅"
-    },
-    "city": "Phitsanulok",
-    "type": "House",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "6.9MB",
-    "bedrooms": "3 Bedrooms",
-    "bathrooms": "3 Bathrooms",
-    "area": "97.6 ตร.ว.",
-    "room": "",
-    "floor": "",
-    "map": "",
-    "description": {
-      "en": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in.",
-      "th": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in.",
-      "tr": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in.",
-      "zh": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in."
-    },
-    "descriptions": {
-      "en": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in.",
-      "th": "บ้านเดี่ยวในตัวเมืองพิษณุโลก 3 ห้องนอน 3 ห้องน้ำ ที่ดิน 97.6 ตร.ว. ราคาขาย 6.9 ล้านบาท มีเงื่อนไขผ่อนตรงกับเจ้าของ ดาวน์ 10% ผ่อน 25,000 บาท/เดือน ดอกเบี้ย 0% สูงสุด 60 งวด บรรยากาศดี พร้อมเข้าอยู่",
-      "tr": "Phitsanulok’ta 3 yatak odalı, 3 banyolu müstakil ev. Arsa 97.6 sq.w., satış fiyatı 6.9 MB. Sahibinden ödeme imkânı: %10 peşinat, ayda 25.000 THB, 60 aya kadar %0 faiz. Ferah ve taşınmaya hazır.",
-      "zh": "位于彭世洛的三卧三卫独栋住宅，土地面积 97.6 平方哇，售价 690 万泰铢。可业主分期：首付 10%，每月 25,000 泰铢，最长 60 期 0% 利息。环境舒适，可入住。"
-    },
-    "highlights": {
-      "en": [
-        "Owner Finance",
-        "0% Interest up to 60 months",
-        "3 Bedrooms",
-        "3 Bathrooms",
-        "97.6 sq.w."
-      ],
-      "th": [
-        "Owner Finance",
-        "0% Interest up to 60 months",
-        "3 Bedrooms",
-        "3 Bathrooms",
-        "97.6 sq.w."
-      ],
-      "tr": [
-        "Owner Finance",
-        "0% Interest up to 60 months",
-        "3 Bedrooms",
-        "3 Bathrooms",
-        "97.6 sq.w."
-      ],
-      "zh": [
-        "Owner Finance",
-        "0% Interest up to 60 months",
-        "3 Bedrooms",
-        "3 Bathrooms",
-        "97.6 sq.w."
-      ]
-    },
-    "images": [
-      "images/pil-001-1.jpg",
-      "images/pil-001-2.jpg",
-      "images/pil-001-3.jpg",
-      "images/pil-001-4.jpg",
-      "images/pil-001-5.jpg",
-      "images/pil-001-6.jpg",
-      "images/pil-001-7.jpg",
-      "images/pil-001-8.jpg",
-      "images/pil-001-9.jpg",
-      "images/pil-001-10.jpg"
-    ],
-    "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-07",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
-  },
-  {
     "id": "CM-0022",
     "city": "Chiang Mai",
     "type": "Condo",
     "deal": "Sale",
     "status": "Available",
-    "price": "3.9 MB",
+    "price": "",
     "bedrooms": "2 Bedrooms",
     "bathrooms": "2 Bathrooms",
     "area": "64.22 sq.m.",
-    "room": "Building 4",
-    "floor": "4th Floor",
+    "room": "",
+    "floor": "",
     "map": "https://maps.google.com/?q=Punna+Residence+5+Chiang+Mai",
-    "landSize": "",
-    "landAreaSqm": "",
-    "buildingArea": "",
-    "parking": "",
-    "titleDeed": "",
-    "roadAccess": "",
-    "frontage": "",
-    "zoning": "",
-    "utilities": "",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
     "title": {
       "en": "Punna Residence 5 — 8 Storey Low Rise Condo",
       "th": "Punna Residence 5 — 8 Storey Low Rise Condo",
@@ -2023,9 +2367,9 @@
     },
     "description": {
       "en": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
-      "th": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
-      "tr": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
-      "zh": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes."
+      "th": "",
+      "tr": "",
+      "zh": ""
     },
     "highlights": {
       "en": [
@@ -2077,14 +2421,20 @@
       "images/punna-residence-5-8-storey-low-rise-condo-32.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-10",
+    "updatedAt": "2026-07-08",
     "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0023",
@@ -2652,95 +3002,72 @@
     "summary": ""
   },
   {
-    "id": "BKK-0001",
+    "id": "CM-0032",
     "title": {
-      "en": "Bangkok Luxury Condo — Sathorn / Suanplu",
-      "th": "Bangkok Luxury Condo — Sathorn / Suanplu",
-      "tr": "Bangkok Luxury Condo — Sathorn / Suanplu",
-      "zh": "Bangkok Luxury Condo — Sathorn / Suanplu"
+      "en": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
+      "th": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
+      "tr": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
+      "zh": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent"
     },
-    "city": "Bangkok",
-    "type": "Condo",
-    "deal": "Sale",
+    "city": "Chiang Mai",
+    "type": "House",
+    "deal": "Rent",
     "status": "Available",
-    "price": "12.99 MB",
-    "bedrooms": "2 Bedrooms",
-    "bathrooms": "2 Bathrooms",
-    "area": "94.80 sqm",
+    "price": "35,000 THB / Month",
+    "bedrooms": "4 Bedrooms",
+    "bathrooms": "4 Bathrooms",
+    "area": "",
     "room": "",
-    "floor": "7th Floor",
+    "floor": "",
     "map": "",
     "description": {
-      "en": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
-      "th": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
-      "tr": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
-      "zh": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026."
+      "en": "Corner house for rent in Karnkanok Ville 12, Phase 1, Soi 4, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, 2 kitchen areas and 2 parking spaces. Fully furnished and ready to move in.",
+      "th": "Corner house for rent in Karnkanok Ville 12, Phase 1, Soi 4, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, 2 kitchen areas and 2 parking spaces. Fully furnished and ready to move in.",
+      "tr": "Corner house for rent in Karnkanok Ville 12, Phase 1, Soi 4, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, 2 kitchen areas and 2 parking spaces. Fully furnished and ready to move in.",
+      "zh": "Corner house for rent in Karnkanok Ville 12, Phase 1, Soi 4, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, 2 kitchen areas and 2 parking spaces. Fully furnished and ready to move in."
     },
     "highlights": {
       "en": [
-        "Sathorn / Suanplu Bangkok",
-        "2 Bedrooms",
-        "2 Bathrooms",
-        "94.80 sqm",
-        "Tenant 45,000 THB/month",
-        "Lease until 31 Oct 2026"
+        "Corner House",
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "2 Kitchen Areas",
+        "2 Parking Spaces",
+        "Fully Furnished",
+        "Ready to Move In"
       ],
       "th": [
-        "Sathorn / Suanplu Bangkok",
-        "2 Bedrooms",
-        "2 Bathrooms",
-        "94.80 sqm",
-        "Tenant 45,000 THB/month",
-        "Lease until 31 Oct 2026"
+        "Corner House",
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "2 Kitchen Areas",
+        "2 Parking Spaces",
+        "Fully Furnished",
+        "Ready to Move In"
       ],
       "tr": [
-        "Sathorn / Suanplu Bangkok",
-        "2 Bedrooms",
-        "2 Bathrooms",
-        "94.80 sqm",
-        "Tenant 45,000 THB/month",
-        "Lease until 31 Oct 2026"
+        "Corner House",
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "2 Kitchen Areas",
+        "2 Parking Spaces",
+        "Fully Furnished",
+        "Ready to Move In"
       ],
       "zh": [
-        "Sathorn / Suanplu Bangkok",
-        "2 Bedrooms",
-        "2 Bathrooms",
-        "94.80 sqm",
-        "Tenant 45,000 THB/month",
-        "Lease until 31 Oct 2026"
+        "Corner House",
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "2 Kitchen Areas",
+        "2 Parking Spaces",
+        "Fully Furnished",
+        "Ready to Move In"
       ]
     },
-    "images": [
-      "images/bkk-01-3.jpg",
-      "images/bkk-01-10.jpg",
-      "images/bkk-01-2.jpg",
-      "images/bkk-01-5.jpg",
-      "images/bkk-01-6.jpg",
-      "images/bkk-01-7.jpg",
-      "images/bkk-01-8.jpg",
-      "images/bkk-01-9.jpg",
-      "images/bkk-01-1.jpg",
-      "images/bkk-01-4.jpg",
-      "images/bkk-01-11.jpg",
-      "images/bkk-01-12.jpg",
-      "images/bkk-01-13.jpg",
-      "images/bkk-01-14.jpg",
-      "images/bkk-01-15.jpg",
-      "images/bkk-01-16.jpg",
-      "images/bkk-01-17.jpg",
-      "images/bkk-01-18.jpg",
-      "images/bkk-01-19.jpg",
-      "images/bkk-01-20.jpg",
-      "images/bkk-01-21.jpg",
-      "images/bkk-01-22.jpg",
-      "images/bkk-01-23.jpg",
-      "images/bkk-01-24.jpg",
-      "images/bkk-01-25.jpg",
-      "images/bkk-01-26.jpg",
-      "images/bkk-01-27.jpg",
-      "images/bkk-01-28.jpg",
-      "images/bkk-01-29.jpg"
-    ],
+    "images": [],
+    "createdAt": "2026-07-10T15:16:00+07:00",
+    "updatedAt": "2026-07-10T15:16:00+07:00",
+    "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
@@ -2748,97 +3075,91 @@
       "line": "@realcreamthailand"
     },
     "salePrice": "",
-    "rentPrice": "",
+    "rentPrice": "35,000 THB / Month",
     "ownerFinance": "",
     "installment": "",
     "freeTransfer": "",
-    "summary": ""
+    "summary": "Corner house for rent in Karnkanok Ville 12 Phase 1, Saraphi, Chiang Mai."
   },
   {
-    "id": "BKK-0002",
+    "id": "CM-0034",
     "title": {
-      "en": "Living Nest Ramkhamhaeng",
-      "th": "Living Nest Ramkhamhaeng",
-      "tr": "Living Nest Ramkhamhaeng",
-      "zh": "Living Nest Ramkhamhaeng"
+      "en": "Karnkanok Ville 12 Phase 3 House for Rent",
+      "th": "Karnkanok Ville 12 Phase 3 House for Rent",
+      "tr": "Karnkanok Ville 12 Phase 3 House for Rent",
+      "zh": "Karnkanok Ville 12 Phase 3 House for Rent"
     },
-    "city": "Bangkok",
-    "type": "Condo",
-    "deal": "Sale",
+    "city": "Chiang Mai",
+    "type": "House",
+    "deal": "Rent",
     "status": "Available",
-    "price": "3.29 MB",
-    "bedrooms": "1 Bedroom",
-    "bathrooms": "1 Bathroom",
-    "area": "51.61 sqm",
-    "room": "845/61",
-    "floor": "5th Floor",
+    "price": "36,000 THB / Month",
+    "bedrooms": "4 Bedrooms",
+    "bathrooms": "4 Bathrooms",
+    "area": "220 sqm",
+    "room": "",
+    "floor": "",
     "map": "",
     "description": {
-      "en": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng.",
-      "th": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng.",
-      "tr": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng.",
-      "zh": "Living Nest Ramkhamhaeng condo for sale. 1 bedroom, 1 bathroom, 51.61 sqm, 5th floor, room 845/61. Good location near Ramkhamhaeng Road, Hua Mak area, and The Mall Ramkhamhaeng."
+      "en": "House for rent in Karnkanok Ville 12, Phase 3, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, approximately 220 sqm of usable area and 52 sq.w. of land. Includes 2 parking spaces, 5 air conditioners, 4 water heaters, washing machine, refrigerator, microwave, remote gate and digital door lock.",
+      "th": "House for rent in Karnkanok Ville 12, Phase 3, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, approximately 220 sqm of usable area and 52 sq.w. of land. Includes 2 parking spaces, 5 air conditioners, 4 water heaters, washing machine, refrigerator, microwave, remote gate and digital door lock.",
+      "tr": "House for rent in Karnkanok Ville 12, Phase 3, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, approximately 220 sqm of usable area and 52 sq.w. of land. Includes 2 parking spaces, 5 air conditioners, 4 water heaters, washing machine, refrigerator, microwave, remote gate and digital door lock.",
+      "zh": "House for rent in Karnkanok Ville 12, Phase 3, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, approximately 220 sqm of usable area and 52 sq.w. of land. Includes 2 parking spaces, 5 air conditioners, 4 water heaters, washing machine, refrigerator, microwave, remote gate and digital door lock."
     },
     "highlights": {
       "en": [
-        "Living Nest Ramkhamhaeng",
-        "1 Bedroom",
-        "1 Bathroom",
-        "51.61 sqm",
-        "5th Floor",
-        "Near The Mall Ramkhamhaeng"
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "220 sqm",
+        "52 sq.w. Land",
+        "2 Parking Spaces",
+        "5 Air Conditioners",
+        "4 Water Heaters",
+        "Remote Gate",
+        "Digital Door Lock",
+        "No Pets"
       ],
       "th": [
-        "Living Nest Ramkhamhaeng",
-        "1 Bedroom",
-        "1 Bathroom",
-        "51.61 sqm",
-        "5th Floor",
-        "Near The Mall Ramkhamhaeng"
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "220 sqm",
+        "52 sq.w. Land",
+        "2 Parking Spaces",
+        "5 Air Conditioners",
+        "4 Water Heaters",
+        "Remote Gate",
+        "Digital Door Lock",
+        "No Pets"
       ],
       "tr": [
-        "Living Nest Ramkhamhaeng",
-        "1 Bedroom",
-        "1 Bathroom",
-        "51.61 sqm",
-        "5th Floor",
-        "Near The Mall Ramkhamhaeng"
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "220 sqm",
+        "52 sq.w. Land",
+        "2 Parking Spaces",
+        "5 Air Conditioners",
+        "4 Water Heaters",
+        "Remote Gate",
+        "Digital Door Lock",
+        "No Pets"
       ],
       "zh": [
-        "Living Nest Ramkhamhaeng",
-        "1 Bedroom",
-        "1 Bathroom",
-        "51.61 sqm",
-        "5th Floor",
-        "Near The Mall Ramkhamhaeng"
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "220 sqm",
+        "52 sq.w. Land",
+        "2 Parking Spaces",
+        "5 Air Conditioners",
+        "4 Water Heaters",
+        "Remote Gate",
+        "Digital Door Lock",
+        "No Pets"
       ]
     },
-    "images": [
-      "images/bkk-lvnst-01-1.jpg",
-      "images/bkk-lvnst-01-2.jpg",
-      "images/bkk-lvnst-01-3.jpg",
-      "images/bkk-lvnst-01-4.jpg",
-      "images/bkk-lvnst-01-5.jpg",
-      "images/bkk-lvnst-01-6.jpg",
-      "images/bkk-lvnst-01-7.jpg",
-      "images/bkk-lvnst-01-8.jpg",
-      "images/bkk-lvnst-01-9.jpg",
-      "images/bkk-lvnst-01-10.jpg",
-      "images/bkk-lvnst-01-11.jpg",
-      "images/bkk-lvnst-01-12.jpg",
-      "images/bkk-lvnst-01-13.jpg",
-      "images/bkk-lvnst-01-14.jpg",
-      "images/bkk-lvnst-01-15.jpg",
-      "images/bkk-lvnst-01-16.jpg",
-      "images/bkk-lvnst-01-17.jpg",
-      "images/bkk-lvnst-01-18.jpg",
-      "images/bkk-lvnst-01-19.jpg",
-      "images/bkk-lvnst-01-20.jpg",
-      "images/bkk-lvnst-01-21.jpg",
-      "images/bkk-lvnst-01-22.jpg",
-      "images/bkk-lvnst-01-23.jpg",
-      "images/bkk-lvnst-01-24.jpg"
-    ],
+    "images": [],
+    "createdAt": "2026-07-10T15:16:00+07:00",
+    "updatedAt": "2026-07-10T15:16:00+07:00",
+    "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
@@ -2846,11 +3167,14 @@
       "line": "@realcreamthailand"
     },
     "salePrice": "",
-    "rentPrice": "",
+    "rentPrice": "36,000 THB / Month",
     "ownerFinance": "",
     "installment": "",
     "freeTransfer": "",
-    "summary": ""
+    "summary": "Spacious house for rent in Karnkanok Ville 12 Phase 3, Saraphi, Chiang Mai.",
+    "landSize": "52 sq.w.",
+    "buildingArea": "220 sqm",
+    "parking": "2 Cars"
   },
   {
     "id": "PCT-0001",
@@ -2958,6 +3282,606 @@
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     },
+    "summary": ""
+  },
+  {
+    "id": "PCT-0002",
+    "city": "Phichit",
+    "type": "Golden 3-Storey Shophouse",
+    "deal": "Sale/Rent",
+    "status": "Available",
+    "price": "4,190,000 THB",
+    "bedrooms": "3",
+    "bathrooms": "3",
+    "area": "",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "salePrice": "4,590,000 THB",
+    "rentPrice": "12,000 THB / Month",
+    "ownerFinance": "",
+    "installment": "Down Payment: 10% (459,000 THB) Monthly Payment: 20,000 THB Interest Rate: 0% Installment Period: 60 Months",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "Sri Sukho Medical Center",
+      "Phichit City Center"
+    ],
+    "features": [
+      "5 Bedrooms",
+      "3 Bathrooms",
+      "Built-in Kitchen",
+      "Steel Security Bars",
+      "Bird Protection System",
+      "Extended Living Space",
+      "Suitable for Home & Business",
+      "Bank Loan Available",
+      "Owner Financing Available",
+      "Full Legal Documents",
+      "Lawyer Contract"
+    ],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Golden 3-Storey Shophouse in Phichit City Center",
+      "th": "อาคารพาณิชย์ 3 ชั้น ทำเลทอง ใจกลางเมืองพิจิตร",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "A 3-storey commercial shophouse located in the heart of Phichit City, close to Sri Sukho Medical Center. Suitable for residential living, retail business, office, clinic, or investment.",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/golden-3-storey-shophouse-in-phichit-city-center-1.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-2.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-3.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-4.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-5.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-6.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-7.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-8.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-9.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-10.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-11.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-12.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-13.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-14.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-15.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-16.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-17.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-18.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-19.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-20.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-21.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-22.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-23.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-24.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-25.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-26.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-27.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-28.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-29.jpg",
+      "images/golden-3-storey-shophouse-in-phichit-city-center-30.jpg"
+    ],
+    "createdAt": "2026-07-09",
+    "updatedAt": "2026-07-09",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "PCT-0003",
+    "city": "Phichit",
+    "type": "Spacious 2-Storey House with Garden",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2,730,000",
+    "bedrooms": "2 Bedrooms + Large Living Room",
+    "bathrooms": "1 Bathroom",
+    "area": "2 Rai 3 Ngan 93.1 Sq.Wah",
+    "room": "Width: 12 meters Depth: 13 meters",
+    "floor": "",
+    "map": "Hua Dong, Mueang Phichit, Phichit",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "Transfer fee shared 50/50 between buyer and seller.",
+    "summary": "",
+    "nearby": [
+      "Location: Hua Dong Soi 2, next to Hua Dong Municipality, Phichit, Thailand",
+      "Enjoy peaceful countryside living while staying just minutes from Phichit City"
+    ],
+    "features": [
+      "Land Details",
+      "Total Land Area: 2 Rai 3 Ngan 93.1 Sq.Wah",
+      "(Approximately 4,772.4 sq.m.)",
+      "The property consists of 3 Chanote (Freehold) Land Titles:",
+      "Title 1: 1 Rai 0 Ngan 17 Sq.Wah",
+      "Title 2: 0 Rai 3 Ngan 84.5 Sq.Wah",
+      "Title 3: 0 Rai 3 Ngan 91.6 Sq.Wah",
+      "Approximate House Size",
+      "Width: 12 meters",
+      "Depth: 13 meters"
+    ],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Spacious 2-Storey House",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "House Features\nUpper Floor\n2 Bedrooms\nLarge Living Hall\n1 Bathroom\nGround Floor\n2 Bedrooms\n1 Kitchen\n1 Bathroom\nSpacious Multi-Purpose Living Area\n\nApproximate House Size\n\nWidth: 12 meters\nDepth: 13 meters\nLand Details\n\nTotal Land Area: 2 Rai 3 Ngan 93.1 Sq.Wah\n(Approximately 4,772.4 sq.m.)\n\nThe property consists of 3 Chanote (Freehold) Land Titles:\n\nTitle 1: 1 Rai 0 Ngan 17 Sq.Wah\nTitle 2: 0 Rai 3 Ngan 84.5 Sq.Wah\nTitle 3: 0 Rai 3 Ngan 91.6 Sq.Wah",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [
+        "Beautifully maintained garden",
+        "Water channels already completed",
+        "Fully fenced property",
+        "Private entrance and driveway",
+        "Clear land zoning",
+        "Peaceful surroundings",
+        "Large usable outdoor area",
+        "Excellent location close to Phichit City"
+      ],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/spacious-2-storey-house-1.jpg",
+      "images/spacious-2-storey-house-2.jpg",
+      "images/spacious-2-storey-house-3.jpg",
+      "images/spacious-2-storey-house-4.jpg",
+      "images/spacious-2-storey-house-5.jpg",
+      "images/spacious-2-storey-house-6.jpg",
+      "images/spacious-2-storey-house-7.jpg",
+      "images/spacious-2-storey-house-8.jpg"
+    ],
+    "createdAt": "2026-07-09",
+    "updatedAt": "2026-07-09",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "PCT-0004",
+    "city": "Phichit",
+    "type": "Pharmacy Business & Commercial Building",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "4.5MB",
+    "bedrooms": "2",
+    "bathrooms": "2",
+    "area": "21.8 sq.wah",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "Located in the Taphan Hin business district, Phichit Province",
+      "Just beyond the main Taphan Hin intersection",
+      "Frontage on the Phichit – Bang Mun Nak Road",
+      "High daily traffic with excellent business visibility",
+      "Non-flooded area"
+    ],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Pharmacy Business & Commercial Building for Sale",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "Fully built-in interior\nAir conditioning\nWater pump\nFurniture and business fixtures included\nReady to operate immediately",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [
+        "Taphan Hin",
+        "Located in the Taphan Hin business district, Phichit Province",
+        "Just beyond the main Taphan Hin intersection",
+        "Frontage on the Phichit – Bang Mun Nak Road",
+        "High daily traffic with excellent business visibility",
+        "Non-flooded area",
+        "Ideal For",
+        "Pharmacists looking to own and operate their own pharmacy",
+        "Investors seeking rental income or long-term capital appreciation",
+        "Entrepreneurs looking for a ready-to-run commercial property"
+      ],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/pharmacy-business-commercial-building-for-sale-1.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-2.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-3.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-4.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-5.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-6.jpg",
+      "images/pharmacy-business-commercial-building-for-sale-7.jpg"
+    ],
+    "createdAt": "2026-07-09",
+    "updatedAt": "2026-07-09",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "PCT-0005",
+    "city": "Phichit",
+    "type": "House",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "3,790,000",
+    "bedrooms": "4",
+    "bathrooms": "2",
+    "area": "183.35 sq.m.",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "landSize": "224 sq.m",
+    "landAreaSqm": "",
+    "buildingArea": "183.35 sq.m.",
+    "parking": "",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "Phichit City Center",
+      "Schools",
+      "Hospitals",
+      "Shopping Centers",
+      "Local Markets",
+      "Restaurants & Cafés",
+      "Government Offices",
+      "Easy access to major roads"
+    ],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Brand New 2-Storey House for Sale in Phichit City",
+      "th": "Brand New 2-Storey House for Sale in Phichit City",
+      "tr": "Brand New 2-Storey House for Sale in Phichit City",
+      "zh": "Brand New 2-Storey House for Sale in Phichit City"
+    },
+    "description": {
+      "en": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today.",
+      "th": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today.",
+      "tr": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today.",
+      "zh": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today."
+    },
+    "highlights": {
+      "en": [
+        "Brand-new home",
+        "✅ Large family living area",
+        "✅ Modern design",
+        "✅ Quiet residential neighborhood",
+        "✅ Excellent value under THB 4 million",
+        "✅ Perfect for family living or investment"
+      ],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-1.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-2.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-3.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-4.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-5.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-6.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-7.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-8.jpg",
+      "images/brand-new-2-storey-house-for-sale-in-phichit-city-9.jpg"
+    ],
+    "createdAt": "2026-07-10",
+    "updatedAt": "2026-07-10",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "PCT-0006",
+    "city": "Phichit",
+    "type": "Brand New Commercial Shophouse",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "3.9M",
+    "bedrooms": "3",
+    "bathrooms": "3",
+    "area": "28.2 Sq.Wah",
+    "room": "",
+    "floor": "3",
+    "map": "",
+    "landSize": "",
+    "landAreaSqm": "",
+    "buildingArea": "",
+    "parking": "2",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "MAkro Imperial Scholl Lotus Tops"
+    ],
+    "features": [
+      "3 Flors"
+    ],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "New Commercial Shophouse for Sale",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "Free Included\nAir Conditioner\nWater Heater\nWater Pump\nWater Storage Tank\nBuyer Benefits\n\n✅ Free Transfer Fee\n\n✅ Free Taxes\n\n✅ Free Government Fees\n\n✅ No Hidden Costs\n\nMove in and start your business immediately.\nExcellent Location\nNext to Makro Phichit\nEasy Access to Main Road\nHigh Traffic Area\nExcellent Commercial Potential\nSuitable for Investment or Owner-Occupied Business",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/new-commercial-shophouse-for-sale-1.jpg",
+      "images/new-commercial-shophouse-for-sale-2.jpg",
+      "images/new-commercial-shophouse-for-sale-3.jpg",
+      "images/new-commercial-shophouse-for-sale-4.jpg",
+      "images/new-commercial-shophouse-for-sale-5.jpg",
+      "images/new-commercial-shophouse-for-sale-6.jpg",
+      "images/new-commercial-shophouse-for-sale-7.jpg",
+      "images/new-commercial-shophouse-for-sale-8.jpg",
+      "images/new-commercial-shophouse-for-sale-9.jpg",
+      "images/new-commercial-shophouse-for-sale-10.jpg",
+      "images/new-commercial-shophouse-for-sale-11.jpg",
+      "images/new-commercial-shophouse-for-sale-12.jpg"
+    ],
+    "createdAt": "2026-07-10",
+    "updatedAt": "2026-07-10",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "PCT-0007",
+    "city": "Phichit",
+    "type": "Double Commercial Shophouses",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "7.8MB",
+    "bedrooms": "5",
+    "bathrooms": "3",
+    "area": "55 Sq.Wah",
+    "room": "2",
+    "floor": "3",
+    "map": "",
+    "landSize": "",
+    "landAreaSqm": "",
+    "buildingArea": "",
+    "parking": "6",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "Prime Location",
+      "Beside Makro Phichit",
+      "Excellent Visibility",
+      "Easy Customer Access",
+      "High Traffic Location",
+      "Strong Future Investment Potential"
+    ],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Double Commercial Shophouses",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "Free Included\nAir Conditioner\nWater Heater\nWater Pump\nWater Storage Tank\nBuyer Benefits\n\n✅ Free Transfer Fee\n\n✅ Free Taxes\n\n✅ Free Government Fees\n\n✅ No Hidden Costs\n\nMove in and start your business immediately.\n\nExcellent Location\nNext to Makro Phichit\nEasy Access to Main Road\nHigh Traffic Area\nExcellent Commercial Potential\nSuitable for Investment or Owner-Occupied Business",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/double-commercial-shophouses-1.jpg",
+      "images/double-commercial-shophouses-2.jpg",
+      "images/double-commercial-shophouses-3.jpg",
+      "images/double-commercial-shophouses-4.jpg",
+      "images/double-commercial-shophouses-5.jpg",
+      "images/double-commercial-shophouses-6.jpg",
+      "images/double-commercial-shophouses-7.jpg",
+      "images/double-commercial-shophouses-8.jpg",
+      "images/double-commercial-shophouses-9.jpg",
+      "images/double-commercial-shophouses-10.jpg",
+      "images/double-commercial-shophouses-11.jpg",
+      "images/double-commercial-shophouses-12.jpg"
+    ],
+    "createdAt": "2026-07-10",
+    "updatedAt": "2026-07-10",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
+    "id": "PIL-001",
+    "title": {
+      "en": "PILLOK HOME 3 Bedroom House",
+      "th": "PILLOK HOME 3 Bedroom House",
+      "tr": "PILLOK HOME 3 Bedroom House",
+      "zh": "PILLOK HOME 3 Bedroom House"
+    },
+    "titles": {
+      "en": "PILLOK HOME 3 Bedroom House",
+      "th": "บ้านเดี่ยว PILLOK HOME 3 ห้องนอน",
+      "tr": "PILLOK HOME 3 Yatak Odalı Ev",
+      "zh": "PILLOK HOME 三卧独栋住宅"
+    },
+    "city": "Phitsanulok",
+    "type": "House",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "6.9MB",
+    "bedrooms": "3 Bedrooms",
+    "bathrooms": "3 Bathrooms",
+    "area": "97.6 ตร.ว.",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "description": {
+      "en": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in.",
+      "th": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in.",
+      "tr": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in.",
+      "zh": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in."
+    },
+    "descriptions": {
+      "en": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in.",
+      "th": "บ้านเดี่ยวในตัวเมืองพิษณุโลก 3 ห้องนอน 3 ห้องน้ำ ที่ดิน 97.6 ตร.ว. ราคาขาย 6.9 ล้านบาท มีเงื่อนไขผ่อนตรงกับเจ้าของ ดาวน์ 10% ผ่อน 25,000 บาท/เดือน ดอกเบี้ย 0% สูงสุด 60 งวด บรรยากาศดี พร้อมเข้าอยู่",
+      "tr": "Phitsanulok’ta 3 yatak odalı, 3 banyolu müstakil ev. Arsa 97.6 sq.w., satış fiyatı 6.9 MB. Sahibinden ödeme imkânı: %10 peşinat, ayda 25.000 THB, 60 aya kadar %0 faiz. Ferah ve taşınmaya hazır.",
+      "zh": "位于彭世洛的三卧三卫独栋住宅，土地面积 97.6 平方哇，售价 690 万泰铢。可业主分期：首付 10%，每月 25,000 泰铢，最长 60 期 0% 利息。环境舒适，可入住。"
+    },
+    "highlights": {
+      "en": [
+        "Owner Finance",
+        "0% Interest up to 60 months",
+        "3 Bedrooms",
+        "3 Bathrooms",
+        "97.6 sq.w."
+      ],
+      "th": [
+        "Owner Finance",
+        "0% Interest up to 60 months",
+        "3 Bedrooms",
+        "3 Bathrooms",
+        "97.6 sq.w."
+      ],
+      "tr": [
+        "Owner Finance",
+        "0% Interest up to 60 months",
+        "3 Bedrooms",
+        "3 Bathrooms",
+        "97.6 sq.w."
+      ],
+      "zh": [
+        "Owner Finance",
+        "0% Interest up to 60 months",
+        "3 Bedrooms",
+        "3 Bathrooms",
+        "97.6 sq.w."
+      ]
+    },
+    "images": [
+      "images/pil-001-1.jpg",
+      "images/pil-001-2.jpg",
+      "images/pil-001-3.jpg",
+      "images/pil-001-4.jpg",
+      "images/pil-001-5.jpg",
+      "images/pil-001-6.jpg",
+      "images/pil-001-7.jpg",
+      "images/pil-001-8.jpg",
+      "images/pil-001-9.jpg",
+      "images/pil-001-10.jpg"
+    ],
+    "createdAt": "2026-07-07",
+    "updatedAt": "2026-07-07",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
     "summary": ""
   }
 ]
