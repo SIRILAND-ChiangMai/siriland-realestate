@@ -3542,5 +3542,86 @@
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
+  },
+  {
+    "id": "PCT-0007",
+    "city": "Phichit",
+    "type": "Double Commercial Shophouses",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "7.8MB",
+    "bedrooms": "5",
+    "bathrooms": "3",
+    "area": "55 Sq.Wah",
+    "room": "2",
+    "floor": "3",
+    "map": "",
+    "landSize": "",
+    "landAreaSqm": "",
+    "buildingArea": "",
+    "parking": "6",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "Prime Location",
+      "Beside Makro Phichit",
+      "Excellent Visibility",
+      "Easy Customer Access",
+      "High Traffic Location",
+      "Strong Future Investment Potential"
+    ],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Double Commercial Shophouses",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "Free Included\nAir Conditioner\nWater Heater\nWater Pump\nWater Storage Tank\nBuyer Benefits\n\n✅ Free Transfer Fee\n\n✅ Free Taxes\n\n✅ Free Government Fees\n\n✅ No Hidden Costs\n\nMove in and start your business immediately.\n\nExcellent Location\nNext to Makro Phichit\nEasy Access to Main Road\nHigh Traffic Area\nExcellent Commercial Potential\nSuitable for Investment or Owner-Occupied Business",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/double-commercial-shophouses-1.jpg",
+      "images/double-commercial-shophouses-2.jpg",
+      "images/double-commercial-shophouses-3.jpg",
+      "images/double-commercial-shophouses-4.jpg",
+      "images/double-commercial-shophouses-5.jpg",
+      "images/double-commercial-shophouses-6.jpg",
+      "images/double-commercial-shophouses-7.jpg",
+      "images/double-commercial-shophouses-8.jpg",
+      "images/double-commercial-shophouses-9.jpg",
+      "images/double-commercial-shophouses-10.jpg",
+      "images/double-commercial-shophouses-11.jpg",
+      "images/double-commercial-shophouses-12.jpg"
+    ],
+    "createdAt": "2026-07-10",
+    "updatedAt": "2026-07-10",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
   }
 ]
