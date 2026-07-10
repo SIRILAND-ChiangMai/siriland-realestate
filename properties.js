@@ -2617,6 +2617,259 @@ window.SIRILAND_PROPERTIES = [
     }
   },
   {
+    "id": "CM-0032",
+    "title": {
+      "en": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
+      "th": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
+      "tr": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
+      "zh": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent"
+    },
+    "city": "Chiang Mai",
+    "type": "House",
+    "deal": "Rent",
+    "status": "Available",
+    "price": "35,000 THB / Month",
+    "bedrooms": "4 Bedrooms",
+    "bathrooms": "4 Bathrooms",
+    "area": "",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "description": {
+      "en": "Corner house for rent in Karnkanok Ville 12, Phase 1, Soi 4, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, 2 kitchen areas and 2 parking spaces. Fully furnished and ready to move in.",
+      "th": "Corner house for rent in Karnkanok Ville 12, Phase 1, Soi 4, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, 2 kitchen areas and 2 parking spaces. Fully furnished and ready to move in.",
+      "tr": "Corner house for rent in Karnkanok Ville 12, Phase 1, Soi 4, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, 2 kitchen areas and 2 parking spaces. Fully furnished and ready to move in.",
+      "zh": "Corner house for rent in Karnkanok Ville 12, Phase 1, Soi 4, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, 2 kitchen areas and 2 parking spaces. Fully furnished and ready to move in."
+    },
+    "highlights": {
+      "en": [
+        "Corner House",
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "2 Kitchen Areas",
+        "2 Parking Spaces",
+        "Fully Furnished",
+        "Ready to Move In"
+      ],
+      "th": [
+        "Corner House",
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "2 Kitchen Areas",
+        "2 Parking Spaces",
+        "Fully Furnished",
+        "Ready to Move In"
+      ],
+      "tr": [
+        "Corner House",
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "2 Kitchen Areas",
+        "2 Parking Spaces",
+        "Fully Furnished",
+        "Ready to Move In"
+      ],
+      "zh": [
+        "Corner House",
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "2 Kitchen Areas",
+        "2 Parking Spaces",
+        "Fully Furnished",
+        "Ready to Move In"
+      ]
+    },
+    "images": [],
+    "createdAt": "2026-07-10T15:16:00+07:00",
+    "updatedAt": "2026-07-10T15:16:00+07:00",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "",
+    "rentPrice": "35,000 THB / Month",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "Corner house for rent in Karnkanok Ville 12 Phase 1, Saraphi, Chiang Mai."
+  },
+  {
+    "id": "CM-0033",
+    "title": {
+      "en": "Karnkanok Ville 12 Phase 2 Soi 10 Corner House for Rent",
+      "th": "Karnkanok Ville 12 Phase 2 Soi 10 Corner House for Rent",
+      "tr": "Karnkanok Ville 12 Phase 2 Soi 10 Corner House for Rent",
+      "zh": "Karnkanok Ville 12 Phase 2 Soi 10 Corner House for Rent"
+    },
+    "city": "Chiang Mai",
+    "type": "House",
+    "deal": "Rent",
+    "status": "Available",
+    "price": "23,000 THB / Month",
+    "bedrooms": "3 Bedrooms",
+    "bathrooms": "3 Bathrooms",
+    "area": "170 sqm",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "description": {
+      "en": "Corner house for rent in Karnkanok Ville 12, Phase 2, Soi 10, Saraphi, Chiang Mai. 3 bedrooms, 3 bathrooms, approximately 170 sqm of usable area and 53.3 sq.w. of land.",
+      "th": "Corner house for rent in Karnkanok Ville 12, Phase 2, Soi 10, Saraphi, Chiang Mai. 3 bedrooms, 3 bathrooms, approximately 170 sqm of usable area and 53.3 sq.w. of land.",
+      "tr": "Corner house for rent in Karnkanok Ville 12, Phase 2, Soi 10, Saraphi, Chiang Mai. 3 bedrooms, 3 bathrooms, approximately 170 sqm of usable area and 53.3 sq.w. of land.",
+      "zh": "Corner house for rent in Karnkanok Ville 12, Phase 2, Soi 10, Saraphi, Chiang Mai. 3 bedrooms, 3 bathrooms, approximately 170 sqm of usable area and 53.3 sq.w. of land."
+    },
+    "highlights": {
+      "en": [
+        "Corner House",
+        "3 Bedrooms",
+        "3 Bathrooms",
+        "170 sqm",
+        "53.3 sq.w. Land",
+        "Available 31 July 2026"
+      ],
+      "th": [
+        "Corner House",
+        "3 Bedrooms",
+        "3 Bathrooms",
+        "170 sqm",
+        "53.3 sq.w. Land",
+        "Available 31 July 2026"
+      ],
+      "tr": [
+        "Corner House",
+        "3 Bedrooms",
+        "3 Bathrooms",
+        "170 sqm",
+        "53.3 sq.w. Land",
+        "Available 31 July 2026"
+      ],
+      "zh": [
+        "Corner House",
+        "3 Bedrooms",
+        "3 Bathrooms",
+        "170 sqm",
+        "53.3 sq.w. Land",
+        "Available 31 July 2026"
+      ]
+    },
+    "images": [],
+    "createdAt": "2026-07-10T15:16:00+07:00",
+    "updatedAt": "2026-07-10T15:16:00+07:00",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "",
+    "rentPrice": "23,000 THB / Month",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "Corner house for rent in Karnkanok Ville 12 Phase 2, Saraphi, Chiang Mai.",
+    "landSize": "53.3 sq.w.",
+    "buildingArea": "170 sqm"
+  },
+  {
+    "id": "CM-0034",
+    "title": {
+      "en": "Karnkanok Ville 12 Phase 3 House for Rent",
+      "th": "Karnkanok Ville 12 Phase 3 House for Rent",
+      "tr": "Karnkanok Ville 12 Phase 3 House for Rent",
+      "zh": "Karnkanok Ville 12 Phase 3 House for Rent"
+    },
+    "city": "Chiang Mai",
+    "type": "House",
+    "deal": "Rent",
+    "status": "Available",
+    "price": "36,000 THB / Month",
+    "bedrooms": "4 Bedrooms",
+    "bathrooms": "4 Bathrooms",
+    "area": "220 sqm",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "description": {
+      "en": "House for rent in Karnkanok Ville 12, Phase 3, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, approximately 220 sqm of usable area and 52 sq.w. of land. Includes 2 parking spaces, 5 air conditioners, 4 water heaters, washing machine, refrigerator, microwave, remote gate and digital door lock.",
+      "th": "House for rent in Karnkanok Ville 12, Phase 3, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, approximately 220 sqm of usable area and 52 sq.w. of land. Includes 2 parking spaces, 5 air conditioners, 4 water heaters, washing machine, refrigerator, microwave, remote gate and digital door lock.",
+      "tr": "House for rent in Karnkanok Ville 12, Phase 3, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, approximately 220 sqm of usable area and 52 sq.w. of land. Includes 2 parking spaces, 5 air conditioners, 4 water heaters, washing machine, refrigerator, microwave, remote gate and digital door lock.",
+      "zh": "House for rent in Karnkanok Ville 12, Phase 3, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, approximately 220 sqm of usable area and 52 sq.w. of land. Includes 2 parking spaces, 5 air conditioners, 4 water heaters, washing machine, refrigerator, microwave, remote gate and digital door lock."
+    },
+    "highlights": {
+      "en": [
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "220 sqm",
+        "52 sq.w. Land",
+        "2 Parking Spaces",
+        "5 Air Conditioners",
+        "4 Water Heaters",
+        "Remote Gate",
+        "Digital Door Lock",
+        "No Pets"
+      ],
+      "th": [
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "220 sqm",
+        "52 sq.w. Land",
+        "2 Parking Spaces",
+        "5 Air Conditioners",
+        "4 Water Heaters",
+        "Remote Gate",
+        "Digital Door Lock",
+        "No Pets"
+      ],
+      "tr": [
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "220 sqm",
+        "52 sq.w. Land",
+        "2 Parking Spaces",
+        "5 Air Conditioners",
+        "4 Water Heaters",
+        "Remote Gate",
+        "Digital Door Lock",
+        "No Pets"
+      ],
+      "zh": [
+        "4 Bedrooms",
+        "4 Bathrooms",
+        "220 sqm",
+        "52 sq.w. Land",
+        "2 Parking Spaces",
+        "5 Air Conditioners",
+        "4 Water Heaters",
+        "Remote Gate",
+        "Digital Door Lock",
+        "No Pets"
+      ]
+    },
+    "images": [],
+    "createdAt": "2026-07-10T15:16:00+07:00",
+    "updatedAt": "2026-07-10T15:16:00+07:00",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "",
+    "rentPrice": "36,000 THB / Month",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "Spacious house for rent in Karnkanok Ville 12 Phase 3, Saraphi, Chiang Mai.",
+    "landSize": "52 sq.w.",
+    "buildingArea": "220 sqm",
+    "parking": "2 Cars"
+  },
+  {
     "id": "PCT-0001",
     "city": "Phichit",
     "type": "Shophouse",
@@ -2727,7 +2980,7 @@ window.SIRILAND_PROPERTIES = [
     "id": "PCT-0002",
     "city": "Phichit",
     "type": "Golden 3-Storey Shophouse",
-    "deal": "Sale",
+    "deal": "Sale/Rent",
     "status": "Available",
     "price": "4,190,000 THB",
     "bedrooms": "3",

@@ -1,23 +1,22 @@
-SIRILAND DATA RECOVERY + ADMIN LIST PRO
+SIRILAND KARNKANOK RESTORATION
 
-Kurtarılan Phichit ilanları:
-PCT-0002, PCT-0003, PCT-0004, PCT-0005, PCT-0006, PCT-0007
+Geri yüklenen ilanlar:
+- CM-0032 — Phase 1 Soi 4 — 35,000 THB/Month
+- CM-0033 — Phase 2 Soi 10 — 23,000 THB/Month
+- CM-0034 — Phase 3 — 36,000 THB/Month
 
-Toplam ilan:
-- Önce: 33
-- Sonra: 39
-- Phichit: 7
+Son durum:
+- Toplam ilan: 42
+- Rent / Sale-Rent ilan sayısı: 5
+
+Önemli:
+- Eski fotoğraf yolları elde olmadığı için bu üç ilanda images alanı boş bırakıldı.
+- Admin'den ilanı açıp fotoğrafları yeniden ekleyebilirsiniz.
+- İlanlar website ve Rent filtresinde görünür.
 
 Kurulum:
-1. admin.html, admin.js, admin.css ve properties.js dosyalarını GitHub klasöründeki eski dosyaların üzerine kopyalayın.
-2. GitHub Desktop Summary: Recover Phichit listings and fix admin list
+1. properties.js dosyasını GitHub proje klasöründeki eski properties.js üzerine kopyalayın.
+2. GitHub Desktop Summary: Restore Karnkanok rental listings
 3. Commit to main
 4. Push origin
-5. Admin ve website sayfasında Ctrl + Shift + R yapın.
-
-Yeni güvenlik:
-- Admin artık properties.js dosyasını otomatik yükler.
-- İlan sayısı aniden düşerse uyarı verir.
-- Son güvenli listeyi tarayıcıda yedekler.
-- Şehir, tür, durum ve arama filtreleri vardır.
-- Sayfalama vardır.
+5. Website ve admin sayfasında Ctrl + Shift + R yapın.
