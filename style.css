@@ -306,3 +306,90 @@
 .home-icon-specs{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:7px;font-size:12px;color:#536276}
 .home-icon-specs span{display:inline-flex;align-items:center;white-space:nowrap}
 .empty-collection{padding:18px;border:1px dashed #d8c59b;border-radius:14px;color:#64748b;background:#fffaf0}
+/* =========================================================
+   SIRILAND WEBSITE — PROPERTY IMAGE SIZE STANDARD
+   Build 2026.07.10.10
+   Ana ilan kartları ve homepage vitrin görselleri büyütüldü.
+   ========================================================= */
+
+/* Main property listing cards */
+#properties .grid#propertyGrid .card .photo,
+#properties .slim-card .photo{
+  height:230px!important;
+  min-height:230px!important;
+}
+
+/* Homepage popular / featured listing cards */
+.sx-property-card .sx-card-photo,
+.sx-card-photo{
+  height:185px!important;
+  min-height:185px!important;
+}
+
+/* Homepage older mini property cards */
+.mini-property-card .mini-photo,
+.mini-photo{
+  height:205px!important;
+  min-height:205px!important;
+}
+
+/* Compact side cards stay compact but become clearer */
+.sx-small-card img,
+.mini-compact-card img{
+  height:82px!important;
+  min-height:82px!important;
+  object-fit:cover!important;
+}
+
+/* Keep all property images well cropped */
+#properties .photo img,
+.sx-card-photo img,
+.mini-photo img,
+.sx-small-card img,
+.mini-compact-card img{
+  width:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+
+/* Tablet */
+@media(max-width:900px){
+  #properties .grid#propertyGrid .card .photo,
+  #properties .slim-card .photo{
+    height:220px!important;
+    min-height:220px!important;
+  }
+
+  .sx-property-card .sx-card-photo,
+  .sx-card-photo{
+    height:190px!important;
+    min-height:190px!important;
+  }
+
+  .mini-property-card .mini-photo,
+  .mini-photo{
+    height:200px!important;
+    min-height:200px!important;
+  }
+}
+
+/* Mobile */
+@media(max-width:620px){
+  #properties .grid#propertyGrid .card .photo,
+  #properties .slim-card .photo{
+    height:245px!important;
+    min-height:245px!important;
+  }
+
+  .sx-property-card .sx-card-photo,
+  .sx-card-photo{
+    height:220px!important;
+    min-height:220px!important;
+  }
+
+  .mini-property-card .mini-photo,
+  .mini-photo{
+    height:220px!important;
+    min-height:220px!important;
+  }
+}

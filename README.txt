@@ -1,26 +1,27 @@
-SIRILAND REAL ID ENGINE + LAND OVERRIDE FIX
+SIRILAND WEBSITE IMAGE SIZE FIX
 
-Kök nedenler:
-1. Admin file:// ile açıldığı için fetch('properties.js') gerçek dosyayı okuyamıyordu.
-2. modules/property.js eski ID popup ve alan kurallarını tekrar yüklüyordu.
-
-Düzeltildi:
-- Eski modules/property.js kaldırıldı.
-- Admin, Integrated Publish Manager içinde kayıtlı 01_CMS klasöründen gerçek properties.js dosyasını doğrudan okur.
-- Mevcut tüm ilanların en yüksek ID numarası hesaplanır.
-- Örnek: en yüksek Chiang Mai ID CM-0048 ise yeni ID CM-0049 olur.
-- CM-0001 / CM-0002'ye geri dönmez.
-- Şehir uyumsuzluğu popup'ı tamamen kaldırıldı.
-- ID readonly ve otomatik.
-- Land seçildiğinde oda/banyo/area/room/floor/building/parking alanları kesin olarak gizlenir ve temizlenir.
-- Condo, House ve Commercial alanları kendi kurallarına göre açılır.
+Düzeltilenler:
+- Ana ilan kartı görselleri: 230 px
+- Homepage Popular / Featured kartları: 185 px
+- Mini property kartları: 205 px
+- Mobilde ilan görselleri daha büyük gösterilir
+- Tüm görseller object-fit: cover ile dengeli kırpılır
+- Kart düzeni ve responsive yapı korunur
 
 Kurulum:
-1. admin.html, admin.js ve admin.css dosyalarını 01_CMS içindeki eski dosyaların üzerine kopyala.
-2. Henüz GitHub'a kopyalama.
-3. Chrome'da 01_CMS/admin.html aç ve Ctrl+Shift+R yap.
-4. Integrated Publish Manager panelinde CMS Source hâlâ 01_CMS olarak seçili olmalı.
-5. Sayfayı bir kez yenile.
-6. Chiang Mai seç ve ID'yi kontrol et.
-7. Land seç ve oda/banyo alanlarının kaybolduğunu kontrol et.
-8. Test doğruysa Backup + Publish ile GitHub'a aktar.
+1. style.css dosyasını şu iki yerde eski dosyanın üzerine kopyala:
+
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS\style.css
+
+E:\SIRILAND_2030_Harddisk_Structure\09_GitHub\siriland-realestate\style.css
+
+2. GitHub Desktop:
+Summary: Increase property image heights
+Commit to main
+Push origin
+
+3. Website açıldıktan sonra:
+Ctrl + Shift + R
+
+Not:
+Bu sürüm güvenli CSS override yöntemini kullanır. Mevcut site tasarımını veya diğer modülleri bozmaz.
