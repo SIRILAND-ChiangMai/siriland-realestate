@@ -1,12 +1,24 @@
-# SIRILAND Build 2026.07.10.06 — Type-Aware Advanced Search
+# SIRILAND Modular Admin — Installation
 
 1. ZIP dosyasını çıkarın.
-2. `index.html`, `script.js` ve `style.css` dosyalarını proje ana klasöründeki aynı adlı dosyaların üzerine kopyalayın.
-3. `admin.html`, `properties.js` ve `images` klasörüne dokunmayın.
-4. GitHub Desktop üzerinden Commit + Push yapın.
-5. Siteyi `?v=2026071006` ekleyerek veya Ctrl+F5 ile yenileyin.
+2. Proje köküne `admin.html`, `admin.css`, `admin.js` dosyalarını kopyalayın.
+3. `modules` klasörünü olduğu gibi proje köküne kopyalayın.
+4. Eski `admin.html` dosyasının yedeğini alın ve yenisiyle değiştirin.
+5. GitHub Desktop: Commit + Push.
+6. Tarayıcıda **Ctrl+F5** ile sert yenileme yapın.
 
-Kontrol:
-- Land seçildiğinde arsa alanı, tapu ve yol filtreleri görünür.
-- Condo/House seçildiğinde oda, banyo ve iç alan filtreleri görünür.
-- Commercial seçildiğinde bina alanı ve otopark filtreleri görünür.
+## Düzeltilen kritik hata
+`updateQualityScore()` içinde `type` değişkeni tanımlanmadan kullanılıyordu. Bu nedenle Kaydet, Kontrol Et ve ZIP Oluştur işlemleri duruyordu. Değişken artık kontrol listesinden önce tanımlanır.
+
+## Dosya yapısı
+- admin.html
+- admin.css
+- admin.js
+- modules/dashboard.js
+- modules/crm.js
+- modules/export.js
+- modules/property.js
+- modules/language.js
+- modules/image-manager.js
+- modules/validator.js
+- modules/quality.js

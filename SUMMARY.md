@@ -1,17 +1,9 @@
-# Build 2026.07.10.06 — Type-Aware Advanced Search
+# SIRILAND Modular Admin Fixed
 
-## Summary
-SIRILAND now adapts its advanced search controls to the selected property type. Land listings use land-specific filters, while residential and commercial listings use their own relevant fields.
+- `Cannot access type before initialization` hatası düzeltildi.
+- Admin CSS ve JavaScript, HTML içinden ayrıldı.
+- Modül klasörü ve güvenli entegrasyon kancaları eklendi.
+- Kaydet, Kontrol Et, JSON/JS indirme ve ZIP oluşturma akışı korundu.
+- CRM, FB/IG post üretici, görsel sıralama ve dinamik property type alanları korundu.
 
-## New Features
-- Min/max price filters
-- Land: minimum land area, title deed and road access
-- Condo/House: bedrooms, bathrooms and internal area
-- Commercial: building area and parking
-- TH / EN / TR / ZH filter labels
-- One-click advanced filter reset
-
-## Updated Files
-- index.html
-- script.js
-- style.css
+> Not: İşlevsel çekirdek, geriye dönük uyumluluk ve inline `onclick` çağrıları bozulmasın diye `admin.js` içinde tutuldu. Modüller, sonraki sürümlerde çekirdeğin güvenli biçimde parçalara ayrılması için hazır altyapıdır.
