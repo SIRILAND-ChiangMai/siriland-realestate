@@ -495,8 +495,10 @@
     $('modalImg').src=imgs[modalIndex] || 'images/logo.png';
     $('modalCounter').textContent = `${Math.min(modalIndex+1, Math.max(imgs.length,1))} / ${Math.max(imgs.length,1)}`;
     $('modalTitle').textContent=pick(p.title);
-    $('modalMeta').textContent=`${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)} • ${trMap('deal',p.deal)} • ${trMap('status',p.status)}`;
-    $('modalPrice').textContent=translateText(p.price||'');
+    $('modalMeta').textContent=`${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}`;
+    $('modalPrice').textContent=translateText(p.price||p.salePrice||p.rentPrice||'');
+    if($('modalStatusBadge')) $('modalStatusBadge').textContent=trMap('status',p.status);
+    if($('modalDealBadge')) $('modalDealBadge').textContent=trMap('deal',p.deal);
     const descEl = $('modalDescription') || $('modalDesc');
     const hiEl = $('modalHighlights') || $('modalChips');
     let specBox = $('modalSpecBox');
@@ -521,6 +523,19 @@
     if(waBtn) waBtn.href = whatsappContactUrl(p);
     const copyBtn = $('copyLink');
     if(copyBtn) copyBtn.onclick = async () => { try{ await navigator.clipboard.writeText(propertyUrl(p)); copyBtn.textContent='Copied'; setTimeout(()=>copyBtn.textContent='Copy Link',1200); }catch(e){ prompt('Copy link', propertyUrl(p)); } };
+    const favBtn = $('modalFavorite');
+    if(favBtn){
+      const favKey='siriland_favorites';
+      const getFav=()=>{try{return JSON.parse(localStorage.getItem(favKey)||'[]')}catch(e){return[]}};
+      const paintFav=()=>{const on=getFav().includes(p.id);favBtn.textContent=on?'♥ Favorited':'♡ Favorite';favBtn.classList.toggle('goldbtn',on)};
+      paintFav();
+      favBtn.onclick=()=>{let a=getFav();a=a.includes(p.id)?a.filter(x=>x!==p.id):[...a,p.id];localStorage.setItem(favKey,JSON.stringify(a));paintFav()};
+    }
+    const shareBtn=$('modalShare');
+    if(shareBtn) shareBtn.onclick=async()=>{
+      const data={title:pick(p.title),text:`${pick(p.title)} - ${p.price||''}`,url:propertyUrl(p)};
+      try{if(navigator.share) await navigator.share(data); else {await navigator.clipboard.writeText(data.url);shareBtn.textContent='Link Copied';setTimeout(()=>shareBtn.textContent='Share',1200)}}catch(e){}
+    };
     renderRelatedProperties(p);
   }
   function next(delta){ if(!modalProperty) return; const n=(modalProperty.images||[]).length||1; modalIndex=(modalIndex+delta+n)%n; updateModal(); }

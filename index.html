@@ -156,28 +156,56 @@
   </main>
 
   <div class="modal hidden" id="propertyModal">
-    <div class="modal-card">
-      <button class="modal-close" id="modalClose">×</button>
-      <div class="modal-gallery">
-        <img id="modalImg" src="" alt="Property photo" />
-        <button id="modalPrev" class="modal-arrow modal-prev">‹</button>
-        <button id="modalNext" class="modal-arrow modal-next">›</button>
-        <div id="modalCounter" class="modal-counter">1 / 1</div>
-      </div>
-      <div class="modal-body">
-        <p id="modalMeta" class="meta"></p>
-        <h3 id="modalTitle"></h3>
-        <div id="modalPrice" class="price"></div>
-        <p id="modalDesc"></p>
-        <div id="modalChips" class="chips"></div>
-        <div id="modalThumbs" class="thumbs"></div>
-        <section id="relatedProperties" class="related-properties"></section>
-        <div class="actions modal-actions">
-          <a class="smallbtn goldbtn" href="tel:0920056640">Call</a>
-          <a class="smallbtn" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a>
-          <a class="smallbtn" id="modalMap" target="_blank">Map</a>
-          <button class="smallbtn" id="copyLink">Copy Link</button>
+    <div class="modal-card detail-pro-modal">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <div class="detail-pro-grid">
+        <div class="detail-pro-media">
+          <div class="modal-gallery">
+            <img id="modalImg" src="" alt="Property photo" />
+            <button id="modalPrev" class="modal-arrow modal-prev" aria-label="Previous photo">‹</button>
+            <button id="modalNext" class="modal-arrow modal-next" aria-label="Next photo">›</button>
+            <div id="modalCounter" class="modal-counter">1 / 1</div>
+          </div>
+          <div id="modalThumbs" class="thumbs"></div>
         </div>
+
+        <aside class="detail-pro-summary">
+          <div class="detail-pro-badges">
+            <span id="modalStatusBadge" class="detail-pro-badge"></span>
+            <span id="modalDealBadge" class="detail-pro-badge gold"></span>
+          </div>
+          <p id="modalMeta" class="meta"></p>
+          <h3 id="modalTitle"></h3>
+          <div id="modalPrice" class="price"></div>
+          <div id="modalSpecBox" class="detail-spec-grid"></div>
+          <div class="detail-pro-quick-actions">
+            <button class="smallbtn" id="modalFavorite" type="button">♡ Favorite</button>
+            <button class="smallbtn" id="modalShare" type="button">Share</button>
+            <button class="smallbtn" id="copyLink" type="button">Copy Link</button>
+          </div>
+          <div class="detail-pro-contact-card">
+            <strong>Contact Kwan</strong>
+            <span>Fast response by phone, LINE or WhatsApp</span>
+            <div class="actions modal-actions">
+              <a class="smallbtn goldbtn" href="tel:0920056640">Call</a>
+              <a class="smallbtn" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a>
+              <a class="smallbtn" id="modalWhatsApp" target="_blank">WhatsApp</a>
+              <a class="smallbtn" id="modalMap" target="_blank">Map</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="modal-body detail-pro-body">
+        <section class="detail-pro-section">
+          <div class="detail-pro-section-head"><span>Overview</span><h4>Property Details</h4></div>
+          <p id="modalDesc"></p>
+        </section>
+        <section class="detail-pro-section" id="modalHighlightsSection">
+          <div class="detail-pro-section-head"><span>Highlights</span><h4>Key Features</h4></div>
+          <div id="modalChips" class="chips detail-pro-chips"></div>
+        </section>
+        <section id="relatedProperties" class="related-properties"></section>
       </div>
     </div>
   </div>

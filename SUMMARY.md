@@ -1,21 +1,18 @@
-# Build 2026.07.09.03 — Home Explore Layout
+# Summary
 
-## Summary
-Redesigns the Explore Thailand Property section into a more professional two-column layout: cities are stacked vertically on the left, while popular listings, best-price listings, condo highlights, and owner-finance/house listings are shown in compact cards on the right.
+SIRILAND Build 2026.07.10.02 introduces a redesigned Property Detail PRO experience with a large responsive gallery, dedicated price and contact panel, cleaner property specification cards, favorite and share controls, improved mobile layout, highlights, and similar property recommendations.
 
-## New Features
-- Left-side vertical city navigation
-- Right-side Popular Listings section
-- Best Price section
-- Popular Condo section
-- House / Owner Finance section
-- Smaller property cards for better density
-- Mobile responsive layout
-
-## Updated Files
+## Updated files
 - index.html
 - script.js
 - style.css
 
-## Notes
-admin.html and properties.js are not changed.
+## Main improvements
+- Two-column desktop property detail layout
+- Large gallery with thumbnail strip
+- Price, status and deal displayed prominently
+- Clear bedroom, bathroom, area and floor cards
+- Favorite, Share and Copy Link controls
+- Call, LINE, WhatsApp and Map contact panel
+- Better mobile property detail experience
+- Similar property recommendations preserved
