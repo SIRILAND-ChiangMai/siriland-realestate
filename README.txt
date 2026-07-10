@@ -1,25 +1,19 @@
-SIRILAND CMS PRO 2030 — Sprint 4.2
+SIRILAND CMS PRO 2030 — Sprint 4.3 GitHub Assistant
 
-KOLAY KURULUM
-1. install-sprint-4.2.html dosyasını Chrome ile açın.
-2. En güncel admin.html dosyanızı seçin.
-3. Sprint 4.2 Kur ve İndir butonuna basın.
-4. İnen admin-sprint-4.2.html dosyasını açıp test edin.
-5. Sorun yoksa adını admin.html yapın ve GitHub proje klasöründeki eski admin.html üzerine kopyalayın.
+KURULUM
+1. install-sprint-4.3.html dosyasını Chrome ile açın.
+2. Sprint 4.2 kurulu güncel admin.html dosyasını seçin.
+3. "Sprint 4.3 Kur ve İndir" butonuna basın.
+4. admin-sprint-4.3.html dosyasını test edin.
+5. Sorun yoksa adını admin.html yapıp proje klasöründeki dosyanın üzerine yazın.
 
 EKLENENLER
-- Publish Manager PRO ekranı
-- Export progress
-- Publish checklist
-- Missing data report (ilan ID tıklanabilir)
-- New / Updated / Deleted listing comparison
-- Export versioning
-- Export history and statistics
-- publish/export-summary.json
-- publish/missing-data-report.json
-- publish/changes.json
-- Ready for GitHub status
-- Existing ZIP button redirected to Publish ZIP
+- Otomatik commit mesajı
+- Repository ve branch ayarları
+- Files Changed listesi
+- New / Updated / Deleted Listings özeti
+- Push Ready kontrolü
+- Commit ve tüm GitHub özetini kopyalama
 
 NOT
-İlk exportta bütün ilanlar New Listings görünebilir. İlk başarılı exporttan sonra snapshot kaydedilir ve sonraki exportlarda gerçek değişiklikler gösterilir.
+Push Ready durumu son Publish Manager exportundaki hata sayısına göre belirlenir.
