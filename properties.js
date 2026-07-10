@@ -2952,6 +2952,113 @@ window.SIRILAND_PROPERTIES = [
     "summary": ""
   },
   {
+    "id": "CM-0032",
+    "city": "Chiang Mai",
+    "type": "Hillside Plaza & Condotel 4",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "2,990,000 THB",
+    "bedrooms": "1",
+    "bathrooms": "1",
+    "area": "45.03 sq.m.",
+    "room": "Unit: 506",
+    "floor": "5",
+    "map": "https://maps.app.goo.gl/KirnqeC8Nzdeubki9",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [
+      "• MAYA Lifestyle Shopping Center – 2 min",
+      "• One Nimman – 2 min",
+      "• Bright Seeds International School – 1 min",
+      "• Chiang Mai University – 8 min",
+      "• Rajamangala University of Technology Lanna – 9 min",
+      "• Demonstration School, Chiang Mai University – 9 min",
+      "• Chiang Mai Ram Hospital – 5 min",
+      "• Maharaj Nakorn Chiang Mai Hospital – 5 min"
+    ],
+    "features": [
+      "Modern Luxury Interior",
+      "• Fully Built-in Furniture",
+      "• Fully Furnished",
+      "• Brand New Electrical & Plumbing System",
+      "• Digital Door Lock",
+      "• Premium Home Appliances Included",
+      "• Airbnb Friendly",
+      "• Large Swimming Pool",
+      "• Fitness Center",
+      "• Restaurant Inside the Building",
+      "• Spacious Parking Area",
+      "• 24-Hour Security",
+      "• One-Year After-Sales Warranty"
+    ],
+    "furniture": [],
+    "appliances": [
+      "• Water Purifier",
+      "• Front Load Washing Machine",
+      "• Front Load Dryer",
+      "• 2 Air Conditioners (12,000 BTU)",
+      "• 55-inch Android TV",
+      "• Electric Hob & Cooker Hood",
+      "• Water Heater",
+      "• Large Refrigerator",
+      "• Microwave",
+      "• Digital Door Lock"
+    ],
+    "title": {
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026",
+      "th": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026",
+      "tr": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026",
+      "zh": "✔ Free Transfer Fee\n\n✔ Foreign Quota Available\n\n✔ Renovation Completed on 15 August 2026"
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [
+      "images/cm-0032-1.jpg",
+      "images/cm-0032-2.jpg",
+      "images/cm-0032-3.jpg",
+      "images/cm-0032-4.jpg",
+      "images/cm-0032-5.jpg",
+      "images/cm-0032-6.jpg",
+      "images/cm-0032-7.jpg",
+      "images/cm-0032-8.jpg",
+      "images/cm-0032-9.jpg",
+      "images/cm-0032-10.jpg",
+      "images/cm-0032-11.jpg",
+      "images/cm-0032-12.jpg",
+      "images/cm-0032-13.jpg",
+      "images/cm-0032-14.jpg",
+      "images/cm-0032-15.jpg",
+      "images/cm-0032-16.jpg",
+      "images/cm-0032-17.jpg",
+      "images/cm-0032-18.jpg",
+      "images/cm-0032-19.jpg",
+      "images/cm-0032-20.jpg"
+    ],
+    "createdAt": "2026-07-09",
+    "updatedAt": "2026-07-09",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
+  },
+  {
     "id": "PCT-0002",
     "city": "Phichit",
     "type": "Golden 3-Storey Shophouse",
@@ -3516,16 +3623,16 @@ window.SIRILAND_PROPERTIES = [
     ],
     "appliances": [],
     "title": {
-      "en": "",
+      "en": "Karnkanok 12 Village Phase 1, Soi 4",
       "th": "",
       "tr": "",
       "zh": ""
     },
     "description": {
       "en": "Property Features\n🛏️ 4 Bedrooms\n🛁 4 Bathrooms\n🍳 2 Kitchens (Indoor & Outdoor)\n🚗 2 Covered Parking Spaces\n🏠 Extended Carport\n🌿 Backyard Area\n✨ Spacious Corner Plot\n🔒 Excellent Privacy\nFully Furnished\n\nThe property includes:\n\n🛋️ Sofa\n🍽️ Dining Table (4 Seats)\n🛏️ Complete Bedroom Furniture\n✍️ Study Desk\n❄️ 5 Air Conditioners\n🚿 4 Water Heaters\n🧊 Refrigerator\n🍲 Microwave\n🧺 Washing Machine\n🚪 Remote-Controlled Gate\n🪟 Premium Tostem Doors & Windows\n🦟 Mosquito Screens\nVillage Facilities\n🏊 Swimming Pool\n🏋️ Fitness Center\n🛡️ 24-Hour Security\n🚘 LPR (License Plate Recognition) Entrance System",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "th": "Property Features\n🛏️ 4 Bedrooms\n🛁 4 Bathrooms\n🍳 2 Kitchens (Indoor & Outdoor)\n🚗 2 Covered Parking Spaces\n🏠 Extended Carport\n🌿 Backyard Area\n✨ Spacious Corner Plot\n🔒 Excellent Privacy\nFully Furnished\n\nThe property includes:\n\n🛋️ Sofa\n🍽️ Dining Table (4 Seats)\n🛏️ Complete Bedroom Furniture\n✍️ Study Desk\n❄️ 5 Air Conditioners\n🚿 4 Water Heaters\n🧊 Refrigerator\n🍲 Microwave\n🧺 Washing Machine\n🚪 Remote-Controlled Gate\n🪟 Premium Tostem Doors & Windows\n🦟 Mosquito Screens\nVillage Facilities\n🏊 Swimming Pool\n🏋️ Fitness Center\n🛡️ 24-Hour Security\n🚘 LPR (License Plate Recognition) Entrance System",
+      "tr": "Property Features\n🛏️ 4 Bedrooms\n🛁 4 Bathrooms\n🍳 2 Kitchens (Indoor & Outdoor)\n🚗 2 Covered Parking Spaces\n🏠 Extended Carport\n🌿 Backyard Area\n✨ Spacious Corner Plot\n🔒 Excellent Privacy\nFully Furnished\n\nThe property includes:\n\n🛋️ Sofa\n🍽️ Dining Table (4 Seats)\n🛏️ Complete Bedroom Furniture\n✍️ Study Desk\n❄️ 5 Air Conditioners\n🚿 4 Water Heaters\n🧊 Refrigerator\n🍲 Microwave\n🧺 Washing Machine\n🚪 Remote-Controlled Gate\n🪟 Premium Tostem Doors & Windows\n🦟 Mosquito Screens\nVillage Facilities\n🏊 Swimming Pool\n🏋️ Fitness Center\n🛡️ 24-Hour Security\n🚘 LPR (License Plate Recognition) Entrance System",
+      "zh": "Property Features\n🛏️ 4 Bedrooms\n🛁 4 Bathrooms\n🍳 2 Kitchens (Indoor & Outdoor)\n🚗 2 Covered Parking Spaces\n🏠 Extended Carport\n🌿 Backyard Area\n✨ Spacious Corner Plot\n🔒 Excellent Privacy\nFully Furnished\n\nThe property includes:\n\n🛋️ Sofa\n🍽️ Dining Table (4 Seats)\n🛏️ Complete Bedroom Furniture\n✍️ Study Desk\n❄️ 5 Air Conditioners\n🚿 4 Water Heaters\n🧊 Refrigerator\n🍲 Microwave\n🧺 Washing Machine\n🚪 Remote-Controlled Gate\n🪟 Premium Tostem Doors & Windows\n🦟 Mosquito Screens\nVillage Facilities\n🏊 Swimming Pool\n🏋️ Fitness Center\n🛡️ 24-Hour Security\n🚘 LPR (License Plate Recognition) Entrance System"
     },
     "highlights": {
       "en": [],
@@ -3560,7 +3667,7 @@ window.SIRILAND_PROPERTIES = [
       "images/cm-0034-24.jpg"
     ],
     "createdAt": "2026-07-10",
-    "updatedAt": "2026-07-10",
+    "updatedAt": "2026-07-10T05:47:16.413Z",
     "featured": true,
     "contact": {
       "name": "Kwan",
