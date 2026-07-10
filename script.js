@@ -1,6 +1,12 @@
 (() => {
   const DATA = window.SIRILAND_PROPERTIES || window.properties || [];
-  const I18N = window.SIRILAND_I18N || {};
+  const DEFAULT_I18N = {
+    en:{navProperties:'Properties',navFinance:'Owner Finance',navContact:'Contact',heroEyebrow:'Luxury Real Estate Thailand',heroTitle:'Buy, Rent & Invest in Thailand Property',heroText:'Premium condos, houses and investment properties with photo galleries, maps and direct contact.',viewListings:'View Listings',lineOfficial:'LINE Official',statProperties:'Properties',statLocations:'Prime Locations',statDeals:'Selected deals',stat4Lang:'4 Languages',statLanguages:'TH / EN / TR / 中文',featured:'Featured Listings',propertiesTitle:'Properties for Sale & Rent',allCities:'All Cities',allTypes:'All Types',allDeals:'All Deals',searchPlaceholder:'Search ID, project, room, area...',financeEyebrow:'Owner Finance',financeTitle:'Flexible payment options for selected properties',financeText:'Ask us about owner finance, foreign quota, Airbnb allowed units and special buyer conditions.',askDetails:'Ask For Details',whyTitle:'Why SIRILAND?',why1:'Curated investment properties',why2:'Clear ID system for every listing',why3:'Map links and photo galleries',why4:'Thai, English, Turkish and Chinese support',contactEyebrow:'Contact',contactTitle:'Talk to SIRILAND',callWhatsapp:'Call / WhatsApp',details:'Details',map:'Map',contact:'Contact',photos:'photos',noResults:'No properties found.',all:'All',buy:'Buy',rent:'Rent',heroSearchPlaceholder:'Search province, area, project, ID...',allResidential:'All Residential',anyPrice:'Any Price',under2m:'Under 2M',anyBedroom:'Any Bedroom',search:'Search',exploreThailand:'Explore Thailand Property',browseSubtitle:'Browse by city, popular listings, best price and owner finance deals.',browseByCity:'📍 Browse by City',popularListings:'🔥 Popular Listings',bestPrice:'💰 Best Price',popularCondo:'🏢 Popular Condo',houseOwnerFinance:'🏡 House / Owner Finance',viewMore:'View More ›',listView:'🏠 List View',mapView:'🗺️ Map View',propertyMap:'🗺️ Property Map',openGoogleMaps:'Open Google Maps',listings:'listings',favorite:'Favorite',favorited:'Favorited',share:'Share',copyLink:'Copy Link',copied:'Copied',whatsapp:'WhatsApp',close:'Close'},
+    th:{navProperties:'อสังหาริมทรัพย์',navFinance:'ผ่อนตรงกับเจ้าของ',navContact:'ติดต่อ',heroEyebrow:'อสังหาริมทรัพย์ระดับพรีเมียมในประเทศไทย',heroTitle:'ซื้อ เช่า และลงทุนอสังหาริมทรัพย์ในประเทศไทย',heroText:'คอนโด บ้าน และอสังหาริมทรัพย์เพื่อการลงทุน พร้อมรูปภาพ แผนที่ และช่องทางติดต่อโดยตรง',viewListings:'ดูประกาศ',lineOfficial:'LINE Official',statProperties:'ประกาศ',statLocations:'ทำเลศักยภาพ',statDeals:'ข้อเสนอพิเศษ',stat4Lang:'4 ภาษา',statLanguages:'ไทย / อังกฤษ / ตุรกี / จีน',featured:'ประกาศแนะนำ',propertiesTitle:'อสังหาริมทรัพย์สำหรับขายและเช่า',allCities:'ทุกจังหวัด',allTypes:'ทุกประเภท',allDeals:'ขายและเช่าทั้งหมด',searchPlaceholder:'ค้นหารหัส โครงการ ห้อง หรือพื้นที่...',financeEyebrow:'ผ่อนตรงกับเจ้าของ',financeTitle:'เงื่อนไขการชำระเงินที่ยืดหยุ่นสำหรับทรัพย์ที่ร่วมรายการ',financeText:'สอบถามเรื่องผ่อนตรง โควต้าต่างชาติ Airbnb และเงื่อนไขพิเศษสำหรับผู้ซื้อ',askDetails:'สอบถามรายละเอียด',whyTitle:'ทำไมต้อง SIRILAND?',why1:'คัดสรรทรัพย์เพื่อการลงทุน',why2:'ทุกรายการมีรหัสชัดเจน',why3:'มีแผนที่และแกลเลอรีรูปภาพ',why4:'รองรับภาษาไทย อังกฤษ ตุรกี และจีน',contactEyebrow:'ติดต่อ',contactTitle:'ติดต่อ SIRILAND',callWhatsapp:'โทร / WhatsApp',details:'รายละเอียด',map:'แผนที่',contact:'ติดต่อ',photos:'รูป',noResults:'ไม่พบอสังหาริมทรัพย์',all:'ทั้งหมด',buy:'ซื้อ',rent:'เช่า',heroSearchPlaceholder:'ค้นหาจังหวัด ทำเล โครงการ หรือรหัส...',allResidential:'ที่อยู่อาศัยทุกประเภท',anyPrice:'ทุกราคา',under2m:'ต่ำกว่า 2 ล้านบาท',anyBedroom:'ทุกจำนวนห้องนอน',search:'ค้นหา',exploreThailand:'ค้นหาอสังหาริมทรัพย์ทั่วไทย',browseSubtitle:'ค้นหาตามจังหวัด ประกาศยอดนิยม ราคาดี และทรัพย์ผ่อนตรง',browseByCity:'📍 ค้นหาตามจังหวัด',popularListings:'🔥 ประกาศยอดนิยม',bestPrice:'💰 ราคาดีที่สุด',popularCondo:'🏢 คอนโดยอดนิยม',houseOwnerFinance:'🏡 บ้าน / ผ่อนตรงกับเจ้าของ',viewMore:'ดูเพิ่มเติม ›',listView:'🏠 มุมมองรายการ',mapView:'🗺️ มุมมองแผนที่',propertyMap:'🗺️ แผนที่อสังหาริมทรัพย์',openGoogleMaps:'เปิด Google Maps',listings:'ประกาศ',favorite:'รายการโปรด',favorited:'บันทึกแล้ว',share:'แชร์',copyLink:'คัดลอกลิงก์',copied:'คัดลอกแล้ว',whatsapp:'WhatsApp',close:'ปิด'},
+    tr:{navProperties:'İlanlar',navFinance:'Mal Sahibinden Taksit',navContact:'İletişim',heroEyebrow:'Tayland Lüks Gayrimenkul',heroTitle:'Tayland’da Satın Alın, Kiralayın ve Yatırım Yapın',heroText:'Fotoğraf galerisi, harita ve doğrudan iletişim seçenekleriyle seçkin daireler, evler ve yatırım mülkleri.',viewListings:'İlanları Gör',lineOfficial:'LINE Resmî Hesap',statProperties:'İlan',statLocations:'Seçkin Konumlar',statDeals:'Özel Fırsatlar',stat4Lang:'4 Dil',statLanguages:'TH / EN / TR / 中文',featured:'Öne Çıkan İlanlar',propertiesTitle:'Satılık ve Kiralık Gayrimenkuller',allCities:'Tüm Şehirler',allTypes:'Tüm Türler',allDeals:'Tüm İşlemler',searchPlaceholder:'ID, proje, oda veya alan ara...',financeEyebrow:'Mal Sahibinden Taksit',financeTitle:'Seçili mülklerde esnek ödeme seçenekleri',financeText:'Mal sahibinden taksit, yabancı kotası, Airbnb ve özel alıcı koşullarını sorun.',askDetails:'Detay Sor',whyTitle:'Neden SIRILAND?',why1:'Seçilmiş yatırım mülkleri',why2:'Her ilan için açık ID sistemi',why3:'Harita bağlantıları ve fotoğraf galerileri',why4:'Tayca, İngilizce, Türkçe ve Çince destek',contactEyebrow:'İletişim',contactTitle:'SIRILAND ile Görüşün',callWhatsapp:'Ara / WhatsApp',details:'Detaylar',map:'Harita',contact:'İletişim',photos:'fotoğraf',noResults:'İlan bulunamadı.',all:'Tümü',buy:'Satın Al',rent:'Kirala',heroSearchPlaceholder:'Şehir, bölge, proje veya ID ara...',allResidential:'Tüm Konutlar',anyPrice:'Tüm Fiyatlar',under2m:'2M Altı',anyBedroom:'Tüm Oda Sayıları',search:'Ara',exploreThailand:'Tayland Gayrimenkullerini Keşfet',browseSubtitle:'Şehre, popüler ilanlara, en iyi fiyata ve taksitli fırsatlara göre keşfet.',browseByCity:'📍 Şehre Göre Ara',popularListings:'🔥 Popüler İlanlar',bestPrice:'💰 En İyi Fiyat',popularCondo:'🏢 Popüler Daireler',houseOwnerFinance:'🏡 Ev / Mal Sahibinden Taksit',viewMore:'Daha Fazla ›',listView:'🏠 Liste Görünümü',mapView:'🗺️ Harita Görünümü',propertyMap:'🗺️ Emlak Haritası',openGoogleMaps:'Google Maps’i Aç',listings:'ilan',favorite:'Favori',favorited:'Favoride',share:'Paylaş',copyLink:'Linki Kopyala',copied:'Kopyalandı',whatsapp:'WhatsApp',close:'Kapat'},
+    zh:{navProperties:'房源',navFinance:'业主分期',navContact:'联系',heroEyebrow:'泰国高端房地产',heroTitle:'在泰国购买、租赁和投资房产',heroText:'精选公寓、住宅和投资物业，配有图片、地图和直接联系方式。',viewListings:'查看房源',lineOfficial:'LINE 官方账号',statProperties:'房源',statLocations:'优质地段',statDeals:'精选优惠',stat4Lang:'4种语言',statLanguages:'泰语 / 英语 / 土耳其语 / 中文',featured:'精选房源',propertiesTitle:'出售和出租房产',allCities:'所有城市',allTypes:'所有类型',allDeals:'所有交易',searchPlaceholder:'搜索编号、项目、房号或面积...',financeEyebrow:'业主分期',financeTitle:'精选房源灵活付款方案',financeText:'欢迎咨询业主分期、外国人配额、Airbnb及特别买家条件。',askDetails:'咨询详情',whyTitle:'为什么选择 SIRILAND？',why1:'精选投资房源',why2:'每套房源都有清晰编号',why3:'地图链接和图片画廊',why4:'支持泰语、英语、土耳其语和中文',contactEyebrow:'联系',contactTitle:'联系 SIRILAND',callWhatsapp:'电话 / WhatsApp',details:'详情',map:'地图',contact:'联系',photos:'张图片',noResults:'未找到房源。',all:'全部',buy:'购买',rent:'租赁',heroSearchPlaceholder:'搜索城市、区域、项目或编号...',allResidential:'所有住宅',anyPrice:'不限价格',under2m:'低于200万',anyBedroom:'不限卧室',search:'搜索',exploreThailand:'探索泰国房产',browseSubtitle:'按城市、热门房源、最佳价格和业主分期浏览。',browseByCity:'📍 按城市浏览',popularListings:'🔥 热门房源',bestPrice:'💰 最佳价格',popularCondo:'🏢 热门公寓',houseOwnerFinance:'🏡 住宅 / 业主分期',viewMore:'查看更多 ›',listView:'🏠 列表视图',mapView:'🗺️ 地图视图',propertyMap:'🗺️ 房产地图',openGoogleMaps:'打开 Google Maps',listings:'套房源',favorite:'收藏',favorited:'已收藏',share:'分享',copyLink:'复制链接',copied:'已复制',whatsapp:'WhatsApp',close:'关闭'}
+  };
+  const I18N = Object.assign({}, DEFAULT_I18N, window.SIRILAND_I18N || {});
   let lang = localStorage.getItem('siriland_lang') || 'en';
   let currentList = DATA.slice();
   let currentPage = 1;
@@ -223,14 +229,20 @@
     const finance = DATA.filter(p => propertyBlob(p).includes('owner finance') || propertyBlob(p).includes('ผ่อน') || propertyBlob(p).includes('free transfer') || propertyBlob(p).includes('0%'));
     const luxury = priced.filter(p=>parsePriceNumber(p.price||p.salePrice) >= 7000000);
 
+    const homeLabels = {
+      en:{best:'Best Price',condo:'Popular Condo',house:'Houses',luxury:'Luxury',new:'New Listings',finance:'Owner Finance'},
+      th:{best:'ราคาดีที่สุด',condo:'คอนโดยอดนิยม',house:'บ้าน',luxury:'ลักชัวรี',new:'ประกาศใหม่',finance:'ผ่อนตรงกับเจ้าของ'},
+      tr:{best:'En İyi Fiyat',condo:'Popüler Daireler',house:'Evler',luxury:'Lüks',new:'Yeni İlanlar',finance:'Mal Sahibinden Taksit'},
+      zh:{best:'最佳价格',condo:'热门公寓',house:'住宅',luxury:'豪华房产',new:'最新房源',finance:'业主分期'}
+    }[lang] || {};
     if($('sxCollectionTiles')) $('sxCollectionTiles').innerHTML = [
-      ['💰','Best Price',bestPrice.length,'bestPrice'],
-      ['🏢','Popular Condo',condos.length,'condo'],
-      ['🏡','Houses',houses.length,'house'],
-      ['💎','Luxury',luxury.length,'luxury'],
-      ['📅','New Listings',newest.length,'new'],
-      ['🔑','Owner Finance',finance.length,'ownerFinance']
-    ].map(([icon,label,count,filter])=>`<a href="#properties" class="sx-collection-tile" data-home-filter="${filter}"><b>${icon}</b><strong>${label}</strong><span>${count} listings</span></a>`).join('');
+      ['💰',homeLabels.best,bestPrice.length,'bestPrice'],
+      ['🏢',homeLabels.condo,condos.length,'condo'],
+      ['🏡',homeLabels.house,houses.length,'house'],
+      ['💎',homeLabels.luxury,luxury.length,'luxury'],
+      ['📅',homeLabels.new,newest.length,'new'],
+      ['🔑',homeLabels.finance,finance.length,'ownerFinance']
+    ].map(([icon,label,count,filter])=>`<a href="#properties" class="sx-collection-tile" data-home-filter="${filter}"><b>${icon}</b><strong>${label}</strong><span>${count} ${t('listings')}</span></a>`).join('');
 
     if($('sxPopularListings')) $('sxPopularListings').innerHTML = (featured.length?featured:newest).slice(0,6).map(sxHomeCard).join('');
     if($('sxBestPrice')) $('sxBestPrice').innerHTML = (bestPrice.length?bestPrice:featured).slice(0,5).map(sxSmallCard).join('');
@@ -248,7 +260,7 @@
   function fillHeroControls(){
     const heroType = $('heroType'); if(!heroType) return;
     const types=[...new Set(DATA.map(p=>p.type).filter(Boolean))].sort();
-    heroType.innerHTML = '<option value="all">All Residential</option>' + types.map(v=>`<option value="${v}">${trMap('type',v)}</option>`).join('');
+    heroType.innerHTML = `<option value="all">${t('allResidential')}</option>` + types.map(v=>`<option value="${v}">${trMap('type',v)}</option>`).join('');
   }
   function runHeroSearch(){
     const q = ($('heroSearchInput')?.value || '').trim();
@@ -282,7 +294,9 @@
     document.documentElement.lang = lang;
     document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => el.placeholder = t(el.dataset.i18nPlaceholder));
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
     document.querySelectorAll('#langSwitch button').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+    document.title = lang==='th' ? 'SIRILAND อสังหาริมทรัพย์ประเทศไทย' : lang==='tr' ? 'SIRILAND Tayland Gayrimenkul' : lang==='zh' ? 'SIRILAND 泰国房地产' : 'SIRILAND Real Estate Thailand';
   }
 
   function fillFilters(){
@@ -617,23 +631,23 @@ function renderMapView(){
     let waBtn = document.getElementById('modalWhatsApp');
     if(!waBtn){
       const actions = document.querySelector('.modal-actions');
-      if(actions){ waBtn = document.createElement('a'); waBtn.id='modalWhatsApp'; waBtn.className='smallbtn'; waBtn.target='_blank'; waBtn.textContent='WhatsApp'; actions.insertBefore(waBtn, $('modalMap')); }
+      if(actions){ waBtn = document.createElement('a'); waBtn.id='modalWhatsApp'; waBtn.className='smallbtn'; waBtn.target='_blank'; waBtn.textContent=t('whatsapp'); actions.insertBefore(waBtn, $('modalMap')); }
     }
     if(waBtn) waBtn.href = whatsappContactUrl(p);
     const copyBtn = $('copyLink');
-    if(copyBtn) copyBtn.onclick = async () => { try{ await navigator.clipboard.writeText(propertyUrl(p)); copyBtn.textContent='Copied'; setTimeout(()=>copyBtn.textContent='Copy Link',1200); }catch(e){ prompt('Copy link', propertyUrl(p)); } };
+    if(copyBtn) copyBtn.onclick = async () => { try{ await navigator.clipboard.writeText(propertyUrl(p)); copyBtn.textContent=t('copied'); setTimeout(()=>copyBtn.textContent=t('copyLink'),1200); }catch(e){ prompt('Copy link', propertyUrl(p)); } };
     const favBtn = $('modalFavorite');
     if(favBtn){
       const favKey='siriland_favorites';
       const getFav=()=>{try{return JSON.parse(localStorage.getItem(favKey)||'[]')}catch(e){return[]}};
-      const paintFav=()=>{const on=getFav().includes(p.id);favBtn.textContent=on?'♥ Favorited':'♡ Favorite';favBtn.classList.toggle('goldbtn',on)};
+      const paintFav=()=>{const on=getFav().includes(p.id);favBtn.textContent=on?`♥ ${t('favorited')}`:`♡ ${t('favorite')}`;favBtn.classList.toggle('goldbtn',on)};
       paintFav();
       favBtn.onclick=()=>{let a=getFav();a=a.includes(p.id)?a.filter(x=>x!==p.id):[...a,p.id];localStorage.setItem(favKey,JSON.stringify(a));paintFav()};
     }
     const shareBtn=$('modalShare');
     if(shareBtn) shareBtn.onclick=async()=>{
       const data={title:pick(p.title),text:`${pick(p.title)} - ${p.price||''}`,url:propertyUrl(p)};
-      try{if(navigator.share) await navigator.share(data); else {await navigator.clipboard.writeText(data.url);shareBtn.textContent='Link Copied';setTimeout(()=>shareBtn.textContent='Share',1200)}}catch(e){}
+      try{if(navigator.share) await navigator.share(data); else {await navigator.clipboard.writeText(data.url);shareBtn.textContent=t('copied');setTimeout(()=>shareBtn.textContent=t('share'),1200)}}catch(e){}
     };
     renderRelatedProperties(p);
   }
@@ -668,7 +682,7 @@ function renderMapView(){
   $('heroSearchInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter') runHeroSearch(); });
 
   document.addEventListener('click', e=>{
-    const langBtn=e.target.closest('#langSwitch button'); if(langBtn){lang=langBtn.dataset.lang; localStorage.setItem('siriland_lang',lang); applyI18n(); fillFilters(); render(); if(modalProperty) updateModal(); return;}
+    const langBtn=e.target.closest('#langSwitch button'); if(langBtn){lang=langBtn.dataset.lang; localStorage.setItem('siriland_lang',lang); applyI18n(); fillFilters(); fillHeroControls(); renderHomeShowcase(); render(); if(modalProperty) updateModal(); return;}
     const viewBtn=e.target.closest('#viewSwitch button'); if(viewBtn){setViewMode(viewBtn.dataset.view); return;}
     const mapCluster=e.target.closest('.map-cluster'); if(mapCluster){setMapCity(mapCluster.dataset.city); return;}
     const mapPick=e.target.closest('.map-item'); if(mapPick && !e.target.closest('button,a')){const p=DATA.find(x=>x.id===mapPick.dataset.mapId); if(p) setMapProperty(p); return;}

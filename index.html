@@ -39,16 +39,16 @@
       </div>
       <div class="hero-search-pro" id="heroSearchPro">
         <div class="hero-tabs">
-          <button class="active" data-hero-deal="all">All</button>
-          <button data-hero-deal="Sale">Buy</button>
-          <button data-hero-deal="Rent">Rent</button>
+          <button class="active" data-hero-deal="all" data-i18n="all">All</button>
+          <button data-hero-deal="Sale" data-i18n="buy">Buy</button>
+          <button data-hero-deal="Rent" data-i18n="rent">Rent</button>
         </div>
         <div class="hero-search-grid">
-          <input id="heroSearchInput" type="search" placeholder="Search province, area, project, ID..." />
-          <select id="heroType"><option value="all">All Residential</option></select>
-          <select id="heroPrice"><option value="all">Any Price</option><option value="0-2000000">Under 2M</option><option value="2000000-4000000">2M - 4M</option><option value="4000000-7000000">4M - 7M</option><option value="7000000-999999999">7M+</option></select>
-          <select id="heroBedroom"><option value="all">Any Bedroom</option><option value="1">1+ Bedroom</option><option value="2">2+ Bedrooms</option><option value="3">3+ Bedrooms</option><option value="4">4+ Bedrooms</option></select>
-          <button id="heroSearchBtn" class="btn primary">Search</button>
+          <input id="heroSearchInput" type="search" placeholder="Search province, area, project, ID..." data-i18n-placeholder="heroSearchPlaceholder" />
+          <select id="heroType"><option value="all" data-i18n="allResidential">All Residential</option></select>
+          <select id="heroPrice"><option value="all" data-i18n="anyPrice">Any Price</option><option value="0-2000000" data-i18n="under2m">Under 2M</option><option value="2000000-4000000">2M - 4M</option><option value="4000000-7000000">4M - 7M</option><option value="7000000-999999999">7M+</option></select>
+          <select id="heroBedroom"><option value="all" data-i18n="anyBedroom">Any Bedroom</option><option value="1">1+ Bedroom</option><option value="2">2+ Bedrooms</option><option value="3">3+ Bedrooms</option><option value="4">4+ Bedrooms</option></select>
+          <button id="heroSearchBtn" class="btn primary" data-i18n="search">Search</button>
         </div>
       </div>
     </div>
@@ -65,13 +65,13 @@
     <section class="section home-showcase sx-home" id="homeShowcase">
       <div class="section-head sx-home-head">
         <span class="eyebrow dark">SIRILAND PRO</span>
-        <h2>Explore Thailand Property</h2>
-        <p class="sx-home-subtitle">Browse by city, popular listings, best price and owner finance deals.</p>
+        <h2 data-i18n="exploreThailand">Explore Thailand Property</h2>
+        <p class="sx-home-subtitle" data-i18n="browseSubtitle">Browse by city, popular listings, best price and owner finance deals.</p>
       </div>
 
       <div class="sx-explore-grid">
         <aside class="sx-city-panel">
-          <div class="sx-panel-title">📍 Browse by City</div>
+          <div class="sx-panel-title" data-i18n="browseByCity">📍 Browse by City</div>
           <div class="sx-city-list" id="sxCityList"></div>
         </aside>
 
@@ -79,8 +79,8 @@
           <section class="sx-collection-strip" id="sxCollectionTiles"></section>
           <section class="sx-showcase-card sx-wide">
             <div class="sx-showcase-head">
-              <h3>🔥 Popular Listings</h3>
-              <a href="#properties" data-home-filter="featured">View More ›</a>
+              <h3 data-i18n="popularListings">🔥 Popular Listings</h3>
+              <a href="#properties" data-home-filter="featured" data-i18n="viewMore">View More ›</a>
             </div>
             <div class="sx-property-grid" id="sxPopularListings"></div>
           </section>
@@ -88,16 +88,16 @@
           <div class="sx-two-columns">
             <section class="sx-showcase-card">
               <div class="sx-showcase-head">
-                <h3>💰 Best Price</h3>
-                <a href="#properties" data-home-filter="bestPrice">View More ›</a>
+                <h3 data-i18n="bestPrice">💰 Best Price</h3>
+                <a href="#properties" data-home-filter="bestPrice" data-i18n="viewMore">View More ›</a>
               </div>
               <div class="sx-list" id="sxBestPrice"></div>
             </section>
 
             <section class="sx-showcase-card">
               <div class="sx-showcase-head">
-                <h3>🏢 Popular Condo</h3>
-                <a href="#properties" data-home-filter="condo">View More ›</a>
+                <h3 data-i18n="popularCondo">🏢 Popular Condo</h3>
+                <a href="#properties" data-home-filter="condo" data-i18n="viewMore">View More ›</a>
               </div>
               <div class="sx-list" id="sxPopularCondo"></div>
             </section>
@@ -105,8 +105,8 @@
 
           <section class="sx-showcase-card sx-wide">
             <div class="sx-showcase-head">
-              <h3>🏡 House / Owner Finance</h3>
-              <a href="#properties" data-home-filter="ownerFinance">View More ›</a>
+              <h3 data-i18n="houseOwnerFinance">🏡 House / Owner Finance</h3>
+              <a href="#properties" data-home-filter="ownerFinance" data-i18n="viewMore">View More ›</a>
             </div>
             <div class="sx-property-grid" id="sxOwnerFinance"></div>
           </section>
@@ -126,14 +126,14 @@
         <input id="searchInput" type="search" placeholder="Search ID, project, room, area..." data-i18n-placeholder="searchPlaceholder" />
       </div>
       <div class="view-switch" id="viewSwitch">
-        <button class="active" data-view="list">🏠 List View</button>
-        <button data-view="map">🗺️ Map View</button>
+        <button class="active" data-view="list" data-i18n="listView">🏠 List View</button>
+        <button data-view="map" data-i18n="mapView">🗺️ Map View</button>
       </div>
       <div class="map-view hidden" id="mapView">
         <div class="map-panel">
           <div class="map-head">
-            <div><strong>🗺️ Property Map</strong><span id="mapResultCount">0 listings</span></div>
-            <button class="smallbtn goldbtn" id="openSelectedMap">Open Google Maps</button>
+            <div><strong data-i18n="propertyMap">🗺️ Property Map</strong><span id="mapResultCount">0 listings</span></div>
+            <button class="smallbtn goldbtn" id="openSelectedMap" data-i18n="openGoogleMaps">Open Google Maps</button>
           </div>
           <div id="propertyMapCanvas" role="application" aria-label="Interactive property map"></div>
         </div>
@@ -160,7 +160,7 @@
 
   <div class="modal hidden" id="propertyModal">
     <div class="modal-card detail-pro-modal">
-      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <button class="modal-close" id="modalClose" aria-label="Close" data-i18n-aria="close">×</button>
       <div class="detail-pro-grid">
         <div class="detail-pro-media">
           <div class="modal-gallery">

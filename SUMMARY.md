@@ -1,18 +1,15 @@
-# Summary
+# Build 2026.07.10.04 — Full Multi-Language UI
 
-SIRILAND Build 2026.07.10.02 introduces a redesigned Property Detail PRO experience with a large responsive gallery, dedicated price and contact panel, cleaner property specification cards, favorite and share controls, improved mobile layout, highlights, and similar property recommendations.
+## Summary
+SIRILAND Build 2026.07.10.04 expands the multilingual property experience across the homepage, filters, map interface, property cards, modal actions, structured property specifications, collections, contact areas and navigation.
 
-## Updated files
-- index.html
-- script.js
-- style.css
+## New Features
+- Full TH / EN / TR / ZH interface dictionary
+- Localized homepage collections and city counts
+- Localized search, filter, list and map controls
+- Localized modal actions, favorite, share and copy-link feedback
+- Localized property specification labels
+- Language-aware browser title
 
-## Main improvements
-- Two-column desktop property detail layout
-- Large gallery with thumbnail strip
-- Price, status and deal displayed prominently
-- Clear bedroom, bathroom, area and floor cards
-- Favorite, Share and Copy Link controls
-- Call, LINE, WhatsApp and Map contact panel
-- Better mobile property detail experience
-- Similar property recommendations preserved
+## Important
+The website now translates the interface and structured property data. For fully natural property titles, summaries and long descriptions, fill each language field separately in the admin panel.
