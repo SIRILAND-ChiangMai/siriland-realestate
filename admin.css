@@ -219,3 +219,14 @@
 body.simpleFormMode [data-property-field].type-field-hidden{display:none!important}
 body.advancedFormMode [data-property-field].type-field-hidden{display:none!important}
 select:focus,input:focus,textarea:focus{outline:2px solid rgba(214,173,75,.35);border-color:#d6ad4b}
+
+
+/* Absolute Land form override */
+[data-property-field].type-field-hidden{
+  display:none!important;
+}
+#id[readonly]{
+  background:#e9eef6!important;
+  color:#081a3a!important;
+  font-weight:900!important;
+}

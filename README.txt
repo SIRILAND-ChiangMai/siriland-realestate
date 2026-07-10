@@ -1,48 +1,26 @@
-SIRILAND FINAL ID + DROPDOWN + LAND FORM FIX
+SIRILAND REAL ID ENGINE + LAND OVERRIDE FIX
+
+Kök nedenler:
+1. Admin file:// ile açıldığı için fetch('properties.js') gerçek dosyayı okuyamıyordu.
+2. modules/property.js eski ID popup ve alan kurallarını tekrar yüklüyordu.
 
 Düzeltildi:
-- ID artık properties.js tamamen yüklenmeden oluşturulmaz.
-- Chiang Mai seçildiğinde mevcut en yüksek CM ID bulunur ve sıradaki numara gelir.
-- CM-0001'e geri dönme sorunu giderildi.
-- Şehir kodu uyumsuzluğu popup'ı kaldırıldı.
-- ID readonly oldu; yanlışlıkla elle değiştirilemez.
-- Kullanılmış en yüksek ID tarayıcıda ayrıca tutulur.
-
-Dropdown yapılan alanlar:
-- City
-- Property Type
-- Deal
-- Status
-- Bedrooms
-- Bathrooms
-- Floor
-- Parking
-
-Room / Unit:
-- Öneri listeli alan olarak kaldı; özel oda numarası yazılabilir.
-
-Land seçildiğinde tamamen gizlenen ve temizlenen alanlar:
-- Bedrooms
-- Bathrooms
-- Room
-- Floor
-- Parking
-- Building Area
-- Internal Area
-
-Land için kalan ana alanlar:
-- Price
-- Map
-- Land Size
-- Land Area
-- Title Deed
-- Road Access
-- Frontage
-- Zoning
-- Utilities
+- Eski modules/property.js kaldırıldı.
+- Admin, Integrated Publish Manager içinde kayıtlı 01_CMS klasöründen gerçek properties.js dosyasını doğrudan okur.
+- Mevcut tüm ilanların en yüksek ID numarası hesaplanır.
+- Örnek: en yüksek Chiang Mai ID CM-0048 ise yeni ID CM-0049 olur.
+- CM-0001 / CM-0002'ye geri dönmez.
+- Şehir uyumsuzluğu popup'ı tamamen kaldırıldı.
+- ID readonly ve otomatik.
+- Land seçildiğinde oda/banyo/area/room/floor/building/parking alanları kesin olarak gizlenir ve temizlenir.
+- Condo, House ve Commercial alanları kendi kurallarına göre açılır.
 
 Kurulum:
 1. admin.html, admin.js ve admin.css dosyalarını 01_CMS içindeki eski dosyaların üzerine kopyala.
-2. Aynı üç dosyayı GitHub repository içine de kopyala.
-3. Chrome'da 01_CMS\admin.html aç.
-4. Ctrl + Shift + R yap.
+2. Henüz GitHub'a kopyalama.
+3. Chrome'da 01_CMS/admin.html aç ve Ctrl+Shift+R yap.
+4. Integrated Publish Manager panelinde CMS Source hâlâ 01_CMS olarak seçili olmalı.
+5. Sayfayı bir kez yenile.
+6. Chiang Mai seç ve ID'yi kontrol et.
+7. Land seç ve oda/banyo alanlarının kaybolduğunu kontrol et.
+8. Test doğruysa Backup + Publish ile GitHub'a aktar.

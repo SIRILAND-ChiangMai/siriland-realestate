@@ -2205,3 +2205,157 @@ $('type')?.addEventListener('change',()=>{
   sirilandClearHiddenLandFields();
 });
 $('saveBtn')?.addEventListener('click',sirilandClearHiddenLandFields);
+
+
+/* FINAL OVERRIDE — Real properties.js loader + ID engine + Land form */
+let sirilandRealDataLoaded=false;
+
+async function sirilandLoadRealPropertiesFromCms(){
+  try{
+    if(!publishHandles.cms) publishHandles.cms=await publishLoadHandle('cms');
+    if(!publishHandles.cms) throw new Error('CMS Source klasörü seçilmemiş.');
+
+    const allowed=await publishRequestPermission(publishHandles.cms,'read');
+    if(!allowed) throw new Error('CMS klasörü okuma izni verilmedi.');
+
+    const file=await publishReadFile(publishHandles.cms,'properties.js');
+    if(!file) throw new Error('01_CMS içinde properties.js bulunamadı.');
+
+    const text=await file.text();
+    const loaded=extractProperties(text).map(cleanProperty);
+
+    if(!loaded.length) throw new Error('properties.js içinde ilan bulunamadı.');
+
+    properties=loaded;
+    sirilandRealDataLoaded=true;
+
+    rebuildIdHistory();
+    localStorage.setItem('siriland_last_property_count',String(properties.length));
+    localStorage.setItem('siriland_properties_backup',JSON.stringify(properties));
+
+    renderList();
+    validate();
+    renderCRM();
+
+    // Only create a new ID if the form is not editing an existing property.
+    const current=String($('id')?.value||'').trim();
+    const editing=properties.some(p=>p.id===current);
+    if(!editing) syncIdToCity(true);
+
+    sirilandApplyDynamicForm();
+    sirilandClearHiddenLandFields();
+
+    console.info('Real properties.js loaded from CMS:',properties.length);
+    return loaded;
+  }catch(e){
+    console.warn('Real CMS data load failed:',e);
+    return null;
+  }
+}
+
+function sirilandForceCorrectNewId(){
+  const city=$('city')?.value;
+  if(!city||!$('id'))return;
+
+  const current=String($('id').value||'').trim();
+  const editing=(properties||[]).some(p=>p.id===current);
+
+  if(!editing){
+    $('id').value=nextId(city);
+  }
+}
+
+function sirilandHardApplyTypeRules(){
+  const kind=sirilandTypeKind($('type')?.value);
+
+  const fieldVisibility={
+    bedrooms:kind!=='land',
+    bathrooms:kind!=='land',
+    area:kind!=='land',
+    room:kind==='condo'||kind==='commercial',
+    floor:kind==='condo'||kind==='commercial',
+    landSize:kind==='land'||kind==='house'||kind==='commercial',
+    landAreaSqm:kind==='land',
+    buildingArea:kind==='house'||kind==='commercial',
+    parking:kind==='house'||kind==='condo'||kind==='commercial',
+    titleDeed:kind==='land'||kind==='house'||kind==='commercial',
+    roadAccess:kind==='land'||kind==='house'||kind==='commercial',
+    frontage:kind==='land'||kind==='commercial',
+    zoning:kind==='land'||kind==='commercial',
+    utilities:kind==='land'||kind==='house'||kind==='commercial'
+  };
+
+  Object.entries(fieldVisibility).forEach(([name,visible])=>{
+    document.querySelectorAll(`[data-property-field="${name}"]`).forEach(el=>{
+      el.classList.toggle('type-field-hidden',!visible);
+      el.style.setProperty('display',visible?'':'none',visible?'':'important');
+    });
+  });
+
+  if(kind==='land'){
+    ['bedrooms','bathrooms','area','room','floor','buildingArea','parking'].forEach(id=>{
+      if($(id))$(id).value='';
+    });
+  }
+}
+
+function sirilandInstallFinalOverrides(){
+  const city=$('city');
+  const type=$('type');
+
+  if(city){
+    city.addEventListener('change',event=>{
+      event.stopImmediatePropagation();
+      sirilandForceCorrectNewId();
+      sirilandApplyDynamicForm();
+      sirilandHardApplyTypeRules();
+    },true);
+  }
+
+  if(type){
+    type.addEventListener('change',event=>{
+      event.stopImmediatePropagation();
+      sirilandApplyDynamicForm();
+      sirilandHardApplyTypeRules();
+    },true);
+    type.addEventListener('input',event=>{
+      event.stopImmediatePropagation();
+      sirilandApplyDynamicForm();
+      sirilandHardApplyTypeRules();
+    },true);
+  }
+
+  $('clearBtn')?.addEventListener('click',()=>{
+    setTimeout(()=>{
+      sirilandForceCorrectNewId();
+      sirilandApplyDynamicForm();
+      sirilandHardApplyTypeRules();
+    },100);
+  },true);
+
+  $('saveBtn')?.addEventListener('click',()=>{
+    sirilandHardApplyTypeRules();
+    reserveId($('id')?.value);
+  },true);
+}
+
+window.addEventListener('load',async()=>{
+  sirilandInstallFinalOverrides();
+
+  // Integrated Publish Manager handles are available after page load.
+  const loaded=await sirilandLoadRealPropertiesFromCms();
+
+  // If no saved folder permission exists, use the browser backup but never trust CM-0001/0002 blindly.
+  if(!loaded){
+    rebuildIdHistory();
+    sirilandForceCorrectNewId();
+    sirilandApplyDynamicForm();
+    sirilandHardApplyTypeRules();
+
+    const status=$('directSaveStatus');
+    if(status){
+      status.textContent='Gerçek properties.js okunamadı. Integrated Publish Manager panelinden CMS Source klasörünü tekrar seçip sayfayı yenile.';
+      status.className='directSaveStatus error';
+    }
+  }
+});
