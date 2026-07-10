@@ -84,7 +84,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0002",
@@ -166,7 +172,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0003",
@@ -249,7 +261,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0004",
@@ -336,7 +354,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0005",
@@ -427,7 +451,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0006",
@@ -518,7 +548,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0007",
@@ -601,7 +637,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0008",
@@ -684,7 +726,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0009",
@@ -771,7 +819,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0010",
@@ -858,7 +912,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0011",
@@ -941,7 +1001,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0012",
@@ -1015,7 +1081,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0013",
@@ -1098,7 +1170,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0014",
@@ -1181,7 +1259,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0015",
@@ -1264,7 +1348,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0016",
@@ -1341,7 +1431,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0017",
@@ -1428,7 +1524,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0018",
@@ -1495,7 +1597,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0019",
@@ -1514,7 +1622,7 @@ window.SIRILAND_PROPERTIES = [
     "bathrooms": "-",
     "area": "61.6 Sq.Wah Usable Area: 250 Sq.M.",
     "room": "Soi 27",
-    "floor": "211/190,",
+    "floor": "",
     "map": "https://maps.app.goo.gl/yPM5qz9by9yBNaka6",
     "description": {
       "en": "Siwalee Klong Chol House No. Soi 27 (211/190,). 4 Bedrooms | Private Swimming Pool with Jacuzzi. Area 61.6 Sq.Wah Usable Area: 250 Sq.M. Soi 27 211/190,.",
@@ -1580,7 +1688,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0020",
@@ -1673,7 +1787,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0021",
@@ -1760,7 +1880,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "PIL-001",
@@ -1849,7 +1975,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0022",
@@ -1857,13 +1989,32 @@ window.SIRILAND_PROPERTIES = [
     "type": "Condo",
     "deal": "Sale",
     "status": "Available",
-    "price": "Ask for price",
+    "price": "3.9 MB",
     "bedrooms": "2 Bedrooms",
     "bathrooms": "2 Bathrooms",
     "area": "64.22 sq.m.",
-    "room": "Please update",
-    "floor": "Please update4th Floor",
+    "room": "Building 4",
+    "floor": "4th Floor",
     "map": "https://maps.google.com/?q=Punna+Residence+5+Chiang+Mai",
+    "landSize": "",
+    "landAreaSqm": "",
+    "buildingArea": "",
+    "parking": "",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
     "title": {
       "en": "Punna Residence 5 — 8 Storey Low Rise Condo",
       "th": "Punna Residence 5 — 8 Storey Low Rise Condo",
@@ -1872,9 +2023,9 @@ window.SIRILAND_PROPERTIES = [
     },
     "description": {
       "en": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
-      "th": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND.",
-      "tr": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND.",
-      "zh": "Punna Residence 5 — 8 Storey Low Rise Condo. Details are being updated by SIRILAND."
+      "th": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
+      "tr": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes.",
+      "zh": "An exclusive 8-storey luxury low-rise condominium on Huay Kaew Road, located only 500 meters from the main gate of Chiang Mai University. You can easily walk to the university in just a few minutes."
     },
     "highlights": {
       "en": [
@@ -1882,18 +2033,12 @@ window.SIRILAND_PROPERTIES = [
         "Building 4, 4th Floor"
       ],
       "th": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -1932,7 +2077,7 @@ window.SIRILAND_PROPERTIES = [
       "images/punna-residence-5-8-storey-low-rise-condo-32.jpg"
     ],
     "createdAt": "2026-07-07",
-    "updatedAt": "2026-07-08",
+    "updatedAt": "2026-07-10",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -1951,8 +2096,8 @@ window.SIRILAND_PROPERTIES = [
     "bedrooms": "1 Bedroom",
     "bathrooms": "1 Bathrooms",
     "area": "35 Sq.m.",
-    "room": "Please uUnit 236pdate",
-    "floor": "Please upd2nd Floorate",
+    "room": "",
+    "floor": "",
     "map": "https://maps.google.com/?q=Hillside+Condo+3+Nimmanhaemin+Soi+8+Chiang+Mai",
     "title": {
       "en": "Hillside 3 Condo Unit 236 — 2nd Floor",
@@ -1961,30 +2106,22 @@ window.SIRILAND_PROPERTIES = [
       "zh": "Hillside 3 Condo Unit 236 — 2nd Floor"
     },
     "description": {
-      "en": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND.",
-      "th": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND.",
-      "tr": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND.",
-      "zh": "Hillside 3 Condo Unit 236 — 2nd Floor. Details are being updated by SIRILAND."
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "th": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2028,7 +2165,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0024",
@@ -2037,8 +2180,8 @@ window.SIRILAND_PROPERTIES = [
     "deal": "Sale",
     "status": "Available",
     "price": "2.89 MB",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
+    "bedrooms": "",
+    "bathrooms": "",
     "area": "38.45 SQ.M.",
     "room": "Room 1021",
     "floor": "10th Floor",
@@ -2050,30 +2193,22 @@ window.SIRILAND_PROPERTIES = [
       "zh": "Nakornping Condo"
     },
     "description": {
-      "en": "Nakornping Condo. Details are being updated by SIRILAND.",
-      "th": "Nakornping Condo. Details are being updated by SIRILAND.",
-      "tr": "Nakornping Condo. Details are being updated by SIRILAND.",
-      "zh": "Nakornping Condo. Details are being updated by SIRILAND."
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "th": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2107,7 +2242,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0025",
@@ -2129,10 +2270,10 @@ window.SIRILAND_PROPERTIES = [
       "zh": "Pansuk The Erben Condo Room 5/16"
     },
     "description": {
-      "en": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND.",
-      "th": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND.",
-      "tr": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND.",
-      "zh": "Pansuk The Erben Condo Room 5/16. Details are being updated by SIRILAND."
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
     },
     "highlights": {
       "en": [
@@ -2147,18 +2288,12 @@ window.SIRILAND_PROPERTIES = [
         "💧 Water Filter"
       ],
       "th": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2192,7 +2327,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0026",
@@ -2214,10 +2355,10 @@ window.SIRILAND_PROPERTIES = [
       "zh": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m."
     },
     "description": {
-      "en": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND.",
-      "th": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND.",
-      "tr": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND.",
-      "zh": "Rawi Waree Residence Nimman Soi 15 Room 401 — 4th Floor 115 sq.m.. Details are being updated by SIRILAND."
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
     },
     "highlights": {
       "en": [
@@ -2232,18 +2373,12 @@ window.SIRILAND_PROPERTIES = [
         "✅ Airbnb Allowed"
       ],
       "th": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2277,7 +2412,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0028",
@@ -2291,38 +2432,30 @@ window.SIRILAND_PROPERTIES = [
     "type": "Condo",
     "deal": "Sale",
     "status": "Available",
-    "price": "Ask for price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
+    "price": "",
+    "bedrooms": "",
+    "bathrooms": "",
+    "area": "",
+    "room": "",
+    "floor": "",
     "map": "",
     "description": {
-      "en": "Srithana 2 Huay Kaew Nimman. Details are being updated by SIRILAND.",
-      "th": "Srithana 2 Huay Kaew Nimman. Details are being updated by SIRILAND.",
-      "tr": "Srithana 2 Huay Kaew Nimman. Details are being updated by SIRILAND.",
-      "zh": "Srithana 2 Huay Kaew Nimman. Details are being updated by SIRILAND."
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "th": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2356,7 +2489,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0030",
@@ -2366,7 +2505,7 @@ window.SIRILAND_PROPERTIES = [
     "status": "Available",
     "price": "3.69 MB",
     "bedrooms": "2 Bedrooms",
-    "bathrooms": "Please update",
+    "bathrooms": "",
     "area": "61.48 SQ.M.",
     "room": "Unit 3609",
     "floor": "3rd Floor",
@@ -2378,30 +2517,22 @@ window.SIRILAND_PROPERTIES = [
       "zh": "The Next 1.3 Ruamchok"
     },
     "description": {
-      "en": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND.",
-      "th": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND.",
-      "tr": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND.",
-      "zh": "The Next 1.3 Ruamchok. Details are being updated by SIRILAND."
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "th": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2435,7 +2566,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "CM-0031",
@@ -2449,38 +2586,30 @@ window.SIRILAND_PROPERTIES = [
     "type": "Condo",
     "deal": "Sale",
     "status": "Available",
-    "price": "Ask for price",
-    "bedrooms": "Please update",
-    "bathrooms": "Please update",
-    "area": "Please update",
-    "room": "Please update",
-    "floor": "Please update",
+    "price": "",
+    "bedrooms": "",
+    "bathrooms": "",
+    "area": "",
+    "room": "",
+    "floor": "",
     "map": "",
     "description": {
-      "en": "Wiangpink Mansion Condo. Details are being updated by SIRILAND.",
-      "th": "Wiangpink Mansion Condo. Details are being updated by SIRILAND.",
-      "tr": "Wiangpink Mansion Condo. Details are being updated by SIRILAND.",
-      "zh": "Wiangpink Mansion Condo. Details are being updated by SIRILAND."
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
     },
     "highlights": {
       "en": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "th": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "tr": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ],
       "zh": [
-        "Recovered from image folder",
-        "Details updating",
         "Chiang Mai"
       ]
     },
@@ -2514,7 +2643,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "BKK-0001",
@@ -2611,7 +2746,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "BKK-0002",
@@ -2703,7 +2844,13 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "PCT-0001",
@@ -2714,7 +2861,7 @@ window.SIRILAND_PROPERTIES = [
     "price": "3.2 MB / Unit",
     "bedrooms": "-",
     "bathrooms": "3 Bathrooms",
-    "area": "Please update",
+    "area": "",
     "room": "4 Units",
     "floor": "3 Floors",
     "map": "https://maps.app.goo.gl/J36iCzsPpTPL6N3d9",
@@ -2810,7 +2957,8 @@ window.SIRILAND_PROPERTIES = [
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "summary": ""
   }
 ];
 const properties = window.SIRILAND_PROPERTIES;

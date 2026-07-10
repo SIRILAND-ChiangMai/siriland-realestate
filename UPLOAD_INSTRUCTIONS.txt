@@ -1,17 +1,7 @@
-SIRILAND HERO SEARCH FIX
+1) Bu ZIP dosyasını açın.
+2) properties.js dosyasını GitHub proje klasöründe eski properties.js üstüne kopyalayın.
+3) properties.json dosyasını da eski properties.json üstüne kopyalayın.
+4) images klasöründeki yeni fotoğrafları mevcut images klasörüne kopyalayın.
+5) GitHub Desktop: Commit + Push.
 
-Düzeltildi:
-- Üstteki Hero Search artık Search butonuyla çalışır.
-- Enter tuşuyla arama çalışır.
-- All / Buy / Rent sekmeleri çalışır.
-- Property Type, Price ve Bedroom filtreleri birlikte uygulanır.
-- Sonuçlara otomatik kaydırır.
-- Alt filtrelerle senkronize olur.
-- Önceki Rent, House Collection ve Property Link düzeltmeleri korunmuştur.
-
-Kurulum:
-1. script.js dosyasını GitHub klasöründeki eski script.js üzerine kopyalayın.
-2. GitHub Desktop Summary: Fix hero search
-3. Commit to main
-4. Push origin
-5. Siteyi açıp Ctrl + Shift + R yapın.
+Not: Export artık boş properties.json üretmez. Eksik fiyat/oda/banyo/alan varsa raporda uyarı verir ama export durmaz. Duplicate ID varsa durur. CRM müşterileri crm/customers.json olarak eklenir.
