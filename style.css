@@ -300,3 +300,9 @@
 @media(max-width:1100px){.advanced-filter-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:700px){.advanced-filters{padding:10px}.advanced-filter-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:460px){.advanced-filter-grid{grid-template-columns:1fr}}
+
+
+/* Build 2026.07.10.09 — clean icon specs and empty finance collection */
+.home-icon-specs{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:7px;font-size:12px;color:#536276}
+.home-icon-specs span{display:inline-flex;align-items:center;white-space:nowrap}
+.empty-collection{padding:18px;border:1px dashed #d8c59b;border-radius:14px;color:#64748b;background:#fffaf0}

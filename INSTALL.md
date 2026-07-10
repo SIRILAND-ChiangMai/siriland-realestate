@@ -1,9 +1,15 @@
-# Installation
+# SIRILAND Build 2026.07.10.09 — Data Validator Hotfix
 
-1. Extract the ZIP.
-2. Copy all files and the complete `modules` folder into the GitHub project root.
-3. Replace the existing modular admin files when Windows asks.
-4. Commit and push with GitHub Desktop.
-5. Open `admin.html` and press `Ctrl + F5` once.
+1. ZIP dosyasını çıkarın.
+2. Proje kökünde aşağıdaki dosyaların üzerine yazın:
+   - index.html
+   - script.js
+   - style.css
+   - admin.html
+   - admin.css
+   - admin.js
+3. `modules` klasörünü eksiksiz şekilde mevcut `modules` klasörünün üzerine kopyalayın.
+4. GitHub Desktop ile Commit + Push yapın.
+5. Website ve admin panelinde Ctrl + F5 yapın.
 
-Do not delete `properties.js`, `properties.json`, or the `images` folder.
+`properties.js`, `properties.json` ve `images` klasörüne dokunmayın.

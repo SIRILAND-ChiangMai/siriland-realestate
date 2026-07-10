@@ -193,6 +193,27 @@
   function cleanTranslatedValue(v){
     return translateText(String(v || '').replace(/Features/gi,'').replace(/Approximate/gi,'ประมาณ').replace(/\s+/g,' ').trim());
   }
+  function isPlaceholderLike(v){
+    const s=String(v||'').trim().toLowerCase();
+    return !s || /^(?:-|–|—|0|false|null|undefined|n\/?a|none|no)$/i.test(s) ||
+      /ask for price|contact for price|please\s*update|details?\s*updat|recovered from|pending/i.test(s);
+  }
+  function isInvalidStructuredValue(v, kind){
+    const raw=String(v||'').trim();
+    if(isPlaceholderLike(raw)) return true;
+    const s=raw.toLowerCase();
+    if(/please|update|undefined|null|pending|details|pdate|katate|upd/i.test(s)) return true;
+    if(kind==='floor'){
+      return !(/(?:^|\s)(?:basement|ground|mezzanine|penthouse|ชั้น|kat|floor|\d+(?:st|nd|rd|th)?)(?:\s|$)/i.test(raw));
+    }
+    if(kind==='room'){
+      return !(/(?:unit|room|ห้อง|oda|房|studio|\b[a-z]?\d+[a-z-]*\b)/i.test(raw));
+    }
+    return false;
+  }
+  function hasOwnerFinance(p){
+    return !isPlaceholderLike(p?.ownerFinance) || !isPlaceholderLike(p?.installment);
+  }
   function normalizedType(p){ return String(p?.type||'').toLowerCase(); }
   function isLandProperty(p){ const x=normalizedType(p); return x.includes('land')||x.includes('ที่ดิน')||x.includes('arsa')||x.includes('土地'); }
   function isHouseProperty(p){ const x=normalizedType(p); return x.includes('house')||x.includes('villa')||x.includes('บ้าน')||x.includes('ev')||x.includes('住宅'); }
@@ -219,8 +240,8 @@
     }else{
       addSpec(rows,'area',L.area,p.area);
     }
-    addSpec(rows,'floor',L.floor,p.floor);
-    addSpec(rows,'room',L.room,p.room);
+    if(!isInvalidStructuredValue(p.floor,'floor')) addSpec(rows,'floor',L.floor,p.floor);
+    if(!isInvalidStructuredValue(p.room,'room')) addSpec(rows,'room',L.room,p.room);
     addSpec(rows,'parking',L.parking,p.parking);
     return rows;
   }
@@ -253,27 +274,27 @@
   }
   function sxHomeCard(p){
     const title = pick(p.title);
-    const specs = specsText(p,3);
+    const specs = specsInline(p);
     return `<article class="sx-property-card" data-mini-id="${p.id}">
       <div class="sx-card-photo"><img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'"><span>${(p.images||[]).length} ${t('photos')||'photos'}</span></div>
       <div class="sx-card-body">
         <div class="sx-card-meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div>
         <h4>${title}</h4>
         <strong>${translateText(p.price||p.salePrice||'')}</strong>
-        <p>${specs}</p>
+        ${specs?`<div class="property-spec-line home-icon-specs">${specs}</div>`:''}
       </div>
     </article>`;
   }
   function sxSmallCard(p){
     const title = pick(p.title);
-    const specs = specsText(p,3);
+    const specs = specsInline(p);
     return `<article class="sx-small-card" data-mini-id="${p.id}">
       <img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'">
       <div>
         <div class="sx-card-meta">${p.id} • ${trMap('city',p.city)}</div>
         <h4>${title}</h4>
         <strong>${translateText(p.price||p.salePrice||'')}</strong>
-        <p>${specs}</p>
+        ${specs?`<div class="property-spec-line home-icon-specs">${specs}</div>`:''}
       </div>
     </article>`;
   }
@@ -294,7 +315,7 @@
     const bestPrice = priced.slice().sort((a,b)=>parsePriceNumber(a.price||a.salePrice)-parsePriceNumber(b.price||b.salePrice));
     const condos = DATA.filter(p=>String(p.type||'').toLowerCase().includes('condo'));
     const houses = DATA.filter(p=>String(p.type||'').toLowerCase().includes('house'));
-    const finance = DATA.filter(p => propertyBlob(p).includes('owner finance') || propertyBlob(p).includes('ผ่อน') || propertyBlob(p).includes('free transfer') || propertyBlob(p).includes('0%'));
+    const finance = DATA.filter(hasOwnerFinance);
     const luxury = priced.filter(p=>parsePriceNumber(p.price||p.salePrice) >= 7000000);
 
     const homeLabels = {
@@ -315,7 +336,7 @@
     if($('sxPopularListings')) $('sxPopularListings').innerHTML = (featured.length?featured:newest).slice(0,6).map(sxHomeCard).join('');
     if($('sxBestPrice')) $('sxBestPrice').innerHTML = (bestPrice.length?bestPrice:featured).slice(0,5).map(sxSmallCard).join('');
     if($('sxPopularCondo')) $('sxPopularCondo').innerHTML = (condos.length?condos:featured).slice(0,5).map(sxSmallCard).join('');
-    if($('sxOwnerFinance')) $('sxOwnerFinance').innerHTML = (finance.length?finance:(houses.length?houses:featured)).slice(0,6).map(sxHomeCard).join('');
+    if($('sxOwnerFinance')) $('sxOwnerFinance').innerHTML = finance.length ? finance.slice(0,6).map(sxHomeCard).join('') : '<p class="empty-collection">No owner-finance listings available.</p>';
 
     // Backward compatibility for older home rows
     if($('featuredRow')) $('featuredRow').innerHTML = featured.slice(0,6).map(miniCard).join('');
@@ -323,7 +344,7 @@
     if($('popularSmallRow')) $('popularSmallRow').innerHTML = featured.slice(0,5).map(miniCompactCard).join('');
     if($('bestPriceSmallRow')) $('bestPriceSmallRow').innerHTML = (bestPrice.length?bestPrice:featured.slice(0,5)).map(miniCompactCard).join('');
     if($('condoSmallRow')) $('condoSmallRow').innerHTML = (condos.length?condos:featured.slice(0,5)).map(miniCompactCard).join('');
-    if($('financeRow')) $('financeRow').innerHTML = (finance.length?finance:(houses.length?houses:featured)).slice(0,5).map(miniCompactCard).join('');
+    if($('financeRow')) $('financeRow').innerHTML = finance.length ? finance.slice(0,5).map(miniCompactCard).join('') : '';
   }
   function fillHeroControls(){
     const heroType = $('heroType'); if(!heroType) return;

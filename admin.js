@@ -122,6 +122,21 @@ function isPlaceholderValue(v){
 function isMissingValue(v){
   return isPlaceholderValue(v);
 }
+function isInvalidStructuredValue(v, kind){
+  const raw=String(v||'').trim();
+  if(!raw || isPlaceholderValue(raw)) return false;
+  const s=raw.toLowerCase();
+  if(/please|update|undefined|null|pending|details|pdate|katate|upd/i.test(s)) return true;
+  if(kind==='floor') return !(/(?:^|\s)(?:basement|ground|mezzanine|penthouse|ชั้น|kat|floor|\d+(?:st|nd|rd|th)?)(?:\s|$)/i.test(raw));
+  if(kind==='room') return !(/(?:unit|room|ห้อง|oda|房|studio|\b[a-z]?\d+[a-z-]*\b)/i.test(raw));
+  return false;
+}
+function structuredFieldErrors(p){
+  const errors=[];
+  if(p.floor && isInvalidStructuredValue(p.floor,'floor')) errors.push(`${p.id||'Aktif ilan'}: Floor geçersiz (${p.floor})`);
+  if(p.room && isInvalidStructuredValue(p.room,'room')) errors.push(`${p.id||'Aktif ilan'}: Room geçersiz (${p.room})`);
+  return errors;
+}
 function cleanLineArray(arr){
   return (Array.isArray(arr)?arr:[]).map(x=>String(x||'').trim()).filter(x=>x && !isPlaceholderValue(x));
 }
@@ -161,6 +176,7 @@ function validateCurrentForm(){
   if(!p.map) warnings.push('Map URL eksik');
   if(!p.summary) warnings.push('Summary eksik');
   if(!p.images || !p.images.length) warnings.push('Images yok');
+  structuredFieldErrors(p).forEach(x=>warnings.push('HATALI VERİ: '+x));
   return warnings;
 }
 function upsertCurrent(silent=false){
@@ -290,6 +306,7 @@ function validate(){
     if(!type.includes('land')) ['bedrooms','bathrooms'].forEach(f=>{ if(isMissingValue(p[f])) warnings.push(`${p.id}: ${f} eksik`) });
     if(isMissingValue(p.area)) warnings.push(`${p.id}: area eksik`);
     if(!p.images||!p.images.length) warnings.push(`${p.id}: Foto yok`);
+    structuredFieldErrors(p).forEach(x=>errors.push(x));
   });
   const pending=Object.keys(pendingFilesById).map(id=>`${id}: ${pendingFilesById[id].length} yeni foto`).join('\n') || 'Yeni seçilen foto yok';
   let msg=errors.length?'<span class="bad">HATA:</span>\n'+errors.join('\n'):'<span class="ok">OK: properties.js üretilebilir.</span>';
@@ -332,7 +349,8 @@ function exportReady(){
     if(!p.status) warnings.push(label+': Status eksik');
     if(isMissingValue(p.price)) warnings.push(label+': Price eksik — fiyat yoksa Contact for Price yaz');
     if(!pick(p.title,'en') && !pick(p.title,'th')) warnings.push(label+': Title eksik');
-    if(isMissingValue(p.area)) warnings.push(label+': Area eksik');
+    if(isMissingValue(p.area) && isMissingValue(p.landSize)) warnings.push(label+': Area/Land Size eksik');
+    structuredFieldErrors(p).forEach(x=>hardErrors.push(x));
   });
 
   if(hardErrors.length){
