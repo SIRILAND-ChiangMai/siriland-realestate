@@ -298,6 +298,29 @@
       </div>
     </article>`;
   }
+  function applyCityCollection(city){
+    const cityFilter = $('cityFilter');
+    if(cityFilter){
+      const option = [...cityFilter.options].find(o =>
+        String(o.value || '').trim().toLowerCase() === String(city || '').trim().toLowerCase()
+      );
+      cityFilter.value = option ? option.value : 'all';
+    }
+    if($('typeFilter')) $('typeFilter').value = 'all';
+    if($('dealFilter')) $('dealFilter').value = 'all';
+    if($('searchInput')) $('searchInput').value = '';
+    window.__sirilandPriceRange = 'all';
+    window.__sirilandMinBeds = 'all';
+    window.__sirilandCollectionFilter = '';
+    currentPage = 1;
+    render();
+    const section = document.getElementById('properties');
+    if(section){
+      history.replaceState({}, '', window.location.pathname + window.location.search + '#properties');
+      section.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
   function renderHomeShowcase(){
     const cityOrder = [...new Set(DATA.map(p=>p.city).filter(Boolean))]
       .map(city => ({city, count: DATA.filter(p=>p.city===city).length}))
@@ -308,6 +331,15 @@
     if($('sxCityList')) $('sxCityList').innerHTML = cityCounts;
     const qc = $('quickCollections'); if(qc) qc.innerHTML = cityCounts;
     if($('citySideList')) $('citySideList').innerHTML = cityCounts;
+    document.querySelectorAll('[data-collection-city]').forEach(btn=>{
+      btn.onclick = event=>{
+        event.preventDefault();
+        event.stopPropagation();
+        applyCityCollection(btn.dataset.collectionCity);
+      };
+      btn.setAttribute('role','button');
+      btn.setAttribute('tabindex','0');
+    });
 
     const newest = DATA.slice().sort((a,b)=>String(b.updatedAt||b.createdAt||'').localeCompare(String(a.updatedAt||a.createdAt||'')));
     const featured = DATA.filter(p=>p.featured !== false);
@@ -798,7 +830,12 @@ function renderMapView(){
       return;
     }
     const collection = e.target.closest('[data-collection-city]');
-    if(collection){ if($('cityFilter')) $('cityFilter').value = collection.dataset.collectionCity; currentPage=1; location.hash='#properties'; render(); return; }
+    if(collection){
+      e.preventDefault();
+      e.stopPropagation();
+      applyCityCollection(collection.dataset.collectionCity);
+      return;
+    }
     const mini = e.target.closest('[data-mini-id]');
     if(mini){ const p=DATA.find(x=>x.id===mini.dataset.miniId); if(p) openModal(p.id); return; }
     const homeFilter = e.target.closest('[data-home-filter]');

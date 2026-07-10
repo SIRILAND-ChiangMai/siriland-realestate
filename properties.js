@@ -189,6 +189,238 @@ window.SIRILAND_PROPERTIES = [
     }
   },
   {
+    "id": "BKK-0003",
+    "title": {
+      "en": "Supalai Veranda Rama 9 Condo for Sale",
+      "th": "Supalai Veranda Rama 9 Condo for Sale",
+      "tr": "Supalai Veranda Rama 9 Condo for Sale",
+      "zh": "Supalai Veranda Rama 9 Condo for Sale"
+    },
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "3.29 MB",
+    "bedrooms": "1 Bedroom",
+    "bathrooms": "1 Bathroom",
+    "area": "37.5 sqm",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "description": {
+      "en": "Condo for sale at Supalai Veranda Rama 9, Bangkok. 1 bedroom, 1 bathroom, 37.5 sqm. Cash price 3.29 MB. Tenant income approximately 12,000 THB per month. Owner finance option: 10% down payment and up to 60 months at 0% interest, approximately 20,000 THB per month.",
+      "th": "Condo for sale at Supalai Veranda Rama 9, Bangkok. 1 bedroom, 1 bathroom, 37.5 sqm. Cash price 3.29 MB. Tenant income approximately 12,000 THB per month. Owner finance option: 10% down payment and up to 60 months at 0% interest, approximately 20,000 THB per month.",
+      "tr": "Condo for sale at Supalai Veranda Rama 9, Bangkok. 1 bedroom, 1 bathroom, 37.5 sqm. Cash price 3.29 MB. Tenant income approximately 12,000 THB per month. Owner finance option: 10% down payment and up to 60 months at 0% interest, approximately 20,000 THB per month.",
+      "zh": "Condo for sale at Supalai Veranda Rama 9, Bangkok. 1 bedroom, 1 bathroom, 37.5 sqm. Cash price 3.29 MB. Tenant income approximately 12,000 THB per month. Owner finance option: 10% down payment and up to 60 months at 0% interest, approximately 20,000 THB per month."
+    },
+    "highlights": {
+      "en": [
+        "1 Bedroom",
+        "1 Bathroom",
+        "37.5 sqm",
+        "Tenant 12,000 THB/Month",
+        "Owner Finance Available",
+        "10% Down Payment",
+        "0% Interest up to 60 Months"
+      ],
+      "th": [
+        "1 Bedroom",
+        "1 Bathroom",
+        "37.5 sqm",
+        "Tenant 12,000 THB/Month",
+        "Owner Finance Available",
+        "10% Down Payment",
+        "0% Interest up to 60 Months"
+      ],
+      "tr": [
+        "1 Bedroom",
+        "1 Bathroom",
+        "37.5 sqm",
+        "Tenant 12,000 THB/Month",
+        "Owner Finance Available",
+        "10% Down Payment",
+        "0% Interest up to 60 Months"
+      ],
+      "zh": [
+        "1 Bedroom",
+        "1 Bathroom",
+        "37.5 sqm",
+        "Tenant 12,000 THB/Month",
+        "Owner Finance Available",
+        "10% Down Payment",
+        "0% Interest up to 60 Months"
+      ]
+    },
+    "images": [],
+    "createdAt": "2026-07-10T15:20:51+07:00",
+    "updatedAt": "2026-07-10T15:20:51+07:00",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "3.29 MB",
+    "rentPrice": "",
+    "ownerFinance": "10% Down Payment",
+    "installment": "60 Months / 20,000 THB per Month / 0% Interest",
+    "freeTransfer": "",
+    "summary": "Investment condo at Supalai Veranda Rama 9 with tenant and owner-finance option."
+  },
+  {
+    "id": "BKK-0004",
+    "title": {
+      "en": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
+      "th": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
+      "tr": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
+      "zh": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale"
+    },
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "12.0 MB",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathrooms",
+    "area": "97.50 sqm",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "description": {
+      "en": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
+      "th": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
+      "tr": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
+      "zh": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026."
+    },
+    "highlights": {
+      "en": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ],
+      "th": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ],
+      "tr": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ],
+      "zh": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ]
+    },
+    "images": [],
+    "createdAt": "2026-07-10T15:20:51+07:00",
+    "updatedAt": "2026-07-10T15:20:51+07:00",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "12.0 MB",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "Spacious 97.50 sqm condo for sale in Sathorn-Suanplu, Bangkok."
+  },
+  {
+    "id": "BKK-0005",
+    "title": {
+      "en": "The Tree Sukhumvit 71-Ekkamai Condo for Rent",
+      "th": "The Tree Sukhumvit 71-Ekkamai Condo for Rent",
+      "tr": "The Tree Sukhumvit 71-Ekkamai Condo for Rent",
+      "zh": "The Tree Sukhumvit 71-Ekkamai Condo for Rent"
+    },
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Rent",
+    "status": "Leased Out",
+    "price": "16,000 THB / Month",
+    "bedrooms": "1 Bedroom + 1 Multi-purpose Room",
+    "bathrooms": "1 Bathroom",
+    "area": "34.57 sqm",
+    "room": "",
+    "floor": "10th Floor",
+    "map": "",
+    "description": {
+      "en": "Condo at The Tree Sukhumvit 71-Ekkamai, Bangkok. 1 bedroom plus 1 multi-purpose room, 1 bathroom, 34.57 sqm on the 10th floor. Rental price 16,000 THB per month. Currently leased out.",
+      "th": "Condo at The Tree Sukhumvit 71-Ekkamai, Bangkok. 1 bedroom plus 1 multi-purpose room, 1 bathroom, 34.57 sqm on the 10th floor. Rental price 16,000 THB per month. Currently leased out.",
+      "tr": "Condo at The Tree Sukhumvit 71-Ekkamai, Bangkok. 1 bedroom plus 1 multi-purpose room, 1 bathroom, 34.57 sqm on the 10th floor. Rental price 16,000 THB per month. Currently leased out.",
+      "zh": "Condo at The Tree Sukhumvit 71-Ekkamai, Bangkok. 1 bedroom plus 1 multi-purpose room, 1 bathroom, 34.57 sqm on the 10th floor. Rental price 16,000 THB per month. Currently leased out."
+    },
+    "highlights": {
+      "en": [
+        "1 Bedroom + 1 Multi-purpose Room",
+        "1 Bathroom",
+        "34.57 sqm",
+        "10th Floor",
+        "16,000 THB/Month",
+        "Leased Out"
+      ],
+      "th": [
+        "1 Bedroom + 1 Multi-purpose Room",
+        "1 Bathroom",
+        "34.57 sqm",
+        "10th Floor",
+        "16,000 THB/Month",
+        "Leased Out"
+      ],
+      "tr": [
+        "1 Bedroom + 1 Multi-purpose Room",
+        "1 Bathroom",
+        "34.57 sqm",
+        "10th Floor",
+        "16,000 THB/Month",
+        "Leased Out"
+      ],
+      "zh": [
+        "1 Bedroom + 1 Multi-purpose Room",
+        "1 Bathroom",
+        "34.57 sqm",
+        "10th Floor",
+        "16,000 THB/Month",
+        "Leased Out"
+      ]
+    },
+    "images": [],
+    "createdAt": "2026-07-10T15:20:51+07:00",
+    "updatedAt": "2026-07-10T15:20:51+07:00",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "",
+    "rentPrice": "16,000 THB / Month",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "Condo for rent at The Tree Sukhumvit 71-Ekkamai, currently leased out."
+  },
+  {
     "id": "CM-0001",
     "title": {
       "en": "Srithana 2 Huay Kaew Room 813 (8th Floor Corner Unit)",
