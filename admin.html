@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND CMS PRO 2030 - Data Recovery + List PRO</title>
-  <link rel="stylesheet" href="admin.css?v=2026071017">
+  <title>SIRILAND CMS PRO 2030 - Property Database Manager PRO</title>
+  <link rel="stylesheet" href="admin.css?v=2026071018">
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND CMS PRO 2030 — Data Recovery + List PRO</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
+    <div><div class="logo">SIRILAND CMS PRO 2030 — Property Database Manager PRO</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -107,7 +107,58 @@
     </div>
   </div>
 
-  <div class="panel" id="crmPanel">
+  
+  <div class="panel propertyDatabasePanel" id="propertyDatabasePanel">
+    <div class="propertyDbHead">
+      <div>
+        <h2>🗄️ Property Database Manager PRO</h2>
+        <p class="muted">İlan verisini ID bazlı birleştirir, yedekler, karşılaştırır ve yanlış veri kaybını engeller.</p>
+      </div>
+      <span class="dbStatusBadge" id="dbStatusBadge">READY</span>
+    </div>
+
+    <div class="dashboardGrid dbStatGrid">
+      <div class="statCard"><div class="statLabel">Toplam İlan</div><div class="statValue" id="dbTotalProperties">0</div></div>
+      <div class="statCard"><div class="statLabel">Şehir</div><div class="statValue" id="dbTotalCities">0</div></div>
+      <div class="statCard"><div class="statLabel">Duplicate ID</div><div class="statValue" id="dbDuplicateIds">0</div></div>
+      <div class="statCard"><div class="statLabel">Eksik ID</div><div class="statValue" id="dbMissingIds">0</div></div>
+      <div class="statCard"><div class="statLabel">Eksik Fotoğraf</div><div class="statValue" id="dbMissingImages">0</div></div>
+      <div class="statCard"><div class="statLabel">Eksik Fiyat</div><div class="statValue" id="dbMissingPrices">0</div></div>
+      <div class="statCard"><div class="statLabel">Silinenler</div><div class="statValue" id="dbTrashCount">0</div></div>
+      <div class="statCard"><div class="statLabel">Sürüm</div><div class="statValue compactValue" id="dbVersion">—</div></div>
+    </div>
+
+    <div class="dbToolbar">
+      <button class="btn green" id="dbCreateBackupBtn" type="button">Yedek Oluştur</button>
+      <button class="btn dark" id="dbExportFullBtn" type="button">Full Export</button>
+      <button class="btn dark" id="dbExportChangesBtn" type="button">Changes Only</button>
+      <button class="btn" id="dbImportMergeBtn" type="button">ID Bazlı Merge</button>
+      <input type="file" id="dbImportMergeFile" accept=".js,.json" hidden>
+      <button class="btn" id="dbCompareBtn" type="button">Önceki Sürümle Karşılaştır</button>
+      <button class="btn red" id="dbOpenTrashBtn" type="button">Recycle Bin</button>
+    </div>
+
+    <div class="dbGrid">
+      <section class="dbBox">
+        <h3>Database Health</h3>
+        <div id="dbHealthReport" class="dbReport"></div>
+      </section>
+      <section class="dbBox">
+        <h3>Version History</h3>
+        <div id="dbVersionHistory" class="dbVersionHistory"></div>
+      </section>
+      <section class="dbBox">
+        <h3>Changes</h3>
+        <div id="dbChangesReport" class="dbReport"></div>
+      </section>
+      <section class="dbBox">
+        <h3>Recycle Bin</h3>
+        <div id="dbTrashList" class="dbTrashList"></div>
+      </section>
+    </div>
+  </div>
+
+<div class="panel" id="crmPanel">
     <h2>👥 CRM — Phase 2.1 Customer Manager</h2>
     <div class="dashboardGrid">
       <div class="statCard"><div class="statLabel">Total Customers</div><div class="statValue" id="crmTotal">0</div></div>
@@ -338,7 +389,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071017"></script>
+<script src="admin.js?v=2026071018"></script>
 <script src="modules/dashboard.js?v=2026071012"></script>
 <script src="modules/crm.js?v=2026071012"></script>
 <script src="modules/export.js?v=2026071012"></script>

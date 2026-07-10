@@ -594,7 +594,19 @@ window.dropImg=(to,existing)=>{
   if(!existing) analyzeMediaFiles(); else renderImages();
 };
 window.editProp=id=>{const p=properties.find(x=>x.id===id);if(p)setForm(p)};
-window.deleteProp=id=>{if(confirm(id+' silinsin mi?')){properties=properties.filter(p=>p.id!==id);delete pendingFilesById[id];renderList();clearForm();validate()}};
+window.deleteProp=id=>{
+  if(!confirm(id+' silinsin mi? Bu ilan Recycle Bin içine taşınacak.'))return;
+  const p=properties.find(x=>x.id===id);
+  if(p){
+    const trash=dbGetTrash();
+    trash.unshift({...p,__deletedAt:new Date().toISOString()});
+    dbSetTrash(trash);
+  }
+  properties=properties.filter(p=>p.id!==id);
+  delete pendingFilesById[id];
+  dbSaveCurrentSnapshot('Delete '+id);
+  renderList();clearForm();validate();dbRender();
+};
 window.moveImg=(i,d)=>{const j=i+d;if(j<0||j>=imageFiles.length)return;[imageFiles[i],imageFiles[j]]=[imageFiles[j],imageFiles[i]];analyzeMediaFiles()};
 window.coverImg=i=>{if(i<=0||i>=imageFiles.length)return;const f=imageFiles.splice(i,1)[0];imageFiles.unshift(f);analyzeMediaFiles()};
 window.removeImg=i=>{if(i<0||i>=imageFiles.length)return;const f=imageFiles.splice(i,1)[0];if(f?.__sirilandPreview)URL.revokeObjectURL(f.__sirilandPreview);analyzeMediaFiles()};
@@ -1127,3 +1139,215 @@ function initPropertyListPro(){
   });
 }
 window.addEventListener('DOMContentLoaded',initPropertyListPro);
+
+
+const DB_KEYS={
+  versions:'siriland_db_versions_v1',
+  trash:'siriland_db_trash_v1',
+  baseline:'siriland_db_baseline_v1'
+};
+function dbNow(){return new Date().toISOString()}
+function dbVersionId(){
+  const d=new Date();
+  const p=n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}.${p(d.getMonth()+1)}.${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;
+}
+function dbClone(v){return JSON.parse(JSON.stringify(v))}
+function dbGetVersions(){try{return JSON.parse(localStorage.getItem(DB_KEYS.versions)||'[]')}catch(e){return[]}}
+function dbSetVersions(v){localStorage.setItem(DB_KEYS.versions,JSON.stringify(v.slice(0,20)))}
+function dbGetTrash(){try{return JSON.parse(localStorage.getItem(DB_KEYS.trash)||'[]')}catch(e){return[]}}
+function dbSetTrash(v){localStorage.setItem(DB_KEYS.trash,JSON.stringify(v))}
+function dbGetBaseline(){try{return JSON.parse(localStorage.getItem(DB_KEYS.baseline)||'[]')}catch(e){return[]}}
+function dbSetBaseline(v){localStorage.setItem(DB_KEYS.baseline,JSON.stringify(v))}
+function dbSignature(p){
+  const copy=dbClone(p||{});
+  delete copy.updatedAt;
+  return JSON.stringify(copy);
+}
+function dbAnalyze(list=properties){
+  const ids=list.map(p=>String(p.id||'').trim());
+  const duplicateIds=ids.filter((id,i)=>id&&ids.indexOf(id)!==i);
+  const missingId=list.filter(p=>!String(p.id||'').trim());
+  const missingImages=list.filter(p=>!Array.isArray(p.images)||!p.images.length);
+  const missingPrices=list.filter(p=>isMissingValue(p.price||p.salePrice||p.rentPrice));
+  const missingTranslations=list.filter(p=>{
+    const title=p.title||{},desc=p.description||{};
+    return langs.some(l=>!pick(title,l)||!pick(desc,l));
+  });
+  return {
+    duplicateIds:[...new Set(duplicateIds)],
+    missingId,
+    missingImages,
+    missingPrices,
+    missingTranslations,
+    cities:[...new Set(list.map(p=>p.city).filter(Boolean))]
+  };
+}
+function dbCompare(current=properties,baseline=dbGetBaseline()){
+  const oldMap=new Map((baseline||[]).map(p=>[p.id,p]));
+  const newMap=new Map((current||[]).map(p=>[p.id,p]));
+  const added=[],updated=[],deleted=[];
+  for(const [id,p] of newMap){
+    if(!oldMap.has(id))added.push(id);
+    else if(dbSignature(p)!==dbSignature(oldMap.get(id)))updated.push(id);
+  }
+  for(const [id] of oldMap){if(!newMap.has(id))deleted.push(id)}
+  return {added,updated,deleted};
+}
+function dbSaveCurrentSnapshot(label='Manual backup'){
+  const version={
+    id:dbVersionId(),
+    createdAt:dbNow(),
+    label,
+    count:properties.length,
+    properties:dbClone(properties)
+  };
+  const versions=dbGetVersions();
+  versions.unshift(version);
+  dbSetVersions(versions);
+  dbSetBaseline(dbClone(properties));
+  localStorage.setItem('siriland_last_property_count',String(properties.length));
+  localStorage.setItem('siriland_properties_backup',JSON.stringify(properties));
+  return version;
+}
+function dbDownload(filename,content,type='application/json'){
+  const blob=content instanceof Blob?content:new Blob([content],{type});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=filename;a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),500);
+}
+function dbRender(){
+  const a=dbAnalyze();
+  const versions=dbGetVersions();
+  const trash=dbGetTrash();
+  const changes=dbCompare();
+  const set=(id,v)=>{if($(id))$(id).textContent=v};
+  set('dbTotalProperties',properties.length);
+  set('dbTotalCities',a.cities.length);
+  set('dbDuplicateIds',a.duplicateIds.length);
+  set('dbMissingIds',a.missingId.length);
+  set('dbMissingImages',a.missingImages.length);
+  set('dbMissingPrices',a.missingPrices.length);
+  set('dbTrashCount',trash.length);
+  set('dbVersion',versions[0]?.id||'—');
+
+  const healthy=!a.duplicateIds.length&&!a.missingId.length;
+  if($('dbStatusBadge')){
+    $('dbStatusBadge').textContent=healthy?'READY':'CHECK';
+    $('dbStatusBadge').classList.toggle('bad',!healthy);
+  }
+
+  if($('dbHealthReport')) $('dbHealthReport').innerHTML=[
+    ['Duplicate ID',a.duplicateIds.length,a.duplicateIds.join(', ')||'Temiz'],
+    ['Eksik ID',a.missingId.length,a.missingId.map((_,i)=>'#'+(i+1)).join(', ')||'Temiz'],
+    ['Eksik Fotoğraf',a.missingImages.length,a.missingImages.slice(0,8).map(p=>p.id).join(', ')||'Temiz'],
+    ['Eksik Fiyat',a.missingPrices.length,a.missingPrices.slice(0,8).map(p=>p.id).join(', ')||'Temiz'],
+    ['Eksik Çeviri',a.missingTranslations.length,a.missingTranslations.slice(0,8).map(p=>p.id).join(', ')||'Temiz']
+  ].map(([label,count,detail])=>`<div class="dbHealthRow"><span>${label}</span><b>${count}</b><small>${escapeHtml(detail)}</small></div>`).join('');
+
+  if($('dbVersionHistory')) $('dbVersionHistory').innerHTML=versions.length?versions.map(v=>
+    `<div class="dbVersionItem"><div><b>${escapeHtml(v.id)}</b><span>${escapeHtml(v.label||'Backup')} • ${v.count} ilan</span></div><button class="btn dark" type="button" data-db-restore="${escapeHtml(v.id)}">Restore</button></div>`
+  ).join(''):'<span class="muted">Henüz yedek yok.</span>';
+
+  if($('dbChangesReport')) $('dbChangesReport').innerHTML=[
+    `<div><b>Added (${changes.added.length})</b><span>${escapeHtml(changes.added.join(', ')||'—')}</span></div>`,
+    `<div><b>Updated (${changes.updated.length})</b><span>${escapeHtml(changes.updated.join(', ')||'—')}</span></div>`,
+    `<div><b>Deleted (${changes.deleted.length})</b><span>${escapeHtml(changes.deleted.join(', ')||'—')}</span></div>`
+  ].join('');
+
+  if($('dbTrashList')) $('dbTrashList').innerHTML=trash.length?trash.map(p=>
+    `<div class="dbTrashItem"><div><b>${escapeHtml(p.id||'No ID')}</b><span>${escapeHtml(pick(p.title,'en')||pick(p.title,'th')||'Başlıksız')}</span></div><button class="btn" type="button" data-db-trash-restore="${escapeHtml(p.id||'')}">Geri Yükle</button></div>`
+  ).join(''):'<span class="muted">Recycle Bin boş.</span>';
+}
+function dbMergeById(incoming){
+  const currentMap=new Map(properties.map(p=>[String(p.id||'').trim(),p]));
+  const added=[],updated=[],skipped=[];
+  incoming.forEach(raw=>{
+    const p=cleanProperty(raw);
+    const id=String(p.id||'').trim();
+    if(!id){skipped.push('(missing id)');return}
+    if(!currentMap.has(id)){currentMap.set(id,p);added.push(id);return}
+    const existing=currentMap.get(id);
+    const merged={...existing,...p};
+    merged.title={...(existing.title||{}),...(p.title||{})};
+    merged.description={...(existing.description||{}),...(p.description||{})};
+    merged.highlights={...(existing.highlights||{}),...(p.highlights||{})};
+    if(dbSignature(existing)!==dbSignature(merged))updated.push(id);
+    currentMap.set(id,merged);
+  });
+  properties=[...currentMap.values()].sort((a,b)=>String(a.id||'').localeCompare(String(b.id||''),undefined,{numeric:true}));
+  return {added,updated,skipped};
+}
+function dbInit(){
+  if(!dbGetBaseline().length)dbSetBaseline(dbClone(properties));
+  dbRender();
+
+  $('dbCreateBackupBtn')?.addEventListener('click',()=>{
+    const v=dbSaveCurrentSnapshot('Manual backup');
+    dbRender();alert('Yedek oluşturuldu: '+v.id);
+  });
+  $('dbExportFullBtn')?.addEventListener('click',()=>{
+    dbSaveCurrentSnapshot('Full export');
+    const content='window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\\nconst properties = window.SIRILAND_PROPERTIES;\\n';
+    dbDownload('properties-full-'+dbVersionId()+'.js',content,'text/javascript');
+    dbRender();
+  });
+  $('dbExportChangesBtn')?.addEventListener('click',()=>{
+    const changes=dbCompare();
+    const payload={
+      version:dbVersionId(),
+      createdAt:dbNow(),
+      added:properties.filter(p=>changes.added.includes(p.id)),
+      updated:properties.filter(p=>changes.updated.includes(p.id)),
+      deleted:changes.deleted
+    };
+    dbDownload('property-changes-'+payload.version+'.json',JSON.stringify(payload,null,2));
+  });
+  $('dbImportMergeBtn')?.addEventListener('click',()=>$('dbImportMergeFile')?.click());
+  $('dbImportMergeFile')?.addEventListener('change',e=>{
+    const f=e.target.files?.[0];if(!f)return;
+    const rd=new FileReader();
+    rd.onload=()=>{
+      try{
+        const incoming=extractProperties(rd.result);
+        dbSaveCurrentSnapshot('Before merge');
+        const result=dbMergeById(incoming);
+        dbSaveCurrentSnapshot('After merge');
+        renderList();dbRender();
+        alert(`Merge tamamlandı. Added: ${result.added.length}, Updated: ${result.updated.length}, Skipped: ${result.skipped.length}`);
+      }catch(err){alert('Merge hatası: '+err.message)}
+    };
+    rd.readAsText(f);
+  });
+  $('dbCompareBtn')?.addEventListener('click',()=>{dbRender();document.getElementById('dbChangesReport')?.scrollIntoView({behavior:'smooth',block:'center'})});
+  $('dbOpenTrashBtn')?.addEventListener('click',()=>document.getElementById('dbTrashList')?.scrollIntoView({behavior:'smooth',block:'center'}));
+
+  document.addEventListener('click',e=>{
+    const restore=e.target.closest('[data-db-restore]');
+    if(restore){
+      const v=dbGetVersions().find(x=>x.id===restore.dataset.dbRestore);
+      if(v&&confirm(`${v.id} sürümüne dönülsün mü? Mevcut liste önce yedeklenecek.`)){
+        dbSaveCurrentSnapshot('Before restore');
+        properties=dbClone(v.properties||[]);
+        dbSetBaseline(dbClone(properties));
+        renderList();clearForm();validate();dbRender();
+      }
+    }
+    const trashRestore=e.target.closest('[data-db-trash-restore]');
+    if(trashRestore){
+      const id=trashRestore.dataset.dbTrashRestore;
+      const trash=dbGetTrash();
+      const p=trash.find(x=>x.id===id);
+      if(p){
+        const clean=dbClone(p);delete clean.__deletedAt;
+        if(!properties.some(x=>x.id===id))properties.push(clean);
+        dbSetTrash(trash.filter(x=>x.id!==id));
+        dbSaveCurrentSnapshot('Restore '+id);
+        renderList();dbRender();
+      }
+    }
+  });
+}
+window.addEventListener('DOMContentLoaded',dbInit);
+
+$('saveBtn')?.addEventListener('click',()=>setTimeout(()=>{dbSaveCurrentSnapshot('Property save');dbRender()},0));
