@@ -7,6 +7,9 @@
   <meta name="description" content="Luxury real estate in Thailand. Buy, rent and invest in Chiang Mai property with SIRILAND." />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="visitor-counter.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynZpGgVqjMZPZ8V0RjD8fT6Q0v9E=" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
 </head>
 <body>
   <header class="site-header">
@@ -132,7 +135,7 @@
             <div><strong>🗺️ Property Map</strong><span id="mapResultCount">0 listings</span></div>
             <button class="smallbtn goldbtn" id="openSelectedMap">Open Google Maps</button>
           </div>
-          <iframe id="propertyMapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div id="propertyMapCanvas" role="application" aria-label="Interactive property map"></div>
         </div>
         <div class="map-list" id="mapPropertyList"></div>
       </div>
@@ -247,6 +250,8 @@
   <footer><p>© SIRILAND Real Estate Thailand</p></footer>
   <script src="data/i18n.js"></script>
   <script src="properties.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script src="script.js"></script>
   <script src="visitor-counter.js"></script>
 </body>

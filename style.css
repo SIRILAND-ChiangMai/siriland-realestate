@@ -38,7 +38,7 @@
 .map-panel{background:#fff;border:1px solid rgba(216,178,92,.35);border-radius:22px;overflow:hidden;box-shadow:0 18px 50px rgba(10,20,30,.1);position:sticky;top:112px}
 .map-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid #eadfca;background:#fffaf0}
 .map-head strong{display:block;color:#07111f;font-size:18px}.map-head span{display:block;color:#64748b;font-size:12px;font-weight:800}
-#propertyMapFrame{width:100%;height:560px;border:0;display:block;background:#eadfca}
+#propertyMapCanvas{width:100%;height:560px;display:block;background:#eadfca;z-index:1}
 .map-list{display:flex;flex-direction:column;gap:12px;max-height:680px;overflow:auto;padding-right:4px}
 .map-item{display:grid;grid-template-columns:132px 1fr;gap:12px;background:#fff;border:1px solid rgba(216,178,92,.28);border-radius:18px;padding:10px;box-shadow:0 10px 26px rgba(7,17,31,.08);cursor:pointer;transition:.2s}
 .map-item:hover,.map-item.active{border-color:#d8b25c;box-shadow:0 16px 34px rgba(7,17,31,.14);transform:translateY(-2px)}
@@ -46,8 +46,8 @@
 .map-item h4{font-size:15px;line-height:1.25;margin:2px 0 4px;color:#07111f;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .map-item strong{color:#b98b32;font-size:17px}.map-item p{margin:4px 0;color:#4d5b6b;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .map-meta{font-size:11px;color:#b98b32;font-weight:1000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.map-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.map-actions .smallbtn{font-size:12px;padding:8px 10px;border-radius:9px}
-@media(max-width:980px){.map-view{grid-template-columns:1fr}.map-panel{position:relative;top:auto}#propertyMapFrame{height:390px}.map-list{max-height:none}.map-item{grid-template-columns:120px 1fr}.map-item img{width:120px;height:104px}}
-@media(max-width:540px){.view-switch{justify-content:stretch}.view-switch button{flex:1;padding:11px 10px}.map-head{align-items:flex-start;flex-direction:column}#propertyMapFrame{height:330px}.map-item{grid-template-columns:104px 1fr;padding:8px}.map-item img{width:104px;height:100px}.map-actions{display:none}.map-item h4{font-size:14px}.map-item strong{font-size:15px}}
+@media(max-width:980px){.map-view{grid-template-columns:1fr}.map-panel{position:relative;top:auto}#propertyMapCanvas{height:390px}.map-list{max-height:none}.map-item{grid-template-columns:120px 1fr}.map-item img{width:120px;height:104px}}
+@media(max-width:540px){.view-switch{justify-content:stretch}.view-switch button{flex:1;padding:11px 10px}.map-head{align-items:flex-start;flex-direction:column}#propertyMapCanvas{height:330px}.map-item{grid-template-columns:104px 1fr;padding:8px}.map-item img{width:104px;height:100px}.map-actions{display:none}.map-item h4{font-size:14px}.map-item strong{font-size:15px}}
 
 /* SIRILAND CMS PRO Sprint 3.4 — Homepage PRO + Search PRO + 4-per-page */
 .hero{min-height:620px;padding-bottom:90px}.hero-content{max-width:980px}.hero-search-pro{margin-top:28px;background:rgba(255,255,255,.96);border:1px solid rgba(216,178,92,.45);border-radius:24px;padding:18px;box-shadow:0 26px 60px rgba(7,17,31,.22);backdrop-filter:blur(10px)}
@@ -94,7 +94,7 @@
   .modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .modal-actions .smallbtn{width:100%;text-align:center;margin:0}
   .map-view{grid-template-columns:1fr!important}
-  .map-panel iframe,#propertyMapFrame{min-height:320px}
+  .map-panel #propertyMapCanvas{min-height:320px}
   .map-item{grid-template-columns:92px 1fr!important}
 }
 
@@ -278,3 +278,16 @@
   .detail-pro-contact-card .modal-actions{grid-template-columns:1fr 1fr}
   .detail-pro-section{padding:17px}
 }
+
+
+/* Build 2026.07.10.03 — Interactive Map PRO */
+#propertyMapCanvas .leaflet-control-attribution{font-size:10px}
+.siriland-city-marker-wrap,.siriland-property-pin-wrap{background:transparent;border:0}
+.siriland-city-marker{min-width:106px;height:48px;border-radius:16px;background:#07111f;color:#fff;border:2px solid #d8b25c;display:flex;align-items:center;justify-content:center;gap:8px;padding:5px 10px;box-shadow:0 12px 28px rgba(7,17,31,.32);white-space:nowrap}
+.siriland-city-marker strong{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#d8b25c;color:#07111f;font-size:14px}.siriland-city-marker span{font-size:12px;font-weight:900;overflow:hidden;text-overflow:ellipsis}
+.siriland-property-pin{width:38px;height:38px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;background:#07111f;border:2px solid #d8b25c;box-shadow:0 8px 18px rgba(7,17,31,.3)}
+.siriland-property-pin::first-letter{transform:rotate(45deg)}
+.leaflet-property-popup{display:grid;grid-template-columns:112px 1fr;gap:10px;min-width:285px}.leaflet-property-popup img{width:112px;height:100px;object-fit:cover;border-radius:12px}.leaflet-property-popup small{display:block;color:#b98b32;font-weight:900}.leaflet-property-popup strong{display:block;color:#07111f;font-size:14px;line-height:1.25;margin:3px 0}.leaflet-property-popup b{color:#b98b32;font-size:17px}.leaflet-property-popup em{display:block;color:#8a5b20;font-size:11px;margin-top:5px}.leaflet-popup-specs{display:flex;gap:6px;flex-wrap:wrap;color:#536171;font-size:11px;margin-top:4px}.leaflet-popup-actions{display:flex;gap:7px;margin-top:8px}.leaflet-popup-actions button,.leaflet-popup-actions a{border:0;border-radius:9px;padding:7px 10px;background:#07111f;color:#fff;text-decoration:none;font-weight:900;cursor:pointer;font-size:11px}.leaflet-popup-actions a{background:#d8b25c;color:#07111f}
+.map-location-status{display:inline-flex;margin-top:5px;border-radius:999px;padding:4px 7px;font-size:10px;font-weight:900}.map-location-status.exact{background:#e8f7ed;color:#0f7b3f}.map-location-status.city{background:#fff2d6;color:#8a5b20}
+.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(216,178,92,.38)}.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background:#07111f;color:#d8b25c;font-weight:1000}
+@media(max-width:640px){.leaflet-property-popup{grid-template-columns:84px 1fr;min-width:240px}.leaflet-property-popup img{width:84px;height:84px}.siriland-city-marker{min-width:88px}.siriland-city-marker span{max-width:48px}}

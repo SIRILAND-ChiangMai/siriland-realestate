@@ -311,64 +311,163 @@
     </article>`;
   }
 
-  let selectedMapProperty = null;
-  const CITY_COORDS = {
-    'Chiang Mai':'18.7883,98.9853',
-    'Bangkok':'13.7563,100.5018',
-    'Phichit':'16.4429,100.3482',
-    'Phitsanulok':'16.8211,100.2659',
-    'Nakhon Sawan':'15.7047,100.1372'
-  };
-  function propertyMapQuery(p){
-    if(p && (p.lat || p.latitude) && (p.lng || p.longitude)) return `${p.lat||p.latitude},${p.lng||p.longitude}`;
-    if(p && p.map) return String(p.map).trim();
-    return [pick(p.title), p.city, p.type, 'Thailand'].filter(Boolean).join(' ');
+let selectedMapProperty = null;
+let leafletMap = null;
+let exactMarkerLayer = null;
+let cityMarkerLayer = null;
+let mapInitialized = false;
+
+const CITY_COORDS = {
+  'Chiang Mai':[18.7883,98.9853],
+  'Bangkok':[13.7563,100.5018],
+  'Phichit':[16.4429,100.3482],
+  'Phitsanulok':[16.8211,100.2659],
+  'Nakhon Sawan':[15.7047,100.1372]
+};
+
+function numericCoord(v){
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+function coordinatesFromMapUrl(url){
+  const s = String(url || '');
+  const patterns = [
+    /@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/,
+    /[?&](?:q|query|ll)=(-?\d+(?:\.\d+)?)[,%2C\s]+(-?\d+(?:\.\d+)?)/i,
+    /\/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)(?:[/?]|$)/
+  ];
+  for(const re of patterns){
+    const m=s.match(re);
+    if(m) return [Number(m[1]), Number(m[2])];
   }
-  function cityMapQuery(city){ return CITY_COORDS[city] || [city,'Thailand'].filter(Boolean).join(' '); }
-  function mapEmbedUrl(p){
-    const q = propertyMapQuery(p);
-    return 'https://www.google.com/maps?q=' + encodeURIComponent(q) + '&z=16&output=embed';
+  return null;
+}
+function propertyCoords(p){
+  const lat=numericCoord(p?.lat ?? p?.latitude);
+  const lng=numericCoord(p?.lng ?? p?.longitude);
+  if(lat !== null && lng !== null) return [lat,lng];
+  return coordinatesFromMapUrl(p?.map);
+}
+function cityCoords(city){ return CITY_COORDS[city] || [15.87,100.99]; }
+function propertyMapQuery(p){
+  const c=propertyCoords(p);
+  if(c) return c.join(',');
+  return [pick(p?.title), p?.city, p?.type, 'Thailand'].filter(Boolean).join(' ');
+}
+function propertyGoogleMapsUrl(p){
+  return p?.map || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(propertyMapQuery(p)));
+}
+function mapPopupHtml(p, exact=true){
+  const title=pick(p.title);
+  const specs=propertySpecs(p).slice(0,3).map(x=>`<span>${x.icon||''} ${x.value}</span>`).join('');
+  return `<div class="leaflet-property-popup">
+    <img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'">
+    <div><small>${p.id} • ${trMap('city',p.city)}</small><strong>${title}</strong><b>${translateText(p.price||p.salePrice||p.rentPrice||'')}</b>
+    <div class="leaflet-popup-specs">${specs}</div>
+    ${exact?'':'<em>Exact pin is not stored yet; showing the city area.</em>'}
+    <div class="leaflet-popup-actions"><button type="button" data-open="${p.id}">${t('details')}</button><a href="${propertyGoogleMapsUrl(p)}" target="_blank">${t('map')}</a></div></div>
+  </div>`;
+}
+function cityMarkerIcon(city,count){
+  return L.divIcon({
+    className:'siriland-city-marker-wrap',
+    html:`<div class="siriland-city-marker"><strong>${count}</strong><span>${trMap('city',city)}</span></div>`,
+    iconSize:[110,52], iconAnchor:[55,26]
+  });
+}
+function exactMarkerIcon(){
+  return L.divIcon({className:'siriland-property-pin-wrap',html:'<div class="siriland-property-pin">🏠</div>',iconSize:[38,38],iconAnchor:[19,34],popupAnchor:[0,-34]});
+}
+function ensureMap(){
+  const canvas=$('propertyMapCanvas');
+  if(!canvas || typeof L==='undefined') return false;
+  if(!leafletMap){
+    leafletMap=L.map(canvas,{zoomControl:true,scrollWheelZoom:true}).setView([15.87,100.99],6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(leafletMap);
+    exactMarkerLayer=L.markerClusterGroup({showCoverageOnHover:false,spiderfyOnMaxZoom:true,maxClusterRadius:48});
+    cityMarkerLayer=L.layerGroup();
+    leafletMap.addLayer(exactMarkerLayer);
+    leafletMap.addLayer(cityMarkerLayer);
+    mapInitialized=true;
   }
-  function setMapProperty(p){
-    if(!p) return;
-    selectedMapProperty = p;
-    const frame = $('propertyMapFrame');
-    if(frame) frame.src = mapEmbedUrl(p);
-    const btn = $('openSelectedMap');
-    if(btn) btn.onclick = () => window.open(p.map || ('https://maps.google.com/?q=' + encodeURIComponent(propertyMapQuery(p))), '_blank');
-    document.querySelectorAll('.map-item').forEach(el => el.classList.toggle('active', el.dataset.mapId === p.id));
-    const active = document.querySelector(`.map-item[data-map-id="${CSS.escape(p.id)}"]`);
-    if(active) active.scrollIntoView({block:'nearest',behavior:'smooth'});
+  setTimeout(()=>leafletMap.invalidateSize(),60);
+  return true;
+}
+function setMapProperty(p){
+  if(!p || !ensureMap()) return;
+  selectedMapProperty=p;
+  const coords=propertyCoords(p) || cityCoords(p.city);
+  leafletMap.flyTo(coords, propertyCoords(p)?16:11, {duration:.65});
+  const btn=$('openSelectedMap');
+  if(btn) btn.onclick=()=>window.open(propertyGoogleMapsUrl(p),'_blank');
+  document.querySelectorAll('.map-item').forEach(el=>el.classList.toggle('active',el.dataset.mapId===p.id));
+  const active=document.querySelector(`.map-item[data-map-id="${CSS.escape(p.id)}"]`);
+  if(active) active.scrollIntoView({block:'nearest',behavior:'smooth'});
+  if(propertyCoords(p)){
+    exactMarkerLayer.eachLayer(marker=>{ if(marker.__propertyId===p.id){ exactMarkerLayer.zoomToShowLayer(marker,()=>marker.openPopup()); } });
+  } else {
+    L.popup({maxWidth:340}).setLatLng(coords).setContent(mapPopupHtml(p,false)).openOn(leafletMap);
   }
-  function setMapCity(city){
-    const frame = $('propertyMapFrame');
-    if(frame) frame.src = 'https://www.google.com/maps?q=' + encodeURIComponent(cityMapQuery(city)) + '&z=12&output=embed';
-    const btn = $('openSelectedMap');
-    if(btn) btn.onclick = () => window.open('https://maps.google.com/?q=' + encodeURIComponent(cityMapQuery(city)), '_blank');
-    document.querySelectorAll('.map-cluster').forEach(el => el.classList.toggle('active', el.dataset.city === city));
-  }
-  function mapItem(p){
-    const title = pick(p.title);
-    const specs = propertySpecs(p).slice(0,3).map(x=>`${x.label}: ${x.value}`).join(' • ');
-    return `<article class="map-item" data-map-id="${p.id}">
-      <img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'">
-      <div><div class="map-meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div>
-      <h4>${title}</h4><strong>${translateText(p.price||'')}</strong>${specs?`<p>${specs}</p>`:''}
-      <div class="map-actions"><button class="smallbtn goldbtn" data-open="${p.id}">${t('details')}</button>${p.map?`<a class="smallbtn" target="_blank" href="${p.map}">${t('map')}</a>`:''}</div></div>
-    </article>`;
-  }
-  function renderMapView(){
-    const mapList = $('mapPropertyList');
-    const count = $('mapResultCount');
-    if(count) count.textContent = currentList.length + (lang==='th'?' รายการ':lang==='tr'?' ilan':' listings');
-    if(!mapList) return;
-    const cityGroups = [...new Set(currentList.map(p=>p.city).filter(Boolean))]
-      .map(city => `<button class="map-cluster" data-city="${city}"><strong>${trMap('city',city)}</strong><span>${currentList.filter(p=>p.city===city).length}</span></button>`).join('');
-    const clusterHtml = cityGroups ? `<div class="map-clusters"><div class="map-cluster-title">📍 ${lang==='th'?'พื้นที่':'Areas'}</div>${cityGroups}</div>` : '';
-    mapList.innerHTML = currentList.length ? clusterHtml + currentList.slice(0,100).map(mapItem).join('') : '<p>No map results</p>';
-    const first = currentList[0];
-    if(first) setMapProperty(selectedMapProperty && currentList.some(p=>p.id===selectedMapProperty.id) ? selectedMapProperty : first);
-  }
+}
+function setMapCity(city){
+  if(!ensureMap()) return;
+  leafletMap.flyTo(cityCoords(city),11,{duration:.65});
+  const btn=$('openSelectedMap');
+  if(btn) btn.onclick=()=>window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(city+', Thailand'),'_blank');
+  document.querySelectorAll('.map-cluster').forEach(el=>el.classList.toggle('active',el.dataset.city===city));
+}
+function mapItem(p){
+  const title=pick(p.title);
+  const specs=propertySpecs(p).slice(0,3).map(x=>`${x.value}`).join(' • ');
+  const exact=!!propertyCoords(p);
+  return `<article class="map-item" data-map-id="${p.id}">
+    <img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'">
+    <div><div class="map-meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div>
+    <h4>${title}</h4><strong>${translateText(p.price||p.salePrice||p.rentPrice||'')}</strong>${specs?`<p>${specs}</p>`:''}
+    <span class="map-location-status ${exact?'exact':'city'}">${exact?'📍 Exact location':'📍 City area'}</span>
+    <div class="map-actions"><button class="smallbtn goldbtn" data-open="${p.id}">${t('details')}</button><a class="smallbtn" target="_blank" href="${propertyGoogleMapsUrl(p)}">${t('map')}</a></div></div>
+  </article>`;
+}
+function rebuildMapMarkers(){
+  if(!ensureMap()) return;
+  exactMarkerLayer.clearLayers(); cityMarkerLayer.clearLayers();
+  const cityGroups={};
+  currentList.forEach(p=>{
+    const coords=propertyCoords(p);
+    if(coords){
+      const marker=L.marker(coords,{icon:exactMarkerIcon(),title:pick(p.title)});
+      marker.__propertyId=p.id;
+      marker.bindPopup(mapPopupHtml(p,true),{maxWidth:350});
+      marker.on('click',()=>{selectedMapProperty=p;document.querySelectorAll('.map-item').forEach(el=>el.classList.toggle('active',el.dataset.mapId===p.id));});
+      exactMarkerLayer.addLayer(marker);
+    } else if(p.city){
+      (cityGroups[p.city] ||= []).push(p);
+    }
+  });
+  Object.entries(cityGroups).forEach(([city,items])=>{
+    const marker=L.marker(cityCoords(city),{icon:cityMarkerIcon(city,items.length),title:`${city}: ${items.length}`});
+    marker.on('click',()=>setMapCity(city));
+    cityMarkerLayer.addLayer(marker);
+  });
+  const bounds=[];
+  exactMarkerLayer.eachLayer(m=>bounds.push(m.getLatLng()));
+  Object.keys(cityGroups).forEach(city=>bounds.push(L.latLng(cityCoords(city))));
+  if(bounds.length>1) leafletMap.fitBounds(L.latLngBounds(bounds),{padding:[35,35],maxZoom:12});
+  else if(bounds.length===1) leafletMap.setView(bounds[0],12);
+}
+function renderMapView(){
+  const mapList=$('mapPropertyList');
+  const count=$('mapResultCount');
+  if(count) count.textContent=currentList.length+(lang==='th'?' รายการ':lang==='tr'?' ilan':' listings');
+  if(!mapList) return;
+  const cityGroups=[...new Set(currentList.map(p=>p.city).filter(Boolean))]
+    .map(city=>`<button class="map-cluster" data-city="${city}"><strong>${trMap('city',city)}</strong><span>${currentList.filter(p=>p.city===city).length}</span></button>`).join('');
+  const clusterHtml=cityGroups?`<div class="map-clusters"><div class="map-cluster-title">📍 ${lang==='th'?'พื้นที่':'Areas'}</div>${cityGroups}</div>`:'';
+  mapList.innerHTML=currentList.length?clusterHtml+currentList.slice(0,100).map(mapItem).join(''):'<p>No map results</p>';
+  rebuildMapMarkers();
+  const first=currentList[0];
+  if(first && selectedMapProperty && currentList.some(p=>p.id===selectedMapProperty.id)) setMapProperty(selectedMapProperty);
+}
   function setViewMode(mode){
     const isMap = mode === 'map';
     $('propertyGrid')?.classList.toggle('hidden', isMap);
