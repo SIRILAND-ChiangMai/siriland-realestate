@@ -1622,7 +1622,7 @@
     "bathrooms": "-",
     "area": "61.6 Sq.Wah Usable Area: 250 Sq.M.",
     "room": "Soi 27",
-    "floor": "211/190,",
+    "floor": "",
     "map": "https://maps.app.goo.gl/yPM5qz9by9yBNaka6",
     "description": {
       "en": "Siwalee Klong Chol House No. Soi 27 (211/190,). 4 Bedrooms | Private Swimming Pool with Jacuzzi. Area 61.6 Sq.Wah Usable Area: 250 Sq.M. Soi 27 211/190,.",
@@ -1994,7 +1994,7 @@
     "bathrooms": "2 Bathrooms",
     "area": "64.22 sq.m.",
     "room": "416",
-    "floor": "Please update4th Floor",
+    "floor": "",
     "map": "https://maps.google.com/?q=Punna+Residence+5+Chiang+Mai",
     "salePrice": "3.9 MB",
     "rentPrice": "",
@@ -2094,8 +2094,8 @@
     "bedrooms": "1 Bedroom",
     "bathrooms": "1 Bathrooms",
     "area": "35 Sq.m.",
-    "room": "Please uUnit 236pdate",
-    "floor": "Please upd2nd Floorate",
+    "room": "",
+    "floor": "",
     "map": "https://maps.google.com/?q=Hillside+Condo+3+Nimmanhaemin+Soi+8+Chiang+Mai",
     "salePrice": "",
     "rentPrice": "",
@@ -3382,7 +3382,7 @@
     "id": "PCT-0005",
     "city": "Phichit",
     "type": "House",
-    "deal": "",
+    "deal": "Sale",
     "status": "Available",
     "price": "3,790,000",
     "bedrooms": "4",
@@ -3421,15 +3421,15 @@
     "appliances": [],
     "title": {
       "en": "Brand New 2-Storey House for Sale in Phichit City",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "th": "Brand New 2-Storey House for Sale in Phichit City",
+      "tr": "Brand New 2-Storey House for Sale in Phichit City",
+      "zh": "Brand New 2-Storey House for Sale in Phichit City"
     },
     "description": {
       "en": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today.",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "th": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today.",
+      "tr": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today.",
+      "zh": "Brand New 4 Bedroom House for Sale in Phichit City | THB 3.79 Million\n\nMeta Description\n\nBrand new 4-bedroom, 2-bathroom house for sale in Phichit City. 183.35 sq.m. usable area on 56 sq.wah land. Ready to move in with furniture included. Only THB 3.79 million. Contact SIRILAND Real Estate today."
     },
     "highlights": {
       "en": [
