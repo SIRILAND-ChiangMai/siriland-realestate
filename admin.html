@@ -37,6 +37,7 @@
     .crmStage h4{margin:0 0 8px;font-size:12px;color:var(--navy);text-transform:uppercase}
     .crmChip{display:inline-block;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800;background:#eef2ff;color:#172033;margin:2px}
     .crmSearch{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+    .type-field-hidden{display:none!important}.type-note{grid-column:1/-1;background:#eef6ff;border:1px solid #bfdbfe;border-radius:12px;padding:10px;font-size:13px;color:#1e3a5f}
     @media(max-width:900px){.crmPipeline,.crmSearch,.dashboardGrid,.miniList,.grid,.grid2,.grid3{grid-template-columns:1fr}.top{display:block}.imageCard{grid-template-columns:1fr}.thumbWrap{width:100%;height:180px}}
   </style>
 </head>
@@ -99,12 +100,22 @@
           <div><label data-ui="deal">Deal</label><input id="deal" placeholder="Sale / Rent"></div>
           <div><label data-ui="status">Status</label><input id="status" placeholder="Available"></div>
           <div><label data-ui="price">Price</label><input id="price" placeholder="2.59 MB"></div>
-          <div><label data-ui="bedrooms">Bedrooms</label><input id="bedrooms"></div>
-          <div><label data-ui="bathrooms">Bathrooms</label><input id="bathrooms"></div>
-          <div><label data-ui="area">Area</label><input id="area"></div>
-          <div><label data-ui="room">Room</label><input id="room"></div>
-          <div><label data-ui="floor">Floor</label><input id="floor"></div>
+          <div data-property-field="bedrooms"><label data-ui="bedrooms">Bedrooms</label><input id="bedrooms"></div>
+          <div data-property-field="bathrooms"><label data-ui="bathrooms">Bathrooms</label><input id="bathrooms"></div>
+          <div data-property-field="area"><label data-ui="area">Area / Internal Area</label><input id="area"></div>
+          <div data-property-field="room"><label data-ui="room">Room</label><input id="room"></div>
+          <div data-property-field="floor"><label data-ui="floor">Floor</label><input id="floor"></div>
           <div><label data-ui="map">Map URL</label><input id="map"></div>
+          <div data-property-field="landSize"><label>🌳 Land Size</label><input id="landSize" placeholder="7-2-80 Rai / 97.6 sq.w."></div>
+          <div data-property-field="landAreaSqm"><label>📐 Land Area (sqm)</label><input id="landAreaSqm" placeholder="11,920 sqm"></div>
+          <div data-property-field="buildingArea"><label>🏠 Building Area</label><input id="buildingArea" placeholder="240 sqm"></div>
+          <div data-property-field="parking"><label>🚗 Parking</label><input id="parking" placeholder="2 Cars"></div>
+          <div data-property-field="titleDeed"><label>📄 Title Deed</label><input id="titleDeed" placeholder="Chanote / Nor Sor 3 Gor"></div>
+          <div data-property-field="roadAccess"><label>🛣️ Road Access</label><input id="roadAccess" placeholder="Public road / Concrete road"></div>
+          <div data-property-field="frontage"><label>↔️ Frontage</label><input id="frontage" placeholder="20 meters"></div>
+          <div data-property-field="zoning"><label>🗺️ Zoning / Land Use</label><input id="zoning" placeholder="Residential / Commercial / Agricultural"></div>
+          <div data-property-field="utilities"><label>⚡ Utilities</label><input id="utilities" placeholder="Electricity / Water available"></div>
+          <div class="type-note" id="propertyTypeNote">Select a property type. The form will show the most relevant fields.</div>
         </div>
       </div>
       <div class="panel">
@@ -225,7 +236,7 @@ let imageFiles=[];
 let existingImageList=[];
 let pendingFilesById={};
 const langs=['en','th','tr','zh'];
-const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map','salePrice','rentPrice','ownerFinance','installment','freeTransfer','summary','nearby','features','furniture','appliances'];
+const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map','landSize','landAreaSqm','buildingArea','parking','titleDeed','roadAccess','frontage','zoning','utilities','salePrice','rentPrice','ownerFinance','installment','freeTransfer','summary','nearby','features','furniture','appliances'];
 const $=id=>document.getElementById(id);
 
 function escapeHtml(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
@@ -278,6 +289,34 @@ function initLangForms(){
 }
 function switchLang(l){currentLang=l;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));langs.forEach(x=>$('form_'+x).style.display=x===l?'block':'none');updateUiLang(l)}
 
+function normalizedPropertyType(){
+  return String($('type')?.value||'').trim().toLowerCase();
+}
+function updatePropertyTypeFields(){
+  const type=normalizedPropertyType();
+  const isLand=type.includes('land') || type.includes('ที่ดิน') || type.includes('arsa') || type.includes('土地');
+  const isCondo=type.includes('condo') || type.includes('apartment') || type.includes('คอนโด') || type.includes('公寓');
+  const isHouse=type.includes('house') || type.includes('villa') || type.includes('บ้าน') || type.includes('ev') || type.includes('住宅');
+  const isCommercial=type.includes('shop') || type.includes('commercial') || type.includes('office') || type.includes('warehouse') || type.includes('hotel') || type.includes('resort') || type.includes('อาคาร') || type.includes('โกดัง');
+  const visibility={
+    bedrooms:!isLand, bathrooms:!isLand, room:isCondo||isCommercial, floor:isCondo||isCommercial,
+    area:!isLand, landSize:isLand||isHouse||isCommercial, landAreaSqm:isLand,
+    buildingArea:isHouse||isCommercial, parking:isHouse||isCondo||isCommercial,
+    titleDeed:isLand, roadAccess:isLand, frontage:isLand, zoning:isLand, utilities:isLand
+  };
+  document.querySelectorAll('[data-property-field]').forEach(el=>{
+    const key=el.dataset.propertyField;
+    el.classList.toggle('type-field-hidden', visibility[key]===false);
+  });
+  const note=$('propertyTypeNote');
+  if(note){
+    note.textContent=isLand?'Land mode: bedrooms, bathrooms, room and floor are hidden. Add land size, title deed, road access and utilities.'
+      :isCondo?'Condo mode: room, floor, internal area and parking are shown.'
+      :isHouse?'House mode: bedrooms, bathrooms, land size, building area and parking are shown.'
+      :isCommercial?'Commercial mode: floors, building/land area, parking and usable rooms are shown.'
+      :'Select Condo, House, Land, Shophouse, Commercial, Warehouse, Hotel or Resort.';
+  }
+}
 function getForm(){
   const p={}; fields.forEach(f=>p[f]=$(f).value.trim());
   if(!p.id) p.id=nextId(p.city);
@@ -305,8 +344,8 @@ function getForm(){
   p.contact={name:'Kwan',phone1:'092-005-6640',phone2:'090-650-7558',line:'@realcreamthailand'};
   return p;
 }
-function setForm(p){p=cleanProperty(p);fields.forEach(f=>{$(f).value=Array.isArray(p[f])?p[f].join('\n'):(p[f]||'')});langs.forEach(l=>{$('title_'+l).value=pick(p.title,l);$('description_'+l).value=pick(p.description,l);$('highlights_'+l).value=pickArr(p.highlights,l).join('\n')});imageFiles=[];existingImageList=(p.images||[]).slice();renderImages()}
-function clearForm(){fields.forEach(f=>$(f).value='');$('city').value='Chiang Mai';$('id').value=nextId('Chiang Mai');$('status').value='Available';langs.forEach(l=>{$('title_'+l).value='';$('description_'+l).value='';$('highlights_'+l).value=''});imageFiles=[];existingImageList=[];renderImages();switchLang('en');updateQualityScore();renderDashboard()}
+function setForm(p){p=cleanProperty(p);fields.forEach(f=>{$(f).value=Array.isArray(p[f])?p[f].join('\n'):(p[f]||'')});langs.forEach(l=>{$('title_'+l).value=pick(p.title,l);$('description_'+l).value=pick(p.description,l);$('highlights_'+l).value=pickArr(p.highlights,l).join('\n')});imageFiles=[];existingImageList=(p.images||[]).slice();renderImages();updatePropertyTypeFields()}
+function clearForm(){fields.forEach(f=>$(f).value='');$('city').value='Chiang Mai';$('id').value=nextId('Chiang Mai');$('status').value='Available';langs.forEach(l=>{$('title_'+l).value='';$('description_'+l).value='';$('highlights_'+l).value=''});imageFiles=[];existingImageList=[];renderImages();switchLang('en');updatePropertyTypeFields();updateQualityScore();renderDashboard()}
 function isPlaceholderValue(v){
   const s=String(v||'').trim().toLowerCase();
   return !s || s==='ask for price' || s==='please update' || s==='details updating' || s==='recovered from image folder' || s==='details are being updated by siriland.' || s==='n/a' || s==='null' || s==='undefined';
@@ -349,7 +388,7 @@ function validateCurrentForm(){
     if(isMissingValue(p.bedrooms)) warnings.push('Bedrooms eksik');
     if(isMissingValue(p.bathrooms)) warnings.push('Bathrooms eksik');
   }
-  if(isMissingValue(p.area)) warnings.push('Area eksik');
+  if(isMissingValue(p.area) && isMissingValue(p.landSize)) warnings.push(type.includes('land') ? 'Land Size eksik' : 'Area eksik');
   if(!p.map) warnings.push('Map URL eksik');
   if(!p.summary) warnings.push('Summary eksik');
   if(!p.images || !p.images.length) warnings.push('Images yok');
@@ -390,7 +429,7 @@ function upsertCurrentForExport(){
 function statusText(p){ return String(p.status||'').toLowerCase(); }
 function dealText(p){ return String(p.deal||'').toLowerCase(); }
 function propertyHasMissing(p){
-  if(!p.id || !p.city || !p.type || !p.deal || !p.status || isMissingValue(p.price) || isMissingValue(p.area) || !pick(p.title,'en') && !pick(p.title,'th') || !p.images || !p.images.length) return true;
+  if(!p.id || !p.city || !p.type || !p.deal || !p.status || isMissingValue(p.price) || (isMissingValue(p.area) && isMissingValue(p.landSize)) || !pick(p.title,'en') && !pick(p.title,'th') || !p.images || !p.images.length) return true;
   const type=String(p.type||'').toLowerCase();
   if(!type.includes('land') && (isMissingValue(p.bedrooms) || isMissingValue(p.bathrooms))) return true;
   return false;
@@ -417,7 +456,7 @@ function renderDashboard(){
 }
 function updateQualityScore(){
   let p; try{ p=getForm(); }catch(e){ return; }
-  const checks=[p.id,p.city,p.type,p.deal,p.status,p.price,p.area,(pick(p.title,'en')||pick(p.title,'th')),p.images&&p.images.length?1:''];
+  const checks=[p.id,p.city,p.type,p.deal,p.status,p.price,(type.includes('land')?p.landSize:p.area),(pick(p.title,'en')||pick(p.title,'th')),p.images&&p.images.length?1:''];
   const type=String(p.type||'').toLowerCase();
   if(!type.includes('land')){ checks.push(p.bedrooms,p.bathrooms); }
   const score=Math.round(checks.filter(x=>!isMissingValue(x)).length / checks.length * 100);
@@ -813,6 +852,7 @@ $('crmSearchInput').oninput=renderCRM;
 $('crmStatusFilter').onchange=renderCRM;
 
 $('city').onchange=()=>syncIdToCity(true);
+$('type').addEventListener('input',updatePropertyTypeFields);
 $('imageFiles').onchange=e=>{imageFiles=Array.from(e.target.files||[]);existingImageList=[];renderImages()};
 document.addEventListener('input',e=>{ if(e.target && ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) updateQualityScore(); });
 $('importBtn').onclick=()=>$('importFile').click();
@@ -821,6 +861,7 @@ $('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new
 loadCustomers();
 initLangForms();
 updateUiLang('en');
+updatePropertyTypeFields();
 fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s).map(cleanProperty);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate();renderCRM();clearCustomerForm()});
 </script>
 </body>

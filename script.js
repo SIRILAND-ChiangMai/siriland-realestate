@@ -83,7 +83,7 @@
         ['Mountain View','วิวภูเขา'],
         ['Open View','วิวเปิดโล่ง'],
         ['Corner Unit','ห้องมุม'],
-        ['Spacious','กว้างขวาง'],['Garden','สวน'],['Large Living Hall','ห้องโถงใหญ่'],['Living Hall','ห้องโถง'],['Kitchen','ห้องครัว'],['Multi-Purpose Living Area','พื้นที่อเนกประสงค์'],['Land Size','ขนาดที่ดิน'],['Width','กว้าง'],['Depth','ลึก'],['Total Area','พื้นที่รวม'],['The property consists of','ทรัพย์ประกอบด้วย'],['Title Deed','โฉนด'],['Freehold','กรรมสิทธิ์'],['Chanote','โฉนด'],['Upper','ชั้นบน'],['Ground','ชั้นล่าง'],['Approximate','ประมาณ'],['Approximately','ประมาณ'],['Features','จุดเด่น'],['Details','รายละเอียด'],['Property','ทรัพย์'],['Parking','ที่จอดรถ'],['Car Park','ที่จอดรถ'],['Balcony','ระเบียง'],['Pool View','วิวสระว่ายน้ำ'],['Foreign Quota','โควต้าต่างชาติ'],['Airbnb Allowed','ปล่อยเช่ารายวันได้'],['Renovated','รีโนเวทใหม่'],['Free Transfer','ฟรีค่าโอน'],['Sale Price','ราคาขาย'],['Rent Price','ราคาเช่า'],['Owner finance','ผ่อนตรงกับเจ้าของ']
+        ['Spacious','กว้างขวาง'],['Garden','สวน'],['Large Living Hall','ห้องโถงใหญ่'],['Living Hall','ห้องโถง'],['Kitchen','ห้องครัว'],['Multi-Purpose Living Area','พื้นที่อเนกประสงค์'],['Land Size','ขนาดที่ดิน'],['Width','กว้าง'],['Depth','ลึก'],['Total Area','พื้นที่รวม'],['The property consists of','ทรัพย์ประกอบด้วย'],        ['Title Deed','เอกสารสิทธิ์'],['Road Access','ทางเข้าออก'],['Land Size','ขนาดที่ดิน'],['Building Area','พื้นที่อาคาร'],['Parking','ที่จอดรถ'],['Frontage','หน้ากว้าง'],['Zoning','ผังเมือง'],['Utilities','ไฟฟ้าและน้ำ'],['Title Deed','โฉนด'],['Freehold','กรรมสิทธิ์'],['Chanote','โฉนด'],['Upper','ชั้นบน'],['Ground','ชั้นล่าง'],['Approximate','ประมาณ'],['Approximately','ประมาณ'],['Features','จุดเด่น'],['Details','รายละเอียด'],['Property','ทรัพย์'],['Parking','ที่จอดรถ'],['Car Park','ที่จอดรถ'],['Balcony','ระเบียง'],['Pool View','วิวสระว่ายน้ำ'],['Foreign Quota','โควต้าต่างชาติ'],['Airbnb Allowed','ปล่อยเช่ารายวันได้'],['Renovated','รีโนเวทใหม่'],['Free Transfer','ฟรีค่าโอน'],['Sale Price','ราคาขาย'],['Rent Price','ราคาเช่า'],['Owner finance','ผ่อนตรงกับเจ้าของ']
       ],
       tr: [], zh: []
     };
@@ -135,32 +135,54 @@
     return m ? parseFloat(m[0]) : 0;
   }
   function propertyBlob(p){
-    return [p.id,p.city,p.type,p.deal,p.price,p.room,p.floor,p.area,p.bedrooms,p.bathrooms,p.status,p.map,p.salePrice,p.rentPrice,p.ownerFinance,p.installment,p.summary,pick(p.title),pick(p.description),...pickList(p.highlights),...(Array.isArray(p.features)?p.features:[]),...(Array.isArray(p.nearby)?p.nearby:[])].join(' ').toLowerCase();
+    return [p.id,p.city,p.type,p.deal,p.price,p.room,p.floor,p.area,p.bedrooms,p.bathrooms,p.status,p.map,p.salePrice,p.rentPrice,p.ownerFinance,p.installment,p.summary,p.landSize,p.landAreaSqm,p.buildingArea,p.parking,p.titleDeed,p.roadAccess,p.frontage,p.zoning,p.utilities,pick(p.title),pick(p.description),...pickList(p.highlights),...(Array.isArray(p.features)?p.features:[]),...(Array.isArray(p.nearby)?p.nearby:[])].join(' ').toLowerCase();
   }
 
   const specLabels = {
-    en:{bed:'Bedrooms',bath:'Bathrooms',area:'Area',floor:'Floor',room:'Room',price:'Price'},
-    th:{bed:'ห้องนอน',bath:'ห้องน้ำ',area:'พื้นที่',floor:'ชั้น',room:'ห้อง',price:'ราคา'},
-    tr:{bed:'Yatak Odası',bath:'Banyo',area:'Alan',floor:'Kat',room:'Oda',price:'Fiyat'},
-    zh:{bed:'卧室',bath:'浴室',area:'面积',floor:'楼层',room:'房号',price:'价格'}
+    en:{bed:'Bedrooms',bath:'Bathrooms',area:'Internal Area',floor:'Floor',room:'Room',price:'Price',landSize:'Land Size',landAreaSqm:'Land Area',buildingArea:'Building Area',parking:'Parking',titleDeed:'Title Deed',roadAccess:'Road Access',frontage:'Frontage',zoning:'Zoning',utilities:'Utilities'},
+    th:{bed:'ห้องนอน',bath:'ห้องน้ำ',area:'พื้นที่ใช้สอย',floor:'ชั้น',room:'ห้อง',price:'ราคา',landSize:'ขนาดที่ดิน',landAreaSqm:'พื้นที่ดิน',buildingArea:'พื้นที่อาคาร',parking:'ที่จอดรถ',titleDeed:'เอกสารสิทธิ์',roadAccess:'ทางเข้าออก',frontage:'หน้ากว้าง',zoning:'ผังเมือง/การใช้ที่ดิน',utilities:'ไฟฟ้าและน้ำ'},
+    tr:{bed:'Yatak Odası',bath:'Banyo',area:'İç Alan',floor:'Kat',room:'Oda',price:'Fiyat',landSize:'Arsa Büyüklüğü',landAreaSqm:'Arsa Alanı',buildingArea:'Bina Alanı',parking:'Otopark',titleDeed:'Tapu Türü',roadAccess:'Yol Erişimi',frontage:'Cephe',zoning:'İmar / Kullanım',utilities:'Elektrik ve Su'},
+    zh:{bed:'卧室',bath:'浴室',area:'室内面积',floor:'楼层',room:'房号',price:'价格',landSize:'土地面积',landAreaSqm:'土地平方米',buildingArea:'建筑面积',parking:'停车位',titleDeed:'地契',roadAccess:'道路通行',frontage:'临街宽度',zoning:'土地用途',utilities:'水电设施'}
   };
   function cleanTranslatedValue(v){
     return translateText(String(v || '').replace(/Features/gi,'').replace(/Approximate/gi,'ประมาณ').replace(/\s+/g,' ').trim());
   }
+  function normalizedType(p){ return String(p?.type||'').toLowerCase(); }
+  function isLandProperty(p){ const x=normalizedType(p); return x.includes('land')||x.includes('ที่ดิน')||x.includes('arsa')||x.includes('土地'); }
+  function isHouseProperty(p){ const x=normalizedType(p); return x.includes('house')||x.includes('villa')||x.includes('บ้าน')||x.includes('ev')||x.includes('住宅'); }
+  function isCommercialProperty(p){ const x=normalizedType(p); return x.includes('shop')||x.includes('commercial')||x.includes('office')||x.includes('warehouse')||x.includes('hotel')||x.includes('resort')||x.includes('อาคาร')||x.includes('โกดัง'); }
+  function addSpec(rows,key,label,value){ if(value && !String(value).match(/^[-–]$/)) rows.push({key,label,value:cleanTranslatedValue(value)}); }
   function propertySpecs(p){
     const L = specLabels[lang] || specLabels.en;
     const rows = [];
-    if(p.bedrooms && !String(p.bedrooms).match(/^[-–]$/)) rows.push({key:'bed',label:L.bed,value:cleanTranslatedValue(p.bedrooms)});
-    if(p.bathrooms && !String(p.bathrooms).match(/^[-–]$/)) rows.push({key:'bath',label:L.bath,value:cleanTranslatedValue(p.bathrooms)});
-    if(p.area && !String(p.area).match(/^[-–]$/)) rows.push({key:'area',label:L.area,value:cleanTranslatedValue(p.area)});
-    if(p.floor && !String(p.floor).match(/^[-–]$/)) rows.push({key:'floor',label:L.floor,value:cleanTranslatedValue(p.floor)});
-    if(p.room && !String(p.room).match(/^[-–]$/)) rows.push({key:'room',label:L.room,value:cleanTranslatedValue(p.room)});
+    if(isLandProperty(p)){
+      addSpec(rows,'landSize',L.landSize,p.landSize||p.area);
+      addSpec(rows,'landAreaSqm',L.landAreaSqm,p.landAreaSqm);
+      addSpec(rows,'titleDeed',L.titleDeed,p.titleDeed);
+      addSpec(rows,'roadAccess',L.roadAccess,p.roadAccess);
+      addSpec(rows,'frontage',L.frontage,p.frontage);
+      addSpec(rows,'zoning',L.zoning,p.zoning);
+      addSpec(rows,'utilities',L.utilities,p.utilities);
+      return rows;
+    }
+    addSpec(rows,'bed',L.bed,p.bedrooms);
+    addSpec(rows,'bath',L.bath,p.bathrooms);
+    if(isHouseProperty(p) || isCommercialProperty(p)){
+      addSpec(rows,'landSize',L.landSize,p.landSize);
+      addSpec(rows,'buildingArea',L.buildingArea,p.buildingArea||p.area);
+    }else{
+      addSpec(rows,'area',L.area,p.area);
+    }
+    addSpec(rows,'floor',L.floor,p.floor);
+    addSpec(rows,'room',L.room,p.room);
+    addSpec(rows,'parking',L.parking,p.parking);
     return rows;
   }
   function specsInline(p){
-    const icon = {bed:'🛏', bath:'🚿', area:'📐', floor:'🏢', room:'🚪'};
+    const icon = {bed:'🛏', bath:'🚿', area:'📐', floor:'🏢', room:'🚪',landSize:'🌳',landAreaSqm:'📐',buildingArea:'🏠',parking:'🚗',titleDeed:'📄',roadAccess:'🛣️',frontage:'↔️',zoning:'🗺️',utilities:'⚡'};
     return propertySpecs(p).slice(0,4).map(x => `<span>${icon[x.key]||''} ${x.value}</span>`).join('');
   }
+  function specsText(p,max=3){ return propertySpecs(p).slice(0,max).map(x=>x.value).join(' • '); }
   function specsGrid(p){ return propertySpecs(p).map(x => `<div class="detail-spec-card"><small>${x.label}</small><strong>${x.value}</strong></div>`).join(''); }
   function propertyShortText(p){
     const summary = p.summary && typeof p.summary === 'object' ? (p.summary[lang] || p.summary.en || p.summary.th || '') : (p.summary || '');
@@ -173,19 +195,19 @@
     const title = pick(p.title);
     return `<article class="mini-property-card" data-mini-id="${p.id}">
       <div class="mini-photo"><img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'"><span>${(p.images||[]).length} photos</span></div>
-      <div class="mini-info"><div class="mini-meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div><h4>${title}</h4><strong>${translateText(p.price||'')}</strong><p>${[p.bedrooms,p.bathrooms,p.area].filter(Boolean).map(translateText).join(' • ')}</p></div>
+      <div class="mini-info"><div class="mini-meta">${p.id} • ${trMap('city',p.city)} • ${trMap('type',p.type)}</div><h4>${title}</h4><strong>${translateText(p.price||'')}</strong><p>${specsText(p,3)}</p></div>
     </article>`;
   }
   function miniCompactCard(p){
     const title = pick(p.title);
     return `<article class="mini-compact-card" data-mini-id="${p.id}">
       <img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'">
-      <div><div class="mini-meta">${p.id} • ${trMap('city',p.city)}</div><h4>${title}</h4><strong>${translateText(p.price||'')}</strong><p>${[p.bedrooms,p.bathrooms,p.area].filter(Boolean).map(translateText).join(' • ')}</p></div>
+      <div><div class="mini-meta">${p.id} • ${trMap('city',p.city)}</div><h4>${title}</h4><strong>${translateText(p.price||'')}</strong><p>${specsText(p,3)}</p></div>
     </article>`;
   }
   function sxHomeCard(p){
     const title = pick(p.title);
-    const specs = [p.bedrooms,p.bathrooms,p.area].filter(Boolean).map(translateText).join(' • ');
+    const specs = specsText(p,3);
     return `<article class="sx-property-card" data-mini-id="${p.id}">
       <div class="sx-card-photo"><img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'"><span>${(p.images||[]).length} ${t('photos')||'photos'}</span></div>
       <div class="sx-card-body">
@@ -198,7 +220,7 @@
   }
   function sxSmallCard(p){
     const title = pick(p.title);
-    const specs = [p.bedrooms,p.bathrooms,p.area].filter(Boolean).map(translateText).join(' • ');
+    const specs = specsText(p,3);
     return `<article class="sx-small-card" data-mini-id="${p.id}">
       <img src="${safeImg(p.images)}" alt="${title}" onerror="this.src='images/logo.png'">
       <div>

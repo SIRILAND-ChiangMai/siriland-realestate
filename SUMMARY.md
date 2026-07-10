@@ -1,15 +1,11 @@
-# Build 2026.07.10.04 — Full Multi-Language UI
+# Build 2026.07.10.05 — Dynamic Property Engine
 
-## Summary
-SIRILAND Build 2026.07.10.04 expands the multilingual property experience across the homepage, filters, map interface, property cards, modal actions, structured property specifications, collections, contact areas and navigation.
+SIRILAND now uses property-type-aware fields and cards. Land listings no longer display irrelevant bedroom, bathroom, room, or floor information. The admin form dynamically adapts for Land, Condo, House, and Commercial properties, while the website automatically renders the most relevant specifications for each type.
 
 ## New Features
-- Full TH / EN / TR / ZH interface dictionary
-- Localized homepage collections and city counts
-- Localized search, filter, list and map controls
-- Localized modal actions, favorite, share and copy-link feedback
-- Localized property specification labels
-- Language-aware browser title
-
-## Important
-The website now translates the interface and structured property data. For fully natural property titles, summaries and long descriptions, fill each language field separately in the admin panel.
+- Dynamic admin fields by property type
+- Dedicated land fields: land size, sqm, title deed, road access, frontage, zoning, utilities
+- House/commercial fields: building area, land size, parking
+- Type-aware cards and property details
+- Land listings excluded from bedroom/bathroom requirements
+- Existing listings remain compatible
