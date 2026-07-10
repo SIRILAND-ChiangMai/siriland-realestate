@@ -8,6 +8,8 @@ let existingImageList=[];
 let pendingFilesById={};
 let mediaAnalysis=[];
 let mediaAnalysisToken=0;
+let propertyListPage=1;
+const PROPERTY_LIST_PAGE_SIZE=20;
 const langs=['en','th','tr','zh'];
 const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map','landSize','landAreaSqm','buildingArea','parking','titleDeed','roadAccess','frontage','zoning','utilities','salePrice','rentPrice','ownerFinance','installment','freeTransfer','summary','nearby','features','furniture','appliances'];
 const $=id=>document.getElementById(id);
@@ -373,10 +375,87 @@ function updateQualityScore(){
   if($('qualityScore')) $('qualityScore').textContent=score+'%';
   if($('qualityFill')) $('qualityFill').style.width=score+'%';
 }
+function propertyListText(p){
+  return [
+    p.id,p.city,p.type,p.deal,p.status,p.price,p.salePrice,p.rentPrice,
+    pick(p.title,'en'),pick(p.title,'th'),pick(p.title,'tr'),pick(p.title,'zh')
+  ].join(' ').toLowerCase();
+}
+function fillPropertyListFilters(){
+  const fill=(id,values,first)=>{
+    const el=$(id);if(!el)return;
+    const selected=el.value||'all';
+    el.innerHTML=`<option value="all">${first}</option>`+values.map(v=>`<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
+    el.value=[...el.options].some(o=>o.value===selected)?selected:'all';
+  };
+  fill('propertyListCity',[...new Set(properties.map(p=>p.city).filter(Boolean))].sort(),'Tüm Şehirler');
+  fill('propertyListType',[...new Set(properties.map(p=>p.type).filter(Boolean))].sort(),'Tüm Türler');
+  fill('propertyListStatus',[...new Set(properties.map(p=>p.status).filter(Boolean))].sort(),'Tüm Durumlar');
+}
+function renderPropertyCitySummary(){
+  const el=$('propertyCitySummary');if(!el)return;
+  const counts={};
+  properties.forEach(p=>{const city=p.city||'Unknown';counts[city]=(counts[city]||0)+1});
+  el.innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([city,count])=>
+    `<button type="button" class="citySummaryChip" data-list-city="${escapeHtml(city)}"><b>${escapeHtml(city)}</b><span>${count}</span></button>`
+  ).join('');
+}
+function renderPropertyListPagination(total){
+  const el=$('propertyListPagination');if(!el)return;
+  const pages=Math.max(1,Math.ceil(total/PROPERTY_LIST_PAGE_SIZE));
+  if(propertyListPage>pages)propertyListPage=pages;
+  if(pages<=1){el.innerHTML='';return}
+  const buttons=[];
+  buttons.push(`<button type="button" ${propertyListPage===1?'disabled':''} data-list-page="${propertyListPage-1}">‹</button>`);
+  for(let i=1;i<=pages;i++){
+    if(i===1||i===pages||Math.abs(i-propertyListPage)<=1)buttons.push(`<button type="button" class="${i===propertyListPage?'active':''}" data-list-page="${i}">${i}</button>`);
+    else if(Math.abs(i-propertyListPage)===2)buttons.push('<span>…</span>');
+  }
+  buttons.push(`<button type="button" ${propertyListPage===pages?'disabled':''} data-list-page="${propertyListPage+1}">›</button>`);
+  el.innerHTML=buttons.join('');
+}
 function renderList(){
   renderDashboard();
   updateQualityScore();
-  $('list').innerHTML=properties.map(p=>`<div class="item"><div><b>${escapeHtml(p.id)}</b> — ${escapeHtml(pick(p.title,'en')||pick(p.title,'th'))}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.price||'')} • ${(p.images||[]).length} foto</span></div><div><button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button><button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button></div></div>`).join('');
+  fillPropertyListFilters();
+  renderPropertyCitySummary();
+
+  const q=String($('propertyListSearch')?.value||'').trim().toLowerCase();
+  const city=$('propertyListCity')?.value||'all';
+  const type=$('propertyListType')?.value||'all';
+  const status=$('propertyListStatus')?.value||'all';
+
+  const filtered=properties.filter(p=>
+    (!q||propertyListText(p).includes(q)) &&
+    (city==='all'||p.city===city) &&
+    (type==='all'||p.type===type) &&
+    (status==='all'||p.status===status)
+  ).sort((a,b)=>String(a.id||'').localeCompare(String(b.id||''),undefined,{numeric:true}));
+
+  const pages=Math.max(1,Math.ceil(filtered.length/PROPERTY_LIST_PAGE_SIZE));
+  if(propertyListPage>pages)propertyListPage=pages;
+  const start=(propertyListPage-1)*PROPERTY_LIST_PAGE_SIZE;
+  const visible=filtered.slice(start,start+PROPERTY_LIST_PAGE_SIZE);
+
+  if($('propertyListCount'))$('propertyListCount').textContent=`${filtered.length} / ${properties.length} ilan`;
+  $('list').innerHTML=visible.length?visible.map(p=>`<div class="item propertyListItem">
+    <div class="propertyListMain">
+      <div><b>${escapeHtml(p.id)}</b> — ${escapeHtml(pick(p.title,'en')||pick(p.title,'th')||'Başlıksız')}</div>
+      <div class="propertyListMeta">
+        <span>${escapeHtml(p.city||'')}</span>
+        <span>${escapeHtml(p.type||'')}</span>
+        <span>${escapeHtml(p.deal||'')}</span>
+        <span>${escapeHtml(p.status||'')}</span>
+        <span>${escapeHtml(p.price||p.salePrice||p.rentPrice||'Fiyat yok')}</span>
+        <span>${(p.images||[]).length} foto</span>
+      </div>
+    </div>
+    <div class="propertyListActions">
+      <button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button>
+      <button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button>
+    </div>
+  </div>`).join(''):'<div class="propertyListEmpty">Bu filtrelerde ilan bulunamadı.</div>';
+  renderPropertyListPagination(filtered.length);
 }
 function filePreview(f){
   if(!f.__sirilandPreview) f.__sirilandPreview=URL.createObjectURL(f);
@@ -918,13 +997,55 @@ $('imageFiles').onchange=e=>{
 };
 document.addEventListener('input',e=>{ if(e.target && ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) updateQualityScore(); });
 $('importBtn').onclick=()=>$('importFile').click();
-$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result).map(cleanProperty);renderList();clearForm();validate();renderCRM();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
+$('importFile').onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  const rd=new FileReader();
+  rd.onload=()=>{
+    try{
+      const loaded=extractProperties(rd.result).map(cleanProperty);
+      if(properties.length && loaded.length<properties.length){
+        const ok=confirm(`Seçilen dosyada ${loaded.length} ilan var; mevcut listede ${properties.length} ilan bulunuyor.\n\nEksik dosya olabilir. Yine de değiştirmek istiyor musun?`);
+        if(!ok)return;
+      }
+      properties=loaded;
+      localStorage.setItem('siriland_last_property_count',String(properties.length));
+      localStorage.setItem('siriland_properties_backup',JSON.stringify(properties));
+      propertyListPage=1;renderList();clearForm();validate();renderCRM();
+      alert('Yüklendi: '+properties.length+' ilan');
+    }catch(err){alert('Okuma hatası: '+err.message)}
+  };
+  rd.readAsText(f)
+};
 
 loadCustomers();
 initLangForms();
 updateUiLang('en');
 updatePropertyTypeFields();
-fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s).map(cleanProperty);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate();renderCRM();clearCustomerForm()});
+fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>{
+  if(!r.ok)throw new Error('properties.js yüklenemedi: '+r.status);
+  return r.text();
+}).then(s=>{
+  const loaded=extractProperties(s).map(cleanProperty);
+  const previousCount=Number(localStorage.getItem('siriland_last_property_count')||0);
+  if(previousCount && loaded.length<previousCount){
+    const ok=confirm(`UYARI: Bu properties.js dosyasında ${loaded.length} ilan var. Önceki kayıt sayısı ${previousCount}.\n\nEksik veri ihtimali var. Yine de yüklemek istiyor musun?`);
+    if(!ok)throw new Error('Düşük ilan sayılı dosya kullanıcı tarafından reddedildi.');
+  }
+  properties=loaded;
+  localStorage.setItem('siriland_last_property_count',String(properties.length));
+  localStorage.setItem('siriland_properties_backup',JSON.stringify(properties));
+  renderList();clearForm();validate();renderCRM();clearCustomerForm();
+}).catch(err=>{
+  console.warn(err);
+  try{
+    const backup=JSON.parse(localStorage.getItem('siriland_properties_backup')||'[]');
+    if(Array.isArray(backup)&&backup.length){
+      properties=backup.map(cleanProperty);
+      alert('properties.js yüklenemedi. Tarayıcıdaki son güvenli yedek açıldı: '+properties.length+' ilan');
+    }
+  }catch(e){}
+  clearForm();renderList();validate();renderCRM();clearCustomerForm();
+});
 
 
 // Sprint 4.3 — GitHub Assistant
@@ -984,3 +1105,25 @@ function mediaInit(){
   renderMediaSummary();
 }
 window.addEventListener('DOMContentLoaded',mediaInit);
+
+function initPropertyListPro(){
+  ['propertyListSearch','propertyListCity','propertyListType','propertyListStatus'].forEach(id=>{
+    $(id)?.addEventListener(id==='propertyListSearch'?'input':'change',()=>{propertyListPage=1;renderList()});
+  });
+  $('propertyListClear')?.addEventListener('click',()=>{
+    if($('propertyListSearch'))$('propertyListSearch').value='';
+    ['propertyListCity','propertyListType','propertyListStatus'].forEach(id=>{if($(id))$(id).value='all'});
+    propertyListPage=1;renderList();
+  });
+  $('propertyListPagination')?.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-list-page]');if(!btn)return;
+    propertyListPage=Number(btn.dataset.listPage)||1;renderList();
+    $('list')?.scrollTo({top:0,behavior:'smooth'});
+  });
+  $('propertyCitySummary')?.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-list-city]');if(!btn)return;
+    if($('propertyListCity'))$('propertyListCity').value=btn.dataset.listCity;
+    propertyListPage=1;renderList();
+  });
+}
+window.addEventListener('DOMContentLoaded',initPropertyListPro);

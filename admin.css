@@ -100,3 +100,20 @@
 .imageWarnings>div{padding:8px 10px;border-radius:10px;background:#fff7df;border:1px solid #f1d184;margin:5px 0;font-size:13px}.imageWarnings .mediaAllGood{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
 @media(max-width:900px){.mediaSettingsGrid,.imageStatsGrid{grid-template-columns:1fr 1fr}.mediaManagerHead{flex-direction:column}}
 @media(max-width:520px){.mediaSettingsGrid,.imageStatsGrid{grid-template-columns:1fr}}
+
+
+/* Data Recovery + Property List PRO */
+.propertyListHead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.propertyListHead h2{margin:0 0 4px}.propertyListCount{background:var(--navy);color:var(--gold);font-weight:900;border-radius:999px;padding:8px 12px;white-space:nowrap}
+.propertyListFilters{display:grid;grid-template-columns:1.5fr repeat(3,1fr) auto;gap:8px;margin:12px 0}
+.propertyCitySummary{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 12px}
+.citySummaryChip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;cursor:pointer;display:flex;gap:7px;align-items:center}
+.citySummaryChip:hover{border-color:var(--gold);background:#fffaf0}.citySummaryChip span{background:#eef2ff;border-radius:999px;padding:2px 6px;font-size:11px;font-weight:900}
+.propertyListPro{max-height:720px}.propertyListItem{align-items:flex-start}.propertyListMain{min-width:0;flex:1}.propertyListMeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.propertyListMeta span{background:#f1f5f9;border-radius:999px;padding:4px 7px;font-size:11px;font-weight:800;color:#475569}
+.propertyListActions{display:flex;gap:5px;flex-wrap:wrap}.propertyListEmpty{padding:25px;text-align:center;color:#64748b}
+.propertyListPagination{display:flex;justify-content:center;align-items:center;gap:5px;margin-top:12px;flex-wrap:wrap}
+.propertyListPagination button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 10px;cursor:pointer;font-weight:800}
+.propertyListPagination button.active{background:var(--navy);color:#fff}.propertyListPagination button:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:900px){.propertyListFilters{grid-template-columns:1fr 1fr}.propertyListHead{flex-direction:column}.propertyListActions{width:100%}}
+@media(max-width:520px){.propertyListFilters{grid-template-columns:1fr}.propertyListItem{display:block}.propertyListActions{margin-top:8px}}

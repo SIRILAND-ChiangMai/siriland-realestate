@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND CMS PRO 2030 - Sprint 4.5 Media Manager PRO</title>
-  <link rel="stylesheet" href="admin.css?v=2026071016">
+  <title>SIRILAND CMS PRO 2030 - Data Recovery + List PRO</title>
+  <link rel="stylesheet" href="admin.css?v=2026071017">
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND CMS PRO 2030 — Sprint 4.5 Media Manager PRO</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
+    <div><div class="logo">SIRILAND CMS PRO 2030 — Data Recovery + List PRO</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -309,7 +309,25 @@
       </div>
     </div>
     <div>
-      <div class="panel"><h2>İlan Listesi</h2><input id="propertyListSearch" type="search" placeholder="ID, başlık, şehir veya fiyat ara..." style="margin-bottom:10px"><div id="list" class="list"></div></div>
+      <div class="panel propertyListProPanel">
+        <div class="propertyListHead">
+          <div>
+            <h2>📋 İlan Listesi PRO</h2>
+            <p class="muted">Tüm şehirleri, ilan türlerini ve durumları filtreleyerek görüntüle.</p>
+          </div>
+          <div class="propertyListCount" id="propertyListCount">0 / 0 ilan</div>
+        </div>
+        <div class="propertyListFilters">
+          <input id="propertyListSearch" type="search" placeholder="ID, başlık, şehir veya fiyat ara...">
+          <select id="propertyListCity"><option value="all">Tüm Şehirler</option></select>
+          <select id="propertyListType"><option value="all">Tüm Türler</option></select>
+          <select id="propertyListStatus"><option value="all">Tüm Durumlar</option></select>
+          <button class="btn dark" id="propertyListClear" type="button">Filtreleri Temizle</button>
+        </div>
+        <div id="propertyCitySummary" class="propertyCitySummary"></div>
+        <div id="list" class="list propertyListPro"></div>
+        <div id="propertyListPagination" class="propertyListPagination"></div>
+      </div>
       <div class="panel"><h2>İlan Kalite Puanı</h2><div class="statValue" id="qualityScore">0%</div><div class="qualityBar"><div class="qualityFill" id="qualityFill"></div></div><p class="muted">Aktif formdaki zorunlu alanlara göre hesaplanır.</p></div>
       <div class="panel"><h2>👥 CRM Customer List</h2>
         <div class="crmSearch"><input id="crmSearchInput" placeholder="Search customer"><select id="crmStatusFilter"><option value="all">All Status</option><option>New</option><option>Contacted</option><option>Viewing</option><option>Negotiation</option><option>Reserved</option><option>Closed</option><option>Lost</option></select><button class="btn" id="crmSearchBtn" type="button">Search</button></div>
@@ -320,7 +338,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071016"></script>
+<script src="admin.js?v=2026071017"></script>
 <script src="modules/dashboard.js?v=2026071012"></script>
 <script src="modules/crm.js?v=2026071012"></script>
 <script src="modules/export.js?v=2026071012"></script>
