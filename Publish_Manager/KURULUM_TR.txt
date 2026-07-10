@@ -1,0 +1,63 @@
+SIRILAND PUBLISH MANAGER PRO v2
+
+SIRALAMA
+
+1. Önce GitHub repository klasörünü E: diskine taşı veya yeniden klonla:
+
+E:\SIRILAND_2030_Harddisk_Structure\09_GitHub\siriland-realestate
+
+2. Güncel CMS ve website dosyalarını şu klasöre koy:
+
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+
+Önemli dosyalar:
+- index.html
+- script.js
+- style.css
+- properties.js
+- admin.html
+- admin.js
+- admin.css
+- images klasörü
+- modules klasörü
+
+3. Publish_Manager klasörünü istediğin yerde tutabilirsin.
+Tavsiye:
+
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS\Publish_Manager
+
+4. İlk kullanım:
+RUN_PUBLISH.bat dosyasına çift tıkla.
+
+Sırasıyla üç klasör seçeceksin:
+- 01_CMS
+- 09_GitHub\siriland-realestate
+- 02_Backup
+
+Bu seçim yalnızca ilk kullanımda yapılır.
+
+5. Sonraki kullanımlar:
+Sadece RUN_PUBLISH.bat dosyasına çift tıkla.
+
+Araç:
+- Önce backup alır
+- Değişen dosyaları GitHub klasörüne kopyalar
+- Publish raporu oluşturur
+- Commit mesajını panoya kopyalar
+- GitHub klasörünü açar
+
+Sen sadece GitHub Desktop'ta:
+- Ctrl+V
+- Commit to main
+- Push origin
+
+yapacaksın.
+
+GITHUB YOLUNU NE ZAMAN DEĞİŞTİRECEĞİZ?
+
+ÖNCE GitHub klasörünü E: diskine taşı veya yeniden klonla.
+SONRA Publish Manager'ı ilk kez çalıştır ve yeni E: yolunu seç.
+
+Daha sonra yolu değiştirirsen:
+RESET_PATHS.bat dosyasını çalıştır.
+Sonra RUN_PUBLISH.bat ile yolları yeniden seç.
