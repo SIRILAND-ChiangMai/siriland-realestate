@@ -1,5 +1,5 @@
 
-console.info('SIRILAND Admin Build 2026.07.10.13 loaded');
+console.info('SIRILAND Admin Build 2026.07.10.12 loaded');
 let properties=[];
 let customers=[];
 let currentLang='en';
@@ -109,8 +109,8 @@ function getForm(){
     p.images=existingImageList.length ? existingImageList.slice() : ((existing&&existing.images)||[]);
   }
   cleanProperty(p);
-  p.createdAt=(existing&&existing.createdAt)||new Date().toISOString();
-  p.updatedAt=new Date().toISOString();
+  p.createdAt=(existing&&existing.createdAt)||new Date().toISOString().slice(0,10);
+  p.updatedAt=new Date().toISOString().slice(0,10);
   p.featured=existing?.featured!==undefined?existing.featured:true;
   p.contact={name:'Kwan',phone1:'092-005-6640',phone2:'090-650-7558',line:'@realcreamthailand'};
   return p;
@@ -261,33 +261,10 @@ function updateQualityScore(){
   if($('qualityScore')) $('qualityScore').textContent=score+'%';
   if($('qualityFill')) $('qualityFill').style.width=score+'%';
 }
-function isGhostProperty(p){
-  if(!p || typeof p!=='object') return true;
-  const title=String(pick(p.title,'en')||pick(p.title,'th')||'').trim();
-  const type=String(p.type||'').trim();
-  const price=String(p.price||p.salePrice||p.rentPrice||'').trim();
-  const images=Array.isArray(p.images)?p.images.filter(Boolean):[];
-  // A record with only an ID/city but no real listing content is a ghost.
-  return !title && !type && !price && images.length===0;
-}
-function removeGhostProperties(showReport=false){
-  const ghosts=properties.filter(isGhostProperty).map(p=>p.id||'(ID yok)');
-  if(ghosts.length){
-    properties=properties.filter(p=>!isGhostProperty(p));
-    ghosts.forEach(id=>delete pendingFilesById[id]);
-    if(showReport && $('report')) $('report').innerHTML='<span class="warn">Ghost Property Removed:</span> '+ghosts.join(', ');
-  }
-  return ghosts;
-}
 function renderList(){
   renderDashboard();
   updateQualityScore();
-  const q=String($('propertyListSearch')?.value||'').trim().toLowerCase();
-  const visible=properties.filter(p=>{
-    const blob=[p.id,p.city,p.type,p.deal,p.status,p.price,pick(p.title,'en'),pick(p.title,'th')].join(' ').toLowerCase();
-    return !q || blob.includes(q);
-  });
-  $('list').innerHTML=visible.map(p=>`<div class="item"><div><b>${escapeHtml(p.id)}</b> — ${escapeHtml(pick(p.title,'en')||pick(p.title,'th'))}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.price||'')} • ${(p.images||[]).length} foto</span></div><div><button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button><button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button></div></div>`).join('') || '<p class="muted">Eşleşen ilan yok.</p>';
+  $('list').innerHTML=properties.map(p=>`<div class="item"><div><b>${escapeHtml(p.id)}</b> — ${escapeHtml(pick(p.title,'en')||pick(p.title,'th'))}<br><span class="muted">${escapeHtml(p.city||'')} • ${escapeHtml(p.price||'')} • ${(p.images||[]).length} foto</span></div><div><button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button><button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button></div></div>`).join('');
 }
 function filePreview(f){ return URL.createObjectURL(f); }
 function imageCard(src, name, i, existing=false){
@@ -316,7 +293,7 @@ window.dropImg=(to,existing)=>{
   dragFromIndex=null; renderImages();
 };
 window.editProp=id=>{const p=properties.find(x=>x.id===id);if(p)setForm(p)};
-window.deleteProp=id=>{if(confirm(id+' silinsin mi?')){properties=properties.filter(p=>String(p.id)!==String(id));delete pendingFilesById[id];renderList();clearForm();validate();if($('report'))$('report').innerHTML='<span class="ok">SİLİNDİ:</span> '+escapeHtml(id)+' artık export dosyasına eklenmeyecek.';}};
+window.deleteProp=id=>{if(confirm(id+' silinsin mi?')){properties=properties.filter(p=>p.id!==id);delete pendingFilesById[id];renderList();clearForm();validate()}};
 window.moveImg=(i,d)=>{const j=i+d;if(j<0||j>=imageFiles.length)return;[imageFiles[i],imageFiles[j]]=[imageFiles[j],imageFiles[i]];renderImages()};
 window.coverImg=i=>{if(i<=0||i>=imageFiles.length)return;const f=imageFiles.splice(i,1)[0];imageFiles.unshift(f);renderImages()};
 window.removeImg=i=>{if(i<0||i>=imageFiles.length)return;imageFiles.splice(i,1);renderImages();if(window.SIRILAND_MEDIA_REFRESH)window.SIRILAND_MEDIA_REFRESH();};
@@ -346,11 +323,10 @@ function validate(){
   updateQualityScore();
   return !errors.length;
 }
-function makeJs(){removeGhostProperties(false);cleanAllProperties();return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
+function makeJs(){cleanAllProperties();return 'window.SIRILAND_PROPERTIES = '+JSON.stringify(properties,null,2)+';\nconst properties = window.SIRILAND_PROPERTIES;\n'}
 function download(name,content,type='application/octet-stream'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
 
 function exportReady(){
-  const removedGhosts=removeGhostProperties(false);
   if(properties.length === 0){
     alert('EXPORT STOPPED\n\nproperties listesi boş görünüyor. Önce properties.js yükle veya sayfayı yenile. Boş JSON export edilmedi.');
     $('report').innerHTML='<span class="bad">EXPORT STOPPED:</span> properties listesi boş. properties.js yüklemeden export yapma.';
@@ -391,8 +367,6 @@ function exportReady(){
     return false;
   }
 
-  if(removedGhosts.length) warnings.unshift('Ghost Property Removed: '+removedGhosts.join(', '));
-
   if(warnings.length){
     $('report').innerHTML='<span class="ok">EXPORT READY:</span> Dosya oluşturulabilir.\n\n<span class="warn">UYARI:</span>\n'+warnings.slice(0,120).join('\n')+(warnings.length>120?'\n...':'');
   } else {
@@ -400,7 +374,7 @@ function exportReady(){
   }
   return true;
 }
-function exportJsonText(){ removeGhostProperties(false); cleanAllProperties(); return JSON.stringify(properties,null,2); }
+function exportJsonText(){ cleanAllProperties(); return JSON.stringify(properties,null,2); }
 
 async function buildZip(){
   if(!exportReady()) return;
@@ -677,17 +651,34 @@ $('importCustomersFile').onchange=e=>{const f=e.target.files[0]; if(f) importCus
 $('crmSearchBtn').onclick=renderCRM;
 $('crmSearchInput').oninput=renderCRM;
 $('crmStatusFilter').onchange=renderCRM;
-if($('propertyListSearch')) $('propertyListSearch').oninput=renderList;
 
 $('city').onchange=()=>syncIdToCity(true);
 $('type').addEventListener('input',updatePropertyTypeFields);
 $('imageFiles').onchange=e=>{imageFiles=Array.from(e.target.files||[]);existingImageList=[];renderImages()};
 document.addEventListener('input',e=>{ if(e.target && ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) updateQualityScore(); });
 $('importBtn').onclick=()=>$('importFile').click();
-$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result).map(cleanProperty);removeGhostProperties(true);renderList();clearForm();validate();renderCRM();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
+$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{properties=extractProperties(rd.result).map(cleanProperty);renderList();clearForm();validate();renderCRM();alert('Yüklendi: '+properties.length+' ilan')}catch(err){alert('Okuma hatası: '+err.message)}};rd.readAsText(f)};
 
 loadCustomers();
 initLangForms();
 updateUiLang('en');
 updatePropertyTypeFields();
-fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s).map(cleanProperty);removeGhostProperties(true);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate();renderCRM();clearCustomerForm()});
+fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(s=>{properties=extractProperties(s).map(cleanProperty);renderList();clearForm();validate()}).catch(err=>{console.warn(err);clearForm();renderList();validate();renderCRM();clearCustomerForm()});
+
+
+// Sprint 4.3 — GitHub Assistant
+const GH43_SETTINGS_KEY='siriland_gh43_settings';
+const GH43_SNAPSHOT_KEY='siriland_gh43_snapshot';
+const GH43_LAST_EXPORT_KEY='siriland_gh43_last_export';
+function gh43Read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'')||fallback}catch(e){return fallback}}
+function gh43Write(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){console.warn('GH43 storage:',e)}}
+function gh43Snapshot(list=properties){const out={};(list||[]).forEach(p=>{if(!p||!p.id)return;const c=JSON.parse(JSON.stringify(p));delete c.updatedAt;out[p.id]=JSON.stringify(c)});return out}
+function gh43GetChanges(){const previous=gh43Read(GH43_SNAPSHOT_KEY,{}),current=gh43Snapshot();const added=[],updated=[],deleted=[];Object.keys(current).forEach(id=>{if(!(id in previous))added.push(id);else if(previous[id]!==current[id])updated.push(id)});Object.keys(previous).forEach(id=>{if(!(id in current))deleted.push(id)});return{added,updated,deleted}}
+function gh43FilesChanged(){return['properties.js','properties.json','data/properties.json','crm/customers.json','publish/export-summary.json','publish/changes.json','UPLOAD_INSTRUCTIONS.txt']}
+function gh43CommitText(c){const count=c.added.length+c.updated.length+c.deleted.length;const title=count?`Update ${count} property record${count===1?'':'s'}`:'Refresh property export';const lines=[title,'',`Added: ${c.added.length}`,`Updated: ${c.updated.length}`,`Deleted: ${c.deleted.length}`];if(c.added.length)lines.push('',`New listings: ${c.added.join(', ')}`);if(c.updated.length)lines.push(`Updated listings: ${c.updated.join(', ')}`);if(c.deleted.length)lines.push(`Deleted listings: ${c.deleted.join(', ')}`);return lines.join('\n')}
+async function gh43Copy(text,message){try{await navigator.clipboard.writeText(text)}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}alert(message)}
+function gh43Render(){if(!$('gh43Panel'))return;const c=gh43GetChanges(),files=gh43FilesChanged(),last=gh43Read(GH43_LAST_EXPORT_KEY,null),settings=gh43Read(GH43_SETTINGS_KEY,{repository:'SIRILAND-ChiangMai/siriland-realestate',branch:'main'});$('gh43Repository').value=settings.repository||'SIRILAND-ChiangMai/siriland-realestate';$('gh43Branch').value=settings.branch||'main';$('gh43CommitMessage').value=gh43CommitText(c);$('gh43Files').innerHTML=files.map(x=>`<div class="gh43-row"><b>${escapeHtml(x)}</b><span>CHANGED</span></div>`).join('');$('gh43Changes').innerHTML=[['New Listings',c.added],['Updated Listings',c.updated],['Deleted Listings',c.deleted]].map(([label,list])=>`<div class="gh43-row"><b>${label}</b><span>${list.length}${list.length?' · '+escapeHtml(list.join(', ')):''}</span></div>`).join('');const ready=!!last;const status=$('gh43Status');status.textContent=ready?'PUSH READY':'EXPORT REQUIRED';status.className='gh43-status '+(ready?'ready':'warn');$('gh43Summary').textContent=['SIRILAND GITHUB ASSISTANT','Repository: '+$('gh43Repository').value,'Branch: '+$('gh43Branch').value,'Status: '+(ready?'PUSH READY':'RUN ZIP EXPORT FIRST'),last?'Export version: '+last.version:'Export version: —',last?'Exported at: '+last.exportedAt:'Exported at: —','',$('gh43CommitMessage').value,'','Files Changed ('+files.length+')',...files.map(x=>'• '+x)].join('\n')}
+function gh43Init(){if(!$('gh43Panel'))return;const settings=gh43Read(GH43_SETTINGS_KEY,{repository:'SIRILAND-ChiangMai/siriland-realestate',branch:'main'});$('gh43Repository').value=settings.repository;$('gh43Branch').value=settings.branch;$('gh43RefreshBtn').onclick=gh43Render;$('gh43CopyCommitBtn').onclick=()=>gh43Copy($('gh43CommitMessage').value,'Commit mesajı kopyalandı.');$('gh43CopySummaryBtn').onclick=()=>gh43Copy($('gh43Summary').textContent,'GitHub özeti kopyalandı.');['gh43Repository','gh43Branch'].forEach(id=>$(id).addEventListener('change',()=>{gh43Write(GH43_SETTINGS_KEY,{repository:$('gh43Repository').value.trim(),branch:$('gh43Branch').value.trim()});gh43Render()}));gh43Render()}
+const _gh43BuildZip=buildZip;
+buildZip=async function(){const before=gh43GetChanges();const result=await _gh43BuildZip();const now=new Date();const version=now.getFullYear()+'.'+String(now.getMonth()+1).padStart(2,'0')+'.'+String(now.getDate()).padStart(2,'0')+'-'+String(now.getHours()).padStart(2,'0')+String(now.getMinutes()).padStart(2,'0');gh43Write(GH43_LAST_EXPORT_KEY,{version,exportedAt:now.toLocaleString(),changes:before,files:gh43FilesChanged()});gh43Write(GH43_SNAPSHOT_KEY,gh43Snapshot());gh43Render();return result};
+window.addEventListener('DOMContentLoaded',gh43Init);

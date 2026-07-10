@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND CMS PRO 2030 - Ghost + UI + Recent 24h Fixed</title>
-  <link rel="stylesheet" href="admin.css?v=2026071013">
+  <title>SIRILAND CMS PRO 2030 - Sprint 4.3 GitHub Assistant</title>
+  <link rel="stylesheet" href="admin.css?v=2026071014">
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND CMS PRO 2030 — Ghost + UI + Recent 24h Fixed</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
+    <div><div class="logo">SIRILAND CMS PRO 2030 — Sprint 4.3 GitHub Assistant</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -18,6 +18,40 @@
     </div>
   </div>
   <div class="hint"><b>Önemli düzeltme:</b> Facebook/Instagram post, fotoğraf önizleme ve kapak seçimi korunmuştur. Export artık <b>Ask for price</b>, <b>Recovered from image folder</b>, <b>Details updating</b> gibi placeholder yazıları temizler. Fiyat bilinmiyorsa <b>Contact for Price</b> yaz.</div>
+  <div class="panel gh43-panel" id="gh43Panel">
+    <div class="gh43-head">
+      <div>
+        <h2>🐙 GitHub Assistant — Sprint 4.3</h2>
+        <p class="muted">ZIP export sonrası commit mesajını, değişen dosyaları ve ilan değişikliklerini otomatik hazırlar.</p>
+      </div>
+      <span class="gh43-status warn" id="gh43Status">EXPORT REQUIRED</span>
+    </div>
+    <div class="gh43-grid">
+      <div class="gh43-box">
+        <h3>Repository & Commit</h3>
+        <div class="grid2">
+          <div><label>Repository</label><input id="gh43Repository" value="SIRILAND-ChiangMai/siriland-realestate"></div>
+          <div><label>Branch</label><input id="gh43Branch" value="main"></div>
+        </div>
+        <label>Commit Message</label>
+        <textarea id="gh43CommitMessage" class="gh43-textarea"></textarea>
+        <div class="copyrow">
+          <button class="btn" id="gh43RefreshBtn" type="button">Commit Hazırla</button>
+          <button class="btn dark" id="gh43CopyCommitBtn" type="button">Commit Kopyala</button>
+          <button class="btn dark" id="gh43CopySummaryBtn" type="button">Tüm Özeti Kopyala</button>
+        </div>
+      </div>
+      <div class="gh43-box">
+        <h3>Files Changed</h3>
+        <div id="gh43Files" class="gh43-list"></div>
+        <h3>Listing Changes</h3>
+        <div id="gh43Changes" class="gh43-list"></div>
+      </div>
+    </div>
+    <h3>Push Summary</h3>
+    <pre id="gh43Summary" class="gh43-summary"></pre>
+  </div>
+
 
   <div class="panel" id="dashboardPanel">
     <h2>🏠 Dashboard — Phase 1</h2>
@@ -206,7 +240,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071012"></script>
+<script src="admin.js?v=2026071014"></script>
 <script src="modules/dashboard.js?v=2026071012"></script>
 <script src="modules/crm.js?v=2026071012"></script>
 <script src="modules/export.js?v=2026071012"></script>

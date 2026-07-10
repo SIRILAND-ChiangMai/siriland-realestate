@@ -39,5 +39,19 @@
 .imageDropZone:hover,.imageDropZone:focus,.imageDropZone.dragover{background:#fff3cb;border-color:#a97812;transform:translateY(-1px)}
 .dropIcon{font-size:34px}.imageDropZone span{font-size:13px;color:#64748b}.mediaToolbar{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 8px}.imageStats{border:1px solid #d9deea;border-radius:12px;padding:10px 12px;background:#f8fafc;font-size:13px;font-weight:700}.imageWarnings{margin:8px 0}.imageWarning{border-left:4px solid #b45309;background:#fff7ed;border-radius:8px;padding:8px 10px;margin:5px 0;font-size:12px}.imageOk{border-left:4px solid #0f7b3f;background:#ecfdf5;border-radius:8px;padding:8px 10px;margin:5px 0;font-size:12px}.imageMeta{font-size:12px;color:#475569;margin-top:5px}.imageCard.badImage{border-color:#f59e0b;background:#fffaf0}
 
-/* Build 2026.07.10.13 */
-#propertyListSearch{min-height:42px;font-weight:700}
+
+/* Sprint 4.3 — GitHub Assistant */
+.gh43-panel{border:1px solid #d6ad4b;background:linear-gradient(180deg,#fff,#fffaf0)}
+.gh43-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.gh43-head h2{margin:0;color:var(--navy)}
+.gh43-status{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:900;color:#fff}
+.gh43-status.ready{background:var(--green)}.gh43-status.warn{background:#a16207}
+.gh43-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}
+.gh43-box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+.gh43-box h3{margin:0 0 10px;color:var(--navy);font-size:15px}
+.gh43-textarea{min-height:155px;font-family:Consolas,monospace;line-height:1.5}
+.gh43-list{border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;margin-bottom:14px}
+.gh43-row{display:flex;justify-content:space-between;gap:10px;padding:9px 10px;border-bottom:1px dashed #e5e7eb;font-size:12px}
+.gh43-row:last-child{border-bottom:0}.gh43-row span{color:#64748b;text-align:right}
+.gh43-summary{white-space:pre-wrap;background:#0b1220;color:#dbeafe;border-radius:14px;padding:14px;min-height:170px;max-height:300px;overflow:auto;font:12px/1.55 Consolas,monospace}
+@media(max-width:900px){.gh43-grid{grid-template-columns:1fr}}
