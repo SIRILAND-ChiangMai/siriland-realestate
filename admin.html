@@ -4,9 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SIRILAND CMS PRO 2030 - Integrated Publish Manager PRO</title>
-  <link rel="stylesheet" href="admin.css?v=2026071026">
+  <link rel="stylesheet" href="admin.css?v=2026071028">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
+
+<button type="button" class="propertyListFloatingButton" id="propertyListFloatingButton">
+  📋 İlan Listesi
+</button>
+
 
 <button type="button" class="publishFloatingButton" onclick="document.getElementById('integratedPublishPanel')?.scrollIntoView({behavior:'smooth',block:'start'})">
   🚀 Publish
@@ -420,7 +426,9 @@
       <option value="20th Floor">20th Floor</option>
       <option value="21+ Floor">21+ Floor</option>
     </select></div>
-          <div><label data-ui="map">Map URL</label><input id="map"></div>
+          <div><label data-ui="map">Map URL</label><input id="map" placeholder="Google Maps URL"></div>
+          <div><label>Latitude</label><input id="latitude" readonly placeholder="18.7883"></div>
+          <div><label>Longitude</label><input id="longitude" readonly placeholder="98.9853"></div>
           <div data-property-field="landSize"><label>🌳 Land Size</label><input id="landSize" placeholder="7-2-80 Rai / 97.6 sq.w."></div>
           <div data-property-field="landAreaSqm"><label>📐 Land Area (sqm)</label><input id="landAreaSqm" placeholder="11,920 sqm"></div>
           <div data-property-field="buildingArea"><label>🏠 Building Area</label><input id="buildingArea" placeholder="240 sqm"></div>
@@ -452,7 +460,39 @@
           <div><label>⭐ Summary</label><input id="summary" placeholder="Short SEO summary"><button class="btn" type="button" id="generateSummaryBtn" style="margin-top:7px">Generate Summary</button></div>
         </div>
       </div>
-      <div class="panel" id="languageContentPanel">
+      
+      <div class="panel googleMapsProPanel" id="googleMapsProPanel">
+        <div class="googleMapsProHead">
+          <div>
+            <h2>🗺️ Sprint 4.6 — Google Maps PRO</h2>
+            <p class="muted">Haritada noktayı seç, marker’ı sürükle veya Google Maps linkinden koordinatı otomatik çıkar.</p>
+          </div>
+          <span class="mapsStatusBadge" id="mapsStatusBadge">READY</span>
+        </div>
+
+        <div class="mapsToolbar">
+          <button class="btn" type="button" id="parseMapUrlBtn">Google Maps Linkini Oku</button>
+          <button class="btn dark" type="button" id="locateCurrentBtn">Mevcut Konumum</button>
+          <button class="btn dark" type="button" id="centerCityBtn">Şehir Merkezine Git</button>
+          <button class="btn green" type="button" id="saveMapPositionBtn">Konumu İlan Formuna Kaydet</button>
+          <button class="btn red" type="button" id="clearMapPositionBtn">Konumu Temizle</button>
+        </div>
+
+        <div id="adminMapCanvas" class="adminMapCanvas"></div>
+
+        <div class="mapsInfoGrid">
+          <div><span>Latitude</span><strong id="mapLatDisplay">—</strong></div>
+          <div><span>Longitude</span><strong id="mapLngDisplay">—</strong></div>
+          <div><span>Adres</span><strong id="mapAddressDisplay">Henüz seçilmedi</strong></div>
+          <div><span>Kaynak</span><strong id="mapSourceDisplay">—</strong></div>
+        </div>
+
+        <div class="mapsHint">
+          Haritada bir noktaya tıkla veya marker’ı sürükle. Koordinatlar otomatik güncellenir.
+        </div>
+      </div>
+
+<div class="panel" id="languageContentPanel">
         <h2 id="h_lang">3) İlan Başlığı ve Açıklaması</h2>
         <div class="tabs" id="langTabs"></div>
         <div id="langForms"></div>
@@ -613,8 +653,13 @@
             <h2>📋 İlan Listesi PRO</h2>
             <p class="muted">Tüm şehirleri, ilan türlerini ve durumları filtreleyerek görüntüle.</p>
           </div>
-          <div class="propertyListCount" id="propertyListCount">0 / 0 ilan</div>
+          <div class="propertyListHeaderActions">
+            <div class="propertyListCount" id="propertyListCount">0 / 0 ilan</div>
+            <button class="btn green" id="reloadPropertyListBtn" type="button">İlanları Yeniden Yükle</button>
+            <button class="btn dark" id="choosePropertiesFileBtn" type="button">properties.js Seç</button>
+          </div>
         </div>
+        <div id="propertyListLoadStatus" class="propertyListLoadStatus">İlan verisi kontrol ediliyor...</div>
         <div class="propertyListFilters">
           <input id="propertyListSearch" type="search" placeholder="ID, başlık, şehir veya fiyat ara...">
           <select id="propertyListCity"><option value="all">Tüm Şehirler</option></select>
@@ -636,7 +681,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071026"></script>
+<script src="admin.js?v=2026071028"></script>
 <script src="modules/dashboard.js?v=2026071012"></script>
 <script src="modules/crm.js?v=2026071012"></script>
 <script src="modules/export.js?v=2026071012"></script>
@@ -645,5 +690,6 @@
 <script src="modules/validator.js?v=2026071012"></script>
 <script src="modules/quality.js?v=2026071012"></script>
 <script src="modules/autosave.js?v=2026071012"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 </html>

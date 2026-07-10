@@ -11,7 +11,7 @@ let mediaAnalysisToken=0;
 let propertyListPage=1;
 const PROPERTY_LIST_PAGE_SIZE=20;
 const langs=['en','th','tr','zh'];
-const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map','landSize','landAreaSqm','buildingArea','parking','titleDeed','roadAccess','frontage','zoning','utilities','salePrice','rentPrice','ownerFinance','installment','freeTransfer','summary','nearby','features','furniture','appliances'];
+const fields=['id','city','type','deal','status','price','bedrooms','bathrooms','area','room','floor','map','latitude','longitude','landSize','landAreaSqm','buildingArea','parking','titleDeed','roadAccess','frontage','zoning','utilities','salePrice','rentPrice','ownerFinance','installment','freeTransfer','summary','nearby','features','furniture','appliances'];
 const $=id=>document.getElementById(id);
 
 function escapeHtml(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
@@ -491,8 +491,8 @@ function renderList(){
       </div>
     </div>
     <div class="propertyListActions">
-      <button class="btn dark" onclick="editProp('${escapeHtml(p.id)}')">Düzenle</button>
-      <button class="btn red" onclick="deleteProp('${escapeHtml(p.id)}')">Sil</button>
+      <button class="btn dark" type="button" data-edit-property="${escapeHtml(p.id)}">Düzenle</button>
+      <button class="btn red" type="button" data-delete-property="${escapeHtml(p.id)}">Sil</button>
     </div>
   </div>`).join(''):'<div class="propertyListEmpty">Bu filtrelerde ilan bulunamadı.</div>';
   renderPropertyListPagination(filtered.length);
@@ -2359,3 +2359,328 @@ window.addEventListener('load',async()=>{
     }
   }
 });
+
+
+/* Property List Restore + Direct File Loader */
+function propertyListSetLoadStatus(message,type='info'){
+  const el=$('propertyListLoadStatus');
+  if(!el)return;
+  el.textContent=message;
+  el.className='propertyListLoadStatus '+type;
+}
+
+async function propertyListLoadFromCmsHandle(){
+  try{
+    if(!publishHandles.cms) publishHandles.cms=await publishLoadHandle('cms');
+    if(!publishHandles.cms) throw new Error('CMS Source klasörü seçili değil.');
+
+    const ok=await publishRequestPermission(publishHandles.cms,'read');
+    if(!ok) throw new Error('CMS klasörü okuma izni verilmedi.');
+
+    const file=await publishReadFile(publishHandles.cms,'properties.js');
+    if(!file) throw new Error('01_CMS içinde properties.js bulunamadı.');
+
+    const text=await file.text();
+    const loaded=extractProperties(text).map(cleanProperty);
+    if(!loaded.length) throw new Error('properties.js içinde ilan bulunamadı.');
+
+    properties=loaded;
+    rebuildIdHistory?.();
+    renderList();
+    renderDashboard?.();
+    validate?.();
+
+    localStorage.setItem('siriland_properties_backup',JSON.stringify(properties));
+    localStorage.setItem('siriland_last_property_count',String(properties.length));
+
+    propertyListSetLoadStatus(`${properties.length} ilan yüklendi. Düzenle ve Sil butonları hazır.`,'ok');
+    return true;
+  }catch(e){
+    propertyListSetLoadStatus('CMS klasöründen yüklenemedi: '+e.message,'error');
+    return false;
+  }
+}
+
+async function propertyListChoosePropertiesFile(){
+  if(!('showOpenFilePicker' in window)){
+    alert('Bu özellik için Chrome veya Edge kullan.');
+    return;
+  }
+  try{
+    const [handle]=await window.showOpenFilePicker({
+      multiple:false,
+      types:[{
+        description:'SIRILAND properties.js',
+        accept:{'text/javascript':['.js'],'application/json':['.json']}
+      }]
+    });
+    const file=await handle.getFile();
+    const text=await file.text();
+    const loaded=extractProperties(text).map(cleanProperty);
+    if(!loaded.length) throw new Error('Seçilen dosyada ilan bulunamadı.');
+
+    properties=loaded;
+    rebuildIdHistory?.();
+    renderList();
+    renderDashboard?.();
+    validate?.();
+
+    localStorage.setItem('siriland_properties_backup',JSON.stringify(properties));
+    localStorage.setItem('siriland_last_property_count',String(properties.length));
+
+    propertyListSetLoadStatus(`${properties.length} ilan dosyadan yüklendi.`,'ok');
+  }catch(e){
+    if(e.name!=='AbortError')propertyListSetLoadStatus('Dosya yükleme hatası: '+e.message,'error');
+  }
+}
+
+function propertyListLoadFallback(){
+  try{
+    const backup=JSON.parse(localStorage.getItem('siriland_properties_backup')||'[]');
+    if(Array.isArray(backup)&&backup.length){
+      properties=backup.map(cleanProperty);
+      renderList();
+      propertyListSetLoadStatus(`${properties.length} ilan tarayıcı yedeğinden yüklendi.`,'warning');
+      return true;
+    }
+  }catch(e){}
+  propertyListSetLoadStatus('İlan listesi boş. “İlanları Yeniden Yükle” veya “properties.js Seç” butonunu kullan.','error');
+  return false;
+}
+
+function propertyListRestoreInit(){
+  $('reloadPropertyListBtn')?.addEventListener('click',async()=>{
+    propertyListSetLoadStatus('01_CMS içindeki properties.js okunuyor...','working');
+    const ok=await propertyListLoadFromCmsHandle();
+    if(!ok)propertyListLoadFallback();
+  });
+
+  $('choosePropertiesFileBtn')?.addEventListener('click',propertyListChoosePropertiesFile);
+
+  $('propertyListFloatingButton')?.addEventListener('click',()=>{
+    document.querySelector('.propertyListProPanel')?.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // Event delegation guarantees Edit/Delete buttons work even after rerender.
+  $('list')?.addEventListener('click',e=>{
+    const edit=e.target.closest('[data-edit-property]');
+    if(edit){
+      const p=properties.find(x=>x.id===edit.dataset.editProperty);
+      if(p){
+        setForm(p);
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+      return;
+    }
+    const del=e.target.closest('[data-delete-property]');
+    if(del)window.deleteProp?.(del.dataset.deleteProperty);
+  });
+
+  setTimeout(async()=>{
+    if(properties.length){
+      renderList();
+      propertyListSetLoadStatus(`${properties.length} ilan hazır.`,'ok');
+      return;
+    }
+    const ok=await propertyListLoadFromCmsHandle();
+    if(!ok)propertyListLoadFallback();
+  },700);
+}
+
+window.addEventListener('DOMContentLoaded',propertyListRestoreInit);
+
+
+/* Sprint 4.6 — Google Maps PRO */
+let adminMap=null;
+let adminMapMarker=null;
+let adminMapSource='';
+
+const SIRILAND_CITY_CENTERS={
+  'Chiang Mai':[18.7883,98.9853],
+  'Bangkok':[13.7563,100.5018],
+  'Phichit':[16.4429,100.3488],
+  'Phitsanulok':[16.8211,100.2659],
+  'Nakhon Sawan':[15.7047,100.1372]
+};
+
+function mapsSetStatus(text,bad=false){
+  const el=$('mapsStatusBadge');
+  if(!el)return;
+  el.textContent=text;
+  el.classList.toggle('bad',bad);
+}
+function mapsSetInfo(lat,lng,address='Henüz seçilmedi',source='—'){
+  if($('mapLatDisplay'))$('mapLatDisplay').textContent=Number.isFinite(lat)?lat.toFixed(6):'—';
+  if($('mapLngDisplay'))$('mapLngDisplay').textContent=Number.isFinite(lng)?lng.toFixed(6):'—';
+  if($('mapAddressDisplay'))$('mapAddressDisplay').textContent=address||'—';
+  if($('mapSourceDisplay'))$('mapSourceDisplay').textContent=source||'—';
+}
+function mapsCreateGoogleUrl(lat,lng){
+  return `https://www.google.com/maps?q=${lat.toFixed(6)},${lng.toFixed(6)}`;
+}
+function mapsParseCoordinates(value){
+  const text=String(value||'').trim();
+  if(!text)return null;
+  const patterns=[
+    /@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/,
+    /[?&](?:q|query|ll)=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/,
+    /(-?\d{1,2}\.\d{4,}),\s*(-?\d{1,3}\.\d{4,})/
+  ];
+  for(const pattern of patterns){
+    const m=text.match(pattern);
+    if(m){
+      const lat=Number(m[1]),lng=Number(m[2]);
+      if(lat>=-90&&lat<=90&&lng>=-180&&lng<=180)return {lat,lng};
+    }
+  }
+  return null;
+}
+async function mapsReverseGeocode(lat,lng){
+  try{
+    const url=`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lng)}`;
+    const response=await fetch(url,{headers:{'Accept':'application/json'}});
+    if(!response.ok)throw new Error('Reverse geocode unavailable');
+    const data=await response.json();
+    return data.display_name||'Adres bulunamadı';
+  }catch(e){
+    return 'Adres bilgisi alınamadı';
+  }
+}
+async function mapsApplyPosition(lat,lng,source='Harita',zoom=16){
+  if(!Number.isFinite(lat)||!Number.isFinite(lng))return;
+  if(!adminMap)return;
+  if(!adminMapMarker){
+    adminMapMarker=L.marker([lat,lng],{draggable:true}).addTo(adminMap);
+    adminMapMarker.on('dragend',async()=>{
+      const pos=adminMapMarker.getLatLng();
+      adminMapSource='Sürüklenen marker';
+      const address=await mapsReverseGeocode(pos.lat,pos.lng);
+      mapsSetInfo(pos.lat,pos.lng,address,adminMapSource);
+    });
+  }else adminMapMarker.setLatLng([lat,lng]);
+  adminMap.setView([lat,lng],zoom);
+  adminMapSource=source;
+  mapsSetInfo(lat,lng,'Adres aranıyor...',source);
+  const address=await mapsReverseGeocode(lat,lng);
+  mapsSetInfo(lat,lng,address,source);
+}
+function mapsCurrentPosition(){
+  if(adminMapMarker){
+    const p=adminMapMarker.getLatLng();
+    return {lat:p.lat,lng:p.lng};
+  }
+  const lat=Number($('latitude')?.value),lng=Number($('longitude')?.value);
+  if(Number.isFinite(lat)&&Number.isFinite(lng))return {lat,lng};
+  return null;
+}
+function mapsInit(){
+  if(typeof L==='undefined'){
+    mapsSetStatus('LEAFLET ERROR',true);
+    return;
+  }
+  const city=$('city')?.value||'Chiang Mai';
+  const center=SIRILAND_CITY_CENTERS[city]||SIRILAND_CITY_CENTERS['Chiang Mai'];
+
+  adminMap=L.map('adminMapCanvas').setView(center,12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    maxZoom:19,
+    attribution:'© OpenStreetMap'
+  }).addTo(adminMap);
+
+  adminMap.on('click',async e=>{
+    await mapsApplyPosition(e.latlng.lat,e.latlng.lng,'Harita tıklaması',16);
+  });
+
+  $('parseMapUrlBtn')?.addEventListener('click',async()=>{
+    const parsed=mapsParseCoordinates($('map')?.value);
+    if(!parsed){
+      alert('Google Maps linkinin içinde koordinat bulunamadı. Linki Google Maps’ten “Paylaş > Bağlantıyı kopyala” ile al.');
+      return;
+    }
+    await mapsApplyPosition(parsed.lat,parsed.lng,'Google Maps URL',17);
+  });
+
+  $('locateCurrentBtn')?.addEventListener('click',()=>{
+    if(!navigator.geolocation){
+      alert('Bu tarayıcı konum özelliğini desteklemiyor.');
+      return;
+    }
+    mapsSetStatus('LOCATING');
+    navigator.geolocation.getCurrentPosition(
+      async pos=>{
+        mapsSetStatus('READY');
+        await mapsApplyPosition(pos.coords.latitude,pos.coords.longitude,'Mevcut cihaz konumu',17);
+      },
+      err=>{
+        mapsSetStatus('LOCATION DENIED',true);
+        alert('Konum alınamadı: '+err.message);
+      },
+      {enableHighAccuracy:true,timeout:12000}
+    );
+  });
+
+  $('centerCityBtn')?.addEventListener('click',()=>{
+    const city=$('city')?.value||'Chiang Mai';
+    const c=SIRILAND_CITY_CENTERS[city]||SIRILAND_CITY_CENTERS['Chiang Mai'];
+    adminMap.setView(c,12);
+    mapsSetInfo(NaN,NaN,city+' şehir merkezi','Şehir merkezi');
+  });
+
+  $('saveMapPositionBtn')?.addEventListener('click',()=>{
+    const p=mapsCurrentPosition();
+    if(!p){alert('Önce haritada bir konum seç.');return}
+    $('latitude').value=p.lat.toFixed(6);
+    $('longitude').value=p.lng.toFixed(6);
+    $('map').value=mapsCreateGoogleUrl(p.lat,p.lng);
+    mapsSetStatus('SAVED');
+    updateQualityScore?.();
+  });
+
+  $('clearMapPositionBtn')?.addEventListener('click',()=>{
+    if(adminMapMarker){adminMap.removeLayer(adminMapMarker);adminMapMarker=null}
+    if($('latitude'))$('latitude').value='';
+    if($('longitude'))$('longitude').value='';
+    if($('map'))$('map').value='';
+    mapsSetInfo(NaN,NaN,'Henüz seçilmedi','—');
+    mapsSetStatus('READY');
+  });
+
+  $('city')?.addEventListener('change',()=>{
+    const c=SIRILAND_CITY_CENTERS[$('city').value]||SIRILAND_CITY_CENTERS['Chiang Mai'];
+    if(!adminMapMarker)adminMap.setView(c,12);
+  });
+
+  // Existing property coordinates
+  setTimeout(async()=>{
+    const lat=Number($('latitude')?.value),lng=Number($('longitude')?.value);
+    const fromUrl=mapsParseCoordinates($('map')?.value);
+    if(Number.isFinite(lat)&&Number.isFinite(lng)&&lat&&lng){
+      await mapsApplyPosition(lat,lng,'Kayıtlı koordinat',16);
+    }else if(fromUrl){
+      await mapsApplyPosition(fromUrl.lat,fromUrl.lng,'Kayıtlı Map URL',16);
+    }
+    setTimeout(()=>adminMap.invalidateSize(),200);
+  },300);
+}
+window.addEventListener('load',mapsInit);
+
+/* Editing an existing property should refresh the marker */
+const originalSetFormForMaps=setForm;
+setForm=function(p){
+  originalSetFormForMaps(p);
+  setTimeout(async()=>{
+    if(!adminMap)return;
+    const lat=Number(p.latitude),lng=Number(p.longitude);
+    const parsed=mapsParseCoordinates(p.map);
+    if(Number.isFinite(lat)&&Number.isFinite(lng)&&lat&&lng){
+      await mapsApplyPosition(lat,lng,'Kayıtlı koordinat',16);
+    }else if(parsed){
+      await mapsApplyPosition(parsed.lat,parsed.lng,'Kayıtlı Map URL',16);
+    }else{
+      if(adminMapMarker){adminMap.removeLayer(adminMapMarker);adminMapMarker=null}
+      const c=SIRILAND_CITY_CENTERS[p.city]||SIRILAND_CITY_CENTERS['Chiang Mai'];
+      adminMap.setView(c,12);
+      mapsSetInfo(NaN,NaN,'Konum kaydı yok','—');
+    }
+  },150);
+};

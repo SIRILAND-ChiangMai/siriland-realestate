@@ -1,27 +1,29 @@
-SIRILAND WEBSITE IMAGE SIZE FIX
+SIRILAND SPRINT 4.6 — GOOGLE MAPS PRO
 
-Düzeltilenler:
-- Ana ilan kartı görselleri: 230 px
-- Homepage Popular / Featured kartları: 185 px
-- Mini property kartları: 205 px
-- Mobilde ilan görselleri daha büyük gösterilir
-- Tüm görseller object-fit: cover ile dengeli kırpılır
-- Kart düzeni ve responsive yapı korunur
+Eklenenler:
+- Admin içinde interaktif harita
+- Haritaya tıklayarak koordinat seçme
+- Sürüklenebilir marker
+- Google Maps URL içinden otomatik lat/lng çıkarma
+- Mevcut cihaz konumunu alma
+- Şehir merkezine otomatik gitme
+- Reverse geocode ile adres gösterme
+- Latitude / Longitude alanlarını ilana kaydetme
+- Google Maps URL otomatik oluşturma
+- Düzenlenen ilanın kayıtlı konumunu otomatik açma
 
 Kurulum:
-1. style.css dosyasını şu iki yerde eski dosyanın üzerine kopyala:
+1. admin.html, admin.js ve admin.css dosyalarını:
+   E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+   içindeki eski dosyaların üzerine kopyala.
+2. Chrome'da 01_CMS\admin.html aç.
+3. Ctrl + Shift + R yap.
+4. Önce CMS içinde test et.
+5. Doğruysa Backup + Publish ile GitHub'a gönder.
 
-E:\SIRILAND_2030_Harddisk_Structure\01_CMS\style.css
-
-E:\SIRILAND_2030_Harddisk_Structure\09_GitHub\siriland-realestate\style.css
-
-2. GitHub Desktop:
-Summary: Increase property image heights
-Commit to main
-Push origin
-
-3. Website açıldıktan sonra:
-Ctrl + Shift + R
-
-Not:
-Bu sürüm güvenli CSS override yöntemini kullanır. Mevcut site tasarımını veya diğer modülleri bozmaz.
+Kullanım:
+- Google Maps linkini Map URL alanına yapıştır.
+- “Google Maps Linkini Oku” butonuna bas.
+- Marker doğru değilse sürükle.
+- “Konumu İlan Formuna Kaydet” butonuna bas.
+- Sonra ilanı normal şekilde kaydet.
