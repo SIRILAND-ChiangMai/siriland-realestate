@@ -33,8 +33,46 @@ const UI={
   zh:{info:'1) 房源信息',lang:'2) 4种语言内容',fb:'3) Facebook 文本',images:'4) 图片',id:'编号',city:'城市',type:'类型',deal:'出售/出租',status:'状态',price:'价格',bedrooms:'卧室',bathrooms:'浴室',area:'面积',room:'房号',floor:'楼层',map:'地图链接'}
 };
 function cityCode(city){return CITY_CODES[city]||String(city||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,3)||'PRP'}
-function nextId(city){const code=cityCode(city||$('city')?.value||'Chiang Mai');let max=0;properties.forEach(p=>{let m=String(p.id||'').match(new RegExp('^'+code+'-(\\d+)$','i'));if(m)max=Math.max(max,+m[1])});return code+'-'+String(max+1).padStart(4,'0')}
-function syncIdToCity(force=false){const city=$('city').value;const code=cityCode(city);const id=$('id').value.trim();const known=Object.values(CITY_CODES).join('|');if(force||!id||new RegExp('^('+known+')-\\d+$','i').test(id)) $('id').value=nextId(city)}
+const ID_HISTORY_KEY='siriland_id_history_v2';
+function loadIdHistory(){try{return JSON.parse(localStorage.getItem(ID_HISTORY_KEY)||'{}')}catch(e){return {}}}
+function saveIdHistory(data){localStorage.setItem(ID_HISTORY_KEY,JSON.stringify(data||{}))}
+function rebuildIdHistory(){
+  const history=loadIdHistory();
+  (properties||[]).forEach(p=>{
+    const m=String(p.id||'').trim().match(/^([A-Z]+)-(\d+)$/i);
+    if(!m)return;
+    const code=m[1].toUpperCase(),number=Number(m[2]);
+    history[code]=Math.max(Number(history[code]||0),number);
+  });
+  saveIdHistory(history);
+  return history;
+}
+function nextId(city){
+  const code=cityCode(city||$('city')?.value||'Chiang Mai');
+  const history=rebuildIdHistory();
+  let max=Number(history[code]||0);
+  (properties||[]).forEach(p=>{
+    const m=String(p.id||'').trim().match(new RegExp('^'+code+'-(\\d+)$','i'));
+    if(m)max=Math.max(max,Number(m[1]));
+  });
+  return code+'-'+String(max+1).padStart(4,'0');
+}
+function reserveId(id){
+  const m=String(id||'').trim().match(/^([A-Z]+)-(\d+)$/i);
+  if(!m)return;
+  const history=loadIdHistory();
+  const code=m[1].toUpperCase(),number=Number(m[2]);
+  history[code]=Math.max(Number(history[code]||0),number);
+  saveIdHistory(history);
+}
+function syncIdToCity(force=false){
+  const city=$('city')?.value;
+  if(!city||!$('id'))return;
+  const current=String($('id').value||'').trim();
+  const editing=(properties||[]).some(p=>p.id===current);
+  if(editing&&!force)return;
+  $('id').value=nextId(city);
+}
 function updateUiLang(l=currentLang){const t=UI[l]||UI.en;$('h_info').textContent=t.info;$('h_lang').textContent=t.lang;$('h_fb').textContent=t.fb;$('h_images').textContent=t.images;document.querySelectorAll('[data-ui]').forEach(el=>{el.textContent=t[el.dataset.ui]||el.textContent})}
 function imageBaseFor(p){return slugify(p.title?.en||p.title?.th||p.title?.tr||p.title?.zh||p.id)}
 
@@ -94,11 +132,13 @@ function updatePropertyTypeFields(){
 }
 function getForm(){
   const p={}; fields.forEach(f=>p[f]=$(f).value.trim());
-  if(!p.id) p.id=nextId(p.city);
+  const existingById=(properties||[]).find(x=>x.id===p.id);
   const expected=cityCode(p.city);
-  if(p.id && !String(p.id).toUpperCase().startsWith(expected+'-')){
-    if(confirm('ID şehir kodu ile uyumsuz. '+p.id+' yerine '+nextId(p.city)+' yapılsın mı?')){p.id=nextId(p.city);$('id').value=p.id}
+  if(!existingById && (!p.id || !String(p.id).toUpperCase().startsWith(expected+'-'))){
+    p.id=nextId(p.city);
+    $('id').value=p.id;
   }
+  reserveId(p.id);
   p.title={}; p.description={}; p.highlights={};
   langs.forEach(l=>{p.title[l]=$('title_'+l).value.trim();p.description[l]=$('description_'+l).value.trim();p.highlights[l]=$('highlights_'+l).value.split('\n').map(x=>x.trim()).filter(Boolean)});
   const existing=properties.find(x=>x.id===p.id);
@@ -1044,6 +1084,7 @@ fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>{
     if(!ok)throw new Error('Düşük ilan sayılı dosya kullanıcı tarafından reddedildi.');
   }
   properties=loaded;
+  rebuildIdHistory();
   localStorage.setItem('siriland_last_property_count',String(properties.length));
   localStorage.setItem('siriland_properties_backup',JSON.stringify(properties));
   renderList();clearForm();validate();renderCRM();clearCustomerForm();
@@ -2020,12 +2061,10 @@ function sirilandEnsureAutomaticId(force=false){
   const city=$('city')?.value;
   if(!city||!$('id'))return;
   const current=String($('id').value||'').trim();
-  const editing=properties.some(p=>p.id===current);
+  const editing=(properties||[]).some(p=>p.id===current);
   if(editing&&!force)return;
-  if(force||!current||/^([A-Z]+)-0001$/i.test(current)){
-    $('id').value=sirilandNextId(city);
-    updateQualityScore?.();
-  }
+  syncIdToCity(true);
+  updateQualityScore?.();
 }
 function sirilandTypeKind(type){
   const s=String(type||'').trim().toLowerCase();
@@ -2140,10 +2179,29 @@ function sirilandDynamicFormInit(){
     sirilandReserveId($('id')?.value);
   },50));
 
-  // First load: city selected, ID auto-generated.
-  setTimeout(()=>{
-    sirilandEnsureAutomaticId(false);
-    sirilandApplyDynamicForm();
-  },150);
+  // First load: wait for properties.js to finish loading before generating ID.
+  const waitForProperties=()=>{
+    if((properties||[]).length){
+      rebuildIdHistory();
+      syncIdToCity(true);
+      sirilandApplyDynamicForm();
+      return;
+    }
+    setTimeout(waitForProperties,150);
+  };
+  waitForProperties();
 }
 window.addEventListener('DOMContentLoaded',sirilandDynamicFormInit);
+
+
+function sirilandClearHiddenLandFields(){
+  if(sirilandTypeKind($('type')?.value)!=='land')return;
+  ['bedrooms','bathrooms','room','floor','parking','buildingArea','area'].forEach(id=>{
+    if($(id))$(id).value='';
+  });
+}
+$('type')?.addEventListener('change',()=>{
+  sirilandApplyDynamicForm();
+  sirilandClearHiddenLandFields();
+});
+$('saveBtn')?.addEventListener('click',sirilandClearHiddenLandFields);

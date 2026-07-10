@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SIRILAND CMS PRO 2030 - Integrated Publish Manager PRO</title>
-  <link rel="stylesheet" href="admin.css?v=2026071024">
+  <link rel="stylesheet" href="admin.css?v=2026071025">
 </head>
 <body>
 
@@ -318,7 +318,7 @@
       <div class="panel">
         <h2 id="h_info">1) İlan Bilgileri</h2>
         <div class="grid3">
-          <div><label data-ui="id">ID</label><input id="id" placeholder="CM-0032"></div>
+          <div><label data-ui="id">ID</label><input id="id" placeholder="Şehir seçilince otomatik gelir" readonly></div>
           <div><label data-ui="city">City</label><select id="city">
             <option value="Chiang Mai">Chiang Mai</option>
             <option value="Bangkok">Bangkok</option>
@@ -326,20 +326,113 @@
             <option value="Phichit">Phichit</option>
             <option value="Nakhon Sawan">Nakhon Sawan</option>
           </select></div>
-          <div><label data-ui="type">Type</label><input id="type" placeholder="Condo / House / Land"></div>
-          <div><label data-ui="deal">Deal</label><input id="deal" placeholder="Sale / Rent"></div>
-          <div><label data-ui="status">Status</label><input id="status" placeholder="Available"></div>
+          <div><label data-ui="type">Type</label><select id="type">
+      <option value="">Property Type seç</option>
+      <option value="Condo">Condo</option>
+      <option value="House">House</option>
+      <option value="Land">Land</option>
+      <option value="Commercial">Commercial</option>
+      <option value="Shophouse">Shophouse</option>
+      <option value="Office">Office</option>
+      <option value="Hotel">Hotel</option>
+      <option value="Resort">Resort</option>
+      <option value="Warehouse">Warehouse</option>
+      <option value="Factory">Factory</option>
+      <option value="Farm">Farm</option>
+    </select></div>
+          <div><label data-ui="deal">Deal</label><select id="deal">
+      <option value="">Deal seç</option>
+      <option value="Sale">Sale</option>
+      <option value="Rent">Rent</option>
+      <option value="Sale/Rent">Sale/Rent</option>
+    </select></div>
+          <div><label data-ui="status">Status</label><select id="status">
+      <option value="Available">Available</option>
+      <option value="Reserved">Reserved</option>
+      <option value="Sold Out">Sold Out</option>
+      <option value="Rented Out">Rented Out</option>
+      <option value="Leased Out">Leased Out</option>
+      <option value="Draft">Draft</option>
+      <option value="Hidden">Hidden</option>
+    </select></div>
           <div><label data-ui="price">Price</label><input id="price" placeholder="2.59 MB"></div>
-          <div data-property-field="bedrooms"><label data-ui="bedrooms">Bedrooms</label><input id="bedrooms"></div>
-          <div data-property-field="bathrooms"><label data-ui="bathrooms">Bathrooms</label><input id="bathrooms"></div>
+          <div data-property-field="bedrooms"><label data-ui="bedrooms">Bedrooms</label><select id="bedrooms">
+      <option value="">Seç</option>
+      <option value="Studio">Studio</option>
+      <option value="1 Bedroom">1 Bedroom</option>
+      <option value="2 Bedrooms">2 Bedrooms</option>
+      <option value="3 Bedrooms">3 Bedrooms</option>
+      <option value="4 Bedrooms">4 Bedrooms</option>
+      <option value="5 Bedrooms">5 Bedrooms</option>
+      <option value="6 Bedrooms">6 Bedrooms</option>
+      <option value="7 Bedrooms">7 Bedrooms</option>
+      <option value="8 Bedrooms">8 Bedrooms</option>
+      <option value="9 Bedrooms">9 Bedrooms</option>
+      <option value="10+ Bedrooms">10+ Bedrooms</option>
+    </select></div>
+          <div data-property-field="bathrooms"><label data-ui="bathrooms">Bathrooms</label><select id="bathrooms">
+      <option value="">Seç</option>
+      <option value="1 Bathroom">1 Bathroom</option>
+      <option value="2 Bathrooms">2 Bathrooms</option>
+      <option value="3 Bathrooms">3 Bathrooms</option>
+      <option value="4 Bathrooms">4 Bathrooms</option>
+      <option value="5 Bathrooms">5 Bathrooms</option>
+      <option value="6 Bathrooms">6 Bathrooms</option>
+      <option value="7 Bathrooms">7 Bathrooms</option>
+      <option value="8 Bathrooms">8 Bathrooms</option>
+      <option value="9 Bathrooms">9 Bathrooms</option>
+      <option value="10+ Bathrooms">10+ Bathrooms</option>
+    </select></div>
           <div data-property-field="area"><label data-ui="area">Area / Internal Area</label><input id="area"></div>
-          <div data-property-field="room"><label data-ui="room">Room</label><input id="room"></div>
-          <div data-property-field="floor"><label data-ui="floor">Floor</label><input id="floor"></div>
+          <div data-property-field="room"><label data-ui="room">Room / Unit</label>
+      <input id="room" list="roomSuggestions" placeholder="Room 813 / Unit 516">
+      <datalist id="roomSuggestions">
+        <option value="Studio Unit">
+        <option value="Corner Unit">
+        <option value="Pool View Unit">
+        <option value="Mountain View Unit">
+        <option value="Building A">
+        <option value="Building B">
+      </datalist>
+    </div>
+          <div data-property-field="floor"><label data-ui="floor">Floor</label><select id="floor">
+      <option value="">Seç</option>
+      <option value="Ground Floor">Ground Floor</option>
+      <option value="1st Floor">1st Floor</option>
+      <option value="2nd Floor">2nd Floor</option>
+      <option value="3rd Floor">3rd Floor</option>
+      <option value="4th Floor">4th Floor</option>
+      <option value="5th Floor">5th Floor</option>
+      <option value="6th Floor">6th Floor</option>
+      <option value="7th Floor">7th Floor</option>
+      <option value="8th Floor">8th Floor</option>
+      <option value="9th Floor">9th Floor</option>
+      <option value="10th Floor">10th Floor</option>
+      <option value="11th Floor">11th Floor</option>
+      <option value="12th Floor">12th Floor</option>
+      <option value="13th Floor">13th Floor</option>
+      <option value="14th Floor">14th Floor</option>
+      <option value="15th Floor">15th Floor</option>
+      <option value="16th Floor">16th Floor</option>
+      <option value="17th Floor">17th Floor</option>
+      <option value="18th Floor">18th Floor</option>
+      <option value="19th Floor">19th Floor</option>
+      <option value="20th Floor">20th Floor</option>
+      <option value="21+ Floor">21+ Floor</option>
+    </select></div>
           <div><label data-ui="map">Map URL</label><input id="map"></div>
           <div data-property-field="landSize"><label>🌳 Land Size</label><input id="landSize" placeholder="7-2-80 Rai / 97.6 sq.w."></div>
           <div data-property-field="landAreaSqm"><label>📐 Land Area (sqm)</label><input id="landAreaSqm" placeholder="11,920 sqm"></div>
           <div data-property-field="buildingArea"><label>🏠 Building Area</label><input id="buildingArea" placeholder="240 sqm"></div>
-          <div data-property-field="parking"><label>🚗 Parking</label><input id="parking" placeholder="2 Cars"></div>
+          <div data-property-field="parking"><label>🚗 Parking</label><select id="parking">
+      <option value="">Seç</option>
+      <option value="No Parking">No Parking</option>
+      <option value="1 Car">1 Car</option>
+      <option value="2 Cars">2 Cars</option>
+      <option value="3 Cars">3 Cars</option>
+      <option value="4 Cars">4 Cars</option>
+      <option value="5+ Cars">5+ Cars</option>
+    </select></div>
           <div data-property-field="titleDeed"><label>📄 Title Deed</label><input id="titleDeed" placeholder="Chanote / Nor Sor 3 Gor"></div>
           <div data-property-field="roadAccess"><label>🛣️ Road Access</label><input id="roadAccess" placeholder="Public road / Concrete road"></div>
           <div data-property-field="frontage"><label>↔️ Frontage</label><input id="frontage" placeholder="20 meters"></div>
@@ -543,7 +636,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071024"></script>
+<script src="admin.js?v=2026071025"></script>
 <script src="modules/dashboard.js?v=2026071012"></script>
 <script src="modules/crm.js?v=2026071012"></script>
 <script src="modules/export.js?v=2026071012"></script>
