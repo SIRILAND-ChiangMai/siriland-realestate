@@ -4,7 +4,7 @@
   let lang = localStorage.getItem('siriland_lang') || 'en';
   let currentList = DATA.slice();
   let currentPage = 1;
-  const pageSize = window.innerWidth <= 900 ? 6 : 8;
+  const pageSize = window.innerWidth <= 700 ? 6 : (window.innerWidth <= 1100 ? 8 : 12);
   let activeHeroDeal = "all";
   let modalProperty = null;
   let modalIndex = 0;
@@ -204,33 +204,46 @@
     </article>`;
   }
   function renderHomeShowcase(){
-    const cityCounts = [...new Set(DATA.map(p=>p.city).filter(Boolean))].slice(0,10).map(city => {
-      const count = DATA.filter(p=>p.city===city).length;
+    const cityOrder = [...new Set(DATA.map(p=>p.city).filter(Boolean))]
+      .map(city => ({city, count: DATA.filter(p=>p.city===city).length}))
+      .sort((a,b)=>b.count-a.count || a.city.localeCompare(b.city));
+    const cityCounts = cityOrder.slice(0,10).map(({city,count}) => {
       return `<button class="sx-city-card" data-collection-city="${city}"><strong>${trMap('city',city)}</strong><span>${count} listings</span></button>`;
     }).join('');
     if($('sxCityList')) $('sxCityList').innerHTML = cityCounts;
     const qc = $('quickCollections'); if(qc) qc.innerHTML = cityCounts;
     if($('citySideList')) $('citySideList').innerHTML = cityCounts;
 
-    const featured = DATA.filter(p=>p.featured !== false).slice(0,4);
-    const newest = DATA.slice().sort((a,b)=>String(b.updatedAt||b.createdAt||'').localeCompare(String(a.updatedAt||a.createdAt||''))).slice(0,4);
-    const bestPrice = DATA.filter(p=>parsePriceNumber(p.price || p.salePrice)>0).sort((a,b)=>parsePriceNumber(a.price||a.salePrice)-parsePriceNumber(b.price||b.salePrice)).slice(0,4);
-    const condos = DATA.filter(p=>String(p.type||'').toLowerCase().includes('condo')).slice(0,4);
-    const houses = DATA.filter(p=>String(p.type||'').toLowerCase().includes('house')).slice(0,4);
-    const finance = DATA.filter(p => propertyBlob(p).includes('owner finance') || propertyBlob(p).includes('ผ่อน') || propertyBlob(p).includes('free transfer') || propertyBlob(p).includes('0%')).slice(0,4);
+    const newest = DATA.slice().sort((a,b)=>String(b.updatedAt||b.createdAt||'').localeCompare(String(a.updatedAt||a.createdAt||'')));
+    const featured = DATA.filter(p=>p.featured !== false);
+    const priced = DATA.filter(p=>parsePriceNumber(p.price || p.salePrice)>0);
+    const bestPrice = priced.slice().sort((a,b)=>parsePriceNumber(a.price||a.salePrice)-parsePriceNumber(b.price||b.salePrice));
+    const condos = DATA.filter(p=>String(p.type||'').toLowerCase().includes('condo'));
+    const houses = DATA.filter(p=>String(p.type||'').toLowerCase().includes('house'));
+    const finance = DATA.filter(p => propertyBlob(p).includes('owner finance') || propertyBlob(p).includes('ผ่อน') || propertyBlob(p).includes('free transfer') || propertyBlob(p).includes('0%'));
+    const luxury = priced.filter(p=>parsePriceNumber(p.price||p.salePrice) >= 7000000);
 
-    if($('sxPopularListings')) $('sxPopularListings').innerHTML = (featured.length?featured:newest).slice(0,4).map(sxHomeCard).join('');
-    if($('sxBestPrice')) $('sxBestPrice').innerHTML = (bestPrice.length?bestPrice:featured).slice(0,4).map(sxSmallCard).join('');
-    if($('sxPopularCondo')) $('sxPopularCondo').innerHTML = (condos.length?condos:featured).slice(0,4).map(sxSmallCard).join('');
-    if($('sxOwnerFinance')) $('sxOwnerFinance').innerHTML = (finance.length?finance:(houses.length?houses:featured)).slice(0,4).map(sxHomeCard).join('');
+    if($('sxCollectionTiles')) $('sxCollectionTiles').innerHTML = [
+      ['💰','Best Price',bestPrice.length,'bestPrice'],
+      ['🏢','Popular Condo',condos.length,'condo'],
+      ['🏡','Houses',houses.length,'house'],
+      ['💎','Luxury',luxury.length,'luxury'],
+      ['📅','New Listings',newest.length,'new'],
+      ['🔑','Owner Finance',finance.length,'ownerFinance']
+    ].map(([icon,label,count,filter])=>`<a href="#properties" class="sx-collection-tile" data-home-filter="${filter}"><b>${icon}</b><strong>${label}</strong><span>${count} listings</span></a>`).join('');
+
+    if($('sxPopularListings')) $('sxPopularListings').innerHTML = (featured.length?featured:newest).slice(0,6).map(sxHomeCard).join('');
+    if($('sxBestPrice')) $('sxBestPrice').innerHTML = (bestPrice.length?bestPrice:featured).slice(0,5).map(sxSmallCard).join('');
+    if($('sxPopularCondo')) $('sxPopularCondo').innerHTML = (condos.length?condos:featured).slice(0,5).map(sxSmallCard).join('');
+    if($('sxOwnerFinance')) $('sxOwnerFinance').innerHTML = (finance.length?finance:(houses.length?houses:featured)).slice(0,6).map(sxHomeCard).join('');
 
     // Backward compatibility for older home rows
-    if($('featuredRow')) $('featuredRow').innerHTML = featured.map(miniCard).join('');
-    if($('newRow')) $('newRow').innerHTML = newest.map(miniCard).join('');
-    if($('popularSmallRow')) $('popularSmallRow').innerHTML = featured.map(miniCompactCard).join('');
-    if($('bestPriceSmallRow')) $('bestPriceSmallRow').innerHTML = (bestPrice.length?bestPrice:featured.slice(0,3)).map(miniCompactCard).join('');
-    if($('condoSmallRow')) $('condoSmallRow').innerHTML = (condos.length?condos:featured.slice(0,3)).map(miniCompactCard).join('');
-    if($('financeRow')) $('financeRow').innerHTML = (finance.length?finance:(houses.length?houses:featured)).map(miniCompactCard).join('');
+    if($('featuredRow')) $('featuredRow').innerHTML = featured.slice(0,6).map(miniCard).join('');
+    if($('newRow')) $('newRow').innerHTML = newest.slice(0,6).map(miniCard).join('');
+    if($('popularSmallRow')) $('popularSmallRow').innerHTML = featured.slice(0,5).map(miniCompactCard).join('');
+    if($('bestPriceSmallRow')) $('bestPriceSmallRow').innerHTML = (bestPrice.length?bestPrice:featured.slice(0,5)).map(miniCompactCard).join('');
+    if($('condoSmallRow')) $('condoSmallRow').innerHTML = (condos.length?condos:featured.slice(0,5)).map(miniCompactCard).join('');
+    if($('financeRow')) $('financeRow').innerHTML = (finance.length?finance:(houses.length?houses:featured)).slice(0,5).map(miniCompactCard).join('');
   }
   function fillHeroControls(){
     const heroType = $('heroType'); if(!heroType) return;
@@ -523,7 +536,19 @@
     const mini = e.target.closest('[data-mini-id]');
     if(mini){ const p=DATA.find(x=>x.id===mini.dataset.miniId); if(p) openModal(p.id); return; }
     const homeFilter = e.target.closest('[data-home-filter]');
-    if(homeFilter){ currentPage=1; location.hash='#properties'; render(); return; }
+    if(homeFilter){
+      const f = homeFilter.dataset.homeFilter;
+      if($('cityFilter')) $('cityFilter').value='all';
+      if($('typeFilter')) $('typeFilter').value='all';
+      if($('dealFilter')) $('dealFilter').value='all';
+      if($('searchInput')) $('searchInput').value='';
+      window.__sirilandPriceRange='all'; window.__sirilandMinBeds='all';
+      if(f === 'condo' && $('typeFilter')) $('typeFilter').value = [...new Set(DATA.map(p=>p.type).filter(Boolean))].find(x=>String(x).toLowerCase().includes('condo')) || 'all';
+      if(f === 'house' && $('typeFilter')) $('typeFilter').value = [...new Set(DATA.map(p=>p.type).filter(Boolean))].find(x=>String(x).toLowerCase().includes('house')) || 'all';
+      if(f === 'bestPrice') window.__sirilandPriceRange = '0-4000000';
+      if(f === 'ownerFinance' && $('searchInput')) $('searchInput').value = 'owner finance ผ่อน free transfer 0%';
+      if(f === 'luxury') window.__sirilandPriceRange = '7000000-999999999';
+      currentPage=1; location.hash='#properties'; render(); return; }
   });
   $('heroSearchBtn')?.addEventListener('click', runHeroSearch);
   $('heroSearchInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter') runHeroSearch(); });
