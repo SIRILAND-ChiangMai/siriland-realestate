@@ -1,33 +1,29 @@
-SIRILAND PUBLISH MANAGER PRO v2.1
+SIRILAND SPRINT 6.0 — ONLINE CMS PHASE 1
 
-Bu surumde:
-- 3 klasor tek ekranda secilir
-- Test Paths ile yollar kontrol edilir
-- Save ile yollar kaydedilir
-- Publish ile backup + kopyalama + rapor yapilir
-- Hata olursa pencere kapanmaz
-- Commit mesaji panoya kopyalanir
+1. Supabase'te yeni proje oluştur.
+2. SQL Editor'da supabase/schema.sql çalıştır.
+3. Storage içinde private property-images bucket oluştur.
+4. supabase/storage-policies.sql çalıştır.
+5. Project Settings / API bölümünden Project URL ve Publishable key al.
+6. online-admin/js/config.js içine yapıştır.
+7. online-admin klasörünü GitHub repository içine kopyala.
+8. Commit + Push yap.
+9. Adres:
+https://SIRILAND-ChiangMai.github.io/siriland-realestate/online-admin/
 
-KURULUM
+İlk owner:
+Supabase Authentication / Users bölümünde kullanıcı oluştur.
+Sonra SQL Editor:
+update public.profiles set role='owner', full_name='Kwan' where email='KENDI_EMAIL_ADRESIN';
 
-1. Bu ZIP'i su klasore cikar:
-E:\SIRILAND_2030_Harddisk_Structure\01_CMS\Publish_Manager_v2.1
+Bu Phase 1 şunları içerir:
+- Online login
+- Owner / Manager / Agent / Photographer
+- Draft / Review / Approved / Published
+- Agent yalnızca kendi ilanını görür
+- Manager onaylar veya reddeder
+- Veritabanında otomatik CM/BKK/PCT/PLK/NKS ID
 
-2. RUN_PUBLISH_V2_1.bat dosyasina cift tikla.
-
-3. Browse ile sec:
-CMS Folder:
-E:\SIRILAND_2030_Harddisk_Structure\01_CMS
-
-GitHub Folder:
-E:\SIRILAND_2030_Harddisk_Structure\09_GitHub\siriland-realestate
-
-Backup Folder:
-E:\SIRILAND_2030_Harddisk_Structure\02_Backup
-
-4. Test Paths
-5. Save
-6. Publish
-
-Not:
-Bu paket Windows GUI olarak calisir. Ayrica EXE kurulumuna gerek yoktur.
+Güvenlik:
+Browser dosyasına yalnızca Publishable key girilir.
+Secret veya service_role key kesinlikle girilmez.

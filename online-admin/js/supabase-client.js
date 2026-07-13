@@ -1,0 +1,1 @@
+(function(){const c=window.SIRILAND_SUPABASE_CONFIG||{};const ok=c.url&&c.publishableKey&&!c.url.includes("PASTE_")&&!c.publishableKey.includes("PASTE_");window.SIRILAND_SUPABASE_CONFIGURED=!!ok;window.sirilandDb=ok?window.supabase.createClient(c.url,c.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}):null})();
