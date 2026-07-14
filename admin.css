@@ -308,3 +308,118 @@ select:focus,input:focus,textarea:focus{outline:2px solid rgba(214,173,75,.35);b
 @media(max-width:900px){.coreRefactorStats{grid-template-columns:repeat(2,1fr)}.coreRefactorGrid{grid-template-columns:1fr}.coreRefactorHead{flex-direction:column}}
 
 .publishResultGrid{grid-template-columns:repeat(5,1fr)!important}
+
+
+/* Compact Admin Workspace */
+body{padding-bottom:84px}
+.adminWorkspaceNav{
+  position:sticky;
+  top:0;
+  z-index:900;
+  background:rgba(246,248,252,.96);
+  backdrop-filter:blur(12px);
+  border:1px solid #d9deea;
+  border-radius:16px;
+  padding:10px;
+  margin:10px 0 14px;
+  box-shadow:0 10px 30px rgba(7,26,61,.10);
+}
+.adminMainTabs,.propertyQuickNav{display:flex;gap:7px;flex-wrap:wrap}
+.adminMainTab,.propertyQuickNav button{
+  border:1px solid #d7deea;
+  background:#fff;
+  color:#071a3d;
+  border-radius:999px;
+  padding:9px 13px;
+  cursor:pointer;
+  font-weight:900;
+}
+.adminMainTab.active,.adminMainTab:hover{
+  background:#071a3d;
+  color:#d6ad4b;
+  border-color:#071a3d;
+}
+.propertyQuickNav{margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0}
+.propertyQuickNav button{font-size:12px;padding:7px 10px}
+.propertyQuickNav button:hover{background:#d6ad4b;border-color:#d6ad4b}
+.adminWorkspaceHidden{display:none!important}
+
+.compactAccordionPanel{
+  padding:0!important;
+  overflow:hidden;
+  scroll-margin-top:145px;
+}
+.compactAccordionToggle{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border:0;
+  background:#fffaf0;
+  color:#071a3d;
+  padding:14px 16px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:1000;
+  text-align:left;
+}
+.compactAccordionToggle:hover{background:#f5e8ca}
+.compactAccordionToggle b{font-size:18px;color:#b77900}
+.compactAccordionPanel:not(.compactAccordionOpen)>:not(.compactAccordionToggle){display:none!important}
+.compactAccordionPanel.compactAccordionOpen{padding:0 16px 16px!important}
+.compactAccordionPanel.compactAccordionOpen>.compactAccordionToggle{margin:0 -16px 14px;width:calc(100% + 32px)}
+.compactOriginalHeading{display:none!important}
+
+.wrap>.grid{
+  align-items:start!important;
+  grid-template-columns:minmax(0,1.35fr) minmax(360px,.65fr)!important;
+}
+.compactPropertyList{
+  position:sticky!important;
+  top:142px!important;
+  max-height:calc(100vh - 160px)!important;
+  overflow:auto!important;
+  scroll-margin-top:145px;
+}
+
+.adminStickyActions{
+  position:fixed;
+  left:50%;
+  bottom:14px;
+  transform:translateX(-50%);
+  z-index:950;
+  width:min(920px,calc(100vw - 26px));
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  background:rgba(7,26,61,.96);
+  border:1px solid rgba(214,173,75,.6);
+  border-radius:18px;
+  box-shadow:0 16px 50px rgba(7,26,61,.32);
+}
+.adminStickyActions .btn{margin:0}
+.adminStickyActions span{
+  margin-left:auto;
+  color:#d6ad4b;
+  font-weight:900;
+  white-space:nowrap;
+}
+.adminStickyActions.hidden,.propertyQuickNav.hidden{display:none!important}
+
+@media(max-width:1050px){
+  .wrap>.grid{grid-template-columns:1fr!important}
+  .compactPropertyList{position:relative!important;top:auto!important;max-height:none!important}
+}
+@media(max-width:700px){
+  body{padding-bottom:145px}
+  .adminWorkspaceNav{position:relative;top:auto}
+  .adminMainTabs{display:grid;grid-template-columns:1fr 1fr}
+  .adminMainTab{border-radius:12px}
+  .propertyQuickNav{overflow-x:auto;flex-wrap:nowrap;padding-bottom:5px}
+  .propertyQuickNav button{white-space:nowrap}
+  .adminStickyActions{flex-wrap:wrap;bottom:7px}
+  .adminStickyActions .btn{flex:1;min-width:135px}
+  .adminStickyActions span{width:100%;text-align:center;margin-left:0}
+  .compactAccordionPanel{scroll-margin-top:20px}
+}

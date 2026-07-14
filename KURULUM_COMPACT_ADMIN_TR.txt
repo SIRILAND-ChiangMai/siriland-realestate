@@ -1,0 +1,35 @@
+SIRILAND COMPACT ADMIN WORKSPACE
+
+Sorun:
+Admin panelinde ilan formundan önce çok sayıda Dashboard, Publish ve Database modülü bulunuyordu.
+İlan eklemek için sayfanın çok aşağısına gitmek gerekiyordu.
+
+Düzeltildi:
+- Admin üst sekmelere ayrıldı:
+  1. İlan Ekle / Düzenle
+  2. Dashboard
+  3. Publish
+  4. CRM
+- Admin varsayılan olarak İlan Ekle ekranında açılır.
+- Form içindeki uzun bölümler açılır/kapanır hale getirildi.
+- Temel Bilgiler ve Kaydet bölümü varsayılan açık.
+- Harita, açıklama, fotoğraf ve diğer bölümlere hızlı geçiş menüsü eklendi.
+- Sağdaki İlan Listesi masaüstünde sabit kalır.
+- Sayfanın altında sabit:
+  İlanı Kaydet + CMS Güncelle
+  Yeni İlan
+  İlan Listesi
+  çubuğu eklendi.
+
+KURULUM:
+ZIP içindeki tüm dosya ve klasörleri şu klasörün üzerine kopyala:
+
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+
+Windows sorunca:
+Replace the files in the destination
+
+Sonra Chrome:
+file:///E:/SIRILAND_2030_Harddisk_Structure/01_CMS/admin.html
+
+Ctrl + Shift + R

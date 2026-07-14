@@ -2785,3 +2785,141 @@ $('saveBtn')?.addEventListener('click',()=>{
     }
   },350);
 });
+
+
+/* Compact Admin Workspace */
+const ADMIN_WORKSPACE_KEY='siriland_admin_workspace_v1';
+
+function compactAdminWorkspaceElements(){
+  return {
+    property:[
+      document.querySelector('.formModeToolbar'),
+      document.querySelector('.wrap > .grid')
+    ].filter(Boolean),
+    dashboard:[
+      document.getElementById('dashboardPanel')
+    ].filter(Boolean),
+    publish:[
+      document.getElementById('integratedPublishPanel'),
+      document.getElementById('gh43Panel'),
+      document.getElementById('smartPublishPanel'),
+      document.getElementById('coreRefactorPanel'),
+      document.getElementById('propertyDatabasePanel')
+    ].filter(Boolean),
+    crm:[
+      document.getElementById('crmPanel')
+    ].filter(Boolean)
+  };
+}
+
+function compactShowWorkspace(name){
+  const groups=compactAdminWorkspaceElements();
+  Object.entries(groups).forEach(([group,elements])=>{
+    elements.forEach(el=>el.classList.toggle('adminWorkspaceHidden',group!==name));
+  });
+
+  document.querySelectorAll('.adminMainTab').forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.adminWorkspace===name);
+  });
+
+  document.getElementById('propertyQuickNav')?.classList.toggle('hidden',name!=='property');
+  document.getElementById('adminStickyActions')?.classList.toggle('hidden',name!=='property');
+  localStorage.setItem(ADMIN_WORKSPACE_KEY,name);
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  if(name==='dashboard') setTimeout(()=>window.dispatchEvent(new Event('resize')),100);
+  if(name==='property') setTimeout(compactRefreshStickyId,80);
+}
+
+function compactPanelTitle(panel){
+  return panel.querySelector(':scope > h2, :scope > .directSaveHead h2, :scope > .googleMapsProHead h2')?.textContent?.trim() || 'Bölüm';
+}
+
+function compactPrepareAccordion(panel,open=false){
+  if(!panel || panel.dataset.compactAccordionReady==='true')return;
+  panel.dataset.compactAccordionReady='true';
+  panel.classList.add('compactAccordionPanel');
+
+  const header=document.createElement('button');
+  header.type='button';
+  header.className='compactAccordionToggle';
+  header.innerHTML=`<span>${compactPanelTitle(panel)}</span><b>⌄</b>`;
+  panel.insertBefore(header,panel.firstChild);
+
+  // Hide original main heading to avoid duplicate title.
+  const heading=panel.querySelector(':scope > h2');
+  if(heading)heading.classList.add('compactOriginalHeading');
+
+  header.addEventListener('click',()=>compactSetAccordion(panel,!panel.classList.contains('compactAccordionOpen')));
+  compactSetAccordion(panel,open);
+}
+
+function compactSetAccordion(panel,open){
+  panel.classList.toggle('compactAccordionOpen',open);
+  const toggle=panel.querySelector(':scope > .compactAccordionToggle');
+  if(toggle)toggle.querySelector('b').textContent=open?'⌃':'⌄';
+}
+
+function compactFormPanels(){
+  const left=document.querySelector('.wrap > .grid > div:first-child');
+  if(!left)return [];
+  return [...left.querySelectorAll(':scope > .panel')];
+}
+
+function compactPrepareForm(){
+  const panels=compactFormPanels();
+  panels.forEach((panel,index)=>{
+    if(panel.id==='propertyInfoPanel')compactPrepareAccordion(panel,true);
+    else if(panel.id==='directSavePanel')compactPrepareAccordion(panel,true);
+    else compactPrepareAccordion(panel,false);
+  });
+
+  // Keep property list visible and sticky on desktop.
+  document.getElementById('propertyListProPanel')?.classList.add('compactPropertyList');
+}
+
+function compactJumpPanel(id){
+  const target=document.getElementById(id);
+  if(!target)return;
+  if(target.classList.contains('compactAccordionPanel'))compactSetAccordion(target,true);
+  target.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function compactRefreshStickyId(){
+  const id=document.getElementById('id')?.value?.trim();
+  const city=document.getElementById('city')?.value;
+  const el=document.getElementById('stickyPropertyId');
+  if(el)el.textContent=id?`${id}${city?' • '+city:''}`:'Yeni ilan';
+}
+
+function compactAdminInit(){
+  compactPrepareForm();
+
+  document.querySelectorAll('[data-admin-workspace]').forEach(btn=>{
+    btn.addEventListener('click',()=>compactShowWorkspace(btn.dataset.adminWorkspace));
+  });
+  document.querySelectorAll('[data-jump-panel]').forEach(btn=>{
+    btn.addEventListener('click',()=>compactJumpPanel(btn.dataset.jumpPanel));
+  });
+
+  document.getElementById('stickySavePropertyBtn')?.addEventListener('click',()=>{
+    compactJumpPanel('directSavePanel');
+    document.getElementById('saveBtn')?.click();
+  });
+  document.getElementById('stickyNewPropertyBtn')?.addEventListener('click',()=>{
+    document.getElementById('clearBtn')?.click();
+    compactJumpPanel('propertyInfoPanel');
+  });
+  document.getElementById('stickyPropertyListBtn')?.addEventListener('click',()=>compactJumpPanel('propertyListProPanel'));
+
+  document.getElementById('id')?.addEventListener('input',compactRefreshStickyId);
+  document.getElementById('city')?.addEventListener('change',()=>setTimeout(compactRefreshStickyId,50));
+  document.getElementById('clearBtn')?.addEventListener('click',()=>setTimeout(compactRefreshStickyId,100));
+
+  // Always open on property form, unless user explicitly chose another workspace.
+  const saved=localStorage.getItem(ADMIN_WORKSPACE_KEY);
+  compactShowWorkspace(saved && ['property','dashboard','publish','crm'].includes(saved) ? saved : 'property');
+  compactRefreshStickyId();
+}
+
+window.addEventListener('DOMContentLoaded',compactAdminInit);
