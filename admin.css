@@ -306,3 +306,5 @@ select:focus,input:focus,textarea:focus{outline:2px solid rgba(214,173,75,.35);b
 .corePublishLog .ok{color:#86efac}.corePublishLog .error{color:#fca5a5}.corePublishLog .warn{color:#fde68a}
 .coreRefactorNote{margin-top:12px;background:#f3e8ff;border:1px solid #d8b4fe;border-radius:11px;padding:10px;color:#581c87;font-size:13px}
 @media(max-width:900px){.coreRefactorStats{grid-template-columns:repeat(2,1fr)}.coreRefactorGrid{grid-template-columns:1fr}.coreRefactorHead{flex-direction:column}}
+
+.publishResultGrid{grid-template-columns:repeat(5,1fr)!important}

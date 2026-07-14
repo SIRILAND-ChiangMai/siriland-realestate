@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SIRILAND CMS PRO 2030 - Integrated Publish Manager PRO</title>
-  <link rel="stylesheet" href="admin.css?v=2026071029">
+  <title>SIRILAND CMS PRO 2030 - Publish Manager PRO v3</title>
+  <link rel="stylesheet" href="admin.css?v=2026071030">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
 <div class="wrap">
   <div class="top">
-    <div><div class="logo">SIRILAND CMS PRO 2030 — Integrated Publish Manager PRO</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
+    <div><div class="logo">SIRILAND CMS PRO 2030 — Publish Manager PRO v3</div><div class="muted">Boş JSON ve eksik fiyatla export engellendi. CRM + FB/IG korundu.</div></div>
     <div>
       <button class="btn" id="importBtn">properties.js Yükle</button><input type="file" id="importFile" accept=".js,.json" hidden>
       <button class="btn dark" id="downloadJson">JSON indir</button>
@@ -38,8 +38,8 @@
 <div class="panel integratedPublishPanel" id="integratedPublishPanel">
     <div class="integratedPublishHead">
       <div>
-        <h2>🚀 Integrated Publish Manager PRO</h2>
-        <p class="muted">CMS klasörünü GitHub repository’ye yedekli ve kontrollü şekilde aktarır.</p>
+        <h2>🚀 Publish Manager PRO v3</h2>
+        <p class="muted">Sadece değişen dosyaları analiz eder, hızlı yedekler ve GitHub repository’ye aktarır.</p>
       </div>
       <span class="publishBrowserBadge" id="publishBrowserBadge">CHECKING</span>
     </div>
@@ -72,9 +72,11 @@
     </div>
 
     <div class="publishActions">
-      <button class="btn" id="testPublishPathsBtn" type="button">Test Paths</button>
-      <button class="btn green publishMainBtn" id="integratedPublishBtn" type="button">🚀 Backup + Publish</button>
+      <button class="btn" id="testPublishPathsBtn" type="button">1. Yolları Test Et</button>
+      <button class="btn" id="analyzePublishBtn" type="button">2. Değişiklikleri Analiz Et</button>
+      <button class="btn green publishMainBtn" id="integratedPublishBtn" type="button">🚀 3. Smart Publish</button>
       <button class="btn dark" id="copyPublishCommitBtn" type="button">Commit Mesajını Kopyala</button>
+      <button class="btn dark" id="publishHistoryBtn" type="button">Publish History</button>
       <button class="btn red" id="resetPublishFoldersBtn" type="button">Klasörleri Sıfırla</button>
     </div>
 
@@ -87,6 +89,7 @@
       <div class="publishResultCard"><span>New Files</span><strong id="publishNewCount">0</strong></div>
       <div class="publishResultCard"><span>Updated Files</span><strong id="publishUpdatedCount">0</strong></div>
       <div class="publishResultCard"><span>Unchanged</span><strong id="publishUnchangedCount">0</strong></div>
+      <div class="publishResultCard"><span>Orphan</span><strong id="publishOrphanCount">0</strong></div>
       <div class="publishResultCard"><span>Backup</span><strong id="publishBackupStatus">—</strong></div>
     </div>
 
@@ -732,7 +735,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071029"></script>
+<script src="admin.js?v=2026071030"></script>
   <script src="admin-modules/core-utils.js?v=2026071029"></script>
   <script src="admin-modules/property-store.js?v=2026071029"></script>
   <script src="admin-modules/incremental-publish.js?v=2026071029"></script>

@@ -1,40 +1,39 @@
-SIRILAND PUBLISH MANAGER PRO v3
+SIRILAND CMS FULL PACKAGE — PUBLISH MANAGER PRO v3
 
-KURULUM
-1. Bu ZIP'i şu klasöre çıkar:
-   E:\SIRILAND_2030_Harddisk_Structure\01_CMS\Publish_Manager_v3
+BU PAKET NEYİ DÜZELTİR?
+- Admin ekranındaki eski Integrated Publish Manager kaldırılır.
+- Yerine Publish Manager PRO v3 gelir.
+- Analiz Et, Smart Publish, Incremental Backup, Orphan Report ve Publish History eklenir.
+- PowerShell Publish_Manager klasörü de aynı paketin içindedir.
+- Eski ve yeni dosyaların karışması önlenir.
 
-2. RUN_PUBLISH_V3.bat dosyasına çift tıkla.
+KURULUM — SADECE TEK YER
 
-3. Yollar hazır gelir:
-   CMS Source:
-   E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+ZIP içindeki TÜM dosya ve klasörleri şu klasörün üzerine kopyala:
 
-   GitHub Repo:
-   E:\SIRILAND_2030_Harddisk_Structure\09_GitHub\siriland-realestate
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS
 
-   Backup:
-   E:\SIRILAND_2030_Harddisk_Structure\02_Backup
+Windows sorunca:
+Replace the files in the destination
+seç.
 
-4. Önce "Analiz Et".
-5. Hata yoksa "Publish".
-6. GitHub Desktop'ta:
-   Commit to main
-   Push origin
+ÖZELLİKLE ŞUNLAR KOPYALANACAK:
+admin.html
+admin.js
+admin.css
+admin-modules\
+Publish_Manager\
 
-YENİ ÖZELLİKLER
-- Sadece yeni ve değişen dosyaları senkronlar.
-- images klasörü dahil tüm değişiklikleri otomatik bulur.
-- Sadece üzerine yazılacak eski dosyaları incremental yedekler.
-- Duplicate ID, eksik ID, başlık, fiyat ve şehir kodunu kontrol eder.
-- Eksik map ve görselleri uyarı olarak gösterir.
-- GitHub klasöründe olup CMS'de olmayan orphan dosyaları raporlar; güvenlik için otomatik silmez.
-- Commit mesajını panoya kopyalar.
-- GitHub Desktop'u açmayı dener.
-- Son 100 publish kaydını Publish History içinde tutar.
-- Ayrıntılı publish raporu oluşturur.
+SONRA
+1. Chrome'da:
+   E:\SIRILAND_2030_Harddisk_Structure\01_CMS\admin.html
+2. Ctrl + Shift + R
+3. Üstte Publish Manager PRO v3 görünmeli.
+4. Klasörleri seç.
+5. Yolları Test Et.
+6. Değişiklikleri Analiz Et.
+7. Smart Publish.
+8. GitHub Desktop: Commit + Push.
 
-ÖNEMLİ
-- "Uyarılarda da publish'i durdur" seçili değilse eksik map/fotoğraf uyarıları publish'i engellemez.
-- Gerçek validator hataları publish'i daima durdurur.
-- Orphan dosyalar otomatik silinmez. Yanlışlıkla ilan veya fotoğraf kaybını önler.
+PowerShell kullanmak istersen:
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS\Publish_Manager\RUN_PUBLISH.bat

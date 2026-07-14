@@ -1571,44 +1571,112 @@ function publishStamp(){
   const d=new Date(),p=n=>String(n).padStart(2,'0');
   return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}_${p(d.getHours())}-${p(d.getMinutes())}-${p(d.getSeconds())}`;
 }
-async function publishCreateBackup(){
-  const stamp=publishStamp();
-  const daily=await publishHandles.backup.getDirectoryHandle('Daily',{create:true});
-  const day=stamp.slice(0,10);
-  const dayDir=await daily.getDirectoryHandle(day,{create:true});
-  const backupDir=await dayDir.getDirectoryHandle('Publish_'+stamp,{create:true});
-  const files=await publishWalkDirectory(publishHandles.github);
-  let done=0;
-  for(const row of files){
-    const file=await row.handle.getFile();
-    await publishWriteFile(backupDir,row.path,file);
-    done++;
-    publishSetProgress(10+Math.round(done/Math.max(files.length,1)*30),`Backup: ${done}/${files.length}`);
-  }
-  return {name:'Publish_'+stamp,count:files.length};
-}
-async function publishCopyCmsToGithub(){
+
+const PUBLISH_HISTORY_KEY='siriland_publish_history_v3';
+let publishLastAnalysis=null;
+
+async function publishAnalyzeChanges(){
   const files=await publishWalkDirectory(publishHandles.cms);
-  const result={newFiles:[],updatedFiles:[],unchanged:[]};
+  const result={newFiles:[],updatedFiles:[],unchanged:[],orphanFiles:[],rows:[]};
   let done=0;
+
   for(const row of files){
     const source=await row.handle.getFile();
     const target=await publishReadFile(publishHandles.github,row.path);
     if(!target){
-      await publishWriteFile(publishHandles.github,row.path,source);
       result.newFiles.push(row.path);
+      result.rows.push({...row,status:'new'});
     }else{
       const [a,b]=await Promise.all([publishFileHash(source),publishFileHash(target)]);
       if(a!==b){
-        await publishWriteFile(publishHandles.github,row.path,source);
         result.updatedFiles.push(row.path);
-      }else result.unchanged.push(row.path);
+        result.rows.push({...row,status:'updated'});
+      }else{
+        result.unchanged.push(row.path);
+      }
     }
     done++;
-    publishSetProgress(45+Math.round(done/Math.max(files.length,1)*45),`Publish: ${done}/${files.length}`);
+    publishSetProgress(10+Math.round(done/Math.max(files.length,1)*45),`Analiz: ${done}/${files.length}`);
   }
+
+  const githubFiles=await publishWalkDirectory(publishHandles.github);
+  const cmsPaths=new Set(files.map(x=>x.path));
+  result.orphanFiles=githubFiles.map(x=>x.path).filter(path=>!cmsPaths.has(path));
+
+  publishLastAnalysis=result;
+  if($('publishNewCount'))$('publishNewCount').textContent=result.newFiles.length;
+  if($('publishUpdatedCount'))$('publishUpdatedCount').textContent=result.updatedFiles.length;
+  if($('publishUnchangedCount'))$('publishUnchangedCount').textContent=result.unchanged.length;
+  if($('publishOrphanCount'))$('publishOrphanCount').textContent=result.orphanFiles.length;
+  publishSetProgress(100,`Analiz hazır: ${result.newFiles.length} yeni, ${result.updatedFiles.length} güncel`);
+  publishLog(`Analiz tamamlandı: ${result.newFiles.length} yeni, ${result.updatedFiles.length} güncellenecek, ${result.orphanFiles.length} orphan.`,'ok');
+  result.newFiles.slice(0,50).forEach(x=>publishLog('YENİ: '+x,'info'));
+  result.updatedFiles.slice(0,50).forEach(x=>publishLog('GÜNCEL: '+x,'info'));
+  result.orphanFiles.slice(0,25).forEach(x=>publishLog('ORPHAN (silinmez): '+x,'error'));
   return result;
 }
+
+async function publishCreateIncrementalBackup(analysis){
+  const stamp=publishStamp();
+  const root=await publishHandles.backup.getDirectoryHandle('Incremental',{create:true});
+  const backupDir=await root.getDirectoryHandle('Publish_'+stamp,{create:true});
+  let count=0;
+
+  for(const row of analysis.rows.filter(x=>x.status==='updated')){
+    const existing=await publishReadFile(publishHandles.github,row.path);
+    if(!existing)continue;
+    await publishWriteFile(backupDir,row.path,existing);
+    count++;
+    publishSetProgress(5+Math.round(count/Math.max(analysis.updatedFiles.length,1)*25),`Hızlı backup: ${count}/${analysis.updatedFiles.length}`);
+  }
+
+  const manifest={
+    createdAt:new Date().toISOString(),
+    newFiles:analysis.newFiles,
+    updatedFiles:analysis.updatedFiles,
+    orphanFiles:analysis.orphanFiles
+  };
+  await publishWriteFile(backupDir,'backup-manifest.json',new Blob([JSON.stringify(manifest,null,2)],{type:'application/json'}));
+  return {name:'Publish_'+stamp,count};
+}
+
+async function publishApplyChanges(analysis){
+  let done=0;
+  for(const row of analysis.rows){
+    const source=await row.handle.getFile();
+    await publishWriteFile(publishHandles.github,row.path,source);
+    done++;
+    publishSetProgress(35+Math.round(done/Math.max(analysis.rows.length,1)*55),`Smart Sync: ${done}/${analysis.rows.length}`);
+  }
+  return {
+    newFiles:analysis.newFiles,
+    updatedFiles:analysis.updatedFiles,
+    unchanged:analysis.unchanged,
+    orphanFiles:analysis.orphanFiles
+  };
+}
+
+function publishSaveHistory(record){
+  let history=[];
+  try{history=JSON.parse(localStorage.getItem(PUBLISH_HISTORY_KEY)||'[]')}catch(e){}
+  history.unshift(record);
+  localStorage.setItem(PUBLISH_HISTORY_KEY,JSON.stringify(history.slice(0,100)));
+}
+
+function publishShowHistory(){
+  let history=[];
+  try{history=JSON.parse(localStorage.getItem(PUBLISH_HISTORY_KEY)||'[]')}catch(e){}
+  if(!history.length){alert('Henüz publish history yok.');return}
+  const text=history.map(x=>[
+    new Date(x.date).toLocaleString(),
+    `Yeni: ${x.newFiles}`,
+    `Güncellenen: ${x.updatedFiles}`,
+    `Orphan: ${x.orphanFiles}`,
+    x.commit
+  ].join(' | ')).join('\n\n');
+  alert(text);
+}
+
 async function publishWriteReport(result,backup){
   const reports=await publishHandles.backup.getDirectoryHandle('PublishReports',{create:true});
   const name='Publish_'+publishStamp()+'.txt';
@@ -1616,11 +1684,11 @@ async function publishWriteReport(result,backup){
   const writable=await handle.createWritable();
   const commit=`Publish SIRILAND - ${properties.length} listings, ${result.newFiles.length} new, ${result.updatedFiles.length} updated`;
   const report=[
-    'SIRILAND PUBLISH REPORT',
-    '=======================',
+    'SIRILAND PUBLISH MANAGER PRO v3',
+    '================================',
     'Date: '+new Date().toLocaleString(),
     'Properties: '+properties.length,
-    'Backup: '+backup.name,
+    'Incremental Backup: '+backup.name+' ('+backup.count+' files)',
     '',
     `NEW FILES (${result.newFiles.length})`,
     ...result.newFiles,
@@ -1628,8 +1696,8 @@ async function publishWriteReport(result,backup){
     `UPDATED FILES (${result.updatedFiles.length})`,
     ...result.updatedFiles,
     '',
-    `UNCHANGED (${result.unchanged.length})`,
-    ...result.unchanged,
+    `ORPHAN FILES — NOT DELETED (${result.orphanFiles.length})`,
+    ...result.orphanFiles,
     '',
     'COMMIT MESSAGE',
     commit,
@@ -1640,28 +1708,49 @@ async function publishWriteReport(result,backup){
   await writable.write(report);await writable.close();
   return {commit,name};
 }
+
 async function integratedPublish(){
   const test=await publishTestPaths();
   if(!Object.values(test).every(Boolean)){
-    alert('Önce tüm yolların yeşil olduğundan emin ol.');
+    alert('Önce bütün klasörleri seç ve yolları test et.');
     return;
   }
-  if(!confirm('Önce GitHub repository yedeklenecek, sonra CMS dosyaları repository üzerine kopyalanacak. Devam edilsin mi?'))return;
+
   try{
-    publishSetProgress(5,'Backup başlıyor...');
-    publishLog('Publish işlemi başladı.','info');
-    const backup=await publishCreateBackup();
-    publishLog(`Backup tamamlandı: ${backup.name} (${backup.count} dosya)`,'ok');
-    const result=await publishCopyCmsToGithub();
-    publishLog(`Kopyalama tamamlandı: ${result.newFiles.length} yeni, ${result.updatedFiles.length} güncellendi.`,'ok');
+    publishSetProgress(5,'Değişiklikler analiz ediliyor...');
+    publishLog('Smart Publish başladı.','info');
+    const analysis=publishLastAnalysis||await publishAnalyzeChanges();
+
+    if(!analysis.newFiles.length&&!analysis.updatedFiles.length){
+      publishSetProgress(100,'Değişen dosya yok');
+      alert('CMS ile GitHub repository aynı. Publish gerekmiyor.');
+      return;
+    }
+
+    if(!confirm(`${analysis.newFiles.length} yeni ve ${analysis.updatedFiles.length} güncellenen dosya yayınlanacak.\n\nDevam edilsin mi?`))return;
+
+    const backup=await publishCreateIncrementalBackup(analysis);
+    publishLog(`Incremental backup tamamlandı: ${backup.name} (${backup.count} dosya)`,'ok');
+
+    const result=await publishApplyChanges(analysis);
+    publishLog(`Smart Sync tamamlandı: ${result.newFiles.length} yeni, ${result.updatedFiles.length} güncellendi.`,'ok');
+
     const report=await publishWriteReport(result,backup);
     lastPublishCommit=report.commit;
     if($('integratedCommitMessage'))$('integratedCommitMessage').value=report.commit;
-    if($('publishNewCount'))$('publishNewCount').textContent=result.newFiles.length;
-    if($('publishUpdatedCount'))$('publishUpdatedCount').textContent=result.updatedFiles.length;
-    if($('publishUnchangedCount'))$('publishUnchangedCount').textContent=result.unchanged.length;
     if($('publishBackupStatus'))$('publishBackupStatus').textContent='OK';
     try{await navigator.clipboard.writeText(report.commit)}catch(e){}
+
+    publishSaveHistory({
+      date:new Date().toISOString(),
+      newFiles:result.newFiles.length,
+      updatedFiles:result.updatedFiles.length,
+      orphanFiles:result.orphanFiles.length,
+      commit:report.commit,
+      report:report.name
+    });
+
+    publishLastAnalysis=null;
     publishSetProgress(100,'PUBLISH HAZIR — GitHub Desktop’ta Commit + Push yap');
     publishLog(`Rapor oluşturuldu: ${report.name}`,'ok');
     publishLog(`Commit mesajı: ${report.commit}`,'ok');
@@ -1682,10 +1771,12 @@ async function integratedPublishInit(){
   $('selectGithubFolderBtn')?.addEventListener('click',()=>publishSelectFolder('github'));
   $('selectBackupFolderBtn')?.addEventListener('click',()=>publishSelectFolder('backup'));
   $('testPublishPathsBtn')?.addEventListener('click',publishTestPaths);
+  $('analyzePublishBtn')?.addEventListener('click',async()=>{const t=await publishTestPaths();if(Object.values(t).every(Boolean))await publishAnalyzeChanges()});
   $('integratedPublishBtn')?.addEventListener('click',integratedPublish);
   $('resetPublishFoldersBtn')?.addEventListener('click',async()=>{
     if(confirm('Kayıtlı klasör seçimleri sıfırlansın mı?')){await publishClearHandles();publishLog('Klasör seçimleri sıfırlandı.','info')}
   });
+  $('publishHistoryBtn')?.addEventListener('click',publishShowHistory);
   $('copyPublishCommitBtn')?.addEventListener('click',async()=>{
     const text=$('integratedCommitMessage')?.value||lastPublishCommit;
     if(!text){alert('Henüz commit mesajı yok.');return}
