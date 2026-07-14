@@ -497,3 +497,141 @@ body{padding-bottom:84px}
     text-align:center;
   }
 }
+
+
+/* Property Database PRO */
+.propertyDatabaseProPanel{
+  border:2px solid #0f766e;
+  background:linear-gradient(145deg,#fff,#f1fbfa);
+  scroll-margin-top:145px;
+}
+.databaseProHead{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:flex-start;
+}
+.databaseProHead h2{margin:0 0 4px}
+.databaseProStats{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.databaseProStats span{
+  background:#fff;
+  border:1px solid #cce4e1;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:11px;
+  color:#475569;
+  font-weight:800;
+}
+.databaseProStats b{color:#0f766e;margin-left:3px}
+.databaseToolbar{
+  display:grid;
+  grid-template-columns:minmax(220px,1.8fr) repeat(4,minmax(120px,1fr)) auto;
+  gap:8px;
+  margin:14px 0 10px;
+}
+.databaseToolbar input,.databaseToolbar select{min-width:0}
+.databaseBulkBar{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:10px;
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+.databaseBulkBar label{display:flex;align-items:center;gap:6px;font-weight:900;margin:0}
+.databaseBulkBar input[type=checkbox]{width:auto}
+.databaseBulkBar select{width:auto;min-width:160px}
+.databaseTableWrap{
+  overflow:auto;
+  border:1px solid #d8e2e1;
+  border-radius:14px;
+  background:#fff;
+}
+.databaseTable{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1080px;
+}
+.databaseTable th{
+  position:sticky;
+  top:0;
+  z-index:2;
+  background:#071a3d;
+  color:#fff;
+  text-align:left;
+  padding:11px 10px;
+  font-size:12px;
+}
+.databaseTable td{
+  border-bottom:1px solid #edf1f5;
+  padding:10px;
+  font-size:13px;
+  vertical-align:middle;
+}
+.databaseTable tbody tr:hover{background:#f8fafc}
+.databaseTable input[type=checkbox]{width:auto}
+.dbStatus{
+  display:inline-block;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:1000;
+  background:#e2e8f0;
+}
+.dbStatus.available{background:#dcfce7;color:#166534}
+.dbStatus.sold{background:#fee2e2;color:#991b1b}
+.dbStatus.rented{background:#dbeafe;color:#1d4ed8}
+.dbStatus.draft{background:#fef3c7;color:#92400e}
+.dbStatus.reserved{background:#f3e8ff;color:#7e22ce}
+.dbStatus.hidden{background:#e5e7eb;color:#374151}
+.dbPrice{color:#b77900}
+.dbActions{display:flex;gap:5px}
+.dbActions button{
+  border:1px solid #d7dee8;
+  background:#fff;
+  border-radius:8px;
+  padding:6px 7px;
+  cursor:pointer;
+}
+.dbActions button:hover{background:#d6ad4b}
+.dbEmpty{text-align:center;padding:28px!important;color:#64748b}
+.databaseFooter{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  margin-top:10px;
+}
+.dbPagination{display:flex;gap:5px;align-items:center}
+.dbPagination button,.dbPagination span{
+  border:1px solid #d7dee8;
+  background:#fff;
+  border-radius:8px;
+  padding:6px 9px;
+  font-weight:900;
+}
+.dbPagination button{cursor:pointer}
+.dbPagination button.active{background:#071a3d;color:#d6ad4b}
+.dbPagination button:disabled{opacity:.4;cursor:not-allowed}
+
+@media(max-width:1200px){
+  .databaseToolbar{grid-template-columns:1fr 1fr 1fr}
+}
+@media(max-width:800px){
+  .databaseProHead{flex-direction:column}
+  .databaseProStats{justify-content:flex-start}
+  .databaseToolbar{grid-template-columns:1fr 1fr}
+  .databaseBulkBar .btn,.databaseBulkBar select{flex:1}
+  .databaseFooter{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:520px){
+  .databaseToolbar{grid-template-columns:1fr}
+}

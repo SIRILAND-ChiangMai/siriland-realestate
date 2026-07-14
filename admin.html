@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SIRILAND CMS PRO 2030 - Publish Manager PRO v3</title>
-  <link rel="stylesheet" href="admin.css?v=2026071032">
+  <link rel="stylesheet" href="admin.css?v=2026071033">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
@@ -55,7 +55,8 @@
       <button type="button" data-jump-panel="languageContentPanel">4. Başlık / Açıklama</button>
       <button type="button" data-jump-panel="mediaManagerPanel">5. Fotoğraflar</button>
       <button type="button" data-jump-panel="directSavePanel">6. Kaydet</button>
-      <button type="button" data-jump-panel="propertyListProPanel">📋 İlan Listesi</button>
+      <button type="button" data-jump-panel="propertyDatabaseProPanel">🗃️ Database</button>
+      <button type="button" data-jump-panel="propertyListProPanel">📋 Kart Liste</button>
     </div>
   </div>
 
@@ -726,7 +727,86 @@
       </div>
     </div>
     <div>
-      <div class="panel propertyListProPanel" id="propertyListProPanel">
+      
+      <div class="panel propertyDatabaseProPanel" id="propertyDatabaseProPanel">
+        <div class="databaseProHead">
+          <div>
+            <h2>🗃️ Property Database PRO</h2>
+            <p class="muted">Tüm ilanları Excel benzeri tabloda filtrele, seç ve toplu işlem yap.</p>
+          </div>
+          <div class="databaseProStats">
+            <span>Toplam <b id="dbStatTotal">0</b></span>
+            <span>Satılık <b id="dbStatSale">0</b></span>
+            <span>Kiralık <b id="dbStatRent">0</b></span>
+            <span>Yayında <b id="dbStatPublished">0</b></span>
+            <span>Taslak <b id="dbStatDraft">0</b></span>
+          </div>
+        </div>
+
+        <div class="databaseToolbar">
+          <input id="dbSearch" placeholder="ID, başlık, şehir, fiyat, oda ara">
+          <select id="dbCityFilter">
+            <option value="">Tüm Şehirler</option>
+          </select>
+          <select id="dbTypeFilter">
+            <option value="">Tüm Türler</option>
+          </select>
+          <select id="dbDealFilter">
+            <option value="">Tüm Deal</option>
+            <option value="Sale">Sale</option>
+            <option value="Rent">Rent</option>
+            <option value="Sale/Rent">Sale/Rent</option>
+          </select>
+          <select id="dbStatusFilter">
+            <option value="">Tüm Durumlar</option>
+          </select>
+          <button type="button" class="btn dark" id="dbResetFiltersBtn">Filtreleri Temizle</button>
+        </div>
+
+        <div class="databaseBulkBar">
+          <label><input type="checkbox" id="dbSelectAll"> Tümünü Seç</label>
+          <span id="dbSelectedCount">0 seçili</span>
+          <select id="dbBulkStatus">
+            <option value="">Durum Değiştir</option>
+            <option value="Available">Available</option>
+            <option value="Draft">Draft</option>
+            <option value="Reserved">Reserved</option>
+            <option value="Sold Out">Sold Out</option>
+            <option value="Rented Out">Rented Out</option>
+            <option value="Hidden">Hidden</option>
+          </select>
+          <button type="button" class="btn" id="dbApplyStatusBtn">Durumu Uygula</button>
+          <button type="button" class="btn" id="dbExportSelectedBtn">Seçilileri Export Et</button>
+          <button type="button" class="btn red" id="dbDeleteSelectedBtn">Seçilileri Sil</button>
+        </div>
+
+        <div class="databaseTableWrap">
+          <table class="databaseTable">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Durum</th>
+                <th>Şehir</th>
+                <th>Tür</th>
+                <th>Deal</th>
+                <th>Fiyat</th>
+                <th>Alan</th>
+                <th>Güncelleme</th>
+                <th>İşlem</th>
+              </tr>
+            </thead>
+            <tbody id="propertyDatabaseBody"></tbody>
+          </table>
+        </div>
+
+        <div class="databaseFooter">
+          <span id="dbResultCount">0 ilan</span>
+          <div id="dbPagination" class="dbPagination"></div>
+        </div>
+      </div>
+
+<div class="panel propertyListProPanel" id="propertyListProPanel">
         <div class="propertyListHead">
           <div>
             <h2>📋 İlan Listesi PRO</h2>
@@ -760,7 +840,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071032"></script>
+<script src="admin.js?v=2026071033"></script>
   <script src="admin-modules/core-utils.js?v=2026071029"></script>
   <script src="admin-modules/property-store.js?v=2026071029"></script>
   <script src="admin-modules/incremental-publish.js?v=2026071029"></script>

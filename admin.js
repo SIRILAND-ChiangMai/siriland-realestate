@@ -3130,3 +3130,249 @@ function adminUxInit(){
 }
 
 window.addEventListener('DOMContentLoaded',adminUxInit);
+
+
+/* Property Database PRO */
+const DB_PAGE_SIZE=20;
+let dbPage=1;
+let dbSelected=new Set();
+
+function dbText(value){
+  if(value==null)return '';
+  if(typeof value==='string'||typeof value==='number')return String(value);
+  if(typeof value==='object'){
+    return ['th','en','tr','zh'].map(k=>value[k]).find(Boolean)||'';
+  }
+  return '';
+}
+function dbPrice(p){return dbText(p.price||p.salePrice||p.rentPrice)}
+function dbUpdated(p){return p.updatedAt||p.createdAt||''}
+function dbStatusClass(status){
+  const s=String(status||'').toLowerCase();
+  if(s.includes('sold'))return 'sold';
+  if(s.includes('rent'))return 'rented';
+  if(s.includes('draft'))return 'draft';
+  if(s.includes('reserved'))return 'reserved';
+  if(s.includes('hidden'))return 'hidden';
+  return 'available';
+}
+function dbPropertySearchText(p){
+  return [
+    p.id,p.city,p.type,p.deal,p.status,dbPrice(p),p.area,p.bedrooms,p.bathrooms,
+    dbText(p.title),dbText(p.description)
+  ].join(' ').toLowerCase();
+}
+function dbUniqueValues(field){
+  return [...new Set((properties||[]).map(p=>dbText(p[field])).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+}
+function dbFillFilter(id,values){
+  const select=document.getElementById(id);
+  if(!select)return;
+  const first=select.options[0]?.outerHTML||'<option value="">Tümü</option>';
+  select.innerHTML=first+values.map(v=>`<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
+}
+function dbFilteredProperties(){
+  const query=(document.getElementById('dbSearch')?.value||'').trim().toLowerCase();
+  const city=document.getElementById('dbCityFilter')?.value||'';
+  const type=document.getElementById('dbTypeFilter')?.value||'';
+  const deal=document.getElementById('dbDealFilter')?.value||'';
+  const status=document.getElementById('dbStatusFilter')?.value||'';
+
+  return (properties||[]).filter(p=>{
+    if(query&&!dbPropertySearchText(p).includes(query))return false;
+    if(city&&dbText(p.city)!==city)return false;
+    if(type&&dbText(p.type)!==type)return false;
+    if(deal&&dbText(p.deal)!==deal)return false;
+    if(status&&dbText(p.status)!==status)return false;
+    return true;
+  });
+}
+function dbRenderStats(){
+  const list=properties||[];
+  const countDeal=needle=>list.filter(p=>String(p.deal||'').toLowerCase().includes(needle)).length;
+  const countStatus=needle=>list.filter(p=>String(p.status||'').toLowerCase().includes(needle)).length;
+  document.getElementById('dbStatTotal').textContent=list.length;
+  document.getElementById('dbStatSale').textContent=countDeal('sale');
+  document.getElementById('dbStatRent').textContent=countDeal('rent');
+  document.getElementById('dbStatPublished').textContent=list.filter(p=>!String(p.status||'').toLowerCase().includes('draft')).length;
+  document.getElementById('dbStatDraft').textContent=countStatus('draft');
+}
+function dbRenderPagination(total){
+  const pages=Math.max(1,Math.ceil(total/DB_PAGE_SIZE));
+  if(dbPage>pages)dbPage=pages;
+  const wrap=document.getElementById('dbPagination');
+  if(!wrap)return;
+  const buttons=[];
+  buttons.push(`<button type="button" data-db-page="${Math.max(1,dbPage-1)}" ${dbPage===1?'disabled':''}>‹</button>`);
+  for(let i=1;i<=pages;i++){
+    if(i===1||i===pages||Math.abs(i-dbPage)<=2){
+      buttons.push(`<button type="button" data-db-page="${i}" class="${i===dbPage?'active':''}">${i}</button>`);
+    }else if(buttons.at(-1)!=='<span>…</span>'){
+      buttons.push('<span>…</span>');
+    }
+  }
+  buttons.push(`<button type="button" data-db-page="${Math.min(pages,dbPage+1)}" ${dbPage===pages?'disabled':''}>›</button>`);
+  wrap.innerHTML=buttons.join('');
+}
+function dbRender(){
+  const filtered=dbFilteredProperties();
+  const start=(dbPage-1)*DB_PAGE_SIZE;
+  const pageRows=filtered.slice(start,start+DB_PAGE_SIZE);
+  const body=document.getElementById('propertyDatabaseBody');
+  if(!body)return;
+
+  body.innerHTML=pageRows.map(p=>`
+    <tr data-db-row="${escapeHtml(p.id)}">
+      <td><input type="checkbox" data-db-select="${escapeHtml(p.id)}" ${dbSelected.has(p.id)?'checked':''}></td>
+      <td><b>${escapeHtml(p.id||'')}</b></td>
+      <td><span class="dbStatus ${dbStatusClass(p.status)}">${escapeHtml(p.status||'')}</span></td>
+      <td>${escapeHtml(p.city||'')}</td>
+      <td>${escapeHtml(p.type||'')}</td>
+      <td>${escapeHtml(p.deal||'')}</td>
+      <td><strong class="dbPrice">${escapeHtml(dbPrice(p))}</strong></td>
+      <td>${escapeHtml(p.area||p.landSize||'')}</td>
+      <td>${dbUpdated(p)?new Date(dbUpdated(p)).toLocaleDateString():'—'}</td>
+      <td>
+        <div class="dbActions">
+          <button type="button" data-db-edit="${escapeHtml(p.id)}">✏️</button>
+          <button type="button" data-db-copy="${escapeHtml(p.id)}">📋</button>
+          <button type="button" data-db-delete="${escapeHtml(p.id)}">🗑️</button>
+        </div>
+      </td>
+    </tr>
+  `).join('')||'<tr><td colspan="10" class="dbEmpty">İlan bulunamadı.</td></tr>';
+
+  document.getElementById('dbResultCount').textContent=`${filtered.length} ilan`;
+  document.getElementById('dbSelectedCount').textContent=`${dbSelected.size} seçili`;
+  document.getElementById('dbSelectAll').checked=pageRows.length>0&&pageRows.every(p=>dbSelected.has(p.id));
+  dbRenderPagination(filtered.length);
+  dbRenderStats();
+}
+function dbRefreshFilters(){
+  dbFillFilter('dbCityFilter',dbUniqueValues('city'));
+  dbFillFilter('dbTypeFilter',dbUniqueValues('type'));
+  dbFillFilter('dbStatusFilter',dbUniqueValues('status'));
+}
+function dbResetFilters(){
+  ['dbSearch','dbCityFilter','dbTypeFilter','dbDealFilter','dbStatusFilter'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.value='';
+  });
+  dbPage=1;
+  dbRender();
+}
+function dbSelectedProperties(){
+  return (properties||[]).filter(p=>dbSelected.has(p.id));
+}
+function dbApplyBulkStatus(){
+  const status=document.getElementById('dbBulkStatus')?.value;
+  if(!status)return alert('Önce durum seç.');
+  if(!dbSelected.size)return alert('Önce ilan seç.');
+  const changed=[];
+  properties.forEach(p=>{
+    if(dbSelected.has(p.id)){
+      p.status=status;
+      p.updatedAt=new Date().toISOString();
+      changed.push(p.id);
+    }
+  });
+  renderList?.();
+  validate?.();
+  dbRender();
+  adminUxToast?.(`${changed.length} ilanın durumu ${status} yapıldı.`);
+}
+function dbDeleteSelected(){
+  if(!dbSelected.size)return alert('Önce ilan seç.');
+  if(!confirm(`${dbSelected.size} ilan silinsin mi?`))return;
+  const ids=[...dbSelected];
+  properties=properties.filter(p=>!dbSelected.has(p.id));
+  dbSelected.clear();
+  renderList?.();
+  validate?.();
+  dbRefreshFilters();
+  dbRender();
+  adminUxToast?.(`${ids.length} ilan silindi.`);
+}
+function dbExportSelected(){
+  const selected=dbSelectedProperties();
+  if(!selected.length)return alert('Önce ilan seç.');
+  const blob=new Blob([JSON.stringify(selected,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`siriland-selected-${Date.now()}.json`;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),500);
+}
+function dbEdit(id){
+  const p=(properties||[]).find(x=>x.id===id);
+  if(!p)return;
+  setForm?.(p);
+  compactShowWorkspace?.('property');
+  compactJumpPanel?.('propertyInfoPanel');
+}
+function dbCopy(id){
+  if(typeof adminUxCopyProperty==='function')adminUxCopyProperty(id);
+}
+function dbDelete(id){
+  if(typeof deleteProp==='function')deleteProp(id);
+  else{
+    if(!confirm(`${id} silinsin mi?`))return;
+    properties=properties.filter(p=>p.id!==id);
+    renderList?.();
+    validate?.();
+  }
+  dbSelected.delete(id);
+  dbRefreshFilters();
+  dbRender();
+}
+function dbInit(){
+  dbRefreshFilters();
+  dbRender();
+
+  ['dbSearch','dbCityFilter','dbTypeFilter','dbDealFilter','dbStatusFilter'].forEach(id=>{
+    document.getElementById(id)?.addEventListener(id==='dbSearch'?'input':'change',()=>{
+      dbPage=1;dbRender();
+    });
+  });
+
+  document.getElementById('dbResetFiltersBtn')?.addEventListener('click',dbResetFilters);
+  document.getElementById('dbApplyStatusBtn')?.addEventListener('click',dbApplyBulkStatus);
+  document.getElementById('dbDeleteSelectedBtn')?.addEventListener('click',dbDeleteSelected);
+  document.getElementById('dbExportSelectedBtn')?.addEventListener('click',dbExportSelected);
+  document.getElementById('dbSelectAll')?.addEventListener('change',event=>{
+    const filtered=dbFilteredProperties();
+    const start=(dbPage-1)*DB_PAGE_SIZE;
+    filtered.slice(start,start+DB_PAGE_SIZE).forEach(p=>{
+      if(event.target.checked)dbSelected.add(p.id);
+      else dbSelected.delete(p.id);
+    });
+    dbRender();
+  });
+
+  document.getElementById('propertyDatabaseBody')?.addEventListener('change',event=>{
+    const cb=event.target.closest('[data-db-select]');
+    if(!cb)return;
+    if(cb.checked)dbSelected.add(cb.dataset.dbSelect);
+    else dbSelected.delete(cb.dataset.dbSelect);
+    dbRender();
+  });
+
+  document.addEventListener('click',event=>{
+    const page=event.target.closest('[data-db-page]');
+    if(page){dbPage=Number(page.dataset.dbPage);dbRender();return}
+    const edit=event.target.closest('[data-db-edit]');
+    if(edit){dbEdit(edit.dataset.dbEdit);return}
+    const copy=event.target.closest('[data-db-copy]');
+    if(copy){dbCopy(copy.dataset.dbCopy);return}
+    const del=event.target.closest('[data-db-delete]');
+    if(del){dbDelete(del.dataset.dbDelete);return}
+  });
+
+  // Keep database synced after saves and list refreshes.
+  const observer=new MutationObserver(()=>{dbRefreshFilters();dbRender()});
+  const list=document.getElementById('list');
+  if(list)observer.observe(list,{childList:true,subtree:true});
+  document.getElementById('saveBtn')?.addEventListener('click',()=>setTimeout(()=>{dbRefreshFilters();dbRender()},500));
+  document.getElementById('clearBtn')?.addEventListener('click',()=>setTimeout(dbRender,100));
+}
+window.addEventListener('DOMContentLoaded',dbInit);
