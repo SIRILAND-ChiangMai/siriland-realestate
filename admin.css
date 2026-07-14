@@ -910,3 +910,68 @@ body{padding-bottom:84px}
   font-size:12px;
   font-weight:800;
 }
+
+
+/* Save Engine Rewrite PRO */
+.saveEnginePanel{
+  border:2px solid #0f7b3f!important;
+  background:linear-gradient(145deg,#fff,#f0fdf4)!important;
+  scroll-margin-top:145px;
+}
+.saveEngineSummary{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+  margin-bottom:12px;
+}
+.saveEngineSummary>div{
+  background:#fff;
+  border:1px solid #d6e5dc;
+  border-radius:12px;
+  padding:10px;
+  text-align:center;
+}
+.saveEngineSummary span{
+  display:block;
+  color:#64748b;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+.saveEngineSummary strong{
+  display:block;
+  margin-top:4px;
+  color:#071a3d;
+  font-size:14px;
+}
+.saveEngineSummary strong[data-state="ok"]{color:#0f7b3f}
+.saveEngineSummary strong[data-state="error"]{color:#b91c1c}
+.saveEngineSummary strong[data-state="warn"]{color:#b77900}
+.saveEngineActions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+.saveEngineLog{
+  margin-top:12px;
+  max-height:180px;
+  overflow:auto;
+  background:#071a3d;
+  color:#dbeafe;
+  border-radius:12px;
+  padding:10px;
+  font-family:Consolas,monospace;
+  font-size:11px;
+}
+.saveEngineLog div{padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.saveEngineLog .ok{color:#86efac}
+.saveEngineLog .error{color:#fca5a5}
+.saveEngineLog .warn{color:#fde68a}
+
+@media(max-width:900px){
+  .saveEngineSummary{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .saveEngineSummary{grid-template-columns:1fr}
+  .saveEngineActions .btn{width:100%}
+}

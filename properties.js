@@ -3083,12 +3083,6 @@ window.SIRILAND_PROPERTIES = [
   },
   {
     "id": "CM-0034",
-    "title": {
-      "en": "Karnkanok Ville 12 Phase 3 House for Rent",
-      "th": "Karnkanok Ville 12 Phase 3 House for Rent",
-      "tr": "Karnkanok Ville 12 Phase 3 House for Rent",
-      "zh": "Karnkanok Ville 12 Phase 3 House for Rent"
-    },
     "city": "Chiang Mai",
     "type": "House",
     "deal": "Rent",
@@ -3100,6 +3094,33 @@ window.SIRILAND_PROPERTIES = [
     "room": "",
     "floor": "",
     "map": "",
+    "latitude": "",
+    "longitude": "",
+    "landSize": "52 sq.w.",
+    "landAreaSqm": "",
+    "buildingArea": "220 sqm",
+    "parking": "2 Cars",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "36,000 THB / Month",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "Spacious house for rent in Karnkanok Ville 12 Phase 3, Saraphi, Chiang Mai.",
+    "nearby": [],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Karnkanok Ville 12 Phase 3 House for Rent",
+      "th": "Karnkanok Ville 12 Phase 3 House for Rent",
+      "tr": "Karnkanok Ville 12 Phase 3 House for Rent",
+      "zh": "Karnkanok Ville 12 Phase 3 House for Rent"
+    },
     "description": {
       "en": "House for rent in Karnkanok Ville 12, Phase 3, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, approximately 220 sqm of usable area and 52 sq.w. of land. Includes 2 parking spaces, 5 air conditioners, 4 water heaters, washing machine, refrigerator, microwave, remote gate and digital door lock.",
       "th": "House for rent in Karnkanok Ville 12, Phase 3, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, approximately 220 sqm of usable area and 52 sq.w. of land. Includes 2 parking spaces, 5 air conditioners, 4 water heaters, washing machine, refrigerator, microwave, remote gate and digital door lock.",
@@ -3156,25 +3177,56 @@ window.SIRILAND_PROPERTIES = [
         "No Pets"
       ]
     },
-    "images": [],
+    "images": [
+      "images/karnkanok-ville-12-phase-3-house-for-rent-01.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-02.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-03.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-04.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-05.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-06.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-07.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-08.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-09.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-10.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-11.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-12.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-13.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-14.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-15.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-16.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-17.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-18.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-19.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-20.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-21.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-22.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-23.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-24.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-25.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-26.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-27.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-28.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-29.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-30.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-31.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-32.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-33.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-34.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-35.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-36.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-37.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-38.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-39.jpg"
+    ],
     "createdAt": "2026-07-10T15:16:00+07:00",
-    "updatedAt": "2026-07-10T15:16:00+07:00",
+    "updatedAt": "2026-07-14",
     "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "36,000 THB / Month",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "Spacious house for rent in Karnkanok Ville 12 Phase 3, Saraphi, Chiang Mai.",
-    "landSize": "52 sq.w.",
-    "buildingArea": "220 sqm",
-    "parking": "2 Cars"
+    }
   },
   {
     "id": "PCT-0001",
@@ -3920,15 +3972,15 @@ window.SIRILAND_PROPERTIES = [
     "appliances": [],
     "title": {
       "en": "Karnkanok 12 Phase 1 detached house",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "th": "Karnkanok 12 Phase 1 detached house",
+      "tr": "Karnkanok 12 Phase 1 detached house",
+      "zh": "Karnkanok 12 Phase 1 detached house"
     },
     "description": {
       "en": "* 🏫 Unity Concord International School (UCIS) – approximately 230 m\n* 🏫 Close to ABS International School & ACIS International School\n* 🛍️ Promenada Chiang Mai – approximately 2–3 km\n* 🛒 Boonthavorn Chiang Mai\n* 🛒 Big C Don Chan & Makro\n* 🏥 Bangkok Hospital Chiang Mai\n* ☕ Restaurants, cafés, and convenience stores\n* ✈️ Easy access to Chiang Mai International Airport",
-      "th": "",
-      "tr": "",
-      "zh": ""
+      "th": "* 🏫 Unity Concord International School (UCIS) – approximately 230 m\n* 🏫 Close to ABS International School & ACIS International School\n* 🛍️ Promenada Chiang Mai – approximately 2–3 km\n* 🛒 Boonthavorn Chiang Mai\n* 🛒 Big C Don Chan & Makro\n* 🏥 Bangkok Hospital Chiang Mai\n* ☕ Restaurants, cafés, and convenience stores\n* ✈️ Easy access to Chiang Mai International Airport",
+      "tr": "* 🏫 Unity Concord International School (UCIS) – approximately 230 m\n* 🏫 Close to ABS International School & ACIS International School\n* 🛍️ Promenada Chiang Mai – approximately 2–3 km\n* 🛒 Boonthavorn Chiang Mai\n* 🛒 Big C Don Chan & Makro\n* 🏥 Bangkok Hospital Chiang Mai\n* ☕ Restaurants, cafés, and convenience stores\n* ✈️ Easy access to Chiang Mai International Airport",
+      "zh": "* 🏫 Unity Concord International School (UCIS) – approximately 230 m\n* 🏫 Close to ABS International School & ACIS International School\n* 🛍️ Promenada Chiang Mai – approximately 2–3 km\n* 🛒 Boonthavorn Chiang Mai\n* 🛒 Big C Don Chan & Makro\n* 🏥 Bangkok Hospital Chiang Mai\n* ☕ Restaurants, cafés, and convenience stores\n* ✈️ Easy access to Chiang Mai International Airport"
     },
     "highlights": {
       "en": [

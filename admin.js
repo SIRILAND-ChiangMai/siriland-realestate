@@ -3620,3 +3620,266 @@ function propertyListUiInit(){
   propertyListUiNormalize();
 }
 window.addEventListener('DOMContentLoaded',propertyListUiInit);
+
+
+/* Save Engine Rewrite PRO */
+const SAVE_ENGINE_HANDLE_KEY='siriland_save_engine_cms_handle_v1';
+let saveEngineCmsHandle=null;
+
+function saveEngineLog(message,type='info'){
+  const el=document.getElementById('saveEngineLog');
+  if(!el)return;
+  const row=document.createElement('div');
+  row.className=type;
+  row.textContent=`${new Date().toLocaleTimeString()} — ${message}`;
+  el.appendChild(row);
+  el.scrollTop=el.scrollHeight;
+}
+function saveEngineStatus(id,text,state='idle'){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.textContent=text;
+  el.dataset.state=state;
+}
+function saveEngineCurrentId(){
+  return String(document.getElementById('id')?.value||'').trim();
+}
+function saveEngineBuildJson(){
+  return JSON.stringify(properties||[],null,2);
+}
+function saveEngineBuildJs(){
+  return `window.PROPERTIES = ${saveEngineBuildJson()};\n`;
+}
+function saveEngineFindProperty(id){
+  return (properties||[]).find(p=>String(p.id||'').trim()===String(id||'').trim());
+}
+function saveEngineDownload(name,content,type='application/json'){
+  const blob=new Blob([content],{type});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=name;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),500);
+}
+async function saveEngineLoadHandle(){
+  if(saveEngineCmsHandle)return saveEngineCmsHandle;
+  try{
+    if(typeof publishLoadHandle==='function'){
+      saveEngineCmsHandle=await publishLoadHandle('cms');
+      if(saveEngineCmsHandle)return saveEngineCmsHandle;
+    }
+  }catch(e){}
+  return null;
+}
+async function saveEngineRequestHandle(){
+  let handle=await saveEngineLoadHandle();
+  if(handle){
+    try{
+      const ok=await publishRequestPermission(handle,'readwrite');
+      if(ok)return handle;
+    }catch(e){}
+  }
+  if(!('showDirectoryPicker' in window))return null;
+  handle=await window.showDirectoryPicker({mode:'readwrite',id:'siriland-cms-source'});
+  saveEngineCmsHandle=handle;
+  try{
+    if(typeof publishSaveHandle==='function')await publishSaveHandle('cms',handle);
+  }catch(e){}
+  return handle;
+}
+async function saveEngineWriteFile(handle,path,content,type){
+  if(typeof publishWriteFile==='function'){
+    await publishWriteFile(handle,path,new Blob([content],{type}));
+    return;
+  }
+  const parts=path.split('/').filter(Boolean);
+  const filename=parts.pop();
+  let dir=handle;
+  for(const part of parts)dir=await dir.getDirectoryHandle(part,{create:true});
+  const fileHandle=await dir.getFileHandle(filename,{create:true});
+  const writable=await fileHandle.createWritable();
+  await writable.write(content);
+  await writable.close();
+}
+async function saveEngineReadText(handle,path){
+  if(typeof publishReadFile==='function'){
+    const file=await publishReadFile(handle,path);
+    return file?await file.text():null;
+  }
+  try{
+    const parts=path.split('/').filter(Boolean);
+    const filename=parts.pop();
+    let dir=handle;
+    for(const part of parts)dir=await dir.getDirectoryHandle(part);
+    const fileHandle=await dir.getFileHandle(filename);
+    return await (await fileHandle.getFile()).text();
+  }catch(e){return null}
+}
+function saveEngineCollectFormProperty(){
+  if(typeof readForm==='function')return cleanProperty(readForm());
+  if(typeof getFormData==='function')return cleanProperty(getFormData());
+  return null;
+}
+function saveEngineUpsertProperty(property){
+  if(!property?.id)throw new Error('ID eksik.');
+  const index=(properties||[]).findIndex(p=>p.id===property.id);
+  if(index>=0)properties[index]=property;
+  else properties.push(property);
+  localStorage.setItem('siriland_properties_backup',JSON.stringify(properties));
+  localStorage.setItem('siriland_last_property_count',String(properties.length));
+}
+async function saveEngineWriteExports(handle){
+  const json=saveEngineBuildJson();
+  const jsText=saveEngineBuildJs();
+
+  await saveEngineWriteFile(handle,'properties.json',json,'application/json');
+  saveEngineStatus('saveEngineJsonStatus','Yazıldı','ok');
+  saveEngineLog(`properties.json yazıldı — ${properties.length} ilan`,'ok');
+
+  await saveEngineWriteFile(handle,'properties.js',jsText,'text/javascript');
+  saveEngineStatus('saveEngineJsStatus','Yazıldı','ok');
+  saveEngineLog(`properties.js yazıldı — ${properties.length} ilan`,'ok');
+
+  // Keep data/properties.json synchronized if data folder exists/needed.
+  try{
+    await saveEngineWriteFile(handle,'data/properties.json',json,'application/json');
+    saveEngineLog('data/properties.json yazıldı.','ok');
+  }catch(e){
+    saveEngineLog('data/properties.json yazılamadı: '+e.message,'warn');
+  }
+}
+async function saveEngineVerify(id,handle=null){
+  id=id||saveEngineCurrentId();
+  if(!id)throw new Error('Kontrol edilecek ID yok.');
+
+  const memory=saveEngineFindProperty(id);
+  saveEngineStatus('saveEngineMemoryStatus',memory?'VAR':'YOK',memory?'ok':'error');
+
+  handle=handle||await saveEngineLoadHandle();
+  if(!handle){
+    saveEngineStatus('saveEngineCmsStatus','Klasör seçilmedi','warn');
+    return {memory:Boolean(memory),json:false,js:false};
+  }
+
+  const jsonText=await saveEngineReadText(handle,'properties.json');
+  const jsText=await saveEngineReadText(handle,'properties.js');
+
+  let jsonFound=false;
+  try{
+    const list=JSON.parse(jsonText||'[]');
+    jsonFound=Array.isArray(list)&&list.some(p=>p.id===id);
+  }catch(e){}
+
+  const jsFound=Boolean(jsText&&jsText.includes(`"${id}"`));
+  saveEngineStatus('saveEngineJsonStatus',jsonFound?'ID VAR':'ID YOK',jsonFound?'ok':'error');
+  saveEngineStatus('saveEngineJsStatus',jsFound?'ID VAR':'ID YOK',jsFound?'ok':'error');
+  saveEngineStatus('saveEngineCmsStatus','Bağlı','ok');
+  saveEngineStatus('saveEngineCurrentId',id,'ok');
+
+  saveEngineLog(`${id} doğrulama — Memory:${memory?'VAR':'YOK'} JSON:${jsonFound?'VAR':'YOK'} JS:${jsFound?'VAR':'YOK'}`,memory&&jsonFound&&jsFound?'ok':'error');
+  return {memory:Boolean(memory),json:jsonFound,js:jsFound};
+}
+async function saveEngineSaveAll(){
+  try{
+    saveEngineStatus('saveEngineCurrentId',saveEngineCurrentId()||'—','idle');
+    saveEngineLog('Form verisi okunuyor...');
+
+    const property=saveEngineCollectFormProperty();
+    if(!property)throw new Error('Form verisi okunamadı.');
+    if(!property.id)throw new Error('Şehir seç ve otomatik ID oluşmasını bekle.');
+    if(!property.city)throw new Error('Şehir eksik.');
+    if(!property.type)throw new Error('Property Type eksik.');
+
+    property.updatedAt=new Date().toISOString();
+    if(!property.createdAt)property.createdAt=property.updatedAt;
+
+    saveEngineUpsertProperty(property);
+    saveEngineStatus('saveEngineMemoryStatus','Kaydedildi','ok');
+    saveEngineLog(`${property.id} admin memory içine kaydedildi.`,'ok');
+
+    renderList?.();
+    renderDashboard?.();
+    validate?.();
+    dbRefreshFilters?.();
+    dbRender?.();
+
+    saveEngineLog('CMS klasör izni kontrol ediliyor...');
+    const handle=await saveEngineRequestHandle();
+    if(!handle){
+      saveEngineStatus('saveEngineCmsStatus','İzin yok','error');
+      saveEngineLog('CMS klasörü seçilemedi. Dosyalar indirilecek.','warn');
+      saveEngineDownload('properties.json',saveEngineBuildJson());
+      saveEngineDownload('properties.js',saveEngineBuildJs(),'text/javascript');
+      return;
+    }
+
+    saveEngineCmsHandle=handle;
+    saveEngineStatus('saveEngineCmsStatus','Bağlı','ok');
+    await saveEngineWriteExports(handle);
+
+    const result=await saveEngineVerify(property.id,handle);
+    if(result.memory&&result.json&&result.js){
+      adminUxToast?.(`${property.id} JSON ve JS içine kaydedildi.`,'ok');
+      saveEngineLog(`${property.id} WEBSITE EXPORT READY`,'ok');
+    }else{
+      throw new Error(`${property.id} export doğrulaması başarısız.`);
+    }
+  }catch(e){
+    saveEngineLog('HATA: '+e.message,'error');
+    adminUxToast?.(e.message,'error');
+  }
+}
+function saveEngineDownloadBoth(){
+  saveEngineDownload('properties.json',saveEngineBuildJson());
+  setTimeout(()=>saveEngineDownload('properties.js',saveEngineBuildJs(),'text/javascript'),250);
+  saveEngineLog('properties.json ve properties.js indirildi.','ok');
+}
+async function saveEngineResetHandle(){
+  saveEngineCmsHandle=null;
+  try{
+    if(typeof publishDeleteHandle==='function')await publishDeleteHandle('cms');
+  }catch(e){}
+  saveEngineStatus('saveEngineCmsStatus','Sıfırlandı','warn');
+  saveEngineLog('CMS klasör izni sıfırlandı.','warn');
+}
+function saveEngineInit(){
+  document.getElementById('saveEngineSaveBtn')?.addEventListener('click',saveEngineSaveAll);
+  document.getElementById('saveEngineVerifyBtn')?.addEventListener('click',async()=>{
+    try{
+      const handle=await saveEngineRequestHandle();
+      if(!handle)throw new Error('CMS klasörü seçilmedi.');
+      await saveEngineVerify(saveEngineCurrentId(),handle);
+    }catch(e){
+      saveEngineLog('HATA: '+e.message,'error');
+      adminUxToast?.(e.message,'error');
+    }
+  });
+  document.getElementById('saveEngineDownloadBtn')?.addEventListener('click',saveEngineDownloadBoth);
+  document.getElementById('saveEngineResetHandleBtn')?.addEventListener('click',saveEngineResetHandle);
+
+  // Route sticky save and Ctrl+S to the new engine.
+  document.getElementById('stickySavePropertyBtn')?.addEventListener('click',event=>{
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    saveEngineSaveAll();
+  },true);
+
+  document.addEventListener('keydown',event=>{
+    if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='s'){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      saveEngineSaveAll();
+    }
+  },true);
+
+  ['id','city'].forEach(id=>document.getElementById(id)?.addEventListener('change',()=>{
+    saveEngineStatus('saveEngineCurrentId',saveEngineCurrentId()||'—');
+  }));
+
+  setTimeout(async()=>{
+    saveEngineStatus('saveEngineCurrentId',saveEngineCurrentId()||'—');
+    const handle=await saveEngineLoadHandle();
+    saveEngineStatus('saveEngineCmsStatus',handle?'Kayıtlı izin':'Seçilmedi',handle?'ok':'warn');
+  },500);
+}
+window.addEventListener('DOMContentLoaded',saveEngineInit);

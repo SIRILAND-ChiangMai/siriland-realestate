@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SIRILAND CMS PRO 2030 - Publish Manager PRO v3</title>
-  <link rel="stylesheet" href="admin.css?v=2026071036">
+  <link rel="stylesheet" href="admin.css?v=2026071037">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
@@ -54,7 +54,8 @@
       <button type="button" data-jump-panel="googleMapsProPanel">3. Harita</button>
       <button type="button" data-jump-panel="languageContentPanel">4. Başlık / Açıklama</button>
       <button type="button" data-jump-panel="mediaManagerPanel">5. Fotoğraflar</button>
-      <button type="button" data-jump-panel="directSavePanel">6. Kaydet</button>
+      <button type="button" data-jump-panel="saveEnginePanel">6. Save Engine</button>
+      <button type="button" data-jump-panel="directSavePanel">7. Dosya Kaydet</button>
       <button type="button" data-jump-panel="propertyDatabaseProPanel">🗃️ Database</button>
       <button type="button" data-jump-panel="propertyListProPanel">📋 Kart Liste</button>
     </div>
@@ -710,7 +711,31 @@
         </div>
       </div>
 
-      <div class="panel directSavePanel formAccordionPanel" id="directSavePanel">
+      
+      <div class="panel saveEnginePanel compactAccordionPanel compactAccordionOpen" id="saveEnginePanel">
+        <button type="button" class="compactAccordionToggle">
+          <span>💾 Save Engine PRO — Export Doğrulama</span><b>⌃</b>
+        </button>
+
+        <div class="saveEngineSummary">
+          <div><span>Admin Memory</span><strong id="saveEngineMemoryStatus">Bekliyor</strong></div>
+          <div><span>properties.json</span><strong id="saveEngineJsonStatus">Bekliyor</strong></div>
+          <div><span>properties.js</span><strong id="saveEngineJsStatus">Bekliyor</strong></div>
+          <div><span>CMS Folder</span><strong id="saveEngineCmsStatus">Bekliyor</strong></div>
+          <div><span>Current ID</span><strong id="saveEngineCurrentId">—</strong></div>
+        </div>
+
+        <div class="saveEngineActions">
+          <button type="button" class="btn green" id="saveEngineSaveBtn">💾 Kaydet + JSON + JS Güncelle</button>
+          <button type="button" class="btn dark" id="saveEngineVerifyBtn">CM ID Exportta mı Kontrol Et</button>
+          <button type="button" class="btn" id="saveEngineDownloadBtn">properties.js + JSON İndir</button>
+          <button type="button" class="btn red" id="saveEngineResetHandleBtn">CMS İznini Sıfırla</button>
+        </div>
+
+        <div id="saveEngineLog" class="saveEngineLog">Save Engine hazır.</div>
+      </div>
+
+<div class="panel directSavePanel formAccordionPanel" id="directSavePanel">
         <div class="directSaveHead">
           <div>
             <h2>💾 Direct Save to CMS</h2>
@@ -874,7 +899,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071036"></script>
+<script src="admin.js?v=2026071037"></script>
   <script src="admin-modules/core-utils.js?v=2026071029"></script>
   <script src="admin-modules/property-store.js?v=2026071029"></script>
   <script src="admin-modules/incremental-publish.js?v=2026071029"></script>
