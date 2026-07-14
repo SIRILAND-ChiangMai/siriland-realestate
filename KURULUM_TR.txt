@@ -1,29 +1,40 @@
-SIRILAND SPRINT 6.0 — ONLINE CMS PHASE 1
+SIRILAND PUBLISH MANAGER PRO v3
 
-1. Supabase'te yeni proje oluştur.
-2. SQL Editor'da supabase/schema.sql çalıştır.
-3. Storage içinde private property-images bucket oluştur.
-4. supabase/storage-policies.sql çalıştır.
-5. Project Settings / API bölümünden Project URL ve Publishable key al.
-6. online-admin/js/config.js içine yapıştır.
-7. online-admin klasörünü GitHub repository içine kopyala.
-8. Commit + Push yap.
-9. Adres:
-https://SIRILAND-ChiangMai.github.io/siriland-realestate/online-admin/
+KURULUM
+1. Bu ZIP'i şu klasöre çıkar:
+   E:\SIRILAND_2030_Harddisk_Structure\01_CMS\Publish_Manager_v3
 
-İlk owner:
-Supabase Authentication / Users bölümünde kullanıcı oluştur.
-Sonra SQL Editor:
-update public.profiles set role='owner', full_name='Kwan' where email='KENDI_EMAIL_ADRESIN';
+2. RUN_PUBLISH_V3.bat dosyasına çift tıkla.
 
-Bu Phase 1 şunları içerir:
-- Online login
-- Owner / Manager / Agent / Photographer
-- Draft / Review / Approved / Published
-- Agent yalnızca kendi ilanını görür
-- Manager onaylar veya reddeder
-- Veritabanında otomatik CM/BKK/PCT/PLK/NKS ID
+3. Yollar hazır gelir:
+   CMS Source:
+   E:\SIRILAND_2030_Harddisk_Structure\01_CMS
 
-Güvenlik:
-Browser dosyasına yalnızca Publishable key girilir.
-Secret veya service_role key kesinlikle girilmez.
+   GitHub Repo:
+   E:\SIRILAND_2030_Harddisk_Structure\09_GitHub\siriland-realestate
+
+   Backup:
+   E:\SIRILAND_2030_Harddisk_Structure\02_Backup
+
+4. Önce "Analiz Et".
+5. Hata yoksa "Publish".
+6. GitHub Desktop'ta:
+   Commit to main
+   Push origin
+
+YENİ ÖZELLİKLER
+- Sadece yeni ve değişen dosyaları senkronlar.
+- images klasörü dahil tüm değişiklikleri otomatik bulur.
+- Sadece üzerine yazılacak eski dosyaları incremental yedekler.
+- Duplicate ID, eksik ID, başlık, fiyat ve şehir kodunu kontrol eder.
+- Eksik map ve görselleri uyarı olarak gösterir.
+- GitHub klasöründe olup CMS'de olmayan orphan dosyaları raporlar; güvenlik için otomatik silmez.
+- Commit mesajını panoya kopyalar.
+- GitHub Desktop'u açmayı dener.
+- Son 100 publish kaydını Publish History içinde tutar.
+- Ayrıntılı publish raporu oluşturur.
+
+ÖNEMLİ
+- "Uyarılarda da publish'i durdur" seçili değilse eksik map/fotoğraf uyarıları publish'i engellemez.
+- Gerçek validator hataları publish'i daima durdurur.
+- Orphan dosyalar otomatik silinmez. Yanlışlıkla ilan veya fotoğraf kaybını önler.
