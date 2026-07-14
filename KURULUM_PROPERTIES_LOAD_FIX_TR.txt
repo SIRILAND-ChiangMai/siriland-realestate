@@ -1,0 +1,27 @@
+SIRILAND ADMIN PROPERTIES LOAD SILENT FIX
+
+Sorun:
+Admin file:/// adresinden açıldığı için browser fetch('properties.js') çağrısını engelleyebiliyor.
+Admin güvenli tarayıcı yedeğini açıyor fakat her girişte rahatsız edici alert gösteriyordu.
+
+Düzeltildi:
+- properties.js yüklenemedi popup'ı kaldırıldı.
+- Güvenli yedek sessizce açılır.
+- Gerekirse yalnızca küçük yeşil bildirim görünür.
+- Gerçek veri ve ilan listesi çalışmaya devam eder.
+- Diğer önemli hata alertleri kaldırılmadı.
+
+KURULUM:
+ZIP içindeki tüm dosya ve klasörleri:
+
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+
+klasörünün üzerine kopyala.
+
+Windows sorunca:
+Replace the files in the destination
+
+Sonra:
+file:///E:/SIRILAND_2030_Harddisk_Structure/01_CMS/admin.html
+
+Ctrl + Shift + R

@@ -1,0 +1,42 @@
+SIRILAND BULK OPERATIONS PRO
+
+Eklenen toplu işlemler:
+- Toplu durum değiştirme
+- Toplu şehir değiştirme
+- Toplu Deal değiştirme
+- Fiyatı tamamen değiştirme
+- Fiyatı yüzde artırma
+- Fiyatı yüzde azaltma
+- Toplu arşivleme
+- Son toplu işlemi geri alma
+- Seçili ilanları export etme
+- Seçili ilanları silme
+
+FİYAT ÖRNEKLERİ
+
+Fiyatı tamamen değiştirmek:
+Mode: Fiyatı Değiştir
+Value: 3.9 MB
+
+%5 artırmak:
+Mode: % Artır
+Value: 5
+
+%10 azaltmak:
+Mode: % Azalt
+Value: 10
+
+KURULUM:
+ZIP içindeki tüm dosya ve klasörleri:
+
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+
+klasörünün üzerine kopyala.
+
+Windows sorunca:
+Replace the files in the destination
+
+Sonra Chrome:
+file:///E:/SIRILAND_2030_Harddisk_Structure/01_CMS/admin.html
+
+Ctrl + Shift + R

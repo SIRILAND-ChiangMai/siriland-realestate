@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SIRILAND CMS PRO 2030 - Publish Manager PRO v3</title>
-  <link rel="stylesheet" href="admin.css?v=2026071033">
+  <link rel="stylesheet" href="admin.css?v=2026071036">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
@@ -766,6 +766,7 @@
         <div class="databaseBulkBar">
           <label><input type="checkbox" id="dbSelectAll"> Tümünü Seç</label>
           <span id="dbSelectedCount">0 seçili</span>
+
           <select id="dbBulkStatus">
             <option value="">Durum Değiştir</option>
             <option value="Available">Available</option>
@@ -774,8 +775,37 @@
             <option value="Sold Out">Sold Out</option>
             <option value="Rented Out">Rented Out</option>
             <option value="Hidden">Hidden</option>
+            <option value="Archived">Archived</option>
           </select>
+
+          <select id="dbBulkCity">
+            <option value="">Şehir Değiştir</option>
+            <option value="Chiang Mai">Chiang Mai</option>
+            <option value="Bangkok">Bangkok</option>
+            <option value="Phichit">Phichit</option>
+            <option value="Phitsanulok">Phitsanulok</option>
+            <option value="Nakhon Sawan">Nakhon Sawan</option>
+          </select>
+
+          <select id="dbBulkDeal">
+            <option value="">Deal Değiştir</option>
+            <option value="Sale">Sale</option>
+            <option value="Rent">Rent</option>
+            <option value="Sale/Rent">Sale/Rent</option>
+          </select>
+
+          <input id="dbBulkPriceValue" placeholder="Fiyat değeri veya yüzde">
+          <select id="dbBulkPriceMode">
+            <option value="replace">Fiyatı Değiştir</option>
+            <option value="increase-percent">% Artır</option>
+            <option value="decrease-percent">% Azalt</option>
+          </select>
+
           <button type="button" class="btn" id="dbApplyStatusBtn">Durumu Uygula</button>
+          <button type="button" class="btn" id="dbApplyCityBtn">Şehri Uygula</button>
+          <button type="button" class="btn" id="dbApplyDealBtn">Deal Uygula</button>
+          <button type="button" class="btn" id="dbApplyPriceBtn">Fiyatı Uygula</button>
+          <button type="button" class="btn dark" id="dbArchiveSelectedBtn">Arşivle</button>
           <button type="button" class="btn" id="dbExportSelectedBtn">Seçilileri Export Et</button>
           <button type="button" class="btn red" id="dbDeleteSelectedBtn">Seçilileri Sil</button>
         </div>
@@ -800,6 +830,10 @@
           </table>
         </div>
 
+        <div class="bulkUndoBar" id="bulkUndoBar">
+          <span id="bulkUndoText">Henüz toplu işlem yok.</span>
+          <button type="button" class="btn dark" id="bulkUndoBtn" disabled>Son Toplu İşlemi Geri Al</button>
+        </div>
         <div class="databaseFooter">
           <span id="dbResultCount">0 ilan</span>
           <div id="dbPagination" class="dbPagination"></div>
@@ -840,7 +874,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071033"></script>
+<script src="admin.js?v=2026071036"></script>
   <script src="admin-modules/core-utils.js?v=2026071029"></script>
   <script src="admin-modules/property-store.js?v=2026071029"></script>
   <script src="admin-modules/incremental-publish.js?v=2026071029"></script>

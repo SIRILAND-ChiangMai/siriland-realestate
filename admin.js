@@ -1,4 +1,21 @@
 
+
+/* Suppress legacy properties.js fallback popup */
+(function(){
+  const originalAlert=window.alert.bind(window);
+  window.alert=function(message){
+    const text=String(message||'');
+    if(text.includes('properties.js yüklenemedi') && text.includes('Tarayıcıdaki son güvenli yedek')){
+      console.warn(text);
+      if(typeof adminUxToast==='function'){
+        adminUxToast(text.replace('properties.js yüklenemedi. ','').replace('Tarayıcıdaki son güvenli yedek açıldı:','Güvenli yedek:'),'ok');
+      }
+      return;
+    }
+    return originalAlert(message);
+  };
+})();
+
 console.info('SIRILAND Admin Build 2026.07.10.12 loaded');
 let properties=[];
 let customers=[];
@@ -1094,7 +1111,7 @@ fetch('properties.js?v='+Date.now(),{cache:'no-store'}).then(r=>{
     const backup=JSON.parse(localStorage.getItem('siriland_properties_backup')||'[]');
     if(Array.isArray(backup)&&backup.length){
       properties=backup.map(cleanProperty);
-      alert('properties.js yüklenemedi. Tarayıcıdaki son güvenli yedek açıldı: '+properties.length+' ilan');
+      adminUxToast?.(`Tarayıcı yedeği açıldı: ${properties.length} ilan`, 'ok');
     }
   }catch(e){}
   clearForm();renderList();validate();renderCRM();clearCustomerForm();
@@ -3376,3 +3393,230 @@ function dbInit(){
   document.getElementById('clearBtn')?.addEventListener('click',()=>setTimeout(dbRender,100));
 }
 window.addEventListener('DOMContentLoaded',dbInit);
+
+
+/* Bulk Operations PRO */
+let dbLastBulkSnapshot=null;
+
+function dbCreateBulkSnapshot(label){
+  dbLastBulkSnapshot={
+    label,
+    createdAt:new Date().toISOString(),
+    properties:JSON.parse(JSON.stringify(properties||[]))
+  };
+  const btn=document.getElementById('bulkUndoBtn');
+  const text=document.getElementById('bulkUndoText');
+  if(btn)btn.disabled=false;
+  if(text)text.textContent=`Son işlem: ${label}`;
+}
+
+function dbBulkSelectedIds(){
+  return [...dbSelected];
+}
+
+function dbRequireSelection(){
+  if(!dbSelected.size){
+    alert('Önce en az bir ilan seç.');
+    return false;
+  }
+  return true;
+}
+
+function dbBulkTouch(p){
+  p.updatedAt=new Date().toISOString();
+}
+
+function dbApplyBulkCity(){
+  if(!dbRequireSelection())return;
+  const city=document.getElementById('dbBulkCity')?.value;
+  if(!city)return alert('Önce şehir seç.');
+
+  dbCreateBulkSnapshot(`Şehir → ${city}`);
+  let count=0;
+  properties.forEach(p=>{
+    if(dbSelected.has(p.id)){
+      p.city=city;
+      dbBulkTouch(p);
+      count++;
+    }
+  });
+
+  dbRefreshFilters();
+  dbRender();
+  renderList?.();
+  validate?.();
+  adminUxToast?.(`${count} ilanın şehri ${city} yapıldı.`);
+}
+
+function dbApplyBulkDeal(){
+  if(!dbRequireSelection())return;
+  const deal=document.getElementById('dbBulkDeal')?.value;
+  if(!deal)return alert('Önce deal seç.');
+
+  dbCreateBulkSnapshot(`Deal → ${deal}`);
+  let count=0;
+  properties.forEach(p=>{
+    if(dbSelected.has(p.id)){
+      p.deal=deal;
+      dbBulkTouch(p);
+      count++;
+    }
+  });
+
+  dbRefreshFilters();
+  dbRender();
+  renderList?.();
+  validate?.();
+  adminUxToast?.(`${count} ilanın deal alanı ${deal} yapıldı.`);
+}
+
+function dbParseNumericPrice(value){
+  const cleaned=String(value||'').replace(/,/g,'').match(/-?\d+(?:\.\d+)?/);
+  return cleaned?Number(cleaned[0]):NaN;
+}
+
+function dbFormatPriceLike(original,newNumber){
+  const text=String(original||'');
+  if(/MB/i.test(text))return `${newNumber.toFixed(2).replace(/\.00$/,'')} MB`;
+  if(/THB/i.test(text))return `${Math.round(newNumber).toLocaleString()} THB`;
+  if(/บาท/.test(text))return `${Math.round(newNumber).toLocaleString()} บาท`;
+  return String(newNumber);
+}
+
+function dbApplyBulkPrice(){
+  if(!dbRequireSelection())return;
+  const raw=document.getElementById('dbBulkPriceValue')?.value?.trim();
+  const mode=document.getElementById('dbBulkPriceMode')?.value;
+  const inputValue=Number(raw);
+  if(!raw||!Number.isFinite(inputValue))return alert('Geçerli fiyat veya yüzde gir.');
+
+  dbCreateBulkSnapshot(`Fiyat işlemi: ${mode} ${raw}`);
+  let count=0,skipped=0;
+
+  properties.forEach(p=>{
+    if(!dbSelected.has(p.id))return;
+
+    const field=p.price!=null?'price':p.salePrice!=null?'salePrice':p.rentPrice!=null?'rentPrice':'price';
+    const original=p[field]||'';
+    const numeric=dbParseNumericPrice(original);
+
+    if(mode==='replace'){
+      p[field]=raw;
+      dbBulkTouch(p);
+      count++;
+      return;
+    }
+
+    if(!Number.isFinite(numeric)){
+      skipped++;
+      return;
+    }
+
+    const factor=mode==='increase-percent'?(1+inputValue/100):(1-inputValue/100);
+    p[field]=dbFormatPriceLike(original,numeric*factor);
+    dbBulkTouch(p);
+    count++;
+  });
+
+  dbRender();
+  renderList?.();
+  validate?.();
+  adminUxToast?.(`${count} fiyat güncellendi${skipped?`, ${skipped} atlandı`:''}.`);
+}
+
+function dbArchiveSelected(){
+  if(!dbRequireSelection())return;
+  dbCreateBulkSnapshot('Seçili ilanları arşivle');
+
+  let count=0;
+  properties.forEach(p=>{
+    if(dbSelected.has(p.id)){
+      p.status='Archived';
+      p.archivedAt=new Date().toISOString();
+      dbBulkTouch(p);
+      count++;
+    }
+  });
+
+  dbRender();
+  renderList?.();
+  validate?.();
+  adminUxToast?.(`${count} ilan arşivlendi.`);
+}
+
+function dbUndoLastBulk(){
+  if(!dbLastBulkSnapshot)return;
+  if(!confirm(`${dbLastBulkSnapshot.label} işlemi geri alınsın mı?`))return;
+
+  properties=JSON.parse(JSON.stringify(dbLastBulkSnapshot.properties));
+  dbLastBulkSnapshot=null;
+
+  const btn=document.getElementById('bulkUndoBtn');
+  const text=document.getElementById('bulkUndoText');
+  if(btn)btn.disabled=true;
+  if(text)text.textContent='Son toplu işlem geri alındı.';
+
+  dbRefreshFilters();
+  dbRender();
+  renderList?.();
+  validate?.();
+  adminUxToast?.('Toplu işlem geri alındı.');
+}
+
+function dbInstallBulkOps(){
+  document.getElementById('dbApplyCityBtn')?.addEventListener('click',dbApplyBulkCity);
+  document.getElementById('dbApplyDealBtn')?.addEventListener('click',dbApplyBulkDeal);
+  document.getElementById('dbApplyPriceBtn')?.addEventListener('click',dbApplyBulkPrice);
+  document.getElementById('dbArchiveSelectedBtn')?.addEventListener('click',dbArchiveSelected);
+  document.getElementById('bulkUndoBtn')?.addEventListener('click',dbUndoLastBulk);
+}
+
+window.addEventListener('DOMContentLoaded',dbInstallBulkOps);
+
+
+/* Property List UI Repair */
+function propertyListUiNormalize(){
+  const list=document.getElementById('list');
+  if(!list)return;
+
+  [...list.children].forEach(card=>{
+    if(card.dataset.listUiReady==='1')return;
+    card.dataset.listUiReady='1';
+    card.classList.add('propertyCompactCard');
+
+    const buttons=[...card.querySelectorAll('button')];
+    if(buttons.length){
+      let actions=card.querySelector('.propertyCompactActions');
+      if(!actions){
+        actions=document.createElement('div');
+        actions.className='propertyCompactActions';
+        buttons[0].parentNode.insertBefore(actions,buttons[0]);
+      }
+      buttons.forEach(btn=>actions.appendChild(btn));
+    }
+
+    // Identify text/badge clusters and improve semantic styling.
+    [...card.querySelectorAll('span,small,b,strong')].forEach(el=>{
+      const text=(el.textContent||'').trim();
+      if(!text)return;
+      if(/^(Chiang Mai|Bangkok|Phichit|Phitsanulok|Nakhon Sawan|Condo|House|Land|Commercial|Sale|Rent|Sale\/Rent|Available|Draft|Reserved|Sold Out|Rented Out|Hidden|Archived)$/i.test(text)){
+        el.classList.add('propertyCompactBadge');
+      }
+      if(/(?:MB|THB|บาท|Month|\/ Month)$/i.test(text)){
+        el.classList.add('propertyCompactPrice');
+      }
+    });
+
+    const firstTextBlock=[...card.children].find(el=>!el.classList.contains('propertyCompactActions'));
+    if(firstTextBlock)firstTextBlock.classList.add('propertyCompactContent');
+  });
+}
+
+function propertyListUiInit(){
+  const list=document.getElementById('list');
+  if(!list)return;
+  const observer=new MutationObserver(propertyListUiNormalize);
+  observer.observe(list,{childList:true,subtree:true});
+  propertyListUiNormalize();
+}
+window.addEventListener('DOMContentLoaded',propertyListUiInit);
