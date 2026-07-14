@@ -1,0 +1,28 @@
+SIRILAND ADMIN UX POLISH PRO
+
+Eklenenler:
+- Sağ ilan listesinde Düzenle / Kopyala / Sil
+- Kopyala işlemi yeni otomatik ID hazırlar
+- Ctrl+S = Kaydet
+- Ctrl+N = Yeni ilan
+- Ctrl+F = İlan listesinde ara
+- Esc = Yeni ilan formu
+- Yeni ilan açıldığında ilk alana otomatik odak
+- Düzenle sonrası otomatik forma geçiş
+- Kaydet butonunda işlem durumu
+- Başarılı işlemler için küçük bildirimler
+
+KURULUM:
+ZIP içindeki tüm dosya ve klasörleri:
+
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+
+klasörünün üzerine kopyala.
+
+Windows sorunca:
+Replace the files in the destination
+
+Sonra Chrome:
+file:///E:/SIRILAND_2030_Harddisk_Structure/01_CMS/admin.html
+
+Ctrl + Shift + R

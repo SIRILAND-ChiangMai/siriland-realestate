@@ -2923,3 +2923,210 @@ function compactAdminInit(){
 }
 
 window.addEventListener('DOMContentLoaded',compactAdminInit);
+
+
+/* Admin UX Polish PRO */
+function adminUxToast(message,type='ok'){
+  let toast=document.getElementById('adminUxToast');
+  if(!toast){
+    toast=document.createElement('div');
+    toast.id='adminUxToast';
+    toast.className='adminUxToast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent=message;
+  toast.className=`adminUxToast ${type} show`;
+  clearTimeout(window.__adminUxToastTimer);
+  window.__adminUxToastTimer=setTimeout(()=>toast.classList.remove('show'),2200);
+}
+
+function adminUxFocusFirstField(){
+  const target=document.getElementById('city') || document.querySelector('#propertyInfoPanel input, #propertyInfoPanel select');
+  if(target){
+    target.focus({preventScroll:true});
+    target.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+
+function adminUxFindPropertyById(id){
+  return (window.properties||[]).find(p=>String(p.id)===String(id));
+}
+
+function adminUxDeepClone(value){
+  return JSON.parse(JSON.stringify(value));
+}
+
+function adminUxNextCopyTitle(title){
+  if(typeof title==='string') return title ? `${title} (Copy)` : 'New Property Copy';
+  const copy=adminUxDeepClone(title||{});
+  ['th','en','tr','zh'].forEach(lang=>{
+    if(copy[lang]) copy[lang]=`${copy[lang]} (Copy)`;
+  });
+  return copy;
+}
+
+function adminUxCopyProperty(id){
+  const source=adminUxFindPropertyById(id);
+  if(!source){
+    adminUxToast('İlan bulunamadı.','error');
+    return;
+  }
+
+  const copy=adminUxDeepClone(source);
+  copy.id='';
+  copy.status='Draft';
+  copy.title=adminUxNextCopyTitle(copy.title);
+  copy.createdAt=new Date().toISOString();
+  copy.updatedAt=new Date().toISOString();
+
+  if(typeof setForm==='function') setForm(copy);
+  if(typeof syncIdToCity==='function') setTimeout(()=>syncIdToCity(true),80);
+  if(typeof sirilandEnsureAutomaticId==='function') setTimeout(()=>sirilandEnsureAutomaticId(true),100);
+
+  compactShowWorkspace?.('property');
+  compactJumpPanel?.('propertyInfoPanel');
+  setTimeout(adminUxFocusFirstField,220);
+  adminUxToast('İlan kopyalandı. Yeni ID otomatik hazırlanıyor.');
+}
+
+function adminUxClearForm(){
+  if(typeof clearForm==='function') clearForm();
+  else document.getElementById('clearBtn')?.click();
+  compactShowWorkspace?.('property');
+  compactJumpPanel?.('propertyInfoPanel');
+  setTimeout(adminUxFocusFirstField,180);
+  adminUxToast('Yeni ilan formu hazır.');
+}
+
+function adminUxSave(){
+  const save=document.getElementById('saveBtn');
+  if(!save)return;
+  save.click();
+  adminUxToast('Kaydetme işlemi başlatıldı.');
+}
+
+function adminUxFocusSearch(){
+  const search=document.getElementById('propertyListSearch');
+  if(search){
+    compactShowWorkspace?.('property');
+    compactJumpPanel?.('propertyListProPanel');
+    setTimeout(()=>{search.focus();search.select?.()},180);
+  }
+}
+
+function adminUxInstallKeyboardShortcuts(){
+  document.addEventListener('keydown',event=>{
+    const active=document.activeElement;
+    const typing=active && ['INPUT','TEXTAREA','SELECT'].includes(active.tagName);
+
+    if((event.ctrlKey||event.metaKey) && event.key.toLowerCase()==='s'){
+      event.preventDefault();
+      adminUxSave();
+      return;
+    }
+
+    if((event.ctrlKey||event.metaKey) && event.key.toLowerCase()==='n'){
+      event.preventDefault();
+      adminUxClearForm();
+      return;
+    }
+
+    if((event.ctrlKey||event.metaKey) && event.key.toLowerCase()==='f'){
+      if(document.getElementById('propertyListSearch')){
+        event.preventDefault();
+        adminUxFocusSearch();
+      }
+      return;
+    }
+
+    if(event.key==='Escape' && !typing){
+      adminUxClearForm();
+    }
+  });
+}
+
+function adminUxEnhancePropertyList(){
+  const list=document.getElementById('list');
+  if(!list)return;
+
+  const observer=new MutationObserver(()=>{
+    list.querySelectorAll('[data-edit-property]').forEach(btn=>{
+      if(btn.dataset.uxReady)return;
+      btn.dataset.uxReady='1';
+      btn.textContent='Düzenle';
+    });
+
+    list.querySelectorAll('[data-delete-property]').forEach(btn=>{
+      if(btn.dataset.uxReady)return;
+      btn.dataset.uxReady='1';
+      btn.textContent='Sil';
+    });
+
+    list.querySelectorAll('.propertyListActions,.row-actions,.actions').forEach(actions=>{
+      if(actions.querySelector('[data-copy-property]'))return;
+      const id=
+        actions.querySelector('[data-edit-property]')?.dataset.editProperty ||
+        actions.querySelector('[data-delete-property]')?.dataset.deleteProperty;
+      if(!id)return;
+
+      const copy=document.createElement('button');
+      copy.type='button';
+      copy.className='btn copyPropertyBtn';
+      copy.dataset.copyProperty=id;
+      copy.textContent='Kopyala';
+      actions.insertBefore(copy,actions.children[1]||null);
+    });
+  });
+
+  observer.observe(list,{childList:true,subtree:true});
+  list.dispatchEvent(new Event('change'));
+}
+
+function adminUxInstallListEvents(){
+  document.addEventListener('click',event=>{
+    const copy=event.target.closest('[data-copy-property]');
+    if(copy){
+      event.preventDefault();
+      event.stopPropagation();
+      adminUxCopyProperty(copy.dataset.copyProperty);
+      return;
+    }
+
+    const edit=event.target.closest('[data-edit-property]');
+    if(edit){
+      setTimeout(()=>{
+        compactShowWorkspace?.('property');
+        compactJumpPanel?.('propertyInfoPanel');
+        adminUxToast(`${edit.dataset.editProperty} düzenlemeye açıldı.`);
+      },100);
+    }
+  });
+}
+
+function adminUxWatchSaveState(){
+  const save=document.getElementById('saveBtn');
+  if(!save)return;
+  save.addEventListener('click',()=>{
+    save.disabled=true;
+    const original=save.textContent;
+    save.textContent='Kaydediliyor...';
+    setTimeout(()=>{
+      save.disabled=false;
+      save.textContent=original;
+    },1400);
+  });
+}
+
+function adminUxInit(){
+  adminUxInstallKeyboardShortcuts();
+  adminUxEnhancePropertyList();
+  adminUxInstallListEvents();
+  adminUxWatchSaveState();
+
+  document.getElementById('stickyNewPropertyBtn')?.addEventListener('click',()=>setTimeout(adminUxFocusFirstField,180));
+  document.getElementById('clearBtn')?.addEventListener('click',()=>setTimeout(adminUxFocusFirstField,180));
+
+  setTimeout(adminUxFocusFirstField,500);
+}
+
+window.addEventListener('DOMContentLoaded',adminUxInit);
