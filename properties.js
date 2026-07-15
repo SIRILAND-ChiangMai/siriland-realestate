@@ -1,12 +1,6 @@
-window.PROPERTIES = [
+window.SIRILAND_PROPERTIES = [
   {
     "id": "BKK-0001",
-    "title": {
-      "en": "Bangkok Luxury Condo — Sathorn / Suanplu",
-      "th": "Bangkok Luxury Condo — Sathorn / Suanplu",
-      "tr": "Bangkok Luxury Condo — Sathorn / Suanplu",
-      "zh": "Bangkok Luxury Condo — Sathorn / Suanplu"
-    },
     "city": "Bangkok",
     "type": "Condo",
     "deal": "Sale",
@@ -18,6 +12,33 @@ window.PROPERTIES = [
     "room": "",
     "floor": "7th Floor",
     "map": "",
+    "latitude": "",
+    "longitude": "",
+    "landSize": "",
+    "landAreaSqm": "",
+    "buildingArea": "",
+    "parking": "",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "th": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "tr": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "zh": "Bangkok Luxury Condo — Sathorn / Suanplu"
+    },
     "description": {
       "en": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
       "th": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
@@ -59,8 +80,8 @@ window.PROPERTIES = [
       ]
     },
     "images": [
-      "images/bkk-01-3.jpg",
       "images/bkk-01-10.jpg",
+      "images/bkk-01-3.jpg",
       "images/bkk-01-2.jpg",
       "images/bkk-01-5.jpg",
       "images/bkk-01-6.jpg",
@@ -89,18 +110,15 @@ window.PROPERTIES = [
       "images/bkk-01-28.jpg",
       "images/bkk-01-29.jpg"
     ],
+    "createdAt": "2026-07-15",
+    "updatedAt": "2026-07-15",
+    "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    },
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": ""
+    }
   },
   {
     "id": "BKK-0002",
@@ -4073,3 +4091,4 @@ window.PROPERTIES = [
     }
   }
 ];
+const properties = window.SIRILAND_PROPERTIES;
