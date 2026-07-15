@@ -1,4 +1,4 @@
-window.SIRILAND_PROPERTIES = [
+window.PROPERTIES = [
   {
     "id": "BKK-0001",
     "title": {
@@ -304,82 +304,6 @@ window.SIRILAND_PROPERTIES = [
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
-  },
-  {
-    "id": "BKK-0004",
-    "title": {
-      "en": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
-      "th": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
-      "tr": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
-      "zh": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale"
-    },
-    "city": "Bangkok",
-    "type": "Condo",
-    "deal": "Sale",
-    "status": "Available",
-    "price": "12.0 MB",
-    "bedrooms": "2 Bedrooms",
-    "bathrooms": "2 Bathrooms",
-    "area": "97.50 sqm",
-    "room": "",
-    "floor": "",
-    "map": "",
-    "description": {
-      "en": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
-      "th": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
-      "tr": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
-      "zh": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026."
-    },
-    "highlights": {
-      "en": [
-        "2 Bedrooms",
-        "2 Bathrooms",
-        "97.50 sqm",
-        "Sathorn-Suanplu",
-        "Clear Title Deed",
-        "Lease Ends 31 October 2026"
-      ],
-      "th": [
-        "2 Bedrooms",
-        "2 Bathrooms",
-        "97.50 sqm",
-        "Sathorn-Suanplu",
-        "Clear Title Deed",
-        "Lease Ends 31 October 2026"
-      ],
-      "tr": [
-        "2 Bedrooms",
-        "2 Bathrooms",
-        "97.50 sqm",
-        "Sathorn-Suanplu",
-        "Clear Title Deed",
-        "Lease Ends 31 October 2026"
-      ],
-      "zh": [
-        "2 Bedrooms",
-        "2 Bathrooms",
-        "97.50 sqm",
-        "Sathorn-Suanplu",
-        "Clear Title Deed",
-        "Lease Ends 31 October 2026"
-      ]
-    },
-    "images": [],
-    "createdAt": "2026-07-10T15:20:51+07:00",
-    "updatedAt": "2026-07-10T15:20:51+07:00",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    },
-    "salePrice": "12.0 MB",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "Spacious 97.50 sqm condo for sale in Sathorn-Suanplu, Bangkok."
   },
   {
     "id": "BKK-0005",
@@ -4149,4 +4073,3 @@ window.SIRILAND_PROPERTIES = [
     }
   }
 ];
-const properties = window.SIRILAND_PROPERTIES;

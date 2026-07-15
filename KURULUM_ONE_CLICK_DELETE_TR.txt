@@ -1,0 +1,44 @@
+SIRILAND ONE-CLICK DELETE + PUBLISH
+
+Yeni akış:
+Sil
+↓
+Onayla
+↓
+Admin listesinden kaldırılır
+↓
+properties.json güncellenir
+↓
+properties.js güncellenir
+↓
+Silindiği doğrulanır
+↓
+Auto Publish servisi açıksa GitHub'a otomatik push yapılır
+
+KURULUM
+ZIP içindeki:
+- admin.html
+- admin-modules\one-click-delete-publish.js
+
+dosyalarını şuraya kopyala:
+
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+
+Windows sorunca Replace seç.
+
+Sonra:
+file:///E:/SIRILAND_2030_Harddisk_Structure/01_CMS/admin.html
+
+Ctrl + Shift + R
+
+KULLANIM
+1. İlanın yanındaki Sil butonuna bas.
+2. Onayla.
+3. Başka bir Kaydet butonuna basman gerekmez.
+
+İlk kullanımda klasör seçme ekranı gelirse:
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+klasörünü seç.
+
+Auto Publish servisi açıksa website'den de otomatik kalkar.
+Servis kapalıysa yerel CMS'den silinir ve Smart Publish yapman gerektiği bildirilir.

@@ -1,0 +1,41 @@
+CM-0032 FOTOĞRAF FİZİKSEL KAYDETME DÜZELTMESİ
+
+SORUN
+Admin fotoğrafları önizliyor ve ilan verisine yol ekliyor; fakat gerçek fotoğraf
+dosyaları 01_CMS\images klasörüne yazılmadığı için website 0 photos gösteriyor.
+
+KURULUM
+ZIP içindeki:
+- admin.html
+- admin-modules\image-physical-save-fix.js
+
+dosyalarını şu klasörün üzerine kopyala:
+
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+
+Windows sorunca Replace seç.
+
+SONRA
+1. Yerel admini aç:
+   file:///E:/SIRILAND_2030_Harddisk_Structure/01_CMS/admin.html
+
+2. Ctrl + Shift + R.
+
+3. CM-0032 > Düzenle.
+
+4. Fotoğrafları tekrar seç.
+
+5. Kaydet + JSON + JS Güncelle
+   veya
+   Kaydet + Otomatik Yayınla.
+
+6. İlk kez klasör seçme ekranı gelirse TAM OLARAK şunu seç:
+   E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+
+7. Sistem fotoğrafları önce images klasörüne yazar ve boyutlarını doğrular.
+8. Ardından ilan verisini properties.json / properties.js içine kaydeder.
+9. Publish yap.
+
+KONTROL
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS\images
+içinde CM-0032’ye ait yeni dosyalar görünmeli.
