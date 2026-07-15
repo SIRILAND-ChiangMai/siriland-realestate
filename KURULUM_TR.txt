@@ -1,20 +1,18 @@
-SIRILAND HOMEPAGE WIDE + 4 COLUMN FIX
+SIRILAND TOP POPULAR LISTINGS WIDE FIX
 
-- Masaüstünde sağ ve sol boşluk azaltıldı.
-- Ana içerik alanı maksimum 1480 px yapıldı.
-- Büyük ekranlarda ilanlar 4 sütun görünür.
-- Kartlar ve fotoğraflar biraz büyütüldü.
-- 1350 px altında 3 sütun.
-- Tablette 2 sütun.
-- Telefonda 1 sütun.
-- Şehir listesi daha dar, ilan alanı daha geniş.
-- Alt Best Price / Popular Condo bölümleri de genişler.
+Düzeltildi:
+- Üst Popular Listings bölümü masaüstünde 3 sütun kalır.
+- Üst kartlar daha geniş görünür.
+- Üst fotoğraflar 215–225 px yüksekliğe çıkarıldı.
+- Sol şehir sütunu daraltıldı.
+- Alt ilan bölümü 4 sütun olarak kalır.
+- Tablette 2 sütun, telefonda 1 sütun.
 
 KURULUM:
-style.css dosyasını şu klasörün üzerine kopyala:
+ZIP içindeki style.css dosyasını:
 
 E:\SIRILAND_2030_Harddisk_Structure\01_CMS
 
-Windows sorunca Replace seç.
+üzerine kopyala ve Replace seç.
 
 Sonra Smart Publish, GitHub Desktop Commit + Push ve website'de Ctrl + Shift + R.

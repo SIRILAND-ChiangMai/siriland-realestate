@@ -575,3 +575,104 @@
     min-height:220px!important;
   }
 }
+
+
+/* SIRILAND TOP POPULAR LISTINGS WIDTH FIX */
+
+/* Give more width to the main listing area */
+.explore-layout,
+.sx-explore-layout,
+.home-explore-grid{
+  grid-template-columns:175px minmax(0,1fr)!important;
+  gap:14px!important;
+}
+
+/* Top Popular Listings must stay 3 columns */
+#popularListings,
+.popular-listings-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:14px!important;
+}
+
+/* Make top cards wider and photos taller */
+#popularListings .sx-property-card,
+.popular-listings-grid .sx-property-card{
+  min-height:455px!important;
+}
+
+#popularListings .sx-card-photo,
+.popular-listings-grid .sx-card-photo{
+  height:215px!important;
+  min-height:215px!important;
+}
+
+#popularListings .sx-card-body,
+.popular-listings-grid .sx-card-body{
+  padding:14px!important;
+}
+
+#popularListings .sx-card-body h4,
+.popular-listings-grid .sx-card-body h4{
+  font-size:15px!important;
+  line-height:1.3!important;
+  min-height:44px!important;
+}
+
+/* Bottom general listing grids can stay 4 columns */
+#featuredGrid,
+.property-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+}
+
+/* Large desktop */
+@media(min-width:1450px){
+  :root{--home-wide-max:1540px}
+
+  #popularListings .sx-card-photo,
+  .popular-listings-grid .sx-card-photo{
+    height:225px!important;
+    min-height:225px!important;
+  }
+}
+
+/* Mid desktop */
+@media(max-width:1350px){
+  #popularListings,
+  .popular-listings-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+
+  #popularListings .sx-card-photo,
+  .popular-listings-grid .sx-card-photo{
+    height:190px!important;
+    min-height:190px!important;
+  }
+}
+
+/* Tablet */
+@media(max-width:980px){
+  .explore-layout,
+  .sx-explore-layout,
+  .home-explore-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  #popularListings,
+  .popular-listings-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+/* Mobile */
+@media(max-width:620px){
+  #popularListings,
+  .popular-listings-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  #popularListings .sx-card-photo,
+  .popular-listings-grid .sx-card-photo{
+    height:230px!important;
+    min-height:230px!important;
+  }
+}
