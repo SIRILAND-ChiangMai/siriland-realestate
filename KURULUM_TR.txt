@@ -1,26 +1,23 @@
-SIRILAND CMS PRO 2030 — v5.1 SINGLE SOURCE + IMAGE AUDIT
+SIRILAND HOMEPAGE IMAGE LAYOUT FIX
 
-- Tek ana veri kaynağı: properties.json
-- Uyumlu website dosyası: properties.js
-- Aynı 46 ilan her iki dosyada da bulunur.
-- Eski properties (...) kopyaları otomatik kullanılmaz.
-- Image Audit v5.1 fotoğrafsız ilanları listeler.
-- Eski kopyalar silinmez; CLEAN_OLD_PROPERTY_COPIES.bat ile arşive taşınır.
-
-ŞU ANDA FOTOĞRAFI OLMAYAN 4 İLAN:
-BKK-0004
-BKK-0005
-CM-0032
-CM-0085
+Düzeltildi:
+- Ana sayfa ilan görsellerinin yüksekliği artırıldı.
+- Kart görselleri daha dolgun ve dengeli görünür.
+- BKK-0004 gibi yatay afiş görselleri kırpılmadan kart içine sığar.
+- Logo/no-photo görselleri düzgün merkezlenir.
+- Best Price ve Popular Condo küçük görselleri büyütüldü.
+- Kart yükseklikleri hizalandı.
 
 KURULUM:
-ZIP içindeki tüm dosya ve klasörleri:
+ZIP içindeki style.css dosyasını şuraya kopyala:
+
 E:\SIRILAND_2030_Harddisk_Structure\01_CMS
-üzerine kopyala ve Replace seç.
 
-Admin:
-file:///E:/SIRILAND_2030_Harddisk_Structure/01_CMS/admin.html
-Ctrl + Shift + R
+Windows sorunca Replace seç.
 
-Önce admini kontrol et. Sonra CLEAN_OLD_PROPERTY_COPIES.bat çalıştır.
-Ardından Smart Publish ve GitHub Desktop Commit + Push yap.
+Sonra:
+1. Publish > Yolları Test Et
+2. Değişiklikleri Analiz Et
+3. Smart Publish
+4. GitHub Desktop > Commit + Push
+5. Website > Ctrl + Shift + R
