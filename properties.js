@@ -1,6 +1,13 @@
-window.PROPERTIES = [
+/* SIRILAND canonical property dataset — generated from properties.json */
+window.SIRILAND_PROPERTIES = [
   {
     "id": "BKK-0001",
+    "title": {
+      "en": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "th": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "tr": "Bangkok Luxury Condo — Sathorn / Suanplu",
+      "zh": "Bangkok Luxury Condo — Sathorn / Suanplu"
+    },
     "city": "Bangkok",
     "type": "Condo",
     "deal": "Sale",
@@ -12,33 +19,6 @@ window.PROPERTIES = [
     "room": "",
     "floor": "7th Floor",
     "map": "",
-    "latitude": "",
-    "longitude": "",
-    "landSize": "",
-    "landAreaSqm": "",
-    "buildingArea": "",
-    "parking": "",
-    "titleDeed": "",
-    "roadAccess": "",
-    "frontage": "",
-    "zoning": "",
-    "utilities": "",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
-    "title": {
-      "en": "Bangkok Luxury Condo — Sathorn / Suanplu",
-      "th": "Bangkok Luxury Condo — Sathorn / Suanplu",
-      "tr": "Bangkok Luxury Condo — Sathorn / Suanplu",
-      "zh": "Bangkok Luxury Condo — Sathorn / Suanplu"
-    },
     "description": {
       "en": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
       "th": "Luxury condo in Sathorn / Suanplu area, Bangkok. Spacious 2 bedrooms, 2 bathrooms, 94.80 sqm on 7th floor. Sale price 12.99 MB. Currently rented at 45,000 THB/month until 31 October 2026.",
@@ -80,8 +60,8 @@ window.PROPERTIES = [
       ]
     },
     "images": [
-      "images/bkk-01-10.jpg",
       "images/bkk-01-3.jpg",
+      "images/bkk-01-10.jpg",
       "images/bkk-01-2.jpg",
       "images/bkk-01-5.jpg",
       "images/bkk-01-6.jpg",
@@ -110,15 +90,18 @@ window.PROPERTIES = [
       "images/bkk-01-28.jpg",
       "images/bkk-01-29.jpg"
     ],
-    "createdAt": "2026-07-15",
-    "updatedAt": "2026-07-15",
-    "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": ""
   },
   {
     "id": "BKK-0002",
@@ -322,6 +305,82 @@ window.PROPERTIES = [
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
+  },
+  {
+    "id": "BKK-0004",
+    "title": {
+      "en": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
+      "th": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
+      "tr": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale",
+      "zh": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale"
+    },
+    "city": "Bangkok",
+    "type": "Condo",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "12.0 MB",
+    "bedrooms": "2 Bedrooms",
+    "bathrooms": "2 Bathrooms",
+    "area": "97.50 sqm",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "description": {
+      "en": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
+      "th": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
+      "tr": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026.",
+      "zh": "Large condo for sale at Supalai Elite Sathorn-Suanplu, Bangkok. 2 bedrooms, 2 bathrooms, 97.50 sqm with clear title deed. Sale price 12.0 MB. Existing lease ends on 31 October 2026."
+    },
+    "highlights": {
+      "en": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ],
+      "th": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ],
+      "tr": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ],
+      "zh": [
+        "2 Bedrooms",
+        "2 Bathrooms",
+        "97.50 sqm",
+        "Sathorn-Suanplu",
+        "Clear Title Deed",
+        "Lease Ends 31 October 2026"
+      ]
+    },
+    "images": [],
+    "createdAt": "2026-07-10T15:20:51+07:00",
+    "updatedAt": "2026-07-10T15:20:51+07:00",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    },
+    "salePrice": "12.0 MB",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "Spacious 97.50 sqm condo for sale in Sathorn-Suanplu, Bangkok."
   },
   {
     "id": "BKK-0005",
@@ -2945,6 +3004,12 @@ window.PROPERTIES = [
   },
   {
     "id": "CM-0032",
+    "title": {
+      "en": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
+      "th": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
+      "tr": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
+      "zh": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent"
+    },
     "city": "Chiang Mai",
     "type": "House",
     "deal": "Rent",
@@ -2956,33 +3021,6 @@ window.PROPERTIES = [
     "room": "",
     "floor": "",
     "map": "",
-    "latitude": "",
-    "longitude": "",
-    "landSize": "",
-    "landAreaSqm": "",
-    "buildingArea": "",
-    "parking": "",
-    "titleDeed": "",
-    "roadAccess": "",
-    "frontage": "",
-    "zoning": "",
-    "utilities": "",
-    "salePrice": "",
-    "rentPrice": "35,000 THB / Month",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "Corner house for rent in Karnkanok Ville 12 Phase 1, Saraphi, Chiang Mai.",
-    "nearby": [],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
-    "title": {
-      "en": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
-      "th": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
-      "tr": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent",
-      "zh": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent"
-    },
     "description": {
       "en": "Corner house for rent in Karnkanok Ville 12, Phase 1, Soi 4, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, 2 kitchen areas and 2 parking spaces. Fully furnished and ready to move in.",
       "th": "Corner house for rent in Karnkanok Ville 12, Phase 1, Soi 4, Saraphi, Chiang Mai. 4 bedrooms, 4 bathrooms, 2 kitchen areas and 2 parking spaces. Fully furnished and ready to move in.",
@@ -3027,40 +3065,22 @@ window.PROPERTIES = [
         "Ready to Move In"
       ]
     },
-    "images": [
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-01.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-02.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-03.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-04.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-05.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-06.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-07.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-08.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-09.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-10.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-11.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-12.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-13.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-14.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-15.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-16.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-17.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-18.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-19.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-20.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-21.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-22.jpg",
-      "images/karnkanok-ville-12-phase-1-soi-4-corner-house-for-rent-23.jpg"
-    ],
+    "images": [],
     "createdAt": "2026-07-10T15:16:00+07:00",
-    "updatedAt": "2026-07-15",
+    "updatedAt": "2026-07-10T15:16:00+07:00",
     "featured": true,
     "contact": {
       "name": "Kwan",
       "phone1": "092-005-6640",
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
-    }
+    },
+    "salePrice": "",
+    "rentPrice": "35,000 THB / Month",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "Corner house for rent in Karnkanok Ville 12 Phase 1, Saraphi, Chiang Mai."
   },
   {
     "id": "CM-0034",
@@ -3159,9 +3179,9 @@ window.PROPERTIES = [
       ]
     },
     "images": [
-      "images/karnkanok-ville-12-phase-3-house-for-rent-03.jpg",
       "images/karnkanok-ville-12-phase-3-house-for-rent-01.jpg",
       "images/karnkanok-ville-12-phase-3-house-for-rent-02.jpg",
+      "images/karnkanok-ville-12-phase-3-house-for-rent-03.jpg",
       "images/karnkanok-ville-12-phase-3-house-for-rent-04.jpg",
       "images/karnkanok-ville-12-phase-3-house-for-rent-05.jpg",
       "images/karnkanok-ville-12-phase-3-house-for-rent-06.jpg",
@@ -3200,7 +3220,7 @@ window.PROPERTIES = [
       "images/karnkanok-ville-12-phase-3-house-for-rent-39.jpg"
     ],
     "createdAt": "2026-07-10T15:16:00+07:00",
-    "updatedAt": "2026-07-15",
+    "updatedAt": "2026-07-14",
     "featured": true,
     "contact": {
       "name": "Kwan",
@@ -4026,5 +4046,71 @@ window.PROPERTIES = [
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
+  },
+  {
+    "id": "CM-0085",
+    "city": "Chiang Mai",
+    "type": "",
+    "deal": "",
+    "status": "Available",
+    "price": "",
+    "bedrooms": "",
+    "bathrooms": "",
+    "area": "",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "latitude": "",
+    "longitude": "",
+    "landSize": "",
+    "landAreaSqm": "",
+    "buildingArea": "",
+    "parking": "",
+    "titleDeed": "",
+    "roadAccess": "",
+    "frontage": "",
+    "zoning": "",
+    "utilities": "",
+    "salePrice": "",
+    "rentPrice": "",
+    "ownerFinance": "",
+    "installment": "",
+    "freeTransfer": "",
+    "summary": "",
+    "nearby": [],
+    "features": [],
+    "furniture": [],
+    "appliances": [],
+    "title": {
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "description": {
+      "en": "",
+      "th": "",
+      "tr": "",
+      "zh": ""
+    },
+    "highlights": {
+      "en": [],
+      "th": [],
+      "tr": [],
+      "zh": []
+    },
+    "images": [],
+    "createdAt": "2026-07-14",
+    "updatedAt": "2026-07-14",
+    "featured": true,
+    "contact": {
+      "name": "Kwan",
+      "phone1": "092-005-6640",
+      "phone2": "090-650-7558",
+      "line": "@realcreamthailand"
+    }
   }
 ];
+window.PROPERTIES = window.SIRILAND_PROPERTIES;
+window.properties = window.SIRILAND_PROPERTIES;
+const properties = window.SIRILAND_PROPERTIES;

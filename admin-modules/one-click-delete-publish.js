@@ -76,7 +76,7 @@
 
   async function writeExports(handle){
     const json = JSON.stringify(properties || [], null, 2);
-    const jsText = `window.PROPERTIES = ${json};\n`;
+    const jsText = `window.SIRILAND_PROPERTIES = ${json};\nwindow.PROPERTIES = window.SIRILAND_PROPERTIES;\nwindow.properties = window.SIRILAND_PROPERTIES;\nconst properties = window.SIRILAND_PROPERTIES;\n`;
 
     if(typeof saveEngineWriteFile === 'function'){
       await saveEngineWriteFile(handle,'properties.json',json,'application/json');
@@ -175,8 +175,17 @@
       localStorage.setItem('siriland_last_property_count',String((properties || []).length));
       refreshAdmin();
 
+      const previousSafeCount = Number(localStorage.getItem('siriland_safe_property_count') || 0);
+      if(!Array.isArray(properties) || properties.length < 1){
+        throw new Error('Güvenlik kilidi: 0 ilanlı export engellendi.');
+      }
+      if(previousSafeCount && properties.length < previousSafeCount - 1){
+        throw new Error(`Güvenlik kilidi: ilan sayısı ${previousSafeCount} → ${properties.length}. Tek silmede yalnızca 1 ilan azalabilir.`);
+      }
+
       const handle = await acquireCmsHandleFromClick();
       await writeExports(handle);
+      localStorage.setItem('siriland_safe_property_count', String(properties.length));
 
       const verified = await verifyDeleted(handle,id);
       if(!verified) throw new Error(`${id} properties.json/properties.js içinden silinemedi.`);
