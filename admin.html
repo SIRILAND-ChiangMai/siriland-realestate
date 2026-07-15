@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SIRILAND CMS PRO 2030 - Publish Manager PRO v3</title>
-  <link rel="stylesheet" href="admin.css?v=2026071037">
+  <link rel="stylesheet" href="admin.css?v=2026071038">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
@@ -55,6 +55,7 @@
       <button type="button" data-jump-panel="languageContentPanel">4. Başlık / Açıklama</button>
       <button type="button" data-jump-panel="mediaManagerPanel">5. Fotoğraflar</button>
       <button type="button" data-jump-panel="saveEnginePanel">6. Save Engine</button>
+      <button type="button" data-jump-panel="autoPublishPanel">7. Auto Publish</button>
       <button type="button" data-jump-panel="directSavePanel">7. Dosya Kaydet</button>
       <button type="button" data-jump-panel="propertyDatabaseProPanel">🗃️ Database</button>
       <button type="button" data-jump-panel="propertyListProPanel">📋 Kart Liste</button>
@@ -405,7 +406,7 @@
       <div class="panel formAccordionPanel" id="propertyInfoPanel">
         <h2 id="h_info">1) İlan Bilgileri</h2>
         <div class="grid3">
-          <div><label data-ui="id">ID</label><input id="id" placeholder="Şehir seçilince otomatik gelir" readonly></div>
+          <div><label data-ui="id">ID</label><input id="id" placeholder="Şehir seçilince otomatik gelir" readonly><div class="idSequenceInfo" id="idSequenceInfo">Son ID: — • Yeni ID: —</div></div>
           <div><label data-ui="city">City</label><select id="city">
             <option value="Chiang Mai">Chiang Mai</option>
             <option value="Bangkok">Bangkok</option>
@@ -735,6 +736,34 @@
         <div id="saveEngineLog" class="saveEngineLog">Save Engine hazır.</div>
       </div>
 
+
+      <div class="panel autoPublishPanel compactAccordionPanel compactAccordionOpen" id="autoPublishPanel">
+        <button type="button" class="compactAccordionToggle">
+          <span>🚀 Auto Publish PRO</span><b>⌃</b>
+        </button>
+
+        <div class="autoPublishStatusGrid">
+          <div><span>Local Service</span><strong id="autoPublishServiceStatus">Kontrol edilmedi</strong></div>
+          <div><span>CMS Source</span><strong id="autoPublishCmsStatus">01_CMS</strong></div>
+          <div><span>GitHub Repo</span><strong id="autoPublishRepoStatus">siriland-realestate</strong></div>
+          <div><span>Branch</span><strong id="autoPublishBranchStatus">main</strong></div>
+          <div><span>Last Result</span><strong id="autoPublishLastResult">—</strong></div>
+        </div>
+
+        <div class="autoPublishActions">
+          <button type="button" class="btn" id="autoPublishCheckBtn">Servisi Kontrol Et</button>
+          <button type="button" class="btn green" id="autoPublishNowBtn">💾 Kaydet + Otomatik Yayınla</button>
+          <button type="button" class="btn dark" id="autoPublishOpenSiteBtn">Websiteyi Aç</button>
+        </div>
+
+        <div class="autoPublishHint">
+          İlk kullanımda yalnızca bir kez <b>Auto_Publish\START_AUTO_PUBLISH.bat</b> dosyasını çalıştır.
+          Sonrasında bu buton CMS dosyalarını GitHub’a aktarır, commit oluşturur ve push yapar.
+        </div>
+
+        <div id="autoPublishLog" class="autoPublishLog">Auto Publish hazır.</div>
+      </div>
+
 <div class="panel directSavePanel formAccordionPanel" id="directSavePanel">
         <div class="directSaveHead">
           <div>
@@ -899,7 +928,7 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="admin.js?v=2026071037"></script>
+<script src="admin.js?v=2026071038"></script>
   <script src="admin-modules/core-utils.js?v=2026071029"></script>
   <script src="admin-modules/property-store.js?v=2026071029"></script>
   <script src="admin-modules/incremental-publish.js?v=2026071029"></script>

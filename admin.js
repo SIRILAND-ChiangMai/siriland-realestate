@@ -3883,3 +3883,209 @@ function saveEngineInit(){
   },500);
 }
 window.addEventListener('DOMContentLoaded',saveEngineInit);
+
+
+/* Sequential ID Engine — ignore stale browser counters */
+function sequentialCityCode(city){
+  const map={
+    'Chiang Mai':'CM',
+    'Bangkok':'BKK',
+    'Phichit':'PCT',
+    'Phitsanulok':'PLK',
+    'Nakhon Sawan':'NKS'
+  };
+  return map[city] || String(city||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,3) || 'PRP';
+}
+
+function sequentialIdsForCity(city){
+  const code=sequentialCityCode(city);
+  return (properties||[])
+    .map(p=>String(p.id||'').trim())
+    .map(id=>{
+      const m=id.match(new RegExp('^'+code+'-(\\d+)$','i'));
+      return m ? Number(m[1]) : null;
+    })
+    .filter(Number.isFinite);
+}
+
+function sequentialIdInfo(city){
+  const code=sequentialCityCode(city);
+  const numbers=sequentialIdsForCity(city);
+  const max=numbers.length?Math.max(...numbers):0;
+  return {
+    code,
+    last:max?`${code}-${String(max).padStart(4,'0')}`:'—',
+    next:`${code}-${String(max+1).padStart(4,'0')}`,
+    max
+  };
+}
+
+function nextId(city){
+  return sequentialIdInfo(city||document.getElementById('city')?.value||'Chiang Mai').next;
+}
+
+function syncIdToCity(force=false){
+  const city=document.getElementById('city')?.value;
+  const idEl=document.getElementById('id');
+  if(!city||!idEl)return;
+
+  const current=String(idEl.value||'').trim();
+  const editing=(properties||[]).some(p=>String(p.id)===current);
+  if(editing&&!force){
+    sequentialUpdateInfo(city,current);
+    return;
+  }
+
+  const info=sequentialIdInfo(city);
+  idEl.value=info.next;
+  sequentialUpdateInfo(city,info.next);
+}
+
+function sirilandNextId(city){
+  return nextId(city);
+}
+
+function sirilandEnsureAutomaticId(force=false){
+  syncIdToCity(force);
+  updateQualityScore?.();
+}
+
+function sequentialUpdateInfo(city,currentId){
+  const info=sequentialIdInfo(city||document.getElementById('city')?.value);
+  const el=document.getElementById('idSequenceInfo');
+  if(el)el.textContent=`Son gerçek ID: ${info.last} • Yeni ID: ${currentId||info.next}`;
+}
+
+function sequentialIdInit(){
+  const city=document.getElementById('city');
+  city?.addEventListener('change',()=>{
+    setTimeout(()=>syncIdToCity(true),30);
+  },true);
+
+  document.getElementById('clearBtn')?.addEventListener('click',()=>{
+    setTimeout(()=>syncIdToCity(true),80);
+  },true);
+
+  setTimeout(()=>{
+    const current=document.getElementById('id')?.value;
+    const editing=(properties||[]).some(p=>String(p.id)===String(current));
+    if(!editing)syncIdToCity(true);
+    else sequentialUpdateInfo(city?.value,current);
+  },900);
+}
+window.addEventListener('DOMContentLoaded',sequentialIdInit);
+
+/* Auto Publish PRO — local PowerShell service */
+const AUTO_PUBLISH_URL='http://127.0.0.1:8787';
+
+function autoPublishLog(message,type='info'){
+  const el=document.getElementById('autoPublishLog');
+  if(!el)return;
+  const row=document.createElement('div');
+  row.className=type;
+  row.textContent=`${new Date().toLocaleTimeString()} — ${message}`;
+  el.appendChild(row);
+  el.scrollTop=el.scrollHeight;
+}
+
+function autoPublishSetStatus(id,text,state='idle'){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.textContent=text;
+  el.dataset.state=state;
+}
+
+async function autoPublishRequest(path,options={}){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),options.timeout||120000);
+  try{
+    const response=await fetch(AUTO_PUBLISH_URL+path,{
+      method:options.method||'GET',
+      headers:{'Content-Type':'application/json'},
+      body:options.body?JSON.stringify(options.body):undefined,
+      signal:controller.signal
+    });
+    const text=await response.text();
+    let data;
+    try{data=JSON.parse(text)}catch(e){data={message:text}}
+    if(!response.ok)throw new Error(data.error||data.message||`HTTP ${response.status}`);
+    return data;
+  }finally{
+    clearTimeout(timer);
+  }
+}
+
+async function autoPublishCheck(){
+  try{
+    autoPublishSetStatus('autoPublishServiceStatus','Kontrol ediliyor...','warn');
+    const data=await autoPublishRequest('/health',{timeout:5000});
+    autoPublishSetStatus('autoPublishServiceStatus','Çalışıyor','ok');
+    autoPublishSetStatus('autoPublishCmsStatus',data.cmsFolder||'01_CMS','ok');
+    autoPublishSetStatus('autoPublishRepoStatus',data.githubFolder||'siriland-realestate','ok');
+    autoPublishSetStatus('autoPublishBranchStatus',data.branch||'main','ok');
+    autoPublishLog('Yerel Auto Publish servisi çalışıyor.','ok');
+    return true;
+  }catch(e){
+    autoPublishSetStatus('autoPublishServiceStatus','Kapalı','error');
+    autoPublishLog('Servis kapalı: Auto_Publish\\START_AUTO_PUBLISH.bat çalıştır.','error');
+    return false;
+  }
+}
+
+async function autoPublishSaveAndPush(){
+  const button=document.getElementById('autoPublishNowBtn');
+  const original=button?.textContent;
+  try{
+    if(button){button.disabled=true;button.textContent='Kaydediliyor...'}
+    autoPublishLog('Save Engine çalıştırılıyor...');
+
+    await saveEngineSaveAll();
+
+    const currentId=saveEngineCurrentId();
+    const handle=await saveEngineLoadHandle();
+    const verify=await saveEngineVerify(currentId,handle);
+    if(!verify.memory||!verify.json||!verify.js){
+      throw new Error(`${currentId} JSON/JS doğrulamasını geçemedi.`);
+    }
+
+    if(!(await autoPublishCheck())){
+      throw new Error('Auto Publish servisi kapalı. START_AUTO_PUBLISH.bat dosyasını çalıştır.');
+    }
+
+    if(button)button.textContent='GitHub’a yayınlanıyor...';
+    autoPublishLog(`${currentId} için otomatik publish başlıyor...`);
+
+    const result=await autoPublishRequest('/publish',{
+      method:'POST',
+      body:{
+        propertyId:currentId,
+        commitMessage:`Publish ${currentId} from SIRILAND Admin`
+      },
+      timeout:180000
+    });
+
+    autoPublishSetStatus('autoPublishLastResult','Başarılı','ok');
+    autoPublishLog(`Sync: ${result.changedFiles||0} dosya değişti.`,'ok');
+    autoPublishLog(`Commit: ${result.commit||'oluşturuldu'}`,'ok');
+    autoPublishLog(`Push: ${result.push||'başarılı'}`,'ok');
+    adminUxToast?.(`${currentId} websiteye yayınlandı.`,'ok');
+
+    setTimeout(()=>window.open('https://siriland-chiangmai.github.io/siriland-realestate/','_blank'),900);
+  }catch(e){
+    autoPublishSetStatus('autoPublishLastResult','Hata','error');
+    autoPublishLog('HATA: '+e.message,'error');
+    adminUxToast?.(e.message,'error');
+  }finally{
+    if(button){button.disabled=false;button.textContent=original}
+  }
+}
+
+function autoPublishInit(){
+  document.getElementById('autoPublishCheckBtn')?.addEventListener('click',autoPublishCheck);
+  document.getElementById('autoPublishNowBtn')?.addEventListener('click',autoPublishSaveAndPush);
+  document.getElementById('autoPublishOpenSiteBtn')?.addEventListener('click',()=>{
+    window.open('https://siriland-chiangmai.github.io/siriland-realestate/','_blank');
+  });
+  setTimeout(autoPublishCheck,1200);
+}
+window.addEventListener('DOMContentLoaded',autoPublishInit);

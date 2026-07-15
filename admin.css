@@ -975,3 +975,84 @@ body{padding-bottom:84px}
   .saveEngineSummary{grid-template-columns:1fr}
   .saveEngineActions .btn{width:100%}
 }
+
+
+/* Sequential ID info */
+.idSequenceInfo{
+  margin-top:6px;
+  padding:6px 8px;
+  border-radius:8px;
+  background:#eaf4ff;
+  color:#164e85;
+  font-size:11px;
+  font-weight:900;
+}
+
+/* Auto Publish PRO */
+.autoPublishPanel{
+  border:2px solid #d6ad4b!important;
+  background:linear-gradient(145deg,#fff,#fff9e8)!important;
+  scroll-margin-top:145px;
+}
+.autoPublishStatusGrid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+  margin-bottom:12px;
+}
+.autoPublishStatusGrid>div{
+  background:#fff;
+  border:1px solid #ead9a8;
+  border-radius:12px;
+  padding:10px;
+  text-align:center;
+}
+.autoPublishStatusGrid span{
+  display:block;
+  color:#64748b;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+.autoPublishStatusGrid strong{
+  display:block;
+  margin-top:4px;
+  color:#071a3d;
+  font-size:13px;
+  word-break:break-word;
+}
+.autoPublishStatusGrid strong[data-state="ok"]{color:#0f7b3f}
+.autoPublishStatusGrid strong[data-state="error"]{color:#b91c1c}
+.autoPublishStatusGrid strong[data-state="warn"]{color:#b77900}
+.autoPublishActions{display:flex;gap:7px;flex-wrap:wrap}
+.autoPublishHint{
+  margin-top:10px;
+  padding:9px 11px;
+  border-radius:10px;
+  background:#fff7df;
+  border:1px solid #f4d58d;
+  color:#92400e;
+  font-size:12px;
+}
+.autoPublishLog{
+  margin-top:10px;
+  max-height:180px;
+  overflow:auto;
+  background:#071a3d;
+  color:#dbeafe;
+  border-radius:12px;
+  padding:10px;
+  font-family:Consolas,monospace;
+  font-size:11px;
+}
+.autoPublishLog div{padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.autoPublishLog .ok{color:#86efac}
+.autoPublishLog .error{color:#fca5a5}
+
+@media(max-width:900px){
+  .autoPublishStatusGrid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .autoPublishStatusGrid{grid-template-columns:1fr}
+  .autoPublishActions .btn{width:100%}
+}

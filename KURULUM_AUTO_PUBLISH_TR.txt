@@ -1,0 +1,49 @@
+SIRILAND AUTO PUBLISH + SEQUENTIAL ID FIX
+
+DÜZELTİLEN ID SORUNU
+- Yeni ID artık localStorage içindeki eski sayaçları kullanmaz.
+- Yalnızca gerçek properties listesindeki ID'leri tarar.
+- Örnek: En yüksek gerçek ID CM-0076 ise yeni ilan CM-0077 olur.
+- Ekranda:
+  Son gerçek ID: CM-0076
+  Yeni ID: CM-0077
+  bilgisi gösterilir.
+
+TAM OTOMATİK PUBLISH
+
+İlk kullanımda bir kez:
+1. ZIP içindeki tüm dosya ve klasörleri şu klasörün üzerine kopyala:
+   E:\SIRILAND_2030_Harddisk_Structure\01_CMS
+
+2. Şunu çalıştır:
+   E:\SIRILAND_2030_Harddisk_Structure\01_CMS\Auto_Publish\START_AUTO_PUBLISH.bat
+
+3. PowerShell penceresini açık bırak.
+
+4. Admini aç:
+   file:///E:/SIRILAND_2030_Harddisk_Structure/01_CMS/admin.html
+
+5. Ctrl + Shift + R
+
+6. Auto Publish PRO bölümünde:
+   Servisi Kontrol Et
+   sonucu Çalışıyor olmalı.
+
+GÜNLÜK KULLANIM
+1. İlanı doldur.
+2. Kaydet + Otomatik Yayınla.
+3. Sistem otomatik olarak:
+   - Admin memory günceller
+   - properties.json yazar
+   - properties.js yazar
+   - CMS → GitHub senkronlar
+   - git add
+   - git commit
+   - git push origin main
+   yapar.
+4. Website otomatik açılır.
+
+ÖNEMLİ
+- GitHub Desktop oturumun ve git kimliğin bilgisayarda çalışıyor olmalı.
+- START_AUTO_PUBLISH.bat açık değilse admin servis kapalı uyarısı verir.
+- GitHub token browser içine yazılmaz.
