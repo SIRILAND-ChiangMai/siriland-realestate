@@ -1,0 +1,16 @@
+AUTO PUBLISH DEBUG FIX
+
+1. ZIP içindeki Auto_Publish klasörünü şu klasörün üzerine kopyala:
+
+E:\SIRILAND_2030_Harddisk_Structure\01_CMS\Auto_Publish
+
+2. Windows sorunca Replace seç.
+
+3. Önce TEST_AUTO_PUBLISH_PATHS.bat çalıştır.
+
+4. Sonra START_AUTO_PUBLISH_DEBUG.bat çalıştır.
+
+Pencere artık hata olsa bile kapanmaz.
+Ekrandaki hata mesajının ekran görüntüsünü gönder.
+
+Ayrıca aynı klasörde AUTO_PUBLISH_ERROR.txt oluşursa onu da gönderebilirsin.
