@@ -1,0 +1,33 @@
+{
+  "version": "5.1",
+  "generatedAt": "2026-07-15T09:03:39.482435",
+  "listingCount": 46,
+  "duplicateIdCount": 0,
+  "missingImageListings": [
+    {
+      "id": "BKK-0004",
+      "title": "Supalai Elite Sathorn-Suanplu 97.50 sqm Condo for Sale"
+    },
+    {
+      "id": "BKK-0005",
+      "title": "The Tree Sukhumvit 71-Ekkamai Condo for Rent"
+    },
+    {
+      "id": "CM-0032",
+      "title": "Karnkanok Ville 12 Phase 1 Soi 4 Corner House for Rent"
+    },
+    {
+      "id": "CM-0085",
+      "title": ""
+    }
+  ],
+  "canonicalFiles": [
+    "properties.json",
+    "properties.js",
+    "data/properties.json"
+  ],
+  "sha256": {
+    "properties.json": "88455424125f8d89fb9c4cc7d2abf548dad608758fe40e3fe197cffd5e03a052",
+    "properties.js": "618a7f3deecef1320a550f22829295e7e22bec6a1eae302b676a3cc0ee0c2ac6"
+  }
+}

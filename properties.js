@@ -1,4 +1,4 @@
-/* SIRILAND canonical property dataset — generated from properties.json */
+/* SIRILAND CMS v5.1 canonical property dataset */
 window.SIRILAND_PROPERTIES = [
   {
     "id": "BKK-0001",
