@@ -1,23 +1,20 @@
-SIRILAND BEST PRICE / POPULAR CONDO LAYOUT FIX
+SIRILAND HOMEPAGE WIDE + 4 COLUMN FIX
 
-Düzeltildi:
-- Küçük görseller büyütüldü.
-- Kart düzeni solda büyük görsel, sağda metin olarak değiştirildi.
-- Yazılar artık görselin üzerine binmez.
-- Başlık, fiyat ve özellikler sağ tarafa düzgün hizalanır.
-- Özellik etiketleri düzgün satır kırar.
-- Mobilde görsel üstte, metin altta görünür.
+- Masaüstünde sağ ve sol boşluk azaltıldı.
+- Ana içerik alanı maksimum 1480 px yapıldı.
+- Büyük ekranlarda ilanlar 4 sütun görünür.
+- Kartlar ve fotoğraflar biraz büyütüldü.
+- 1350 px altında 3 sütun.
+- Tablette 2 sütun.
+- Telefonda 1 sütun.
+- Şehir listesi daha dar, ilan alanı daha geniş.
+- Alt Best Price / Popular Condo bölümleri de genişler.
 
 KURULUM:
-ZIP içindeki style.css dosyasını şu klasörün üzerine kopyala:
+style.css dosyasını şu klasörün üzerine kopyala:
 
 E:\SIRILAND_2030_Harddisk_Structure\01_CMS
 
 Windows sorunca Replace seç.
 
-Sonra:
-1. Publish > Yolları Test Et
-2. Değişiklikleri Analiz Et
-3. Smart Publish
-4. GitHub Desktop > Commit + Push
-5. Website > Ctrl + Shift + R
+Sonra Smart Publish, GitHub Desktop Commit + Push ve website'de Ctrl + Shift + R.
