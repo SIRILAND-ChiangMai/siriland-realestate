@@ -1,4 +1,4 @@
-window.SIRILAND_PROPERTIES = [
+window.PROPERTIES = [
   {
     "id": "BKK-0001",
     "city": "Bangkok",
@@ -4026,69 +4026,5 @@ window.SIRILAND_PROPERTIES = [
       "phone2": "090-650-7558",
       "line": "@realcreamthailand"
     }
-  },
-  {
-    "id": "CM-0085",
-    "city": "Chiang Mai",
-    "type": "",
-    "deal": "",
-    "status": "Available",
-    "price": "",
-    "bedrooms": "",
-    "bathrooms": "",
-    "area": "",
-    "room": "",
-    "floor": "",
-    "map": "",
-    "latitude": "",
-    "longitude": "",
-    "landSize": "",
-    "landAreaSqm": "",
-    "buildingArea": "",
-    "parking": "",
-    "titleDeed": "",
-    "roadAccess": "",
-    "frontage": "",
-    "zoning": "",
-    "utilities": "",
-    "salePrice": "",
-    "rentPrice": "",
-    "ownerFinance": "",
-    "installment": "",
-    "freeTransfer": "",
-    "summary": "",
-    "nearby": [],
-    "features": [],
-    "furniture": [],
-    "appliances": [],
-    "title": {
-      "en": "",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "description": {
-      "en": "",
-      "th": "",
-      "tr": "",
-      "zh": ""
-    },
-    "highlights": {
-      "en": [],
-      "th": [],
-      "tr": [],
-      "zh": []
-    },
-    "images": [],
-    "createdAt": "2026-07-14",
-    "updatedAt": "2026-07-14",
-    "featured": true,
-    "contact": {
-      "name": "Kwan",
-      "phone1": "092-005-6640",
-      "phone2": "090-650-7558",
-      "line": "@realcreamthailand"
-    }
   }
 ];
-const properties = window.SIRILAND_PROPERTIES;
