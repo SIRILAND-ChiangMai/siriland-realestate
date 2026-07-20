@@ -4027,7 +4027,7 @@ window.SIRILAND_PROPERTIES = [
     "city": "Chiang Mai",
     "type": "House",
     "deal": "Rent",
-    "status": "Available",
+    "status": "Sold Out",
     "price": "35000",
     "bedrooms": "4 Bedrooms",
     "bathrooms": "4 Bathrooms",
@@ -4123,7 +4123,7 @@ window.SIRILAND_PROPERTIES = [
       "images/karnkanok-12-phase-1-detached-house-39.jpg"
     ],
     "createdAt": "2026-07-14",
-    "updatedAt": "2026-07-14",
+    "updatedAt": "2026-07-20",
     "featured": true,
     "contact": {
       "name": "Kwan",
